@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello US Citizenship Applicant!</string>
+    <string name="app_name">Prepare For Interview</string>
+     <string name="title_close">Start</string>
+    <string name="Next">Go!</string>
+ <string name="select">Selected is :</string>
+ <string name="seniors">Qulifying Senior-Citizens</string>
+</resources>
