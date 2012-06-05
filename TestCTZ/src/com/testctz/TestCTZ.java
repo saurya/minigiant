@@ -1,93 +1,95 @@
 package com.testctz;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.StringTokenizer;
+
+import java.util.Random;
+
+
 
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
+
+
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
-import android.view.inputmethod.InputMethodManager;
+
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class TestCTZ extends Activity {
-	EditText edittext;// How to get back to final and still access from new
-						// onclick to make ""
+	EditText edittext;//
 	private TextView mGetQuestionString;
 	int questionnumber;
 	private Button mnext;
 	int cnt = 0, score = 0;
 	private Button getscores;
 	private Button mcancel;
-	int cnt1;
-	String delimeter="\'";
-
+	int cnt1,ctz_ans,correct_ans;
+	
+	String correctanswerstring;
+	//multiple choice answers display
+//	private RadioGroup radiobtnGrp;
 	private RadioButton radio_ans1;
 	private RadioButton radio_ans2;
 	private RadioButton radio_ans3;
 	private RadioButton radio_ans4;
-	private RadioGroup radiobtnGrp;
+	
+	//Array containing randomly generated question numbers
 	int[]  originalQNums=new int[10];
-	private Map<String, Integer> map = new HashMap<String, Integer>();
-	String  getansString4="";
-	String  getansString1="";String  getansString2="";String  getansString3="";
-	String getquestionString0 = "";
-	String getquestionString = "";
+	
+	
+	String  getansString1="";String  getansString2="";String  getansString3="";String  getansString4="";
+	
+	String getquestionString0 = "";//set first question to be displayed
 	String multipleChoiceAnswer="";
-	 String multipleChoiceAnswers="";
+	
+	String getquestionString = "";//and the next ..
+	String [] nearlygood=new String[100];//deceptive answerset
+	String [] funny1=new String[100];//fake answerset 1
+	String [] funny2=new String[100];//fake answerset 2
+	
+	String multipleChoiceAnswers="";
 	String setanswerString = "";
 	String scoreString = "Your Score Now Is";
-	String [] nearlygood=new String[100];
-	String [] funny1=new String[100];
-	String [] funny2=new String[100];
-	String[] qnlist;
-	String[] anslist;
-	String[] ctznanslist;
-	String ctznans;
-	String word1, word2, word3;
-	String[] ans47 = { "Citizens 18 and older ",
-			"Citizens 18 and older can vote",
-			"Citizens eighteen and older can vote.",
-			"Citizens eighteen and older ", "You don’t have to pay to vote",
-			"You don’t have to pay a poll tax to vote", "Any citizen can vote",
-			"Women and men can vote", "A male citizen of any race" };
-	String[] ans53 = { "eighteen and older", "18 and older" };
+	
+	String[] qnlist;//retrieve current 10 questions of the test
+	String[] anslist;//retrieve current 10 answers of the test
+	String[] ctznanslist;//corresponding  answerset
+	
+	String ctznans;//user-selected answerset
+	int currentdisplay;
+	int originalQnumber;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// InputMethodManager imm = (InputMethodManager) SearchActivity.this
-		// .getSystemService(Context.INPUT_METHOD_SERVICE);
-
-		// if (imm != null) {
-		// imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-		// }
+		
 		setDefaultKeyMode(DEFAULT_KEYS_DISABLE);
+		getMultiChoiceData();
+		
+		//get ten random qns, and corresponding answers and their original numbers
 		Bundle bundle = new Bundle();
 		bundle = this.getIntent().getExtras();
-	 originalQNums=bundle.getIntArray("originalQNums");
-	 getMultiChoiceData();
-		 String  Qs="";
-		 	for(int i=0;i<10;i++)
-		 			 Qs+= originalQNums[i];
-		 		Log.d(" QNums", Qs);
+	    
 		qnlist = bundle.getStringArray("randomqns");
 		anslist = bundle.getStringArray("anstorandomqns");
+		originalQNums=bundle.getIntArray("originalQNums");
+	    
+		//form a tring to verify if user got the answer right
+	    correctanswerstring = "";
+		for (int i=0;i<10;i++)
+			correctanswerstring+=originalQNums[i]+",";
+		  
 		
-		getquestionString0 = "Question# 1:" +delimeter+qnlist[0];
+		getquestionString0 = "Question# 1: joeQ" +qnlist[0];//first question
 		super.onCreate(savedInstanceState);
-		// this.getWindow().setSoftInputMode(WindowManager.LayoutParams.ADJUST_RESIZE);
+		
 		setContentView(com.testctz.R.layout.main1);
 		mGetQuestionString = (TextView) findViewById(com.testctz.R.id.getquestionString);
 		mGetQuestionString.setBackgroundColor(Color.WHITE);
@@ -96,49 +98,66 @@ public class TestCTZ extends Activity {
 		mnext = (Button) findViewById(com.testctz.R.id.next);
 		mcancel = (Button) findViewById(com.testctz.R.id.cancel);
 		getscores = (Button) findViewById(com.testctz.R.id.getscores);
-		// android.view.inputmethod.InputMethodManager imm =
-		// (android.view.inputmethod.InputMethodManager)
-		// getSystemService(Context.INPUT_METHOD_SERVICE);
-		// imm.hideSoftInputFromWindow(edittext.getApplicationWindowToken(), 0);
-	//	final RadioGroup radiobtnGrp = (RadioGroup)findViewById(R.id.MultipleChoiceGroup);
-		radio_ans1 = (RadioButton) findViewById(com.testctz.R.id.radio_ans1);
 		
+		radio_ans1 = (RadioButton) findViewById(com.testctz.R.id.radio_ans1);
 		radio_ans2 = (RadioButton) findViewById(com.testctz.R.id.radio_ans2);
 		radio_ans3 = (RadioButton) findViewById(com.testctz.R.id.radio_ans3);
 		radio_ans4 = (RadioButton) findViewById(com.testctz.R.id.radio_ans4);
-		//radio_ans3.setDuplicateParentStateEnabled(true);radio_ans2.setDuplicateParentStateEnabled(true);radio_ans1.setDuplicateParentStateEnabled(true);
-		 multipleChoiceAnswers=anslist[0]+delimeter+nearlygood[originalQNums[0]]+delimeter+funny1[originalQNums[0]]+delimeter+funny2[originalQNums[0]];
-		setRadioButtonText(multipleChoiceAnswers);
+		
+		 currentdisplay=0;
+	     originalQnumber=originalQNums[0];
+		
+		setRadioButtonText(currentdisplay,originalQnumber);
 		
 		mnext.setOnClickListener(new OnClickListener() {
 		
 			public void onClick(View v) {
-				cnt++;
+				cnt++;ctz_ans=-1;
+				if (v == mnext) {
+					if (radio_ans1.isChecked() == true) {
+						ctz_ans=0;
+
+					}
+					
+					if (radio_ans2.isChecked() == true) {
+
+						ctz_ans=1;
+						
+					}
+					if (radio_ans3.isChecked() == true) {
+					
+						ctz_ans=2;
+					}
+					if (radio_ans4.isChecked() == true) {
+						
+						ctz_ans=3;
+					}
 				
+				if (ctz_ans==correct_ans)
+					score++;
+				}
 				if (cnt == 10) 			{
-					checklast(cnt);
+					
 					Toast.makeText(TestCTZ.this,
 							"Your score is " + score + "\nRestarting!",
 							Toast.LENGTH_LONG).show();
 					score = 0;
 					cnt = 0;
 					mGetQuestionString.setText(getquestionString0);
-			setRadioButtonText(multipleChoiceAnswers);
+					originalQnumber=originalQNums[cnt];
+			        setRadioButtonText(cnt,originalQnumber);
 			
 				} 
-					
-					
-					
-					
 					else{
-					getquestionString = getnextqn(cnt);
+					getquestionString = getnextqn(cnt)+"ctz_ans="+ctz_ans+", correct_ans="+correct_ans;
 					mGetQuestionString.setText(getquestionString);
 					cnt1=originalQNums[cnt];
-				 multipleChoiceAnswer=anslist[cnt]+delimeter+nearlygood[cnt1]+delimeter+funny1[cnt1]+delimeter+funny2[cnt1];
-				 
-		setRadioButtonText(multipleChoiceAnswer);
+					
+		            setRadioButtonText(cnt,cnt1);
 			
-				}}}
+				}
+				}
+			}
 			
 		);
 		mcancel.setOnClickListener(new OnClickListener() {
@@ -160,31 +179,45 @@ public class TestCTZ extends Activity {
 	
 
 	}
+	
+	
 	public void onRadioButtonClicked(View v) {
 	    RadioButton rb = (RadioButton) v;
 	
-	    Toast.makeText(TestCTZ.this, rb.getText(), Toast.LENGTH_SHORT).show();
+	    Toast.makeText(TestCTZ.this,  rb.getText(), Toast.LENGTH_SHORT).show();
 	}
 
 	
 	
-	private void setRadioButtonText(String multipleChoiceAnswers){
-		 String[] strArrtext =multipleChoiceAnswers.split(delimeter);
-		 getansString4=strArrtext[3];
-		 getansString3=strArrtext[2];
-		 getansString2=strArrtext[1];
-		 getansString1=strArrtext[0];
-		 radio_ans1.setText( getansString1);
-		 radio_ans2.setText( getansString2);
-		 radio_ans3.setText( getansString3);
-		 radio_ans4.setText( getansString4);
-	//	 radiobtnGrp.addView( radio_ans1,0);
-		// radiobtnGrp.addView( radio_ans2,1);
-		// radiobtnGrp.addView( radio_ans3,2);
-		    //for (int i = 0; i < radiobtnGrp.getChildCount(); i++) {
-		       // ((RadioButton) radiobtnGrp.getChildAt(i)).setText(strArrtext[i]);
-//	}
+	private void setRadioButtonText(int currentans,int correspondingxtraans){
+		int count=0;String randomstr="";Random rands = new Random();int k;int[]randoms;
+		 randoms=new int[4];
+		 while(count<4)
+		 {	 k = rands.nextInt(4);
+			if (!randomstr.contains(k + "")) {
+				randomstr += (k);
+				randoms[count]=k;
+				count++;
+				}}
+		
+			HashMap<Integer, String> map=new HashMap<Integer,String>(randoms.length);
+			map.put(0,anslist[currentans]);
+			map.put(1,  nearlygood[correspondingxtraans]);
+			map.put(2, funny1[correspondingxtraans]);
+			map.put(3, funny2[correspondingxtraans]);
+			
+			
+			radio_ans1.setText((String)map.get(randoms[0]));
+			radio_ans2.setText((String) map.get(randoms[1]));
+			radio_ans3.setText( (String)map.get(randoms[2]));
+			radio_ans4.setText((String) map.get(randoms[3]));
+			
+			for(int i=0;i<4;i++)
+			if (randoms[i]==0)correct_ans=i;
+	
+	
 	}
+	
 	
 	public void calculateScores() {
 
@@ -192,35 +225,13 @@ public class TestCTZ extends Activity {
 
 	}
 
-	// from web
-	public void hideKeyBoard(EditText et) {
+	
 
-		InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-
-		imm.hideSoftInputFromWindow(et.getWindowToken(),
-				InputMethodManager.HIDE_IMPLICIT_ONLY);
-
-	}
-
-	public void checklast(int cnt) {
-		//String ctzn_ans = (ctznans.trim()).toLowerCase();
-		
-		String ans = "";
-		Set<String> keys = map.keySet();
-		for (String s : keys)
-			ans += s + " ";
-		//if (map.containsKey(ctzn_ans)) 
-		{
-			score++;
-
-		}
-	}
+	
 
 	public String getnextqn(int cnt) {
         int qnnumber = cnt + 1;
 		return "Qusestion# " + qnnumber + qnlist[cnt] + anslist[cnt - 1];
-			
-
 	}
 	
 	public void getMultiChoiceData(){
@@ -235,8 +246,8 @@ public class TestCTZ extends Activity {
 		funny2[i]="b";}
 		
 	    nearlygood[0]="President's verdict";
-		funny1[0]="Law as decided by governors of states";
-		funny2[0]="God";
+		funny1[0]="Declaration of independence";
+		funny2[0]="Gettysburg Address";
 		nearlygood[1]="protects Americans";
 		funny1[1]="passes immigration laws";
 		funny2[1]="Facilitates senators to attend international sports events";
@@ -349,6 +360,13 @@ public class TestCTZ extends Activity {
 	nearlygood[37]=" Peoples court";
 		funny1[37]="International Court of Justice";
 		funny2[37]="Secretary of Aviation and Secretary of sports ";
+		nearlygood[97]=" let it snow";
+		funny1[97]="Hollywood shine";
+		funny2[97]="Lord save the ";	
+		nearlygood[94]=" New Mexico";
+		funny1[94]="California";
+		funny2[94]="Staten island ";	
+		
 	}
 
 	

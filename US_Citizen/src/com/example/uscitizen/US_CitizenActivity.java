@@ -2,6 +2,10 @@ package com.example.uscitizen;
 
 // http://mobiforge.com/designing/story/understanding-user-interface-android-part-2-views
 //http://www.androidpeople.com/android-radiobutton-example/   helpful
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
@@ -9,14 +13,17 @@ import java.util.TimerTask;
 
 import com.example.uscitizen.R.color;
 
+
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -42,9 +49,10 @@ public class US_CitizenActivity extends ListActivity {
 	ArrayList<String> qnlist, anslist;
 	String[] tenquestions = new String[testnum];
 static int positionprev=0;
-	String[] allquestions = {
+	String[] allquestions =new String[100];;
 
-			"What is the supreme law of the land?",
+/*
+		{	"What is the supreme law of the land?",
 			"What does the Constitution do?",
 			"The idea of self-government is in the first three words of the "
 					+ "Constitution.What are these words?",
@@ -151,9 +159,9 @@ static int positionprev=0;
 			"When do we celebrate Independence Day?*",
 			"Name two national U.S. holidays."
 
-	};
-
-	String[] answers = {
+	};*/
+	 
+	String[] answers =  new String[100];;/*{
 			" the Constitution",
 			"  sets up the government" + "\n" + " defines the government"
 					+ "\n" + " protects basic rights of Americans",
@@ -407,15 +415,16 @@ static int positionprev=0;
 					+ "Independence Day" + "\n" + "Labor Day" + "\n"
 					+ " Columbus Day" + "\n" + "Veterans Day" + "\n"
 					+ "Thanksgiving" + "\n" + "Christmas" };
-
+*/
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Bundle bundle = new Bundle();
 		bundle = this.getIntent().getExtras();
 		
-		
-		
+		checkExternalMedia();
+		readRaw();
+		Log.d("first",allquestions[99]);
 		param1 = bundle.getString(param1);
 
 		qnlist = new ArrayList<String>();
@@ -510,7 +519,7 @@ static int positionprev=0;
 					qnlist.add(allquestions[i]);
 					 anslist.add("" + answers[i]);
 				}
-			System.out.println(anslist.size());
+			System.out.println(anslist.size()+"is the length");
 		}
 
 	}
@@ -547,4 +556,68 @@ parent.setScrollIndicators(v,v);
 	     showDoubleToast(2);
 	    
 	}
+	 private void checkExternalMedia(){
+         boolean mExternalStorageAvailable = false;
+         boolean mExternalStorageWriteable = false;
+         String state = Environment.getExternalStorageState();
+ 
+         if (Environment.MEDIA_MOUNTED.equals(state)) {
+             // Can read and write the media
+             mExternalStorageAvailable = mExternalStorageWriteable = true;
+         } else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+             // Can only read the media
+             mExternalStorageAvailable = true;
+             mExternalStorageWriteable = false;
+         } else {
+             // Can't read or write
+             mExternalStorageAvailable = mExternalStorageWriteable = false;
+         }   
+        // tv.append("\n\nExternal Media: readable="
+              //       +mExternalStorageAvailable+" writable="+mExternalStorageWriteable);
+     }
+	
+	private void readRaw(){
+       
+        InputStream is1 = this.getResources().openRawResource(R.raw.qstns);
+        InputStreamReader isr1 = new InputStreamReader(is1);
+        BufferedReader br1 = new BufferedReader(isr1);   
+        InputStream is2 = this.getResources().openRawResource(R.raw.answers);
+        InputStreamReader isr2 = new InputStreamReader(is2);
+        BufferedReader br2 = new BufferedReader(isr2);   
+      
+        
+        try {
+            String test;	int qnnum=0;
+            while (true){				
+                test = br1.readLine();   
+               
+                if(test == null) break;
+                allquestions[qnnum]=test;
+                test = br2.readLine();   
+                
+                if(test == null) break;
+                answers[qnnum]=test;
+                qnnum++;
+            }
+            isr1.close();
+            is2.close();
+            br1.close();
+            br2.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+       
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
