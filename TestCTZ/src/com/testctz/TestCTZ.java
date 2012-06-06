@@ -50,9 +50,9 @@ public class TestCTZ extends Activity {
 	String multipleChoiceAnswer="";
 	
 	String getquestionString = "";//and the next ..
-	String [] nearlygood=new String[100];//deceptive answerset
-	String [] funny1=new String[100];//fake answerset 1
-	String [] funny2=new String[100];//fake answerset 2
+	String [] nearlygood_10=new String[10];//deceptive answerset
+	String [] funny1_10=new String[10];//fake answerset 1
+	String [] funny2_10=new String[10];//fake answerset 2
 	
 	String multipleChoiceAnswers="";
 	String setanswerString = "";
@@ -71,12 +71,14 @@ public class TestCTZ extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		
 		setDefaultKeyMode(DEFAULT_KEYS_DISABLE);
-		getMultiChoiceData();
+		//getMultiChoiceData();
 		
 		//get ten random qns, and corresponding answers and their original numbers
 		Bundle bundle = new Bundle();
 		bundle = this.getIntent().getExtras();
-	    
+		nearlygood_10= bundle.getStringArray("nearlygood_10");
+		funny1_10=bundle.getStringArray("funny1_10");
+		funny2_10=bundle.getStringArray("funny2_10");
 		qnlist = bundle.getStringArray("randomqns");
 		anslist = bundle.getStringArray("anstorandomqns");
 		originalQNums=bundle.getIntArray("originalQNums");
@@ -149,7 +151,7 @@ public class TestCTZ extends Activity {
 			
 				} 
 					else{
-					getquestionString = getnextqn(cnt)+"ctz_ans="+ctz_ans+", correct_ans="+correct_ans;
+					getquestionString = getnextqn(cnt);
 					mGetQuestionString.setText(getquestionString);
 					cnt1=originalQNums[cnt];
 					
@@ -202,9 +204,9 @@ public class TestCTZ extends Activity {
 		
 			HashMap<Integer, String> map=new HashMap<Integer,String>(randoms.length);
 			map.put(0,anslist[currentans]);
-			map.put(1,  nearlygood[correspondingxtraans]);
-			map.put(2, funny1[correspondingxtraans]);
-			map.put(3, funny2[correspondingxtraans]);
+			map.put(1,  nearlygood_10[currentans]);
+			map.put(2, funny1_10[currentans]);
+			map.put(3, funny2_10[currentans]);
 			
 			
 			radio_ans1.setText((String)map.get(randoms[0]));
@@ -234,7 +236,7 @@ public class TestCTZ extends Activity {
 		return "Qusestion# " + qnnumber + qnlist[cnt] + anslist[cnt - 1];
 	}
 	
-	public void getMultiChoiceData(){
+/*	public void getMultiChoiceData(){
 		for (int i=0;i<50;i++)
 		{nearlygood[i]="a";
 		funny1[i]="a";
@@ -367,7 +369,7 @@ public class TestCTZ extends Activity {
 		funny1[94]="California";
 		funny2[94]="Staten island ";	
 		
-	}
+	}*/
 
 	
 	

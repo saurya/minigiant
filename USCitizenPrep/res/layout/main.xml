@@ -34,23 +34,20 @@ android:layout_height="wrap_content"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical">
-      <RadioButton android:id="@+id/radio_prep"
+      <RadioButton android:id="@+id/radio_prepare_for_interview"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="Prepare For The Test" />
-      <RadioButton android:id="@+id/radio_test"
+      <RadioButton android:id="@+id/radio_test_yourself"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="Take Test now" />
-        <RadioButton android:id="@+id/radio_state"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="State-specific Questions" />  
+       
           
-        <RadioButton android:id="@+id/radio_senior"
+        <RadioButton android:id="@+id/radio_senior_prepare_for_interview"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="@string/seniors" />    
+          android:text="@string/seniors_prepare_for_interview" />    
     </RadioGroup> 
 
    

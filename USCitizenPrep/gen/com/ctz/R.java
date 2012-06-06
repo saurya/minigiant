@@ -19,12 +19,11 @@ public final class R {
     }
     public static final class id {
         public static final int edittext=0x7f050000;
-        public static final int exit=0x7f050006;
-        public static final int go=0x7f050005;
-        public static final int radio_prep=0x7f050001;
-        public static final int radio_senior=0x7f050004;
-        public static final int radio_state=0x7f050003;
-        public static final int radio_test=0x7f050002;
+        public static final int exit=0x7f050005;
+        public static final int go=0x7f050004;
+        public static final int radio_prepare_for_interview=0x7f050001;
+        public static final int radio_senior_prepare_for_interview=0x7f050003;
+        public static final int radio_test_yourself=0x7f050002;
     }
     public static final class layout {
         public static final int main=0x7f030000;
@@ -34,7 +33,7 @@ public final class R {
         public static final int app_name=0x7f040001;
         public static final int hello=0x7f040000;
         public static final int select=0x7f040004;
-        public static final int seniors=0x7f040005;
+        public static final int seniors_prepare_for_interview=0x7f040005;
         public static final int title_close=0x7f040002;
     }
 }
