@@ -18,4 +18,11 @@
  <color name="black">#000000</color>
   <color name="beaut">#008000</color>
   <color name="yyellow">#F0FCAC</color>
+ <color name="mainbg">#4682B4 </color>
+ <color name="ansbg">#FFC0CB </color>
+ <color name="testbg">#778899 </color>
+ <color name="anstxt2">#006400 </color>
+  <color name="anstxt1">#008080 </color> 
+  <color name="anstxt3">#FF1493 </color>
+  <color name="anstxt4">#191970</color> 
 </resources>

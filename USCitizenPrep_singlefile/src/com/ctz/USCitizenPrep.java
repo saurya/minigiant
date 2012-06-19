@@ -62,8 +62,8 @@ public class USCitizenPrep extends Activity {
 
 			public void onClick(View v) {
 				v.setBackgroundResource(R.drawable.android_pressed);
-				Toast.makeText(USCitizenPrep.this, "Button clicked",
-						Toast.LENGTH_SHORT).show();
+				//Toast.makeText(USCitizenPrep.this, "Button clicked",
+						//Toast.LENGTH_SHORT).show();
 
 				Intent myIntent = new Intent();
 				myIntent.setClassName("com.ctz",

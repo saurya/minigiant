@@ -97,7 +97,7 @@ public class US_CitizenActivity extends ListActivity {
 			//setContentView(com.example.uscitizen.R.layout.listview);
 			setListAdapter(new ArrayAdapter<String>(
 		            this,R.layout.list_item,R.id.list_content, questions_list));
-			ListView lv = getListView();lv.setBackgroundColor(R.color.silver);
+			ListView lv = getListView();//comnow lv.setBackgroundColor(R.color.silver);
 			lv.setTextFilterEnabled(true);
 		
 
@@ -181,7 +181,7 @@ public class US_CitizenActivity extends ListActivity {
 				+ answers_list.get(position), 2 * Toast.LENGTH_LONG);
 
 		toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
-
+        
 		TextView v2 = (TextView) toast.getView().findViewById(
 				android.R.id.message);
 		v2.setBackgroundDrawable(getResources().getDrawable(

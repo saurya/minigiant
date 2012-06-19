@@ -5,7 +5,7 @@
  android:orientation="vertical" 
    
  android:layout_centerVertical="true"
- android:layout_centerInParent="true">
+ android:layout_centerInParent="true" android:background="@color/mainbg">
 <TextView
    
 android:gravity="center"

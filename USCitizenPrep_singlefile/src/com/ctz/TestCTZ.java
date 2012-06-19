@@ -95,7 +95,7 @@ public class TestCTZ<radiobtnGrp> extends Activity {
 
 		setContentView(R.layout.main2);
 		mGetQuestionString = (TextView) findViewById(R.id.getquestionString);
-		mGetQuestionString.setBackgroundColor(color.maroon);
+		//mGetQuestionString.setBackgroundColor(color.maroon);
 		mGetQuestionString.setText(getquestionString0);
 
 		mnext = (Button) findViewById(R.id.next);
