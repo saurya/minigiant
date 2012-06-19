@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"  
+    android:orientation="vertical" 
+   android:layout_centerVertical="true"
+   android:layout_centerInParent="true"
+   android:background="@color/testbg"
+   >
+    
+    
+    
+    <TextView
+        android:gravity="center"
+        android:id="@+id/getquestionString"
+        android:textSize="7pt"
+        android:textColor="#dd444444"
+        android:layout_margin="4dip"
+        android:scrollbars="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yyellow"
+     />
+    
+    
+
+
+    <RadioGroup
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+       android:id="@+id/radiobtnGrp"
+       android:layout_margin="4dip"
+      android:background="@color/ansbg"
+      >
+      <RadioButton android:id="@+id/radio_ans1"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@+id/getansString1"
+          android:textColor="@color/anstxt1"
+          android:onClick="onRadioButtonClicked"
+          />
+      <RadioButton android:id="@+id/radio_ans2"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@+id/getansString2"
+          android:textColor="@color/anstxt2"
+          android:onClick="onRadioButtonClicked"
+           />
+        <RadioButton android:id="@+id/radio_ans3"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@+id/getansString3"
+          android:textColor="@color/anstxt3"
+          android:onClick="onRadioButtonClicked"
+       />  
+          
+           <RadioButton android:id="@+id/radio_ans4"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@+id/getansString4"
+          android:textColor="@color/anstxt4"
+          android:onClick="onRadioButtonClicked"
+       />  
+    </RadioGroup> 
+    
+   
+        
+<Button android:layout_width="100dp" 
+ android:text="@string/next" 
+ android:layout_height="wrap_content" 
+ 
+        android:layout_marginLeft="10dip"
+        android:textColor="#aa8888bb"
+ android:id="@+id/next"></Button>
+ 
+ <Button android:layout_width="100dp" 
+ android:text="Get Scores Now" 
+ android:layout_height="wrap_content" 
+  android:layout_marginLeft="10dip"
+  android:textColor="#aa8888bb"
+ android:id="@+id/getscores"></Button>       
+
+<Button  android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:layout_marginLeft="10dip"
+         android:textColor="#aa8888bb"
+        android:text="Cancel" />
+</LinearLayout>
