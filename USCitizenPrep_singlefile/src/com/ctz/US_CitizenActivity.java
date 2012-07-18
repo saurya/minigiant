@@ -33,61 +33,25 @@ public class US_CitizenActivity extends ListActivity {
 	ArrayList<String> questions_list, answers_list;
 	static int positionprev = 0;
 	String[] allquestions = new String[question_bank_size];
-	String[] nearlygood = new String[question_bank_size];
-	String[] funny1 = new String[question_bank_size];
-	String[] funny2 = new String[question_bank_size];
+	
 	String[] allanswers = new String[question_bank_size];;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Bundle bundle = new Bundle();
+		
+	
 		bundle = this.getIntent().getExtras();
-
-		read_Rawdata();
 		user_selection = bundle.getString(user_selection);
+		allquestions = bundle.getStringArray("allquestions");
+		 allanswers = bundle.getStringArray(" allanswers");
+		
 
 		questions_list = new ArrayList<String>();
 		answers_list = new ArrayList<String>();
-		if (user_selection.contains("2")) {
-			copy("random");
-			Intent myIntent2 = new Intent();
-			myIntent2.setClassName("com.ctz", "com.ctz.TestCTZ");
-			Bundle qnbundle = new Bundle();
-			String[] qns = new String[questions_list.size()];
-			String[] ans = new String[answers_list.size()];
-			Object[] qnobarr = questions_list.toArray();
-			Object[] ansobarr = answers_list.toArray();
-			for (int i = 0; i < 10; i++) {
-				qns[i] = (String) qnobarr[i];// (String[]) questions_list.toArray()
-				ans[i] = (String) ansobarr[i];
-			}
-			
-			// bundle up the 10 relevant MCQ wrong answers
-			String[] nearlygood_10 = new String[10];
-			String[] funny1_10 = new String[10];
-			String[] funny2_10 = new String[10];
-			for (int i = 0; i < 10; i++) {
-				nearlygood_10[i] = nearlygood[randoms[i]];
-				funny1_10[i] = funny1[randoms[i]];
-				funny2_10[i] = funny2[randoms[i]];
-			}
-			qnbundle.putStringArray("nearlygood_10", nearlygood_10);// deceptive
-			qnbundle.putStringArray("funny1_10", funny1_10);// fake answerset 1
-			qnbundle.putStringArray("funny2_10", funny2_10);// fake answerset 2
-			
-			// bundle up randomly selected question numbers needed for scoring
-			qnbundle.putIntArray("originalQNums", randoms);
-			
-			// bundle up randomly selected test questions and answers
-			qnbundle.putStringArray("randomqns", qns);
-			qnbundle.putStringArray("anstorandomqns", ans);
-			
-			myIntent2.putExtras(qnbundle);
-			startActivity(myIntent2);
-		}
-
-		else {
+		
+		 {
 			if (user_selection.contains("1"))
 				copy("total");
 
@@ -119,27 +83,7 @@ public class US_CitizenActivity extends ListActivity {
 			
 		}
 
-		else if (s.equals("random")) {
-			answers_list.clear();
-			questions_list.clear();
-			Random rands = new Random();
-			String randomstr = "aaa,";
-			int nums = allquestions.length;			
-			int k, count = 0;
-			
-			randoms = new int[10];
-			while (count < 10) {
-				k = rands.nextInt(nums);
-				if (!randomstr.contains(k + "")) {
-					randomstr += (k);
-					randoms[count] = k;
-
-					count++;
-					questions_list.add("" + allquestions[k]);
-					answers_list.add("" + allanswers[k]);
-				}
-			} // return (String[]) qns.toArray();
-		}
+		
 
 		else if (s.equals("senior")) {
 			answers_list.clear();
@@ -193,63 +137,6 @@ public class US_CitizenActivity extends ListActivity {
 	}
 
 	// read all data into program. filenames reveal content
-	private void read_Rawdata() {
-
-		InputStream is1 = this.getResources().openRawResource(R.raw.allquestions);
-		InputStreamReader isr1 = new InputStreamReader(is1);
-		BufferedReader br1 = new BufferedReader(isr1);
-		InputStream is2 = this.getResources().openRawResource(R.raw.allanswers);
-		InputStreamReader isr2 = new InputStreamReader(is2);
-		BufferedReader br2 = new BufferedReader(isr2);
-
-		InputStream isMC1 = this.getResources().openRawResource(
-				R.raw.multiplechoicewrongs);
-		InputStreamReader isrMC1 = new InputStreamReader(isMC1);
-		BufferedReader brMC1 = new BufferedReader(isrMC1);
-		String[] testMC = new String[3];
-
-		try {
-			String test;
-			int qnnum = 0;
-			while (true) {if (qnnum>99)break;
-				for (int i = 0; i < 3; i++) {
-					testMC[i] = brMC1.readLine();
-					Log.d("testMC:", testMC[i]);
-					if (testMC[i] == null)
-						break;
-				}
-				if (testMC[0] == null || testMC[1] == null || testMC[2] == null)
-					break;
-
-				nearlygood[qnnum] = testMC[0];
-				funny1[qnnum] = testMC[1];
-				funny2[qnnum] = testMC[2];
-
-				test = br1.readLine();
-
-				if (test == null)
-					break;
-				allquestions[qnnum] = test;
-				test = br2.readLine();
-
-				if (test == null)
-					break;
-				allanswers[qnnum] = test;
-				qnnum++;
-			}
-			isr1.close();
-			isMC1.close();
-			isr2.close();
-			isrMC1.close();
-			br1.close();
-			brMC1.close();
-			br2.close();
-			is1.close();
-			is2.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+	
 	}
 
-}

@@ -9,15 +9,23 @@
     android:debuggable="true" 
     
     >
-        <activity android:name=".USCitizenPrep"
-       
-                  
+        
+             <activity android:name=".USCitizenPrep" 
                  >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+                 </intent-filter>
+              </activity>
+              <activity android:name=".US_CitizenActivity">
+                      </activity>
+                       <activity android:name=".TestCTZ1">
+                           </activity>
+ <activity android:name=".GestBuildActivity">
+                      </activity>
+                       <activity android:name=".Gather_UserChoices">
+                      </activity>
     </application>
+<uses-permission android:name="android.permission.INTERNET"></uses-permission>
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
 </manifest>

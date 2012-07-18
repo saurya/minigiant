@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/totalView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/anstxt1"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
+
+    <android.gesture.GestureOverlayView
+        android:id="@+id/gestures"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        
+    </android.gesture.GestureOverlayView>
+
+    <EditText
+        android:id="@+id/scoreField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="4dip"
+        android:background="@color/yyellow"
+        android:gravity="center"
+        android:hint="@string/reminder1"
+        android:scrollbars="vertical"
+        android:textColor="#dd444444"
+        android:textSize="7pt" />
+
+    <EditText
+        android:id="@+id/timerTextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="4dip"
+        android:background="@color/yyellow"
+        android:gravity="center"
+        android:hint="@string/reminder2"
+        android:textColor="#dd444444"
+        android:textSize="7pt" />
+
+    <!--
+   <Button  android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:layout_marginLeft="10dip"
+         android:textColor="#aa8888bb"
+        android:text="Exit"
+         android:layout_below="@+id/getpreviousquestionString"
+         android:layout_alignParentRight="true"
+         /> 
+   
+
+    <Button
+        android:id="@+id/next"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="42dp"
+        android:text="@string/next"
+        android:textColor="#aa8888bb" 
+        android:onClick="sendMessage"/>
+    -->
+    <!--
+    <Button
+        android:id="@+id/exit_button2"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/next"
+        android:text="Exit" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/next"
+        android:layout_marginRight="17dp"
+        android:layout_toLeftOf="@+id/next"
+        android:text="Self_Evaluate" />
+    -->
+
+    <TextView
+        android:id="@+id/getquestionString"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/scoreField"
+        android:layout_below="@+id/scoreField"
+        android:layout_margin="4dip"
+        android:layout_marginTop="25dp"
+        android:background="@color/yyellow"
+        android:gravity="center"
+        android:scrollbars="vertical"
+        android:textColor="#778899"
+        android:textSize="7pt" />
+
+    <TextView
+        android:id="@+id/getAnswerString"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/getquestionString"
+        android:layout_centerInParent="true"
+        android:layout_margin="4dip"
+        android:layout_marginBottom="59dp"
+        android:background="@color/yyellow"
+        android:scrollbars="vertical"
+        android:textColor="#dd444444"
+        android:textSize="7pt" />
+<ImageButton
+            android:id="@+id/btn_check_on"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginRight="17dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/btn_check_on"
+            android:onClick="newOnclick"
+            
+             />
+    <ImageButton
+        android:id="@+id/btn_close_normal"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/btn_check_on"
+        android:onClick="newOnclick2"
+        android:src="@drawable/btn_close_normal" />
+
+    <TextView
+        android:id="@+id/getReport"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/gestures"
+        android:layout_margin="4dip"
+        android:background="@color/yyellow"
+        android:gravity="center"
+        android:textColor="#778899"
+        android:textSize="7pt" />
+
+   
+</RelativeLayout>

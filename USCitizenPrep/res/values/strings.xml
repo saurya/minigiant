@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="hint1">"  "</string>
     <string name="hello">Hello US Citizenship Applicant!</string>
     <string name="app_name">Prepare For Interview</string>
      <string name="title_close">Start</string>
     <string name="Next">Go!</string>
  <string name="select">Selected is :</string>
- <string name="seniors_prepare_for_interview">Qulifying Senior-Citizens</string>
+ <string name="seniors_prepare_for_interview">Qualifying Senior-Citizens</string>
+ <string name="startTest">Start The Test Now</string>
+  <string name="next">Next</string>
+  <string name="reminder1"> "  /  "  </string>
+  <string name="reminder2"> "000000" </string>
+  
 </resources>

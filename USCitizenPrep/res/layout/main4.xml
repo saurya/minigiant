@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:layout_width="fill_parent"
+ android:layout_height="fill_parent"
+ android:orientation="vertical" 
+   
+ android:layout_centerVertical="true"
+ android:layout_centerInParent="true" android:background="@color/anstxt1">
+
+<TextView
+android:gravity="center"
+android:text="\nWELCOME \n to \n U.S NATURALIZATION INTERVIEW Practice Test \n\n
+ Please enter the number of questions for your parctice and your expected time in seconds to answer a question, 
+ in the boxes below.\n"
+
+android:layout_margin="4dip"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+/>
+    
+  <!--   android:background="@drawable/android_button" -->
+<!-- android:src="@drawable/android_button" -->
+
+<CheckedTextView
+    android:id="@+id/checkedTextView1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Enter number of questions" 
+      android:layout_marginTop="23dp"/>
+
+<EditText
+    android:id="@+id/numberofQns"
+    android:layout_width="27dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+  android:background="@android:drawable/editbox_background"
+    android:hint="@string/hint1"
+     android:layout_marginTop="23dp"
+    android:inputType="number"
+    android:maxLength="2"
+    android:padding="2dp"
+    android:singleLine="true" />
+
+<CheckedTextView
+    android:id="@+id/chkbx2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:text="Enter a time limit in seconds for each question" />
+
+<EditText
+    android:id="@+id/timingperqn"
+    android:layout_width="27dp"
+    android:layout_height="wrap_content"
+    android:background="@android:drawable/editbox_background"
+     android:layout_gravity="center_horizontal"
+    android:ems="10"
+    android:hint="@string/hint1"
+    android:inputType="number"
+    android:maxLength="2"
+    android:padding="2dp"
+    android:layout_marginTop="23dp"
+    android:singleLine="true" 
+   />
+
+<Button
+    android:id="@+id/go"
+     android:layout_gravity="center_horizontal"
+    android:layout_width="166dp"
+    android:layout_height="48dp"
+    android:onClick="onButtonClicked"
+    android:text="@string/startTest" />
+
+<Button
+    android:id="@+id/exit"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="58dp"
+    android:text="Exit"
+    android:layout_gravity="bottom|right"
+    android:textColorHighlight="#00f"
+    android:textSize="8sp" />
+ 
+</LinearLayout>
