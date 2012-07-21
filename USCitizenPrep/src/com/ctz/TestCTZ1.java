@@ -122,12 +122,14 @@ public class TestCTZ1 extends Activity implements  OnGestureListener,SimpleGestu
 
 	/** Called when the activity is first created. */
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		 detector = new SimpleGestureFilter(this,this);
 		bingo=false;
 		gestureScanner = new GestureDetector(this);
+		
 		setContentView(R.layout.main2);//following lines 'must' to follow layout
 		
 	

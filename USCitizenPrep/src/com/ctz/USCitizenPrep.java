@@ -89,6 +89,8 @@ private CheckBox radio_senior_prepare_for_interview;
 		read_Rawdata();
 		governorData();
 		getSenators();
+		new Justdownload(statenames);
+	
 		//getGovernor();
 		setContentView(com.ctz.R.layout.main);
 		 GestureOverlayView gOverlay = (GestureOverlayView) findViewById(R.id.gestures);
@@ -318,10 +320,11 @@ private CheckBox radio_senior_prepare_for_interview;
 			Random rands = new Random();
 			String randomstr = "aaa,";
 			int nums = allquestions.length;			
-			int k, count = 0;
 			
-			randoms = new int[100];
+
+			
 			for (int i = 0; i < 100; i++) {
+			
 				questions_list.add(allquestions[i]);
 				answers_list.add(allanswers[i]);
 				randoms[i]=i;
