@@ -44,34 +44,41 @@ public final class R {
         public static final int android_normal=0x7f020000;
         public static final int btn_check_on=0x7f020001;
         public static final int btn_close_normal=0x7f020002;
-        public static final int color_selector=0x7f020003;
-        public static final int icon=0x7f020004;
+        public static final int checkbox_off_background=0x7f020003;
+        public static final int checkbox_on_background=0x7f020004;
+        public static final int color_selector=0x7f020005;
+        public static final int icon=0x7f020006;
+        public static final int menuitem_checkbox=0x7f020007;
+        public static final int menuitem_checkbox_on=0x7f020008;
+        public static final int spinner_background=0x7f020009;
+        public static final int spinner_normal=0x7f02000a;
+        public static final int spinner_press=0x7f02000b;
+        public static final int spinner_select=0x7f02000c;
     }
     public static final class id {
-        public static final int btn_check_on=0x7f090011;
-        public static final int btn_close_normal=0x7f090012;
-        public static final int checkBox1=0x7f090008;
-        public static final int checkedTextView1=0x7f090014;
-        public static final int chkbx2=0x7f090016;
-        public static final int exit=0x7f09000a;
-        public static final int gestures=0x7f09000b;
-        public static final int getAnswerString=0x7f090010;
-        public static final int getReport=0x7f090013;
-        public static final int getquestionString=0x7f09000f;
-        public static final int go=0x7f090009;
+        public static final int btn_check_on=0x7f090010;
+        public static final int btn_close_normal=0x7f090011;
+        public static final int checkedTextView1=0x7f090013;
+        public static final int chkbx2=0x7f090015;
+        public static final int exit=0x7f090009;
+        public static final int gestures=0x7f09000a;
+        public static final int getAnswerString=0x7f09000f;
+        public static final int getReport=0x7f090012;
+        public static final int getquestionString=0x7f09000e;
+        public static final int go=0x7f090008;
         public static final int image=0x7f090001;
         public static final int layout_root=0x7f090000;
         public static final int list_content=0x7f090003;
-        public static final int numberofQns=0x7f090015;
+        public static final int numberofQns=0x7f090014;
         public static final int radio_prepare_for_interview=0x7f090005;
         public static final int radio_senior_prepare_for_interview=0x7f090007;
         public static final int radio_test_yourself=0x7f090006;
-        public static final int scoreField=0x7f09000d;
+        public static final int scoreField=0x7f09000c;
         public static final int state_spinner=0x7f090004;
         public static final int text=0x7f090002;
-        public static final int timerTextField=0x7f09000e;
-        public static final int timingperqn=0x7f090017;
-        public static final int totalView=0x7f09000c;
+        public static final int timerTextField=0x7f09000d;
+        public static final int timingperqn=0x7f090016;
+        public static final int totalView=0x7f09000b;
     }
     public static final class layout {
         public static final int custom_dialog=0x7f030000;
@@ -91,19 +98,21 @@ public final class R {
         public static final int statencaps=0x7f050004;
     }
     public static final class string {
-        public static final int Next=0x7f080004;
-        public static final int app_name=0x7f080002;
-        public static final int hello=0x7f080001;
-        public static final int hint1=0x7f080000;
-        public static final int next=0x7f080008;
-        public static final int reminder1=0x7f080009;
-        public static final int reminder2=0x7f08000a;
-        public static final int select=0x7f080005;
-        public static final int seniors_prepare_for_interview=0x7f080006;
-        public static final int startTest=0x7f080007;
-        public static final int title_close=0x7f080003;
+        public static final int Next=0x7f070004;
+        public static final int aboutsenioritis=0x7f07000b;
+        public static final int app_name=0x7f070002;
+        public static final int hello=0x7f070001;
+        public static final int hint1=0x7f070000;
+        public static final int next=0x7f070008;
+        public static final int reminder1=0x7f070009;
+        public static final int reminder2=0x7f07000a;
+        public static final int select=0x7f070005;
+        public static final int seniors_prepare_for_interview=0x7f070006;
+        public static final int startTest=0x7f070007;
+        public static final int title_close=0x7f070003;
     }
     public static final class style {
-        public static final int style1=0x7f070000;
+        public static final int MyTheme=0x7f080000;
+        public static final int style1=0x7f080001;
     }
 }

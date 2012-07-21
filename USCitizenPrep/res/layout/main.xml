@@ -3,10 +3,9 @@
  android:layout_width="fill_parent"
  android:layout_height="fill_parent"
  android:orientation="vertical" 
-   
+  
  android:layout_centerVertical="true"
  android:layout_centerInParent="true" android:background="@color/anstxt1">
-
 <TextView
 android:gravity="center"
 android:text="\nWELCOME \n to \n U.S NATURALIZATION INTERVIEW PREPARATION \n\n
@@ -19,15 +18,15 @@ android:layout_height="wrap_content"
 />
 <!--  style="?android:attr/spinnerItemStyle"--> 
 
-<Spinner
-    android:id="@+id/state_spinner"
-    style="@style/style1"
-    android:layout_width="42dp"
-    android:layout_height="32dp"
-    android:layout_gravity="center|center_horizontal"
-   android:textSize="6sp"
-    android:drawSelectorOnTop="true" />
-
+   <Spinner
+        android:id="@+id/state_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:background="@drawable/spinner_background"
+        style="@style/style1"
+        >
+         </Spinner>
+    
          <!--    android:background="@drawable/android_focused" -->
            <RadioGroup
       android:layout_width="fill_parent"
@@ -42,23 +41,17 @@ android:layout_height="wrap_content"
          
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Take Practice Test now" />
-       
-          
-        <RadioButton android:id="@+id/radio_senior_prepare_for_interview"
-           
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/seniors_prepare_for_interview" />    
+          android:text="Take Practice Test now" />      
     </RadioGroup>
 
            <CheckBox
-               android:id="@+id/checkBox1"
-               android:layout_width="142dp"
-               android:layout_height="19dp"
+               android:id="@+id/radio_senior_prepare_for_interview"
+               android:layout_width="106dp"
+               android:layout_height="30dp"
                android:layout_gravity="center"
-               android:text="Seniors:Take Practice Test now"
-               android:textSize="8sp" />
+               android:text="Check here if you are a qualified Senior"
+               android:textSize="8sp" 
+               />
 
            <Button
                android:id="@+id/go"
@@ -68,7 +61,10 @@ android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
                android:text="@string/Next"
-               android:textSize="12sp" />
+               android:textSize="12sp"
+               
+               
+                />
 
            <Button
                android:id="@+id/exit"

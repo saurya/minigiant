@@ -111,8 +111,8 @@
         android:textSize="7pt" />
 <ImageButton
             android:id="@+id/btn_check_on"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
             android:layout_marginRight="17dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
@@ -122,11 +122,12 @@
              />
     <ImageButton
         android:id="@+id/btn_close_normal"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/btn_check_on"
         android:onClick="newOnclick2"
+        android:layout_marginLeft="17dp"
         android:src="@drawable/btn_close_normal" />
 
     <TextView

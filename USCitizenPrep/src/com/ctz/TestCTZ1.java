@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import com.ctz.R.color;
+import com.ctz.SimpleGestureFilter.SimpleGestureListener;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -19,7 +20,9 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.View;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.View.OnClickListener;
 
 import android.widget.Button;
@@ -43,12 +46,15 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
-
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.MotionEvent;
+import android.widget.Toast;
 @SuppressLint("NewApi")
-public class TestCTZ1 extends Activity {
+public class TestCTZ1 extends Activity implements  OnGestureListener,SimpleGestureListener{
 	private GestureLibrary gLib;
 	private static final String TAG = "com.ctz";
-	 boolean bingo,done;
+	 boolean bingo,done;private GestureDetector gestureScanner ;
 	 static Toast toast;
 		private final Handler toastHandler = new Handler();
 	@SuppressLint({ "NewApi", "NewApi", "NewApi" })
@@ -60,7 +66,7 @@ public class TestCTZ1 extends Activity {
 	private EditText mScore;
 	private CheckBox mcheckBox2;
 	private RelativeLayout mtotalView;
-	
+	 private SimpleGestureFilter detector;
 	int questionnumber;
 	//private Button mnext;
 	private Button exit_button;
@@ -115,34 +121,13 @@ public class TestCTZ1 extends Activity {
 	static String finalswipe;
 
 	/** Called when the activity is first created. */
-	@SuppressLint({ "NewApi", "NewApi", "NewApi", "NewApi", "NewApi" })
-	final OnGesturePerformedListener handleGestureListener = new
-    		OnGesturePerformedListener() {
-
-    		public void onGesturePerformed(GestureOverlayView gestureView,
-    		Gesture gesture) {
-    		  //  Prediction predictions = gLib.recognize(gesture).get(0);
-    		 ArrayList<?> to_arl=gLib.recognize(gesture);
-    			ArrayList<Prediction> predictions = gLib.recognize(gesture);
-    		   for (Prediction prediction : predictions) {
-    		     if (to_arl.size() > 0) {
-    		         
-    		      {Log.d("gesture ",""+ prediction.name+" "+ prediction.score+"++++++++++++++++++++++++++++");
-    		      TestCTZ1.finalswipe=prediction.name+"";
-    		         Toast.makeText(TestCTZ1.this,""+ prediction.name+" "+ prediction.score,Toast.LENGTH_SHORT).show();
-    		}
-    		    
-    		     }  
-    		      
-    		}
-    		}
-    		};
-	@SuppressLint({ "NewApi", "NewApi", "NewApi", "NewApi", "NewApi", "NewApi" })
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		 detector = new SimpleGestureFilter(this,this);
 		bingo=false;
+		gestureScanner = new GestureDetector(this);
 		setContentView(R.layout.main2);//following lines 'must' to follow layout
 		
 	
@@ -178,14 +163,7 @@ public class TestCTZ1 extends Activity {
 	//	mnext = (Button) findViewById(R.id.next);
 		
 		
-		 gLib = GestureLibraries.fromRawResource(this,com.ctz.R.raw.gestures);
-	     if (!gLib.load()) {
-	          Log.w(TAG, "could not load gesture library!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-	       finish();
-	}
-    		 GestureOverlayView gestures = (GestureOverlayView) findViewById(R.id.gestures);
-	 		    gestures.addOnGesturePerformedListener(handleGestureListener);
-		
+	
 		//mnext.setClickable(false);
 		mtimerTextField=(EditText) findViewById(R.id. timerTextField );
 		 mtotalView=(RelativeLayout)findViewById(R.id.totalView);		
@@ -194,7 +172,8 @@ public class TestCTZ1 extends Activity {
 		//mGetQuestionString.setBackgroundColor(color.maroon);
 		mGetQuestionString.setText(getquestionString0);
 		//mgetAnswerString.setText(getAnswerString0);
-		mgetAnswerString.setVisibility(View.GONE);
+		mgetAnswerString.setVisibility(View.GONE); mbtnclose_normal.setVisibility(View.GONE);
+		 mbtn_check_on.setVisibility(View.GONE);
 		mgetReport.setVisibility(View.GONE);
 	   // mnext.setVisibility(View.GONE);
 		 ;
@@ -204,10 +183,29 @@ public class TestCTZ1 extends Activity {
 		currentdisplay = 0;
 		originalQnumber = originalQNums[0];
 	}
-	
+	 @Override 
+	 public boolean dispatchTouchEvent(MotionEvent me){ 
+		  super.dispatchTouchEvent(me);
+	   this.detector.onTouchEvent(me);
+	  return super.dispatchTouchEvent(me); 
+	 }
+	 public void onDoubleTap() {
+		 mgetAnswerString.setVisibility(View.VISIBLE);mbtnclose_normal.setVisibility(View.VISIBLE);
+		 mbtn_check_on.setVisibility(View.VISIBLE); mbtnclose_normal.setClickable(true);
+		 mbtn_check_on.setClickable(true);
+	   // Toast.makeText(this, "Double Tap", Toast.LENGTH_SHORT).show(); 
+	 }
+	 public boolean onSingleTapUp() {
+		 mgetAnswerString.setVisibility(View.VISIBLE);mbtnclose_normal.setVisibility(View.VISIBLE);
+		 mbtn_check_on.setVisibility(View.VISIBLE);
+			 mbtnclose_normal.setClickable(true);
+			 mbtn_check_on.setClickable(true);
+		  //  Toast.makeText(this, "Single Tap", Toast.LENGTH_SHORT).show(); 
+		    return false;
+		 }
 	public void newOnclick2(View v){
-	Toast.makeText(TestCTZ1.this,anslist[cnt],
-		Toast.LENGTH_SHORT).show();
+	//Toast.makeText(TestCTZ1.this,anslist[cnt],
+		//Toast.LENGTH_SHORT).show();
 		
 	bingo=false;
 	callrestofthecode();
@@ -246,7 +244,7 @@ public class TestCTZ1 extends Activity {
 					        	
 					         } 
 					    }, 45);*/
-						decideVisibility(true);mbtn_check_on.setClickable(true);
+						decideVisibility(true);//mbtn_check_on.setClickable(true);//mbtnclose_normal.setClickable(true);
 						mgetReport.setText(getreportString());
 						mgetReport.setVisibility(View.VISIBLE);
 						
@@ -313,20 +311,20 @@ public class TestCTZ1 extends Activity {
 	public void decideVisibility(boolean hide){
 		
 		if(hide)
-		{mbtn_check_on.setClickable(false);
-		mbtnclose_normal.setClickable(false);
+		{mbtn_check_on.setVisibility(View.GONE);
+		mbtnclose_normal.setVisibility(View.GONE);
 			mgetAnswerString.setVisibility(View.GONE);
 		mGetQuestionString.setVisibility(View.GONE);
 		mtimerTextField.setVisibility(View.GONE);
-		mbtnclose_normal.setVisibility(View.GONE);
-		 mbtn_check_on.setVisibility(View.GONE);}
+		
+		 }
 		else
 		{
 			mgetAnswerString.setVisibility(View.VISIBLE);
 		mGetQuestionString.setVisibility(View.VISIBLE);
 		mtimerTextField.setVisibility(View.VISIBLE);
-		mbtnclose_normal.setVisibility(View.VISIBLE);
-		 mbtn_check_on.setVisibility(View.VISIBLE);
+		mbtnclose_normal.setVisibility(View.GONE);
+		 mbtn_check_on.setVisibility(View.GONE);
 		 mbtn_check_on.setClickable(true);
 			mbtnclose_normal.setClickable(true);}
 		
@@ -360,10 +358,13 @@ public class TestCTZ1 extends Activity {
 		     }
           
 		     public void onFinish() {
-		    	 mtimerTextField.setText("done!");mbtn_check_on.setClickable(false);
+		    	 mtimerTextField.setText("done!");//mbtn_check_on.setClickable(false);
 		    	// done=true;
 		    	 bingo=false;
-		    	// mgetAnswerString.setVisibility(View.VISIBLE);
+		    	 mgetAnswerString.setVisibility(View.VISIBLE);
+		    	 
+		 		
+		    	 
 		    	// mcheckBox2.setFocusable(true);
 		    	// mnext.setVisibility(View.VISIBLE);
 		    	 
@@ -411,7 +412,49 @@ public class TestCTZ1 extends Activity {
      
     	  
 	}
-
+	 @Override
+	    public boolean onTouchEvent(MotionEvent me)
+	    {
+	        return gestureScanner.onTouchEvent(me);
+	    }
+	 
+	    public boolean onDown(MotionEvent e)
+	    {
+	     
+	        return false;
+	    }
+	 
+	    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
+	    {
+	      
+	        return false;
+	    }
+	 
+	    public void onLongPress(MotionEvent e)
+	    {
+	    	return ;
+	    }
+	 
+	    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
+	    {
+	        
+	        return false;
+	    }
+	 
+	    public void onShowPress(MotionEvent e)
+	    {
+	        return;
+	    }
+	 
+	    public boolean onSingleTapUp(MotionEvent e)
+	    {mgetAnswerString.setVisibility(View.VISIBLE);
+	    mbtnclose_normal.setVisibility(View.VISIBLE);
+		 mbtn_check_on.setVisibility(View.VISIBLE);
+		 mbtnclose_normal.setClickable(true);
+		 mbtn_check_on.setClickable(true);
+	       // Toast.makeText(TestCTZ1.this, "Single-Tap event ", Toast.LENGTH_LONG).show();
+	        return true;
+	    }
 	public String getnextqn(int cnt) {
 		int qnnumber = cnt + 1;
 		return "Qusestion# " + qnnumber +": "+ qnlist[cnt] ;

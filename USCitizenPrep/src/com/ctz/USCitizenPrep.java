@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -33,6 +34,7 @@ import android.view.View.OnKeyListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -72,9 +74,10 @@ public class USCitizenPrep extends Activity implements OnGesturePerformedListene
 	private String selected_type;
 	private Button go_Button;
 	private Button exit_Button;
+
 	private RadioButton radio_prepare_for_interview;
 	private RadioButton radio_test_yourself;
-	private RadioButton radio_senior_prepare_for_interview;
+private CheckBox radio_senior_prepare_for_interview;
     private static String user_selection;
     private static String user_state;
     private GestureLibrary gLib;
@@ -86,7 +89,7 @@ public class USCitizenPrep extends Activity implements OnGesturePerformedListene
 		read_Rawdata();
 		governorData();
 		getSenators();
-	//	getGovernor();
+		//getGovernor();
 		setContentView(com.ctz.R.layout.main);
 		 GestureOverlayView gOverlay = (GestureOverlayView) findViewById(R.id.gestures);
 	        gOverlay.addOnGesturePerformedListener(USCitizenPrep.this); 	
@@ -98,7 +101,7 @@ public class USCitizenPrep extends Activity implements OnGesturePerformedListene
        
 		questions_list = new ArrayList<String>();
 		answers_list = new ArrayList<String>();
-		final Spinner spinner = (Spinner) findViewById(R.id.state_spinner);
+	final Spinner	 spinner = (Spinner) findViewById(R.id.state_spinner);
 		//findViewById(R.id.state_spinner).setBackgroundColor(R.color.yyellow);
 		// Create an ArrayAdapter using the string array and a default spinner layout
 		//ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -113,42 +116,13 @@ public class USCitizenPrep extends Activity implements OnGesturePerformedListene
 		
 		// Apply the adapter to the spinner
 		//DialogInterface dialog;
-		//spinner.setBackgroundColor(color.transparent);
+		spinner.setBackgroundColor(color.background_dark);
 		spinner.setAdapter(adapter);spinner.setFocusable(true);
-		//spinner.setOnItemSelectedListener(adapter..OnItemSelectedListener();
-		//spinner.onClick( new DialogInterface.OnClickListener(), Toast.LENGTH_SHORT);
-		
-		
-	/*	final EditText edittext = (EditText) findViewById(R.id.edittext);
-
-		edittext.setOnKeyListener(new OnKeyListener() {
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-				if ((event.getAction() == KeyEvent.ACTION_DOWN)
-						&& (keyCode == KeyEvent.KEYCODE_ENTER)) {
-					user_state=(edittext.getText()).toString();
-					
-					Toast.makeText(USCitizenPrep.this,user_state,
-							Toast.LENGTH_SHORT).show();
-					return true;
-				}
-				return false;
-			}
-		});
-		
-		*<EditText
-        android:id="@+id/edittext"
-        android:maxLength="2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"></EditText>  
-        </LinearLayout>
-		
-		*/
-
+		spinner.setVisibility(1);
+		 radio_senior_prepare_for_interview=(CheckBox) findViewById(com.ctz.R.id.radio_senior_prepare_for_interview);
 		radio_prepare_for_interview = (RadioButton) findViewById(com.ctz.R.id.radio_prepare_for_interview);
 		radio_test_yourself = (RadioButton) findViewById(com.ctz.R.id.radio_test_yourself);
-		radio_senior_prepare_for_interview = (RadioButton) findViewById(com.ctz.R.id.radio_senior_prepare_for_interview);
+		//radio_senior_prepare_for_interview = (RadioButton) findViewById(com.ctz.R.id.radio_senior_prepare_for_interview);
 
 		go_Button = (Button) findViewById(com.ctz.R.id.go);
 		exit_Button = (Button) findViewById(com.ctz.R.id.exit);
@@ -189,7 +163,8 @@ public class USCitizenPrep extends Activity implements OnGesturePerformedListene
 				Intent myIntent2 = new Intent();
 	
 				if (v == go_Button) {
-					currentstate=spinner.getSelectedItem().toString();	
+					currentstate=
+					 spinner.getSelectedItem().toString();	
 					//Toast.makeText(USCitizenPrep.this, String.valueOf("State: "+spinner.getSelectedItem()),Toast.LENGTH_SHORT).show();
 					if (radio_test_yourself.isChecked() == true) {
 
@@ -317,6 +292,7 @@ public class USCitizenPrep extends Activity implements OnGesturePerformedListene
             Toast.makeText(USCitizenPrep.this, action, Toast.LENGTH_SHORT).show();
         }
     }
+	
 	public void onNothingSelected(AdapterView<?> parent) {
 		Toast.makeText(USCitizenPrep.this, "",
 				Toast.LENGTH_SHORT).show();
@@ -384,10 +360,12 @@ public class USCitizenPrep extends Activity implements OnGesturePerformedListene
 	
 	private String getSenators(){
 		try {
-			//  Log.d("printinfo","gettingit ***************");
+				
+			
+			
 		  URL senators=  new URL("http://www.senate.gov/general/contact_information/senators_cfm.xml");
-		//  Log.d("printinfo","gotit ***************");
-		 
+		Log.d("printinfo","gotit ***************??????????????????????????>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		new DownloadFilesTask().execute(senators);
 		  String[] firstname=new String[100];
 		  String[] lastname=new String[100];
 		  
@@ -400,6 +378,7 @@ public class USCitizenPrep extends Activity implements OnGesturePerformedListene
 			        	if (inputLine.contains("first_name"))firstname[cnt]=inputLine;
 			        	if (inputLine.contains("last_name"))lastname[cnt]=inputLine;
 			        	if (inputLine.contains("state")){state[cnt]=inputLine;
+			        	
 			        	cnt++;}
 			        }
 			        
@@ -428,12 +407,14 @@ public class USCitizenPrep extends Activity implements OnGesturePerformedListene
 		
 		
 	}
+	//20th julyinsert justdownload here to get correct output. Got round temporarily,commenting if. 
+	//Ver15 made it nec to go through non-mainthread for internet connection from android app
 	private String getSenator(String ofstate){
-		String senator_of_state="";
-	
+		String senator_of_state="old";
+		 Log.d("ofstate",ofstate+"******************************************************************************");
 		  for (int i=0;i<100;i++){	
-			 
-			  if ((state[i]).contains(ofstate))
+			  Log.d("state[i]",state[i]+"******************************************************************************");
+		//	 if ((state[i]).contains(ofstate))
 			   senator_of_state +=sentr[i]+"\n";
 			  
 		  }
@@ -607,4 +588,23 @@ public class USCitizenPrep extends Activity implements OnGesturePerformedListene
 		}
 
 	}
+	private class DownloadFilesTask extends AsyncTask<URL, Integer, Long> {
+	     protected Long doInBackground(URL... urls) {
+	         int count = urls.length;
+	         long totalSize = 0;
+	         for (int i = 0; i < count; i++) {
+	           
+	             publishProgress((int) ((i / (float) count) * 100));
+	             // Escape early if cancel() is called
+	             if (isCancelled()) break;
+	         }
+	         return totalSize;
+	     }
+
+	     protected void onProgressUpdate(Integer... progress) {
+	    	// setProgressPercent(progress[0]);
+	     }
+
+	    
+	 }
 }

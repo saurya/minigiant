@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<style name="MyTheme" parent="android:Theme.Light">
+<item name="android:windowNoTitle">true</item>
+ <item name="android:windowBackground">@color/olive</item>
+ </style>
+
+ <style name="style1" parent="android:style/Widget.Holo.Light.Spinner">
+   
+    
+<item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+       
+<item  name="android:layout_gravity">center|center_horizontal</item>
+       <item name="android:dropDownSelector">@color/olive</item>
+       <item name="android:popupBackground">@color/olive</item>
+      <item name="android:orientation">vertical</item>
+       
+  </style>
+ </resources>
