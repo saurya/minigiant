@@ -24,6 +24,7 @@ import android.view.GestureDetector;
 import android.view.View;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -327,6 +328,11 @@ public class TestCTZ1 extends Activity implements  OnGestureListener,SimpleGestu
 		mtimerTextField.setVisibility(View.VISIBLE);
 		mbtnclose_normal.setVisibility(View.GONE);
 		 mbtn_check_on.setVisibility(View.GONE);
+		 mbtn_check_on.setOnClickListener(new View.OnClickListener() {
+             public void onClick(View v) {
+                 newOnclick(v);
+             }
+         });
 		 mbtn_check_on.setClickable(true);
 			mbtnclose_normal.setClickable(true);}
 		
@@ -365,8 +371,11 @@ public class TestCTZ1 extends Activity implements  OnGestureListener,SimpleGestu
 		    	 bingo=false;
 		    	 mgetAnswerString.setVisibility(View.VISIBLE);
 		    	 
+		 	     mbtnclose_normal.setVisibility(View.VISIBLE);
 		 		
-		    	 
+		 	    mbtn_check_on.setVisibility(View.VISIBLE); 
+		 	   
+		 	    mbtn_check_on.setOnClickListener(null);
 		    	// mcheckBox2.setFocusable(true);
 		    	// mnext.setVisibility(View.VISIBLE);
 		    	 
@@ -452,6 +461,15 @@ public class TestCTZ1 extends Activity implements  OnGestureListener,SimpleGestu
 	    {mgetAnswerString.setVisibility(View.VISIBLE);
 	    mbtnclose_normal.setVisibility(View.VISIBLE);
 		 mbtn_check_on.setVisibility(View.VISIBLE);
+		 
+		 mbtn_check_on.setOnClickListener(new View.OnClickListener() {
+	             public void onClick(View v) {
+	                 newOnclick(v);
+	             }
+	         });
+		 
+		 
+		 
 		 mbtnclose_normal.setClickable(true);
 		 mbtn_check_on.setClickable(true);
 	       // Toast.makeText(TestCTZ1.this, "Single-Tap event ", Toast.LENGTH_LONG).show();
@@ -460,6 +478,10 @@ public class TestCTZ1 extends Activity implements  OnGestureListener,SimpleGestu
 	public String getnextqn(int cnt) {
 		int qnnumber = cnt + 1;
 		return "Qusestion# " + qnnumber +": "+ qnlist[cnt] ;
+	}
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

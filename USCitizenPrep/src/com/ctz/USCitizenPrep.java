@@ -89,7 +89,7 @@ private CheckBox radio_senior_prepare_for_interview;
 		read_Rawdata();
 		governorData();
 		getSenators();
-		new Justdownload(statenames);
+		
 	
 		//getGovernor();
 		setContentView(com.ctz.R.layout.main);
@@ -327,7 +327,7 @@ private CheckBox radio_senior_prepare_for_interview;
 			
 				questions_list.add(allquestions[i]);
 				answers_list.add(allanswers[i]);
-				randoms[i]=i;
+				randoms[i]=i;//this shd be a randomizer instead. But for 100 fn Random gave trouble!! 21st july
 			}
 		/*	while (count < 100) {
 				k = rands.nextInt(nums);
@@ -468,6 +468,7 @@ private CheckBox radio_senior_prepare_for_interview;
 	     for(int i=0;i<50;i++)
 	    	 System.out.println(states[i].toString());
 	Arrays.sort(states);Arrays.sort(statenames);
+	new Justdownload(statenames);
 	 	int getcount=0,statecounter=-1;	 
 	 currentgovernors=new HashMap<String, String>();
 	  try {
