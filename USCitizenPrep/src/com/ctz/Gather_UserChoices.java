@@ -82,7 +82,7 @@ public class Gather_UserChoices extends Activity {
 	private RadioButton radio_senior_prepare_for_interview;
     private static String user_selection;
     private static String user_state;
-  
+  private int numberofrounds=0;
      private TextView  mnumberofQns;
      private TextView mtimingperqn;
     Bundle bundle;
@@ -135,13 +135,13 @@ public class Gather_UserChoices extends Activity {
 		});
 		go_Button.setOnClickListener(new OnClickListener() {
 
-			public void onClick(View v) {
+			public void onClick(View v) {numberofrounds++;
 				//v.setBackgroundResource(R.drawable.android_pressed);
 				//findViewById(R.id.state_spinner).setBackgroundResource(R.drawable.android_pressed);
-				//Toast.makeText(USCitizenPrep.this, "Button clicked",
-						//Toast.LENGTH_SHORT).show();
+				Toast.makeText(Gather_UserChoices.this, "Practice Test# "+numberofrounds,
+						Toast.LENGTH_SHORT).show();
 
-				
+				//it is go_button, da!!
 				if (v == go_Button) {
 					
 					
@@ -149,12 +149,15 @@ public class Gather_UserChoices extends Activity {
 					userselectQns=Integer.parseInt((mnumberofQns.getText()).toString());
 					setvalues();
 					
-					Intent myIntent2 = new Intent();
+					Intent myIntent2User = new Intent();
+					// if( numberofrounds>1)bundle.clear();
+					bundle.putInt("numberofrounds", numberofrounds);
 					
-					myIntent2.putExtras(bundle);
-				myIntent2.setClassName("com.ctz",
+					myIntent2User.putExtras(bundle);
+				
+					myIntent2User.setClassName("com.ctz",
 					"com.ctz.TestCTZ1");
-			startActivity(myIntent2);
+			startActivity(myIntent2User);
 					}
 				
 				

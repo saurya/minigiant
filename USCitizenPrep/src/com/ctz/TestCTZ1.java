@@ -103,10 +103,13 @@ public class TestCTZ1 extends Activity implements  OnGestureListener,SimpleGestu
 	String getquestionString0 = "";// set first question to be displayed
 	String multipleChoiceAnswer = "";
 	String getAnswerString = "";
-	String getquestionString = "";// and the next ..
-	String[] nearlygood_10 = new String[100];// deceptive answerset
-	String[] funny1_10 = new String[100];// fake answerset 1
-	String[] funny2_10 = new String[100];// fake answerset 2
+	String getquestionString = "";// and the next .
+	
+	
+	
+	String[] nearlygood_10; // deceptive answerset
+	String[] funny1_10; // fake answerset 1
+	String[] funny2_10; // fake answerset 2
 	int userselectQns;
 	String multipleChoiceAnswers = "";
 	String setanswerString = "";
@@ -120,7 +123,7 @@ public class TestCTZ1 extends Activity implements  OnGestureListener,SimpleGestu
 	int currentdisplay;
 	int originalQnumber;
 	static String finalswipe;
-
+int numberofrounds;
 	/** Called when the activity is first created. */
 	
 	@SuppressWarnings("deprecation")
@@ -136,24 +139,43 @@ public class TestCTZ1 extends Activity implements  OnGestureListener,SimpleGestu
 	
 		setDefaultKeyMode(DEFAULT_KEYS_DISABLE);
 		// getMultiChoiceData();
-		// get ten random qns, and corresponding answers and their original
+		// get hundred random qns, and corresponding answers and their original
 		// numbers
 		Bundle bundle = new Bundle();
 		bundle = this.getIntent().getExtras();
+		nearlygood_10= new String[100];
+		funny1_10= new String[100];
+		funny2_10= new String[100];
+		 numberofrounds= bundle.getInt( "numberofrounds");
+		// if(numberofrounds==1)
+		 {  userselectQns= bundle.getInt("userselectQns");
+		 
+		// for(int k=0;k< userselectQns;k++)
+		
+		 
+		 
 		nearlygood_10 = bundle.getStringArray("nearlygood_10");
 		funny1_10 = bundle.getStringArray("funny1_10");
 		funny2_10 = bundle.getStringArray("funny2_10");
 		qnlist = bundle.getStringArray("randomqns");
 		anslist = bundle.getStringArray("anstorandomqns");
 		originalQNums = bundle.getIntArray("originalQNums");
-		 userselectQns= bundle.getInt("userselectQns");
-		 userselecttiming= bundle.getInt("userselecttiming");
+		 
+		 userselecttiming= bundle.getInt("userselecttiming");}
+		 
 		// form a tring to verify if user got the answer right
-		correctanswerstring = "";
-		for (int i = 0; i < 100; i++)
+		correctanswerstring = "";int begin=0,end=0;boolean ended=false;;
+		begin=(numberofrounds-1)*userselectQns; end=begin+userselectQns;
+		if (end==100)ended=true;//this is the last round Happens if user selects 5Qns
+		if (end<=100)
+		for (int i = begin; i <  end; i++)
 			correctanswerstring += originalQNums[i] + ",";
-		getAnswerString0 = anslist[0];
-		getquestionString0 = "Question# 1: " + qnlist[0];// first question
+		if(end>100)
+			for (int i =100; i <  end; i++)
+				correctanswerstring += originalQNums[i-100] + ",";
+		
+		getAnswerString0 = anslist[begin];
+		getquestionString0 = "Question# 1: " + qnlist[begin];// first question
 		
 		
 		 int hrs=0,mins=0;String timedisplay="";
@@ -324,8 +346,8 @@ public class TestCTZ1 extends Activity implements  OnGestureListener,SimpleGestu
 		else
 		{
 			mgetAnswerString.setVisibility(View.VISIBLE);
-		mGetQuestionString.setVisibility(View.VISIBLE);
-		mtimerTextField.setVisibility(View.VISIBLE);
+		    mGetQuestionString.setVisibility(View.VISIBLE);
+		    mtimerTextField.setVisibility(View.VISIBLE);
 		mbtnclose_normal.setVisibility(View.GONE);
 		 mbtn_check_on.setVisibility(View.GONE);
 		 mbtn_check_on.setOnClickListener(new View.OnClickListener() {

@@ -12,8 +12,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.Set;
 
 import android.R.color;
 import android.annotation.SuppressLint;
@@ -175,7 +177,7 @@ private CheckBox radio_senior_prepare_for_interview;
 				 {
 							copy("random");
 							
-							Log.d("CAme :","thisfar1*********************************************************");
+							Log.d("CAme :","thisfar1*********************************************************"+questions_list.size());
 							String[] qns = new String[questions_list.size()];
 							String[] ans = new String[answers_list.size()];
 							Object[] qnobarr = questions_list.toArray();
@@ -319,29 +321,46 @@ private CheckBox radio_senior_prepare_for_interview;
 			questions_list.clear();
 			Random rands = new Random();
 			String randomstr = "aaa,";
-			int nums = allquestions.length;			
-			
+			int nums = 10;			
+		Set collect=new HashSet<Integer>();
 
-			
+			/* Code for ordered questions as in original Give a choice to users later version
 			for (int i = 0; i < 100; i++) {
 			
 				questions_list.add(allquestions[i]);
 				answers_list.add(allanswers[i]);
 				randoms[i]=i;//this shd be a randomizer instead. But for 100 fn Random gave trouble!! 21st july
-			}
-		/*	while (count < 100) {
-				k = rands.nextInt(nums);
+			}*/
+			int count=0,k=0;int justcount=0;
+			for (int countslice=1;countslice<=10;countslice++)//generate only 10 rndoms but 10 times. Each slice of 10 qns is randomized
+			{rands = new Random();
+				randomstr="aaa";count=0;
+				while ( count< 10) {//the idea is to randomize all 100qns but locally in slices of size 10 qns
+					if (collect.size()==100)break;
+					k = rands.nextInt(nums);
 				if (!randomstr.contains(k + "")) {
 					randomstr += (k);
-					randoms[count] = k;
-
-					count++;
-					questions_list.add("" + allquestions[k]);
-					answers_list.add("" + allanswers[k]);
+					randoms[justcount] = 10*(countslice-1)+k;
+					count++;justcount++;
+					collect.add(new Integer(10*(countslice-1)+k));
+				//	questions_list.add("" + allquestions[10*(countslice-1)+k]);
+					//answers_list.add("" + allanswers[10*(countslice-1)+k]);
+					Log.d("length???????????????????????????????????????????????????????????? ",10*(countslice-1)+k+"");
 				}
 			} // return (String[]) qns.toArray();
-			*/
+				if (collect.size()==100)break;	
 		}
+		Log.d("size of the set",collect.size()+"************&&&&&&&&&&&&&&&&&&&&&&&&&&&&^^^^^^^^^^^^^^%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+			Iterator it=collect.iterator();
+			while(it.hasNext())
+		{k=((Integer)it.next());
+				questions_list.add("" + allquestions[randoms[k]]);
+			answers_list.add("" + allanswers[randoms[k]]);}
+			
+			
+			
+			
+			}
 
 		else if (s.equals("senior")) {
 			answers_list.clear();
@@ -467,8 +486,8 @@ private CheckBox radio_senior_prepare_for_interview;
 	     }
 	     for(int i=0;i<50;i++)
 	    	 System.out.println(states[i].toString());
-	Arrays.sort(states);Arrays.sort(statenames);
-	new Justdownload(statenames);
+	Arrays.sort(states);Arrays.sort(statenames);String statename="AK";
+	new Justdownload(statename);//trying to get child procesds get info for one state 23rd july
 	 	int getcount=0,statecounter=-1;	 
 	 currentgovernors=new HashMap<String, String>();
 	  try {

@@ -26,9 +26,10 @@ import android.util.Log;
 public class Justdownload {
    
 	static ArrayList<String> strings=new ArrayList<String>();
-	String[]statenames=new String[50];
-  Justdownload(String[]statenames) {
-    	   this.statenames=statenames;
+	//String[]statenames=new String[50];
+	String statename;
+  Justdownload(String statename) {
+    	   this.statename=statename;
     	   
     try{	;
     	
@@ -95,6 +96,7 @@ final class DownloadFile extends AsyncTask<URL, Integer, String> {
                		// System.out.println(p+" "+q);
                		String currgov=inputLine.substring(p+2, q);
                		currentgovernors.put(currstate, currgov);
+               		if (currstate==statename)
                		out.write(currstate+" &"+currgov+"\n");
                		//Log.d("currstate and currgov",currstate+"\n"+currgov);counter++;
                		
