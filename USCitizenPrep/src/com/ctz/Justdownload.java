@@ -27,18 +27,22 @@ public class Justdownload {
    
 	static ArrayList<String> strings=new ArrayList<String>();
 	//String[]statenames=new String[50];
-	String statename;
-  Justdownload(String statename) {
-    	   this.statename=statename;
-    	   
+	static  String currentstate;
+  Justdownload() {
+    	// statename=statename;
+    	// Log.d("STRING  :","nothingggggggggggggggggggggggggggggggggggggggggggggggggggg"+USCitizenPrep.statename); 
     try{	;
     	
     	URL[]urlarray=new URL[2];
     	 urlarray[0]=  new URL("http://www.senate.gov/general/contact_information/senators_cfm.xml");
     	 urlarray[1]=  new URL("http://en.wikipedia.org/wiki/List_of_current_United_States_governors");
     	DownloadFile dfl=new DownloadFile();
-    	dfl.execute(urlarray);
-    	 for(String str:strings) {
+    	
+    	
+    	
+    	
+    	dfl.execute(urlarray);	
+    	for(String str:strings) {
     		  
     	Log.d("STRING  :",str);}}
     	 catch (Exception e) {
@@ -75,30 +79,25 @@ final class DownloadFile extends AsyncTask<URL, Integer, String> {
              
               input = new BufferedInputStream(url.openStream());
               br = new BufferedReader(new InputStreamReader(input, "UTF-8")); 
-             
               if (i==1){
             	  filename="/sdcard/govdataactual.txt";
                   output = new FileOutputStream(filename);   
                   out = new OutputStreamWriter(output, "UTF-8");
-              
-         	 
-          	   
-          	
-               while ((inputLine = br.readLine()) != null )
+                  while ((inputLine = br.readLine()) != null )
                		{if(statecounter>=50)break;
-               	
-               	if(inputLine.contains(",") && ! inputLine.contains("20") && !inputLine.contains("img") )	{
-               		if (cnt>210){statecounter++;
-               		currstate=state[statecounter];
+                         if(inputLine.contains(",") && ! inputLine.contains("20") && !inputLine.contains("img") )	{
+               		 if (cnt>210){statecounter++;
+               		 currstate=state[statecounter];
                		 p=inputLine.indexOf("\">");
                		 q=inputLine.indexOf("</"); 
                		 if(p<0 ||q<0 ||q-p<0)continue;
-               		// System.out.println(p+" "+q);
+               		
                		String currgov=inputLine.substring(p+2, q);
-               		currentgovernors.put(currstate, currgov);
-               		if (currstate==statename)
-               		out.write(currstate+" &"+currgov+"\n");
-               		//Log.d("currstate and currgov",currstate+"\n"+currgov);counter++;
+               		
+               		if (currstate.equals(USCitizenPrep.currentstate))
+               		{out.write(currstate+" &"+currgov+"\n");out.close();
+                	 break;}
+               	
                		
                	}
                		
@@ -106,8 +105,10 @@ final class DownloadFile extends AsyncTask<URL, Integer, String> {
                 	cnt++;
                 	
                }
-               
+               output.close();
+               out.close();
               }
+              
               if (i==0){filename="/sdcard/senatordataactual.txt";
               output = new FileOutputStream(filename);   
               out = new OutputStreamWriter(output, "UTF-8");
@@ -117,9 +118,11 @@ final class DownloadFile extends AsyncTask<URL, Integer, String> {
     						        { 
     						        	if (inputLine.contains("first_name"))firstname[cnt]=inputLine;
     						        	if (inputLine.contains("last_name"))lastname[cnt]=inputLine;
-    						        	if (inputLine.contains("state")){state[cnt]=inputLine;
+    						        	if (inputLine.contains("state")){
+    						        		state[cnt]=inputLine;
     						        	//out.write(state[cnt]+firstname[cnt]+","+lastname[cnt]+","+"\n");
-    						        	cnt++;}
+    						        	cnt++;
+    						        	}
     						        }
     						        for (int id=0;id<100;id++)
     								  {
@@ -134,19 +137,35 @@ final class DownloadFile extends AsyncTask<URL, Integer, String> {
     									   sentr[id]= str6.replaceAll("\\\\n", "");
     									 str7=((state[id].replace("<state>","")).trim()).replaceAll("\\n", "");;
     									 str8=((str7.replace("</state>","")).trim()).replaceAll("\\n", "");;
-    									 state[id]=str8;
-    									   out.write(state[id]+" "+sentr[id]+"\n");
+    									 state[id]=str8;if (state[id].equals(USCitizenPrep.currentstate))
+    									 { out.write(state[id]+" "+sentr[id]+"\n");break;
+    									   
+    									 
+    									 }
     									  }
     					            	
     							        
           
                 
             }
-              out.close();
-              output.close();
-              input.close();  
+               
         }catch (Exception e) {Log.d("STRING  :","nothingggggggggggggggggggggggggggggggggggggggggggggggggggg");
-            }}}
+            }
+        
+        finally{
+        	try {
+        	out.close();
+        	input.close();
+        	output.close(); 
+        	} catch (IOException e) {
+        	// TODO Auto-generated catch block
+        	e.printStackTrace();
+        	}
+        	
+        
+        }
+       
+        }}
            
             
             return null;
@@ -155,21 +174,18 @@ final class DownloadFile extends AsyncTask<URL, Integer, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-           // mProgressDialog.show();
+          
         }
 
         @Override
         protected void onProgressUpdate(Integer... progress) {
             super.onProgressUpdate(progress);
-          //  mProgressDialog.setProgress(progress[0]);
+        
         }
         
     
         protected void onPostExecute(Integer... progress) {
-        // for (int i=0;i<100;i++)
-        	// Log.d("haha data",firstname[i]+","+lastname[i]+","+state[i]);
-        //    mProgressDialog.setProgress(progress[0]);
-           // mProgressDialog.show();
+        
         }
         
         

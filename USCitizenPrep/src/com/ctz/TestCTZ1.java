@@ -363,20 +363,7 @@ int numberofrounds;
 	}
 	
 	private void calltimer( SharedPreferences prefs){mbtn_check_on.setClickable(true);
-		//mcheckBox2.setFocusable(false);
-		// mnext.setEnabled(false);
-	/*	if(mcheckBox2.isChecked()){
- 			mcheckBox2.toggle();
- 			score++;
- 		   
- 		};
-		 if(mbtn_check_on.isSelected())
-		 {
-	 			mcheckBox2.toggle();
-	 			score++;
-	 		   
-	 		};*/
-		//mnext.setFocusable(true);
+	
 		int hrs=0,mins=0;String timedisplay="";done=false;
 		 long timer = prefs.getLong("TIME", userselecttiming* 1000);//set your testtime limit here
 		runtimer=	 new CountDownTimer(timer,1000) {
@@ -398,16 +385,14 @@ int numberofrounds;
 		 	    mbtn_check_on.setVisibility(View.VISIBLE); 
 		 	   
 		 	    mbtn_check_on.setOnClickListener(null);
-		    	// mcheckBox2.setFocusable(true);
-		    	// mnext.setVisibility(View.VISIBLE);
-		    	 
+		    	
 		    	// if (finalswipe=="Right" || mnext.isSelected())getNext();
 		    	// mnext.setEnabled(true);
 		     }
 		  }.start();
 		 
 }
-	//Use this method for hours duration
+	//Use this method for hours duration in GATE
 	
 	private void calltimerinhrs( SharedPreferences prefs){
 		int hrs=0,mins=0;String timedisplay="";

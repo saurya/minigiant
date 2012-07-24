@@ -134,7 +134,7 @@ public class Gather_UserChoices extends Activity {
 			}
 		});
 		go_Button.setOnClickListener(new OnClickListener() {
-
+//sending questions too many tims But works for now MAjor Fix required 23rd July
 			public void onClick(View v) {numberofrounds++;
 				//v.setBackgroundResource(R.drawable.android_pressed);
 				//findViewById(R.id.state_spinner).setBackgroundResource(R.drawable.android_pressed);

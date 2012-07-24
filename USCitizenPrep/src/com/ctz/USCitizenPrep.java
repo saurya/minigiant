@@ -60,7 +60,7 @@ public class USCitizenPrep extends Activity implements OnGesturePerformedListene
 	private float mScaleFactor = 1.f;
 	int[] randoms = new int[100];
 	private ScaleGestureDetector mScaleDetector;
-	String selected,currentstate="";
+	String selected;static String currentstate="CA";//just to keep it going
 	HashMap<String, String> currentgovernors;
 	ArrayList<String> questions_list, answers_list;
 	static int positionprev = 0;
@@ -76,7 +76,7 @@ public class USCitizenPrep extends Activity implements OnGesturePerformedListene
 	private String selected_type;
 	private Button go_Button;
 	private Button exit_Button;
-
+	static String statename="";
 	private RadioButton radio_prepare_for_interview;
 	private RadioButton radio_test_yourself;
 private CheckBox radio_senior_prepare_for_interview;
@@ -91,8 +91,12 @@ private CheckBox radio_senior_prepare_for_interview;
 		read_Rawdata();
 		governorData();
 		getSenators();
-		
-	
+		File file = new File("/sdcard/govdataactual.txt");boolean deleted;
+		if(file.exists())
+		deleted = file.delete();
+		file = new File("/sdcard/senatordataactual.txt");
+		if(file.exists())
+		 deleted = file.delete();
 		//getGovernor();
 		setContentView(com.ctz.R.layout.main);
 		 GestureOverlayView gOverlay = (GestureOverlayView) findViewById(R.id.gestures);
@@ -169,6 +173,7 @@ private CheckBox radio_senior_prepare_for_interview;
 				if (v == go_Button) {
 					currentstate=
 					 spinner.getSelectedItem().toString();	
+					new Justdownload();
 					//Toast.makeText(USCitizenPrep.this, String.valueOf("State: "+spinner.getSelectedItem()),Toast.LENGTH_SHORT).show();
 					if (radio_test_yourself.isChecked() == true) {
 
@@ -246,7 +251,40 @@ private CheckBox radio_senior_prepare_for_interview;
 				
 			bundle.putStringArray("allquestions",allquestions);
 			senator_of_state=getSenator(currentstate);	
-			allanswers[19]=senator_of_state;//update here based on user-provided info
+			
+			
+			String senator = "";
+			try{
+			FileInputStream fIn = new FileInputStream("/sdcard/senatordataactual.txt");
+			BufferedReader myReader = new BufferedReader(
+					new InputStreamReader(fIn));
+			
+			String onlyone = "";
+			while ((onlyone = myReader.readLine()) != null) {
+				senator += onlyone + "\n";
+			}
+			}catch(Exception e){
+				
+			}
+			
+			allanswers[19]=senator;
+			
+			
+			String governor = "";
+			try{
+			FileInputStream fIn = new FileInputStream("/sdcard/govdataactual.txt");
+			BufferedReader myReader = new BufferedReader(
+					new InputStreamReader(fIn));
+			
+			String onlyone = "";
+			while ((onlyone = myReader.readLine()) != null) {
+				governor += onlyone + "\n";
+			}
+			}catch(Exception e){
+				
+			}
+			allanswers[42]=governor;
+			;//update here based on user-provided info
 			//general category Seniors don't remember anyway. Just kidding. The list for seniors
 			governor_of_state=getGovernor(currentstate);
 			 bundle.putStringArray(" allanswers",allanswers );
@@ -486,8 +524,8 @@ private CheckBox radio_senior_prepare_for_interview;
 	     }
 	     for(int i=0;i<50;i++)
 	    	 System.out.println(states[i].toString());
-	Arrays.sort(states);Arrays.sort(statenames);String statename="AK";
-	new Justdownload(statename);//trying to get child procesds get info for one state 23rd july
+	Arrays.sort(states);Arrays.sort(statenames);
+	//new Justdownload();//trying to get child procesds get info for one state 23rd july
 	 	int getcount=0,statecounter=-1;	 
 	 currentgovernors=new HashMap<String, String>();
 	  try {
@@ -587,7 +625,9 @@ private CheckBox radio_senior_prepare_for_interview;
 
 				if (test == null)
 					break;
-				allquestions[qnnum] = test;
+				
+				//StringEntity entity = new StringEntity(jsonTaakkaart.toString(), "UTF-8");
+				allquestions[qnnum] = test.toString();
 				test = br2.readLine();
 
 				if (test == null)
