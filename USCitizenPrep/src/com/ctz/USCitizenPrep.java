@@ -88,6 +88,7 @@ private CheckBox radio_senior_prepare_for_interview;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		read_Rawdata();
 		governorData();
 		getSenators();

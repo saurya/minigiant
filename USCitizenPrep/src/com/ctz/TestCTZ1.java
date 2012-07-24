@@ -59,12 +59,12 @@ public class TestCTZ1 extends Activity implements  OnGestureListener,SimpleGestu
 	 static Toast toast;
 		private final Handler toastHandler = new Handler();
 	@SuppressLint({ "NewApi", "NewApi", "NewApi" })
-		
+	OnClickListener myListener;	
 	EditText edittext;//
 	private TextView mGetQuestionString;
 	private TextView mgetAnswerString;
-	private EditText mtimerTextField;
-	private EditText mScore;
+	private TextView mtimerTextField;
+	private TextView mScore;
 	private CheckBox mcheckBox2;
 	private RelativeLayout mtotalView;
 	 private SimpleGestureFilter detector;
@@ -184,13 +184,17 @@ int numberofrounds;
 		 mgetReport=(TextView) findViewById(R.id.getReport);
 		mGetQuestionString = (TextView) findViewById(R.id.getquestionString);
 		mgetAnswerString = (TextView) findViewById(R.id.getAnswerString);
-		mScore=(EditText)findViewById(R.id.scoreField);
+		mScore=(TextView)findViewById(R.id.scoreField);
 	//	mnext = (Button) findViewById(R.id.next);
-		
+		myListener=new View.OnClickListener() {
+            public void onClick(View v) {
+                newOnclick(v);
+            }
+        };
 		
 	
 		//mnext.setClickable(false);
-		mtimerTextField=(EditText) findViewById(R.id. timerTextField );
+		mtimerTextField=(TextView) findViewById(R.id. timerTextField );
 		 mtotalView=(RelativeLayout)findViewById(R.id.totalView);		
 		 mbtnclose_normal=(ImageButton)	findViewById(R.id.btn_close_normal);
 		 mbtn_check_on=(ImageButton)	findViewById(R.id.btn_check_on);
@@ -214,13 +218,13 @@ int numberofrounds;
 	   this.detector.onTouchEvent(me);
 	  return super.dispatchTouchEvent(me); 
 	 }
-	 public void onDoubleTap() {
+	 public void onDoubleTap() {runtimer.cancel();
 		 mgetAnswerString.setVisibility(View.VISIBLE);mbtnclose_normal.setVisibility(View.VISIBLE);
 		 mbtn_check_on.setVisibility(View.VISIBLE); mbtnclose_normal.setClickable(true);
 		 mbtn_check_on.setClickable(true);
 	   // Toast.makeText(this, "Double Tap", Toast.LENGTH_SHORT).show(); 
 	 }
-	 public boolean onSingleTapUp() {
+	 public boolean onSingleTapUp() {runtimer.cancel();
 		 mgetAnswerString.setVisibility(View.VISIBLE);mbtnclose_normal.setVisibility(View.VISIBLE);
 		 mbtn_check_on.setVisibility(View.VISIBLE);
 			 mbtnclose_normal.setClickable(true);
@@ -350,11 +354,12 @@ int numberofrounds;
 		    mtimerTextField.setVisibility(View.VISIBLE);
 		mbtnclose_normal.setVisibility(View.GONE);
 		 mbtn_check_on.setVisibility(View.GONE);
-		 mbtn_check_on.setOnClickListener(new View.OnClickListener() {
+	/*	 mbtn_check_on.setOnClickListener(new View.OnClickListener() {
              public void onClick(View v) {
                  newOnclick(v);
              }
-         });
+         });*/
+		 mbtn_check_on.setOnClickListener(myListener);
 		 mbtn_check_on.setClickable(true);
 			mbtnclose_normal.setClickable(true);}
 		
@@ -384,8 +389,15 @@ int numberofrounds;
 		 		
 		 	    mbtn_check_on.setVisibility(View.VISIBLE); 
 		 	   
-		 	    mbtn_check_on.setOnClickListener(null);
-		    	
+		    mbtn_check_on.setOnClickListener(null); 
+		 	    
+		 	   
+		 	    
+		 	    
+		 	    
+		 	   
+		 	   Toast.makeText(getBaseContext(), "Sorry, time is up!", Toast.LENGTH_SHORT).show();
+		    	//if( mbtn_check_on.callOnClick());
 		    	// if (finalswipe=="Right" || mnext.isSelected())getNext();
 		    	// mnext.setEnabled(true);
 		     }
@@ -469,13 +481,13 @@ int numberofrounds;
 	    mbtnclose_normal.setVisibility(View.VISIBLE);
 		 mbtn_check_on.setVisibility(View.VISIBLE);
 		 
-		 mbtn_check_on.setOnClickListener(new View.OnClickListener() {
+	/*	 mbtn_check_on.setOnClickListener(new View.OnClickListener() {
 	             public void onClick(View v) {
 	                 newOnclick(v);
 	             }
-	         });
+	         });*/
 		 
-		 
+		 mbtn_check_on.setOnClickListener(myListener);
 		 
 		 mbtnclose_normal.setClickable(true);
 		 mbtn_check_on.setClickable(true);

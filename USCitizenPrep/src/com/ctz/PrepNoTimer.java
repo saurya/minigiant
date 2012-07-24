@@ -190,6 +190,7 @@ int numberofrounds;
 
 				
 						getquestionString = getnextqn(cnt);
+						if(getquestionString==null)this.finish();
 						mGetQuestionString.setText(getquestionString);
 						getAnswerString = getnextanswer(cnt);
 						mgetAnswerString.setText(getAnswerString);
@@ -247,15 +248,16 @@ int numberofrounds;
 	        return true;
 	    }
 	public String getnextqn(int cnt) {
-		int qnnumber = cnt + 1;
+		int qnnumber = cnt + 1;if(qnnumber>100)return null;;
 		return "Qusestion# " + qnnumber +": "+ qnlist[cnt] ;
 	}
 	
 
 	
 	 public String  getnextanswer(int cnt) {
-			int qnnumber = cnt + 1;
+			int qnnumber = cnt + 1;if(qnnumber>100)return null;;
 			return "Answer"  +": "+anslist[cnt] ;
+			
 		}
 	
 	

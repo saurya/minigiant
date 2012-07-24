@@ -5,7 +5,7 @@
  android:orientation="vertical" 
   
  android:layout_centerVertical="true"
- android:layout_centerInParent="true" android:background="@color/anstxt1">
+ android:layout_centerInParent="true" android:background="@drawable/androidbackground">
 <TextView
 android:gravity="center"
 android:text="\nWELCOME \n to \n U.S NATURALIZATION INTERVIEW PREPARATION \n\n

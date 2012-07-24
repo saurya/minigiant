@@ -42,18 +42,19 @@ public final class R {
     }
     public static final class drawable {
         public static final int android_normal=0x7f020000;
-        public static final int btn_check_on=0x7f020001;
-        public static final int btn_close_normal=0x7f020002;
-        public static final int checkbox_off_background=0x7f020003;
-        public static final int checkbox_on_background=0x7f020004;
-        public static final int color_selector=0x7f020005;
-        public static final int icon=0x7f020006;
-        public static final int menuitem_checkbox=0x7f020007;
-        public static final int menuitem_checkbox_on=0x7f020008;
-        public static final int spinner_background=0x7f020009;
-        public static final int spinner_normal=0x7f02000a;
-        public static final int spinner_press=0x7f02000b;
-        public static final int spinner_select=0x7f02000c;
+        public static final int androidbackground=0x7f020001;
+        public static final int btn_check_on=0x7f020002;
+        public static final int btn_close_normal=0x7f020003;
+        public static final int checkbox_off_background=0x7f020004;
+        public static final int checkbox_on_background=0x7f020005;
+        public static final int color_selector=0x7f020006;
+        public static final int icon=0x7f020007;
+        public static final int menuitem_checkbox=0x7f020008;
+        public static final int menuitem_checkbox_on=0x7f020009;
+        public static final int spinner_background=0x7f02000a;
+        public static final int spinner_normal=0x7f02000b;
+        public static final int spinner_press=0x7f02000c;
+        public static final int spinner_select=0x7f02000d;
     }
     public static final class id {
         public static final int btn_check_on=0x7f090010;
