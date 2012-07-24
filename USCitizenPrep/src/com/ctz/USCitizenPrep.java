@@ -289,8 +289,10 @@ private CheckBox radio_senior_prepare_for_interview;
 			governor_of_state=getGovernor(currentstate);
 			 bundle.putStringArray(" allanswers",allanswers );
 				myIntent2.putExtras(bundle);
+				//myIntent2.setClassName("com.ctz",
+					//	"com.ctz.US_CitizenActivity");
 				myIntent2.setClassName("com.ctz",
-						"com.ctz.US_CitizenActivity");
+				"com.ctz.PrepNoTimer");
 				startActivity(myIntent2);
 					}
 				

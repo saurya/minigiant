@@ -27,7 +27,8 @@
                        <activity android:name=".Gather_UserChoices">
                       </activity>
                       
-                     
+                      <activity android:name=".PrepNoTimer">
+                      </activity> 
                        
                        
            

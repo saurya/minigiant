@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/totalView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/anstxt1"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
+  <TextView
+        android:id="@+id/getquestionString"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/scoreField"
+        android:layout_below="@+id/scoreField"
+        android:layout_margin="4dip"
+        android:layout_marginTop="25dp"
+        android:background="@color/yyellow"
+        android:gravity="center"
+        android:scrollbars="vertical"
+        android:textColor="#778899"
+        android:textSize="7pt" />
+
+    <TextView
+        android:id="@+id/getAnswerString"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/getquestionString"
+        android:layout_centerInParent="true"
+        android:layout_margin="4dip"
+        android:layout_marginBottom="59dp"
+        android:background="@color/yyellow"
+        android:scrollbars="vertical"
+        android:textColor="#dd444444"
+        android:textSize="7pt" />
+
+
+   
+</RelativeLayout>
