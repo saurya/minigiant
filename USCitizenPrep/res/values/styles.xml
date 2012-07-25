@@ -4,6 +4,8 @@
 <style name="MyTheme" parent="android:Theme.Light">
 <item name="android:windowNoTitle">true</item>
  <item name="android:windowBackground">@color/olive</item>
+ <item name="android:textSize">9pt</item>
+ <item name="android:textColor">#4F2F4F</item>
  </style>
 
  <style name="style1" parent="android:style/Widget.Holo.Light.Spinner">
@@ -13,7 +15,7 @@
         <item name="android:layout_height">wrap_content</item>
        
 <item  name="android:layout_gravity">center|center_horizontal</item>
-       <item name="android:dropDownSelector">@color/olive</item>
+       <item name="android:dropDownSelector">@color/black</item>
        <item name="android:popupBackground">@color/olive</item>
       <item name="android:orientation">vertical</item>
        

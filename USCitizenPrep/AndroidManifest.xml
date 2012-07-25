@@ -24,7 +24,7 @@
                            </activity>
  <activity android:name=".GestBuildActivity">
                       </activity>
-                       <activity android:name=".Gather_UserChoices">
+                        <activity  android:name=".Gather_UserChoices">
                       </activity>
                       
                       <activity android:name=".PrepNoTimer">

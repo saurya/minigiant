@@ -70,7 +70,7 @@ public final class R {
         public static final int image=0x7f090001;
         public static final int layout_root=0x7f090000;
         public static final int list_content=0x7f090003;
-        public static final int numberofQns=0x7f090014;
+        public static final int questionslice_spinner=0x7f090014;
         public static final int radio_prepare_for_interview=0x7f090005;
         public static final int radio_senior_prepare_for_interview=0x7f090007;
         public static final int radio_test_yourself=0x7f090006;
@@ -78,7 +78,7 @@ public final class R {
         public static final int state_spinner=0x7f090004;
         public static final int text=0x7f090002;
         public static final int timerTextField=0x7f09000d;
-        public static final int timingperqn=0x7f090016;
+        public static final int timerslice_spinner=0x7f090016;
         public static final int totalView=0x7f09000b;
     }
     public static final class layout {

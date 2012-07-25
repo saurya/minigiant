@@ -72,7 +72,8 @@ public class Gather_UserChoices extends Activity {
 	private String selected_type;
 	
 	
-	
+	private static  String []questionslice_size={"10","30","100"};;
+	private static  String []timerslice_size={"10","15","0"};
 	
 	int userselectQns;
 	int userselecttiming;
@@ -83,8 +84,8 @@ public class Gather_UserChoices extends Activity {
     private static String user_selection;
     private static String user_state;
   private int numberofrounds=0;
-     private TextView  mnumberofQns;
-     private TextView mtimingperqn;
+   //  private TextView  mnumberofQns;
+   //  private TextView mtimingperqn;
     Bundle bundle;
     private Button go_Button;
 	private Button exit_Button;
@@ -104,10 +105,30 @@ public class Gather_UserChoices extends Activity {
 		
 	
 		setContentView(com.ctz.R.layout.main4);
-		 
+	
+	
+		final Spinner	 questionslice_spinner = (Spinner) findViewById(R.id.questionslice_spinner);
+		final Spinner	 timerslice_spinner = (Spinner) findViewById(R.id.timerslice_spinner);
+		ArrayAdapter qnadapter = new ArrayAdapter(
+								this,
+								android.R.layout.simple_spinner_item, 
+								questionslice_size);
+		ArrayAdapter timeadapter = new ArrayAdapter(
+								this,
+								android.R.layout.simple_spinner_item, 
+								timerslice_size);
+		qnadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		questionslice_spinner.setBackgroundColor(color.background_dark);
+				questionslice_spinner.setAdapter(qnadapter);questionslice_spinner.setFocusable(true);
+				questionslice_spinner.setVisibility(1);
+
+		timeadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		timerslice_spinner.setBackgroundColor(color.background_dark);
+				timerslice_spinner.setAdapter(timeadapter);timerslice_spinner.setFocusable(true);
+				timerslice_spinner.setVisibility(1);
         
-		mnumberofQns= (TextView) findViewById(com.ctz.R.id.numberofQns);
-		 mtimingperqn=(TextView) findViewById(com.ctz.R.id.timingperqn);
+		//mnumberofQns= (TextView) findViewById(com.ctz.R.id.numberofQns);
+	//	 mtimingperqn=(TextView) findViewById(com.ctz.R.id.timingperqn);
 		go_Button = (Button) findViewById(com.ctz.R.id.go);
 		exit_Button = (Button) findViewById(com.ctz.R.id.exit);
 		
@@ -145,8 +166,12 @@ public class Gather_UserChoices extends Activity {
 				if (v == go_Button) {
 					
 					
-					userselecttiming=Integer.parseInt((mtimingperqn.getText()).toString());
-					userselectQns=Integer.parseInt((mnumberofQns.getText()).toString());
+				//	userselecttiming=Integer.parseInt((mtimingperqn.getText()).toString());
+					//userselectQns=Integer.parseInt((mnumberofQns.getText()).toString());
+					
+					userselecttiming=Integer.parseInt(timerslice_spinner.getSelectedItem().toString());	
+					userselectQns=Integer.parseInt(questionslice_spinner.getSelectedItem().toString());	
+					
 					setvalues();
 					
 					Intent myIntent2User = new Intent();
