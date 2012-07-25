@@ -72,8 +72,8 @@ public class Gather_UserChoices extends Activity {
 	private String selected_type;
 	
 	
-	private static  String []questionslice_size={"10","30","100"};;
-	private static  String []timerslice_size={"10","15","0"};
+	private static  String []questionslice_size={"3","10","30","45","100"};//3 for test purpose only
+	private static  String []timerslice_size={"3","10","15","0"};
 	
 	int userselectQns;
 	int userselecttiming;
@@ -95,7 +95,10 @@ public class Gather_UserChoices extends Activity {
 	public void  setvalues(){bundle.putInt("userselecttiming", userselecttiming);
 	bundle.putInt("userselectQns", userselectQns);
 	}
-	
+	private void checkValidity(){
+		 if(100%userselectQns==0 &&  numberofrounds>=100/userselectQns+1)finish();//REport??
+		 if(100%userselectQns!=0 &&  numberofrounds>=100/userselectQns+2)finish();//there is one more round for the last ten Qns
+	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -156,7 +159,10 @@ public class Gather_UserChoices extends Activity {
 		});
 		go_Button.setOnClickListener(new OnClickListener() {
 //sending questions too many tims But works for now MAjor Fix required 23rd July
-			public void onClick(View v) {numberofrounds++;
+			public void onClick(View v) {numberofrounds++;if(userselectQns==0)userselectQns=10;//avoid 0 divide
+		//	if((numberofrounds-1)*userselectQns>100)return;//avoid exceeding limit Not right Use remainder
+			//if(100%userselectQns==0 &&  numberofrounds>=100/userselectQns+1)finish();//REport??
+			// if(100%userselectQns!=0 &&  numberofrounds>=100/userselectQns+2)finish();//there is one more round for the last ten Qns
 				//v.setBackgroundResource(R.drawable.android_pressed);
 				//findViewById(R.id.state_spinner).setBackgroundResource(R.drawable.android_pressed);
 				Toast.makeText(Gather_UserChoices.this, "Practice Test# "+numberofrounds,
@@ -165,9 +171,9 @@ public class Gather_UserChoices extends Activity {
 				//it is go_button, da!!
 				if (v == go_Button) {
 					
-					
-				//	userselecttiming=Integer.parseInt((mtimingperqn.getText()).toString());
-					//userselectQns=Integer.parseInt((mnumberofQns.getText()).toString());
+				//set default values here in case	
+				userselecttiming=10;
+					userselectQns=10;
 					
 					userselecttiming=Integer.parseInt(timerslice_spinner.getSelectedItem().toString());	
 					userselectQns=Integer.parseInt(questionslice_spinner.getSelectedItem().toString());	

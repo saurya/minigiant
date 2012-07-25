@@ -96,7 +96,7 @@
        android:background="#CDB79E"
         android:gravity="center"
         android:scrollbars="vertical"
-        android:textColor="#AF7358"
+        android:textColor="#8B5742"
         android:textSize="9pt"
          />
 

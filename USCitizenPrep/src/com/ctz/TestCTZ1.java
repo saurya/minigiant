@@ -104,7 +104,7 @@ public class TestCTZ1 extends Activity implements  OnGestureListener,SimpleGestu
 	String multipleChoiceAnswer = "";
 	String getAnswerString = "";
 	String getquestionString = "";// and the next .
-	
+	boolean test_interrupted;
 	
 	
 	String[] nearlygood_10; // deceptive answerset
@@ -128,7 +128,7 @@ int numberofrounds;
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {test_interrupted=false;
 		super.onCreate(savedInstanceState);
 		 detector = new SimpleGestureFilter(this,this);
 		bingo=false;
@@ -147,9 +147,9 @@ int numberofrounds;
 		funny1_10= new String[100];
 		funny2_10= new String[100];
 		 numberofrounds= bundle.getInt( "numberofrounds");
-		// if(numberofrounds==1)
+	
 		 {  userselectQns= bundle.getInt("userselectQns");
-		 
+		// checkValidity();
 		// for(int k=0;k< userselectQns;k++)
 		
 		 
@@ -165,14 +165,14 @@ int numberofrounds;
 		 
 		// form a tring to verify if user got the answer right
 		correctanswerstring = "";int begin=0,end=0;boolean ended=false;;
-		begin=(numberofrounds-1)*userselectQns; end=begin+userselectQns;
-		if (end==100)ended=true;//this is the last round Happens if user selects 5Qns
-		if (end<=100)
+		begin=(numberofrounds-1)*userselectQns; end=begin+userselectQns;if(end>100)end=100;if(begin>=100){
+			Toast.makeText(this, "Congratulstions. You just completed practice of 100 qustions", Toast.LENGTH_SHORT).show(); 
+			
+		}
+		
 		for (int i = begin; i <  end; i++)
 			correctanswerstring += originalQNums[i] + ",";
-		if(end>100)
-			for (int i =100; i <  end; i++)
-				correctanswerstring += originalQNums[i-100] + ",";
+		
 		
 		getAnswerString0 = anslist[begin];
 		getquestionString0 = "Question# 1: " + qnlist[begin];// first question
@@ -249,6 +249,14 @@ int numberofrounds;
 	}
 	
 	}
+	
+	
+	
+	
+	private void checkValidity(){
+		 if(100%userselectQns==0 &&  numberofrounds>=100/userselectQns+1)this.finish();//REport??
+		 if(100%userselectQns!=0 &&  numberofrounds>=100/userselectQns+2)this.finish();//there is one more round for the last ten Qns
+	}
 	public void callrestofthecode(){	
 	runtimer.cancel();
 		//if ( mbtn_check_on.isSelected())
@@ -265,7 +273,7 @@ int numberofrounds;
 					}
 
 			
-					if (cnt ==userselectQns) {
+					if (cnt ==userselectQns ) {
 						/*runtimer.cancel();
 						Handler handler = new Handler(); 
 					    handler.postDelayed(new Runnable() { 
