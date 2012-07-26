@@ -68,13 +68,13 @@ public class TestCTZ1 extends Activity implements  OnGestureListener,SimpleGestu
 	private CheckBox mcheckBox2;
 	private RelativeLayout mtotalView;
 	 private SimpleGestureFilter detector;
-	int questionnumber;
+	int questionnumber,current_Qn_length;
 	//private Button mnext;
 	private Button exit_button;
 	int cnt = 0; int  score = 0;
 	private Button getscores;
 	//private Button mcancel;
-	int cnt1, ctz_ans, correct_ans;
+	int cnt1, ctz_ans, correct_ans,begin,end;
 	CountDownTimer runtimer;
 	String correctanswerstring;
 	// multiple choice answers display
@@ -106,7 +106,7 @@ public class TestCTZ1 extends Activity implements  OnGestureListener,SimpleGestu
 	String getquestionString = "";// and the next .
 	boolean test_interrupted;
 	
-	
+	int justfound;
 	String[] nearlygood_10; // deceptive answerset
 	String[] funny1_10; // fake answerset 1
 	String[] funny2_10; // fake answerset 2
@@ -128,8 +128,10 @@ int numberofrounds;
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	public void onCreate(Bundle savedInstanceState) {test_interrupted=false;
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		test_interrupted=false;
+		justfound=-1;
 		 detector = new SimpleGestureFilter(this,this);
 		bingo=false;
 		gestureScanner = new GestureDetector(this);
@@ -146,9 +148,9 @@ int numberofrounds;
 		nearlygood_10= new String[100];
 		funny1_10= new String[100];
 		funny2_10= new String[100];
-		 numberofrounds= bundle.getInt( "numberofrounds");
-	
-		 {  userselectQns= bundle.getInt("userselectQns");
+		// numberofrounds= bundle.getInt( "numberofrounds");
+		numberofrounds=1;
+		 {  userselectQns= bundle.getInt("userselectQns");if(userselectQns==0)userselectQns=3;//default
 		// checkValidity();
 		// for(int k=0;k< userselectQns;k++)
 		
@@ -161,13 +163,18 @@ int numberofrounds;
 		anslist = bundle.getStringArray("anstorandomqns");
 		originalQNums = bundle.getIntArray("originalQNums");
 		 
-		 userselecttiming= bundle.getInt("userselecttiming");}
+		 userselecttiming= bundle.getInt("userselecttiming");
+		 if(userselecttiming==0)userselecttiming=3;
+		 }
 		 
 		// form a tring to verify if user got the answer right
-		correctanswerstring = "";int begin=0,end=0;boolean ended=false;;
-		begin=(numberofrounds-1)*userselectQns; end=begin+userselectQns;if(end>100)end=100;if(begin>=100){
-			Toast.makeText(this, "Congratulstions. You just completed practice of 100 qustions", Toast.LENGTH_SHORT).show(); 
-			
+		correctanswerstring = "";
+		begin=0;
+		end=userselectQns;
+		begin=(numberofrounds-1)*userselectQns; end=begin+userselectQns;if(end>100)end=100;
+		if(begin>=100){
+			Toast.makeText(this, "Congratulations. You just completed practice of 100 qustions", Toast.LENGTH_SHORT).show(); 
+			finish();
 		}
 		
 		for (int i = begin; i <  end; i++)
@@ -212,6 +219,75 @@ int numberofrounds;
 		currentdisplay = 0;
 		originalQnumber = originalQNums[0];
 	}
+	
+	private void go_For_NextRound(int begin,int end){++numberofrounds;
+     
+Toast.makeText(TestCTZ1.this,"starting Round#"+(numberofrounds), Toast.LENGTH_LONG).show();
+
+if(begin==100)return;
+
+if(end>100)end=100;
+		getAnswerString0 = anslist[begin];
+		getquestionString0 = "Question# 1: " + qnlist[begin];// first question
+		
+		mGetQuestionString.setText(getquestionString0);mGetQuestionString.setVisibility(View.VISIBLE);
+		mgetAnswerString.setVisibility(View.GONE); 
+		mbtnclose_normal.setVisibility(View.GONE);
+		mbtn_check_on.setVisibility(View.GONE);
+		mgetReport.setVisibility(View.GONE);
+		calltimer(PreferenceManager.getDefaultSharedPreferences(this));
+     	mgetAnswerString.setText(getAnswerString0);
+		currentdisplay = 0;
+		originalQnumber = originalQNums[0];
+}
+	
+	
+	 @Override
+	public void onBackPressed() {
+		if(cnt<userselectQns)
+		{
+		   testscores_dialog_builder = new AlertDialog.Builder(TestCTZ1.this);
+								testscores_dialog_builder.setMessage("Exiting the test!Are you sure?")
+								       .setCancelable(false)
+								       .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+								           public void onClick(DialogInterface dialog, int id) {
+								               finish();
+								        	  
+								           }
+			                            }
+								      )
+								       .setNegativeButton("No", new DialogInterface.OnClickListener() {
+								           public void onClick(DialogInterface dialog, int id) {
+								               return;
+								        	  
+								           }
+								       });
+								testscores_dialog = testscores_dialog_builder.create();
+			                    testscores_dialog.show();
+		        return;
+		    }
+		else if(mgetReport.getVisibility() == View.VISIBLE){begin=end;end=end+userselectQns;
+		
+		if (end>100){justfound=100%userselectQns;
+			end=100;
+			
+		}
+	       // go For NextRound();; // my method to toggle the views
+	        Toast.makeText(this, "Starting Next Round"+begin+"to"+end, Toast.LENGTH_SHORT).show();
+	        cnt=0;
+	        score=0;
+	        current_Qn_length=userselectQns;
+	        mScore.setText(" / ");mtimerTextField.setVisibility(View.VISIBLE);runtimer.start();
+	        go_For_NextRound( begin, end);
+	    }
+		
+		else{
+	        super.onBackPressed(); 
+	    }
+		
+		
+		
+		}
 	 @Override 
 	 public boolean dispatchTouchEvent(MotionEvent me){ 
 		  super.dispatchTouchEvent(me);
@@ -259,8 +335,7 @@ int numberofrounds;
 	}
 	public void callrestofthecode(){	
 	runtimer.cancel();
-		//if ( mbtn_check_on.isSelected())
-//	if(!bingo)mgetAnswerString.setVisibility(View.VISIBLE);
+	
 	
 		{SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(this);;
 					cnt++;
@@ -273,54 +348,13 @@ int numberofrounds;
 					}
 
 			
-					if (cnt ==userselectQns ) {
-						/*runtimer.cancel();
-						Handler handler = new Handler(); 
-					    handler.postDelayed(new Runnable() { 
-					         public void run() { 
-					        	
-					         } 
-					    }, 45);*/
+					if (cnt ==userselectQns || cnt==justfound) {
+						
 						decideVisibility(true);//mbtn_check_on.setClickable(true);//mbtnclose_normal.setClickable(true);
 						mgetReport.setText(getreportString());
 						mgetReport.setVisibility(View.VISIBLE);
-						
-						
-					/*	testscores_dialog_builder = new AlertDialog.Builder(TestCTZ1.this);mgetReport.setText(getreportString());
-						testscores_dialog_builder.setMessage("Your score is " + score + "\nRestart the test?")
-						       .setCancelable(false)
-						       .setPositiveButton("Generate Score Report?", new DialogInterface.OnClickListener() {
-						           public void onClick(DialogInterface dialog, int id) { 
-						        	   
-						        	   mgetReport.setVisibility(View.VISIBLE);decideVisibility(true);
-						      	 dialog.cancel();
-						      	decideVisibility(false);
-						         runtimer.start();
-	                            }
-						       })
-						       .setNegativeButton("No", new DialogInterface.OnClickListener() {
-						           public void onClick(DialogInterface dialog, int id) {
-						               finish();
-						        	  
-						           }
-						       });
-						testscores_dialog = testscores_dialog_builder.create();
-	                    testscores_dialog.show();
-						
-						score = 0;
-						cnt = 0;
-						mGetQuestionString.setText(getquestionString0);
-					//	mgetAnswerString.setText(getAnswerString0);
-						originalQnumber = originalQNums[cnt];
-						
-						mGetQuestionString.setVisibility(View.VISIBLE);
-					//	mgetAnswerString.setVisibility(View.VISIBLE);
-					//	mnext.setVisibility(View.VISIBLE);
-						mtimerTextField.setVisibility(View.VISIBLE);;
-						mScore.setVisibility(View.VISIBLE);mScore.setText( "    ");mbtn_check_on.setClickable(true);
-						//mnext.setVisibility(View.VISIBLE);;
-					//	mnext.setClickable(false);
-*/
+					
+
 					} else {
 						decideVisibility(false);
 						//mgetAnswerString.setVisibility(View.GONE);
@@ -335,8 +369,8 @@ int numberofrounds;
 				}
 			}
 	public String getreportString(){
-		return("Your Scores Based On Self-Evaluation: "+"\n"+"Total Questions Available From  Website: \n 100"+"\n"+
-		       "Number of Questions you selected to practise in non-random fashion \n"+
+		return(" Scores Based On Self-Evaluation: "+"\n"+"Total Questions Available From  Website: \n 100"+"\n"+
+		       "Number of Questions I selected in random fashion \n"+
 				userselectQns+"\n"+
 		       "Time I allocated to answer each Question "+"\n"+
 				userselecttiming+"seconds \n"+"I know answers for: "+"\n"+

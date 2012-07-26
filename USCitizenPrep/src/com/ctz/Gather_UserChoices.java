@@ -159,13 +159,13 @@ public class Gather_UserChoices extends Activity {
 		});
 		go_Button.setOnClickListener(new OnClickListener() {
 //sending questions too many tims But works for now MAjor Fix required 23rd July
-			public void onClick(View v) {numberofrounds++;if(userselectQns==0)userselectQns=10;//avoid 0 divide
+			public void onClick(View v) {if(userselectQns==0)userselectQns=10;//avoid 0 divide
 		//	if((numberofrounds-1)*userselectQns>100)return;//avoid exceeding limit Not right Use remainder
 			//if(100%userselectQns==0 &&  numberofrounds>=100/userselectQns+1)finish();//REport??
 			// if(100%userselectQns!=0 &&  numberofrounds>=100/userselectQns+2)finish();//there is one more round for the last ten Qns
 				//v.setBackgroundResource(R.drawable.android_pressed);
 				//findViewById(R.id.state_spinner).setBackgroundResource(R.drawable.android_pressed);
-				Toast.makeText(Gather_UserChoices.this, "Practice Test# "+numberofrounds,
+				Toast.makeText(Gather_UserChoices.this, "Practice Test# 1",
 						Toast.LENGTH_SHORT).show();
 
 				//it is go_button, da!!
@@ -182,7 +182,7 @@ public class Gather_UserChoices extends Activity {
 					
 					Intent myIntent2User = new Intent();
 					// if( numberofrounds>1)bundle.clear();
-					bundle.putInt("numberofrounds", numberofrounds);
+					//bundle.putInt("numberofrounds", numberofrounds);
 					
 					myIntent2User.putExtras(bundle);
 				
