@@ -176,19 +176,20 @@ private CheckBox radio_senior_prepare_for_interview;
 					 spinner.getSelectedItem().toString();	
 					new Justdownload();
 					//Toast.makeText(USCitizenPrep.this, String.valueOf("State: "+spinner.getSelectedItem()),Toast.LENGTH_SHORT).show();
-					if (radio_test_yourself.isChecked() == true) {
+					if (radio_test_yourself.isChecked() == true  &&  radio_senior_prepare_for_interview.isChecked()==false) {
 
 						selected_type = new String("2");
 						
-				 {
+				 {Toast.makeText(USCitizenPrep.this, "No Seniorji",
+							Toast.LENGTH_SHORT).show();
 							copy("random");
 							
-							Log.d("CAme :","thisfar1*********************************************************"+questions_list.size());
+							Log.d("CAme :","thisfar1*****************************??????------------"+questions_list.size());
 							String[] qns = new String[questions_list.size()];
 							String[] ans = new String[answers_list.size()];
 							Object[] qnobarr = questions_list.toArray();
 							Object[] ansobarr = answers_list.toArray();
-							for (int i = 0; i < 100; i++) {
+							for (int i = 0; i <questions_list.size(); i++) {
 								qns[i] = (String) qnobarr[i];// (String[]) questions_list.toArray()
 								ans[i] = (String) ansobarr[i];
 							}
@@ -222,20 +223,21 @@ private CheckBox radio_senior_prepare_for_interview;
 					
 					
 					
-					if (radio_prepare_for_interview.isChecked() == true) {
+					if (radio_prepare_for_interview.isChecked() == true &&  radio_senior_prepare_for_interview.isChecked()==false) {
 						selected_type = new String("1");
-						
+						Toast.makeText(USCitizenPrep.this, "No Seniorji",
+								Toast.LENGTH_SHORT).show();
 						copy("total");
 						
 
 					}
-					if (radio_senior_prepare_for_interview.isChecked() == true) {
-
-						selected_type = new String("3");
+					if (radio_senior_prepare_for_interview.isChecked() == true && (radio_prepare_for_interview.isChecked() == true ||radio_test_yourself.isChecked() == true)) {
+						Toast.makeText(USCitizenPrep.this, "SeniorjiOK",Toast.LENGTH_SHORT).show();
+						selected_type = new String("1");
 						copy("senior");
 						
-						
-					}
+							}
+							
 
 				}
 				
@@ -243,7 +245,7 @@ private CheckBox radio_senior_prepare_for_interview;
 				if(selected_type==null){//Toast.makeText(USCitizenPrep.this, "Plkease choose an activity",
 						//Toast.LENGTH_SHORT).show();
 					return;}
-				if(selected_type.equals("1") ||selected_type.equals("3"))
+				if(selected_type.equals("1") & radio_senior_prepare_for_interview.isChecked() == false)
 					{
 				StringBuilder sb = new StringBuilder().append(selected_type);
 				bundle.putString(user_selection, sb.toString());
@@ -312,7 +314,30 @@ private CheckBox radio_senior_prepare_for_interview;
 			//	Log.d("userselectQns= userselecttiming=",userselectQns+" "+userselecttiming+"****************************?????????????");
 				}
 				
+				if((selected_type.equals("1")||selected_type.equals("2")) && radio_senior_prepare_for_interview.isChecked() == true)
+				{
+					qnbundle.clear();
+				String[] qns = new String[questions_list.size()];
+				String[] ans = new String[answers_list.size()];
+				Object[] qnobarr = questions_list.toArray();
+				Object[] ansobarr = answers_list.toArray();
+				for (int i = 0; i <questions_list.size(); i++) {
+					qns[i] = (String) qnobarr[i];// (String[]) questions_list.toArray()
+					ans[i] = (String) ansobarr[i];
+				}
+					qnbundle.putStringArray("allquestions",qns);
+					qnbundle.putStringArray("allanswers",ans);
+					myIntent2.putExtras(qnbundle);
+				myIntent2.setClassName("com.ctz",
+						"com.ctz.PrepNoTimer");
+				
+				
+				startActivity(myIntent2);
 
+				
+				
+			//	Log.d("userselectQns= userselecttiming=",userselectQns+" "+userselecttiming+"****************************?????????????");
+				}
 			}
 		});
 		
@@ -351,12 +376,17 @@ private CheckBox radio_senior_prepare_for_interview;
 			start = 0;
 			end = allquestions.length;
 			for (int i = start; i < end; i++) {
+				
+				
 				questions_list.add(allquestions[i]);
 				answers_list.add(allanswers[i]);
+				
+				
 			}
 			
 		}
-
+		
+		
 		else if (s.equals("random")) {
 			answers_list.clear();
 			questions_list.clear();
@@ -409,7 +439,7 @@ private CheckBox radio_senior_prepare_for_interview;
 			start = 0;
 
 			end = allquestions.length;
-			Log.d("Length: ",end+"");
+			Log.d("Length: ",end+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 			for (int i = start; i < end; i++)
 				if (allquestions[i].contains("?*")) {
 					questions_list.add(allquestions[i]);

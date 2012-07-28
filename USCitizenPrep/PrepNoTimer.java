@@ -1,22 +1,30 @@
 package com.ctz;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 
+import java.util.Random;
+
+import com.ctz.R.color;
 import com.ctz.SimpleGestureFilter.SimpleGestureListener;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 //import android.os.CountDownTimer;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 
 import android.util.Log;
 import android.view.GestureDetector;
-
+import android.view.View;
 import android.view.GestureDetector.OnGestureListener;
-
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -25,40 +33,56 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-
+import android.widget.ToggleButton;
 
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.gesture.Gesture;
+import android.gesture.GestureLibraries;
 import android.gesture.GestureLibrary;
-
+import android.gesture.GestureOverlayView;
+import android.gesture.GestureOverlayView.OnGesturePerformedListener;
+import android.gesture.Prediction;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
+import android.app.Activity;
+import android.os.Bundle;
 import android.view.MotionEvent;
-
+import android.widget.Toast;
 @SuppressLint("NewApi")
 public class PrepNoTimer extends Activity implements  OnGestureListener,SimpleGestureListener{
-	
+	private GestureLibrary gLib;
+	private static final String TAG = "com.ctz";
 	 boolean bingo,done;private GestureDetector gestureScanner ;
 	 static Toast toast;
-		
+		private final Handler toastHandler = new Handler();
 	@SuppressLint({ "NewApi", "NewApi", "NewApi" })
 		
 	EditText edittext;//
 	private TextView mGetQuestionString;
 	private TextView mgetAnswerString;
 //	private EditText mtimerTextField;
-
+	private EditText mScore;
+	private CheckBox mcheckBox2;
+	private RelativeLayout mtotalView;
 	 private SimpleGestureFilter detector;
 	int questionnumber;
 	//private Button mnext;
-	
+	private Button exit_button;
 	int cnt = 0; int  score = 0;
-	
+	private Button getscores;
 	//private Button mcancel;
 	int cnt1, ctz_ans, correct_ans;
 	//CountDownTimer runtimer;
 	String correctanswerstring;
 	// multiple choice answers display
-	
+	private RadioGroup radiobtnGrp;
+	private RadioButton radio_ans1;
+	private RadioButton radio_ans2;
+	private RadioButton radio_ans3;
+	private RadioButton radio_ans4;
 	final static long seconds_in_milllies = 1000L;
 	final static long minutes_in_millies = seconds_in_milllies * 60;
 	final static long hours_in_millies = minutes_in_millies * 60;
@@ -113,20 +137,27 @@ int numberofrounds;
 		gestureScanner = new GestureDetector(this);
 		
 		setContentView(R.layout.main5);//following lines 'must' to follow layout
-		mGetQuestionString = (TextView) findViewById(R.id.getquestionString);
-		mgetAnswerString = (TextView) findViewById(R.id.getAnswerString);
 		setDefaultKeyMode(DEFAULT_KEYS_DISABLE);
 		Bundle bundle = new Bundle();
 		bundle = this.getIntent().getExtras();
 		
 		qnlist = bundle.getStringArray("allquestions");
-		anslist = bundle.getStringArray("allanswers");
-        int begin=0,end=0;
-		begin=0;end=qnlist.length;
+		anslist = bundle.getStringArray(" allanswers");
+	
+	
+		int begin=0,end=0;boolean ended=false;;
+		begin=0;end=100;
 		
-		Log.d("length: ",qnlist.length+">*>*>&>*>&>*>&>*>&*>&>*>&>&*&"+anslist.length);
-        getAnswerString0 = anslist[begin];
-		getquestionString0 = "Question# 1: " + qnlist[begin];// first question	
+		for (int i = begin; i <  end; i++)
+			
+		    getAnswerString0 = anslist[begin];
+		getquestionString0 = "Question# 1: " + qnlist[begin];// first question
+		
+		
+		
+		mGetQuestionString = (TextView) findViewById(R.id.getquestionString);
+		mgetAnswerString = (TextView) findViewById(R.id.getAnswerString);
+		
 		mGetQuestionString.setText(getquestionString0);
 		mgetAnswerString.setText(getAnswerString0);
 		currentdisplay = 0;
@@ -147,36 +178,36 @@ int numberofrounds;
 		    return false;
 		 }
 	
+	
+	
 	public void callrestofthecode(){	
 
 	
-		{                cnt++;
-					    ctz_ans = -1;
+		{SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(this);;
+					cnt++;
+					ctz_ans = -1;
+					
+
+				
 						getquestionString = getnextqn(cnt);
-						if(getquestionString==null){
-							AlertDialog.Builder builder = new AlertDialog.Builder(PrepNoTimer.this);
-							builder.setMessage("Congratulations! You just finished Practice of all Questions! ")
-						       .setCancelable(false)
-						       .setPositiveButton("Home", new DialogInterface.OnClickListener() {
-						           public void onClick(DialogInterface dialog, int id) {
-						        	  PrepNoTimer.this.finish();
-						           }
-						       });
-						       
-						      
-						AlertDialog alert = builder.create();
-						alert.show();
-							
-							
-							
-						}
+						if(getquestionString==null)this.finish();
 						mGetQuestionString.setText(getquestionString);
 						getAnswerString = getnextanswer(cnt);
 						mgetAnswerString.setText(getAnswerString);
+						
+						
+
 					}
 				}
 			
- @Override
+	
+
+	
+	
+	 
+
+	
+	 @Override
 	    public boolean onTouchEvent(MotionEvent me)
 	    {
 	        return gestureScanner.onTouchEvent(me);
@@ -217,20 +248,14 @@ int numberofrounds;
 	        return true;
 	    }
 	public String getnextqn(int cnt) {
-		int qnnumber = cnt + 1;if(qnnumber>qnlist.length)return null;;
+		int qnnumber = cnt + 1;if(qnnumber>100)return null;;
 		return "Qusestion# " + qnnumber +": "+ qnlist[cnt] ;
 	}
 	
 
 	
 	 public String  getnextanswer(int cnt) {
-			int qnnumber = cnt + 1;
-			if(qnnumber>anslist.length)
-			{	
-		
-	
-				
-				return null;}
+			int qnnumber = cnt + 1;if(qnnumber>100)return null;;
 			return "Answer"  +": "+anslist[cnt] ;
 			
 		}

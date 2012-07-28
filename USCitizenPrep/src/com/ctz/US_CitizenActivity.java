@@ -1,50 +1,36 @@
 package com.ctz;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+
 import java.util.ArrayList;
-import java.util.Random;
 
 
 
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorSet;
+
+
 import android.app.AlertDialog;
-import android.app.Dialog;
+
 import android.app.ListActivity;
 import android.content.Context;
-import android.content.Intent;
+
 import android.graphics.Canvas;
-import android.graphics.Color;
+
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.ContactsContract.Profile;
-
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
+
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
+
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
-import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
-import android.view.View;
+
 public class US_CitizenActivity extends ListActivity {
 	AlertDialog.Builder builder;
 	AlertDialog alertDialog;
@@ -57,17 +43,13 @@ public class US_CitizenActivity extends ListActivity {
 	static int question_bank_size = 100;
 	static Toast toast;
 	private final Handler toastHandler = new Handler();
-	private ScaleGestureDetector mScaleDetector;
-	private float mScaleFactor = 1.f;
+	
 	static int duration_of_toast_display = 2000;
 	LinearLayout activeItem;
 	int[] randoms = new int[10];
-	 private static float MIN_ZOOM = 1f;
-	    private static float MAX_ZOOM = 5f;
 
-	    private float scaleFactor = 1.f;
-	    private ScaleGestureDetector detector;
-	    private LinearLayout  layoutoriginal;
+
+	  
 	String selected;
 	String user_selection;
 	ArrayList<String> questions_list, answers_list;
@@ -175,7 +157,7 @@ public class US_CitizenActivity extends ListActivity {
 		   
         return new View(parent.getContext());
     }
-	@SuppressWarnings("rawtypes")
+	
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 
 		parent.setSelection(position);
