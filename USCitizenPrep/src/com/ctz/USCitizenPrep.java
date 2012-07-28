@@ -224,13 +224,13 @@ private CheckBox radio_senior_prepare_for_interview;
 					
 					
 					if (radio_prepare_for_interview.isChecked() == true &&  radio_senior_prepare_for_interview.isChecked()==false) {
-						selected_type = new String("1");
+						selected_type = new String("5");
 						Toast.makeText(USCitizenPrep.this, "No Seniorji",
 								Toast.LENGTH_SHORT).show();
 						copy("total");
 						
 
-					}
+				
 					if (radio_senior_prepare_for_interview.isChecked() == true && (radio_prepare_for_interview.isChecked() == true ||radio_test_yourself.isChecked() == true)) {
 						Toast.makeText(USCitizenPrep.this, "SeniorjiOK",Toast.LENGTH_SHORT).show();
 						selected_type = new String("1");
@@ -245,62 +245,21 @@ private CheckBox radio_senior_prepare_for_interview;
 				if(selected_type==null){//Toast.makeText(USCitizenPrep.this, "Plkease choose an activity",
 						//Toast.LENGTH_SHORT).show();
 					return;}
-				if(selected_type.equals("1") & radio_senior_prepare_for_interview.isChecked() == false)
+				if(radio_prepare_for_interview.isChecked() == true && radio_senior_prepare_for_interview.isChecked() == false)
 					{
 				StringBuilder sb = new StringBuilder().append(selected_type);
 				bundle.putString(user_selection, sb.toString());
-				
-				
-				
-			bundle.putStringArray("allquestions",allquestions);
-			senator_of_state=getSenator(currentstate);	
-			
-			
-			String senator = "";
-			try{
-			FileInputStream fIn = new FileInputStream("/sdcard/senatordataactual.txt");
-			BufferedReader myReader = new BufferedReader(
-					new InputStreamReader(fIn));
-			
-			String onlyone = "";
-			while ((onlyone = myReader.readLine()) != null) {
-				senator += onlyone + "\n";
-			}
-			}catch(Exception e){
-				
-			}
-			
-			allanswers[19]=senator;
-			
-			
-			String governor = "";
-			try{
-			FileInputStream fIn = new FileInputStream("/sdcard/govdataactual.txt");
-			BufferedReader myReader = new BufferedReader(
-					new InputStreamReader(fIn));
-			
-			String onlyone = "";
-			while ((onlyone = myReader.readLine()) != null) {
-				governor += onlyone + "\n";
-			}
-			}catch(Exception e){
-				
-			}
-			allanswers[42]=governor;
-			;//update here based on user-provided info
-			//general category Seniors don't remember anyway. Just kidding. The list for seniors
-			governor_of_state=getGovernor(currentstate);
-			 bundle.putStringArray(" allanswers",allanswers );
+				bundle.putStringArray("allquestions",allquestions);
+			    bundle.putStringArray("allanswers",allanswers );
 				myIntent2.putExtras(bundle);
-				//myIntent2.setClassName("com.ctz",
-					//	"com.ctz.US_CitizenActivity");
+				
 				myIntent2.setClassName("com.ctz",
 				"com.ctz.PrepNoTimer");
 				startActivity(myIntent2);
 					}
 				
 				
-				if(selected_type.equals("2") )
+				if(selected_type.equals("2") && radio_senior_prepare_for_interview.isChecked() == false)
 				{
 					
 				myIntent2.setClassName("com.ctz",
@@ -317,6 +276,7 @@ private CheckBox radio_senior_prepare_for_interview;
 				if((selected_type.equals("1")||selected_type.equals("2")) && radio_senior_prepare_for_interview.isChecked() == true)
 				{
 					qnbundle.clear();
+				
 				String[] qns = new String[questions_list.size()];
 				String[] ans = new String[answers_list.size()];
 				Object[] qnobarr = questions_list.toArray();
@@ -327,22 +287,51 @@ private CheckBox radio_senior_prepare_for_interview;
 				}
 					qnbundle.putStringArray("allquestions",qns);
 					qnbundle.putStringArray("allanswers",ans);
+					
 					myIntent2.putExtras(qnbundle);
-				myIntent2.setClassName("com.ctz",
-						"com.ctz.PrepNoTimer");
-				
-				
-				startActivity(myIntent2);
-
-				
-				
-			//	Log.d("userselectQns= userselecttiming=",userselectQns+" "+userselecttiming+"****************************?????????????");
+				   myIntent2.setClassName("com.ctz","com.ctz.PrepNoTimer");
+                   startActivity(myIntent2);
 				}
 			}
-		});
+			}});
 		
 	}
-	 
+	public void filldata(){//close ???
+		String senator = "";
+		try{
+		FileInputStream fIn = new FileInputStream("/sdcard/senatordataactual.txt");
+		BufferedReader myReader = new BufferedReader(
+				new InputStreamReader(fIn));
+		
+		String onlyone = "";
+		while ((onlyone = myReader.readLine()) != null) {
+			senator += onlyone + "\n";
+		}
+		}catch(Exception e){
+			
+		}
+		
+		allanswers[19]=senator;
+		
+		
+		String governor = "";
+		try{
+		FileInputStream fIn = new FileInputStream("/sdcard/govdataactual.txt");
+		BufferedReader myReader = new BufferedReader(
+				new InputStreamReader(fIn));
+		
+		String onlyone = "";
+		while ((onlyone = myReader.readLine()) != null) {
+			governor += onlyone + "\n";
+		}
+		}catch(Exception e){
+			
+		}
+		allanswers[42]=governor;
+		;//update here based on user-provided info
+		//general category Seniors don't remember anyway. Just kidding. The list for seniors
+		//governor_of_state=getGovernor(currentstate);
+	}
 	    
 	@SuppressLint({ "NewApi", "NewApi", "NewApi" })
 	public void onItemSelected(AdapterView<?> parent, View v, int position,
