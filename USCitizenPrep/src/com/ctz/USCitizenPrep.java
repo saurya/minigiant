@@ -116,7 +116,7 @@ private CheckBox radio_senior_prepare_for_interview;
 		//ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
 		      //  R.array.states_array, android.R.layout.simple_spinner_item);
 		//spinner.setBackgroundColor(color.holo_blue_bright);
-				ArrayAdapter adapter = new ArrayAdapter(
+	ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
 						this,
 						android.R.layout.simple_spinner_item, 
 						statenames);
@@ -158,33 +158,22 @@ private CheckBox radio_senior_prepare_for_interview;
 				//finish();
 			}
 		});
+		
 		go_Button.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				//v.setBackgroundResource(R.drawable.android_pressed);
-				//findViewById(R.id.state_spinner).setBackgroundResource(R.drawable.android_pressed);
-				//Toast.makeText(USCitizenPrep.this, "Button clicked",
-						//Toast.LENGTH_SHORT).show();
-
-				String current_activity="";
+				
 				Bundle bundle = new Bundle();
 				Bundle qnbundle = new Bundle();
 				Intent myIntent2 = new Intent();
 	
 				if (v == go_Button) {
-					currentstate=
-					 spinner.getSelectedItem().toString();	
+					currentstate=spinner.getSelectedItem().toString();	
 					new Justdownload();
-					//Toast.makeText(USCitizenPrep.this, String.valueOf("State: "+spinner.getSelectedItem()),Toast.LENGTH_SHORT).show();
 					if (radio_test_yourself.isChecked() == true  &&  radio_senior_prepare_for_interview.isChecked()==false) {
-
-						selected_type = new String("2");
-						
-				 {Toast.makeText(USCitizenPrep.this, "No Seniorji",
-							Toast.LENGTH_SHORT).show();
+						selected_type = new String("2");						
+				        {
 							copy("random");
-							
-							Log.d("CAme :","thisfar1*****************************??????------------"+questions_list.size());
 							String[] qns = new String[questions_list.size()];
 							String[] ans = new String[answers_list.size()];
 							Object[] qnobarr = questions_list.toArray();
@@ -193,8 +182,7 @@ private CheckBox radio_senior_prepare_for_interview;
 								qns[i] = (String) qnobarr[i];// (String[]) questions_list.toArray()
 								ans[i] = (String) ansobarr[i];
 							}
-							Log.d("CAme :","thisfar2*********************************************************");
-							// bundle up the 10 relevant MCQ wrong answers
+							
 							String[] nearlygood_10 = new String[100];
 							String[] funny1_10 = new String[100];
 							String[] funny2_10 = new String[100];
@@ -206,17 +194,13 @@ private CheckBox radio_senior_prepare_for_interview;
 							qnbundle.putStringArray("nearlygood_10", nearlygood_10);// deceptive
 							qnbundle.putStringArray("funny1_10", funny1_10);// fake answerset 1
 							qnbundle.putStringArray("funny2_10", funny2_10);// fake answerset 2
-							Log.d("Came :","thisfar3*********************************************************");
+							
 							// bundle up randomly selected question numbers needed for scoring
 							qnbundle.putIntArray("originalQNums", randoms);
-							
-							
-							// bundle up randomly selected test questions and answers
 							qnbundle.putStringArray("randomqns", qns);
 												
 							qnbundle.putStringArray("anstorandomqns", ans);	
-							Log.d("CAme :","thisfar4*********************************************************");
-							//finish();
+							
 						}
 					}
 					
@@ -224,27 +208,25 @@ private CheckBox radio_senior_prepare_for_interview;
 					
 					
 					if (radio_prepare_for_interview.isChecked() == true &&  radio_senior_prepare_for_interview.isChecked()==false) {
-						selected_type = new String("5");
+						selected_type = new String("1");
 						Toast.makeText(USCitizenPrep.this, "No Seniorji",
 								Toast.LENGTH_SHORT).show();
 						copy("total");
-						
-
+					}
+                         
 				
 					if (radio_senior_prepare_for_interview.isChecked() == true && (radio_prepare_for_interview.isChecked() == true ||radio_test_yourself.isChecked() == true)) {
 						Toast.makeText(USCitizenPrep.this, "SeniorjiOK",Toast.LENGTH_SHORT).show();
 						selected_type = new String("1");
 						copy("senior");
-						
-							}
-							
-
-				}
+					}
+						}
+			
 				
-				//String current_class="";
-				if(selected_type==null){//Toast.makeText(USCitizenPrep.this, "Plkease choose an activity",
-						//Toast.LENGTH_SHORT).show();
-					return;}
+					if(selected_type==null){
+					                      return;
+					}
+				
 				if(radio_prepare_for_interview.isChecked() == true && radio_senior_prepare_for_interview.isChecked() == false)
 					{
 				StringBuilder sb = new StringBuilder().append(selected_type);
@@ -257,26 +239,18 @@ private CheckBox radio_senior_prepare_for_interview;
 				"com.ctz.PrepNoTimer");
 				startActivity(myIntent2);
 					}
-				
-				
-				if(selected_type.equals("2") && radio_senior_prepare_for_interview.isChecked() == false)
-				{
-					
-				myIntent2.setClassName("com.ctz",
-						"com.ctz.Gather_UserChoices");
-				
-				myIntent2.putExtras(qnbundle);
+                if(selected_type.equals("2") && radio_senior_prepare_for_interview.isChecked() == false)
+				{	
+				myIntent2.setClassName("com.ctz","com.ctz.Gather_UserChoices");
+                myIntent2.putExtras(qnbundle);
 				startActivity(myIntent2);
-
-				
-				
-			//	Log.d("userselectQns= userselecttiming=",userselectQns+" "+userselecttiming+"****************************?????????????");
 				}
 				
-				if((selected_type.equals("1")||selected_type.equals("2")) && radio_senior_prepare_for_interview.isChecked() == true)
+                if((selected_type.equals("1")||selected_type.equals("2")) && radio_senior_prepare_for_interview.isChecked() == true)
 				{
-					qnbundle.clear();
 				
+                qnbundle.clear();
+				copy("senior");
 				String[] qns = new String[questions_list.size()];
 				String[] ans = new String[answers_list.size()];
 				Object[] qnobarr = questions_list.toArray();
@@ -287,15 +261,15 @@ private CheckBox radio_senior_prepare_for_interview;
 				}
 					qnbundle.putStringArray("allquestions",qns);
 					qnbundle.putStringArray("allanswers",ans);
-					
-					myIntent2.putExtras(qnbundle);
-				   myIntent2.setClassName("com.ctz","com.ctz.PrepNoTimer");
-                   startActivity(myIntent2);
+				    myIntent2.setClassName("com.ctz","com.ctz.PrepNoTimer");
+				    myIntent2.putExtras(qnbundle);
+                    startActivity(myIntent2);
 				}
+			
 			}
-			}});
-		
-	}
+			}
+		    );
+}
 	public void filldata(){//close ???
 		String senator = "";
 		try{
@@ -328,14 +302,12 @@ private CheckBox radio_senior_prepare_for_interview;
 			
 		}
 		allanswers[42]=governor;
-		;//update here based on user-provided info
-		//general category Seniors don't remember anyway. Just kidding. The list for seniors
-		//governor_of_state=getGovernor(currentstate);
+		
 	}
 	    
 	@SuppressLint({ "NewApi", "NewApi", "NewApi" })
 	public void onItemSelected(AdapterView<?> parent, View v, int position,
-			long id) {//v.setBackgroundResource(R.drawable.android_pressed);
+			long id) {
 		Toast.makeText(USCitizenPrep.this, "Button clicked"+statenames[position],
 		Toast.LENGTH_SHORT).show();
 		
@@ -358,10 +330,10 @@ private CheckBox radio_senior_prepare_for_interview;
 	}
 	public void copy(String s) {
 		int start, end;
-
+		answers_list.clear();
+		questions_list.clear();
 		if (s.equals("total")) {
-			answers_list.clear();
-			questions_list.clear();
+			
 			start = 0;
 			end = allquestions.length;
 			for (int i = start; i < end; i++) {
@@ -369,33 +341,20 @@ private CheckBox radio_senior_prepare_for_interview;
 				
 				questions_list.add(allquestions[i]);
 				answers_list.add(allanswers[i]);
-				
-				
-			}
+		}
 			
 		}
-		
-		
-		else if (s.equals("random")) {
-			answers_list.clear();
-			questions_list.clear();
-			Random rands = new Random();
+	  else if (s.equals("random")) {
+            Random rands = new Random();
 			String randomstr = "aaa,";
 			int nums = 10;			
 		Set collect=new HashSet<Integer>();
 
-			/* Code for ordered questions as in original Give a choice to users later version
-			for (int i = 0; i < 100; i++) {
-			
-				questions_list.add(allquestions[i]);
-				answers_list.add(allanswers[i]);
-				randoms[i]=i;//this shd be a randomizer instead. But for 100 fn Random gave trouble!! 21st july
-			}*/
 			int count=0,k=0;int justcount=0;
-			for (int countslice=1;countslice<=10;countslice++)//generate only 10 rndoms but 10 times. Each slice of 10 qns is randomized
+			for (int countslice=1;countslice<=10;countslice++)
 			{rands = new Random();
 				randomstr="aaa";count=0;
-				while ( count< 10) {//the idea is to randomize all 100qns but locally in slices of size 10 qns
+				while ( count< 10) {
 					if (collect.size()==100)break;
 					k = rands.nextInt(nums);
 				if (!randomstr.contains(k + "")) {
@@ -403,14 +362,12 @@ private CheckBox radio_senior_prepare_for_interview;
 					randoms[justcount] = 10*(countslice-1)+k;
 					count++;justcount++;
 					collect.add(new Integer(10*(countslice-1)+k));
-				//	questions_list.add("" + allquestions[10*(countslice-1)+k]);
-					//answers_list.add("" + allanswers[10*(countslice-1)+k]);
-					Log.d("length???????????????????????????????????????????????????????????? ",10*(countslice-1)+k+"");
+				
 				}
-			} // return (String[]) qns.toArray();
+			} 
 				if (collect.size()==100)break;	
 		}
-		Log.d("size of the set",collect.size()+"************&&&&&&&&&&&&&&&&&&&&&&&&&&&&^^^^^^^^^^^^^^%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		
 			Iterator it=collect.iterator();
 			while(it.hasNext())
 		{k=((Integer)it.next());
@@ -423,8 +380,7 @@ private CheckBox radio_senior_prepare_for_interview;
 			}
 
 		else if (s.equals("senior")) {
-			answers_list.clear();
-			questions_list.clear();
+			
 			start = 0;
 
 			end = allquestions.length;
@@ -489,17 +445,13 @@ private CheckBox radio_senior_prepare_for_interview;
 		
 		
 	}
-	//20th julyinsert justdownload here to get correct output. Got round temporarily,commenting if. 
-	//Ver15 made it nec to go through non-mainthread for internet connection from android app
+	
 	private String getSenator(String ofstate){
 		String senator_of_state="old";
-		 Log.d("ofstate",ofstate+"******************************************************************************");
+		
 		  for (int i=0;i<100;i++){	
-			  Log.d("state[i]",state[i]+"******************************************************************************");
-		//	 if ((state[i]).contains(ofstate))
-			   senator_of_state +=sentr[i]+"\n";
-			  
-		  }
+					   senator_of_state +=sentr[i]+"\n";
+            }
 		return   senator_of_state;
 	}
 	
@@ -547,18 +499,14 @@ private CheckBox radio_senior_prepare_for_interview;
 	     for(int i=0;i<50;i++)
 	    	 System.out.println(states[i].toString());
 	Arrays.sort(states);Arrays.sort(statenames);
-	//new Justdownload();//trying to get child procesds get info for one state 23rd july
-	 	int getcount=0,statecounter=-1;	 
+	
+	 	int statecounter=-1;	 
 	 currentgovernors=new HashMap<String, String>();
 	  try {
 	  URL governors=  new URL("http://en.wikipedia.org/wiki/List_of_current_United_States_governors");
-	
-	  
-	  
-	  BufferedReader in = new BufferedReader(
+      BufferedReader in = new BufferedReader(
 		        new InputStreamReader(governors.openStream()));
-
-	  String inputLine,currstate;
+                String inputLine,currstate;
 	 
 	statecounter++;currstate=states[statecounter];
 	 cnt=0;int p=0;int q=0;int counter=0;
@@ -591,24 +539,7 @@ private CheckBox radio_senior_prepare_for_interview;
 	 
 		 }
 	
-	private 
-	String getGovernor(String ofstate){
-		String governor_of_state="";
-		
-		Iterator<String> it = currentgovernors.keySet().iterator();
-		 
-	     while (it.hasNext()) {
-	        String s = (String) it.next();
-	      if (s.equals(ofstate))
-	        
-	        governor_of_state=currentgovernors.get(s).toString();
-	     }
-		
-		
-		//Log.d("governor_of_state:???????? ",governor_of_state+" of "+ofstate);
-		
-		return governor_of_state;
-	}
+	
 	
 	
 	private void read_Rawdata() {
