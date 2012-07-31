@@ -5,6 +5,7 @@ package com.ctz;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,13 +21,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class Justdownload {
    
 	static ArrayList<String> strings=new ArrayList<String>();
-	static  String currentstate;
-  Justdownload() {
-    
+  String currentstate;
+  Justdownload(String currentstate) {
+	
+    this.currentstate=currentstate;
+    //if(returningUser)fillData();
     try{
     	
     	URL[]urlarray=new URL[2];
@@ -85,7 +89,8 @@ final class DownloadFile extends AsyncTask<URL, Integer, String> {
                		String currgov=inputLine.substring(p+2, q);
                		
                		if (currstate.equals(USCitizenPrep.currentstate))
-               		{out.write(currstate+" &"+currgov+"\n");out.close();
+               		{USCitizenPrep.allanswers[42]=currgov;
+               			out.write(currstate+" &"+currgov+"\n");out.close();
                 	 break;}
  		
                	}
@@ -116,7 +121,7 @@ final class DownloadFile extends AsyncTask<URL, Integer, String> {
     								  {
     									   str1= ((firstname[id].replace("<first_name>","")).trim()).replaceAll("\\n", "");;			  
     									   str2= ((str1.replace("</first_name>",""))).trim().replaceAll("\\n", "");;;
-    									   str3= ((lastname[i].replace("<last_name>","")).trim()).replaceAll("\\n", "");;;
+    									   str3= ((lastname[id].replace("<last_name>","")).trim()).replaceAll("\\n", "");;;
     									   str4= ((str3.replace("</last_name>","")).trim()).replaceAll("\\n", "");;;
     									   str5=str2+" "+str4;
     									   str6= ((str5)).trim().replaceAll("\\n", "");;;
@@ -124,7 +129,8 @@ final class DownloadFile extends AsyncTask<URL, Integer, String> {
     									 str7=((state[id].replace("<state>","")).trim()).replaceAll("\\n", "");;
     									 str8=((str7.replace("</state>","")).trim()).replaceAll("\\n", "");;
     									 state[id]=str8;if (state[id].equals(USCitizenPrep.currentstate))
-    									 { out.write(state[id]+" "+sentr[id]+"\n");
+    									 {USCitizenPrep.allanswers[19]=sentr[id];
+    										 out.write(state[id]+" "+sentr[id]+"\n");
     									   break;
     									 }
     									  }
@@ -151,7 +157,42 @@ final class DownloadFile extends AsyncTask<URL, Integer, String> {
             
             return null;
         }    
-    
+        public void filldata(){//close ???
+    		String senator = "";
+    		try{
+    		FileInputStream fIn = new FileInputStream("/sdcard/senatordataactual.txt");
+    		BufferedReader myReader = new BufferedReader(
+    				new InputStreamReader(fIn));
+    		
+    		String onlyone = "";
+    		while ((onlyone = myReader.readLine()) != null) {
+    			senator += onlyone + "\n";
+    			Log.d("onlyone ",onlyone+"MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+    		}
+    		}catch(Exception e){
+    			
+    		}
+    		
+    		USCitizenPrep.allanswers[19]=senator;
+    		
+    		
+    		String governor = "";
+    		try{
+    		FileInputStream fIn = new FileInputStream("/sdcard/govdataactual.txt");
+    		BufferedReader myReader = new BufferedReader(
+    				new InputStreamReader(fIn));
+    		
+    		String onlyone = "";
+    		while ((onlyone = myReader.readLine()) != null) {
+    			governor += onlyone + "\n";
+    			Log.d("onlyone ",onlyone+"MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+    		}
+    		}catch(Exception e){
+    			
+    		}
+    		USCitizenPrep.allanswers[42]=governor;
+    		
+    	}
         @Override
         protected void onPreExecute() {
             super.onPreExecute();

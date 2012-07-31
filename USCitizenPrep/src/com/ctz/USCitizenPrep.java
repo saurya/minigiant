@@ -1,10 +1,10 @@
 package com.ctz;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
+
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,22 +17,21 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
-import android.R.color;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
+
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
+
+
+
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnKeyListener;
+
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -40,7 +39,7 @@ import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.EditText;
+
 
 import android.gesture.Gesture;
 import android.gesture.GestureLibraries;
@@ -51,54 +50,51 @@ import android.gesture.Prediction;
 
 
 public class USCitizenPrep extends Activity implements OnGesturePerformedListener{
+	
 	static int userselectQns;;
 	static int userselecttiming;
-	static int question_bank_size = 100;
+	
 	static Toast toast;
-	private final Handler toastHandler = new Handler();
-	static int duration_of_toast_display = 2000;
-	private float mScaleFactor = 1.f;
+    static int duration_of_toast_display = 2000;
+    
 	int[] randoms = new int[100];
-	private ScaleGestureDetector mScaleDetector;
-	String selected;static String currentstate="CA";//just to keep it going
+	
+	String selected;static String currentstate;//just to keep it going
 	HashMap<String, String> currentgovernors;
 	ArrayList<String> questions_list, answers_list;
 	static int positionprev = 0;
-	String[] allquestions = new String[question_bank_size];
-	String[] nearlygood = new String[question_bank_size];
-	String[] funny1 = new String[question_bank_size];
-	String[] funny2 = new String[question_bank_size];
-	String[] allanswers = new String[question_bank_size];;
+	
+	static int question_bank_size = 100;
+	static  String[] allquestions = new String[question_bank_size];
+	static String[] allanswers = new String[question_bank_size];
+	static  String []statenames;
+	static String statename="";
+	
 	String senator_of_state="",governor_of_state="";
-	String[] state=new String[100];
-	private static  String []statenames;
+	String[] state=new String[100];	 
 	String[] sentr=new String[100];
+		
+	HashMap<String, String> statesncaps;
+	HashMap<String, String> statenabbrevs;
+	
 	private String selected_type;
 	private Button go_Button;
 	private Button exit_Button;
-	static String statename="";
+	
 	private RadioButton radio_prepare_for_interview;
 	private RadioButton radio_test_yourself;
-private CheckBox radio_senior_prepare_for_interview;
+    private CheckBox radio_senior_prepare_for_interview;
     private static String user_selection;
-    private static String user_state;
+   
     private GestureLibrary gLib;
 	/** Called when the activity is first created. */
 	@SuppressLint({ "NewApi", "NewApi", "NewApi", "NewApi" })
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+	    stateData();
 		read_Rawdata();
-		governorData();
-		getSenators();
-		File file = new File("/sdcard/govdataactual.txt");boolean deleted;
-		if(file.exists())
-		deleted = file.delete();
-		file = new File("/sdcard/senatordataactual.txt");
-		if(file.exists())
-		 deleted = file.delete();
-		//getGovernor();
+	
 		setContentView(com.ctz.R.layout.main);
 		 GestureOverlayView gOverlay = (GestureOverlayView) findViewById(R.id.gestures);
 	        gOverlay.addOnGesturePerformedListener(USCitizenPrep.this); 	
@@ -111,28 +107,18 @@ private CheckBox radio_senior_prepare_for_interview;
 		questions_list = new ArrayList<String>();
 		answers_list = new ArrayList<String>();
 	final Spinner	 spinner = (Spinner) findViewById(R.id.state_spinner);
-		//findViewById(R.id.state_spinner).setBackgroundColor(R.color.yyellow);
-		// Create an ArrayAdapter using the string array and a default spinner layout
-		//ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-		      //  R.array.states_array, android.R.layout.simple_spinner_item);
-		//spinner.setBackgroundColor(color.holo_blue_bright);
 	ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
 						this,
 						android.R.layout.simple_spinner_item, 
 						statenames);
-		// Specify the layout to use when the list of choices appears
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		
-		// Apply the adapter to the spinner
-		//DialogInterface dialog;
-	//	spinner.setBackgroundColor(color.background_light);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);spinner.setFocusable(true);
-		//spinner.setVisibility(1);
+		
 		 radio_senior_prepare_for_interview=(CheckBox) findViewById(com.ctz.R.id.radio_senior_prepare_for_interview);
 		radio_prepare_for_interview = (RadioButton) findViewById(com.ctz.R.id.radio_prepare_for_interview);
 		radio_test_yourself = (RadioButton) findViewById(com.ctz.R.id.radio_test_yourself);
-		//radio_senior_prepare_for_interview = (RadioButton) findViewById(com.ctz.R.id.radio_senior_prepare_for_interview);
-
+		
 		go_Button = (Button) findViewById(com.ctz.R.id.go);
 		exit_Button = (Button) findViewById(com.ctz.R.id.exit);
 		
@@ -155,7 +141,7 @@ private CheckBox radio_senior_prepare_for_interview;
 			       });
 			AlertDialog alert = builder.create();
 			alert.show();
-				//finish();
+				
 			}
 		});
 		
@@ -166,10 +152,21 @@ private CheckBox radio_senior_prepare_for_interview;
 				Bundle bundle = new Bundle();
 				Bundle qnbundle = new Bundle();
 				Intent myIntent2 = new Intent();
+				File file = new File("/sdcard/govdataactual.txt");
+				if(file.exists())
+				file.delete();
+				file = new File("/sdcard/senatordataactual.txt");
+				if(file.exists())
+				file.delete();
+				
 	
 				if (v == go_Button) {
+					currentstate="AK";//default in case nothing selected
 					currentstate=spinner.getSelectedItem().toString();	
-					new Justdownload();
+					
+					new Justdownload(currentstate);
+				    allanswers[43]=capital();
+				    Log.d("Spinner Selection",currentstate+"***************&&&&&&&&&&&&&&&&&&^^^^^^^^^^^^^^^^^^"+allanswers[19]+allanswers[42]);
 					if (radio_test_yourself.isChecked() == true  &&  radio_senior_prepare_for_interview.isChecked()==false) {
 						selected_type = new String("2");						
 				        {
@@ -182,41 +179,20 @@ private CheckBox radio_senior_prepare_for_interview;
 								qns[i] = (String) qnobarr[i];// (String[]) questions_list.toArray()
 								ans[i] = (String) ansobarr[i];
 							}
-							
-							String[] nearlygood_10 = new String[100];
-							String[] funny1_10 = new String[100];
-							String[] funny2_10 = new String[100];
-							for (int i = 0; i < 100; i++) {
-								nearlygood_10[i] = nearlygood[randoms[i]];
-								funny1_10[i] = funny1[randoms[i]];
-								funny2_10[i] = funny2[randoms[i]];
-							}
-							qnbundle.putStringArray("nearlygood_10", nearlygood_10);// deceptive
-							qnbundle.putStringArray("funny1_10", funny1_10);// fake answerset 1
-							qnbundle.putStringArray("funny2_10", funny2_10);// fake answerset 2
-							
-							// bundle up randomly selected question numbers needed for scoring
 							qnbundle.putIntArray("originalQNums", randoms);
 							qnbundle.putStringArray("randomqns", qns);
-												
 							qnbundle.putStringArray("anstorandomqns", ans);	
 							
 						}
 					}
-					
-					
-					
-					
+			
 					if (radio_prepare_for_interview.isChecked() == true &&  radio_senior_prepare_for_interview.isChecked()==false) {
 						selected_type = new String("1");
-						Toast.makeText(USCitizenPrep.this, "No Seniorji",
-								Toast.LENGTH_SHORT).show();
 						copy("total");
 					}
                          
 				
 					if (radio_senior_prepare_for_interview.isChecked() == true && (radio_prepare_for_interview.isChecked() == true ||radio_test_yourself.isChecked() == true)) {
-						Toast.makeText(USCitizenPrep.this, "SeniorjiOK",Toast.LENGTH_SHORT).show();
 						selected_type = new String("1");
 						copy("senior");
 					}
@@ -233,10 +209,9 @@ private CheckBox radio_senior_prepare_for_interview;
 				bundle.putString(user_selection, sb.toString());
 				bundle.putStringArray("allquestions",allquestions);
 			    bundle.putStringArray("allanswers",allanswers );
-				myIntent2.putExtras(bundle);
 				
-				myIntent2.setClassName("com.ctz",
-				"com.ctz.PrepNoTimer");
+			    myIntent2.putExtras(bundle);				
+				myIntent2.setClassName("com.ctz","com.ctz.PrepNoTimer");
 				startActivity(myIntent2);
 					}
                 if(selected_type.equals("2") && radio_senior_prepare_for_interview.isChecked() == false)
@@ -270,40 +245,7 @@ private CheckBox radio_senior_prepare_for_interview;
 			}
 		    );
 }
-	public void filldata(){//close ???
-		String senator = "";
-		try{
-		FileInputStream fIn = new FileInputStream("/sdcard/senatordataactual.txt");
-		BufferedReader myReader = new BufferedReader(
-				new InputStreamReader(fIn));
-		
-		String onlyone = "";
-		while ((onlyone = myReader.readLine()) != null) {
-			senator += onlyone + "\n";
-		}
-		}catch(Exception e){
-			
-		}
-		
-		allanswers[19]=senator;
-		
-		
-		String governor = "";
-		try{
-		FileInputStream fIn = new FileInputStream("/sdcard/govdataactual.txt");
-		BufferedReader myReader = new BufferedReader(
-				new InputStreamReader(fIn));
-		
-		String onlyone = "";
-		while ((onlyone = myReader.readLine()) != null) {
-			governor += onlyone + "\n";
-		}
-		}catch(Exception e){
-			
-		}
-		allanswers[42]=governor;
-		
-	}
+	
 	    
 	@SuppressLint({ "NewApi", "NewApi", "NewApi" })
 	public void onItemSelected(AdapterView<?> parent, View v, int position,
@@ -328,6 +270,13 @@ private CheckBox radio_senior_prepare_for_interview;
 		Toast.makeText(USCitizenPrep.this, "",
 				Toast.LENGTH_SHORT).show();
 	}
+	
+	public String capital(){
+		String currcapital;
+		currcapital=statenabbrevs.get(currentstate);
+		return(statesncaps.get(currcapital));	
+	}
+	
 	public void copy(String s) {
 		int start, end;
 		answers_list.clear();
@@ -348,7 +297,7 @@ private CheckBox radio_senior_prepare_for_interview;
             Random rands = new Random();
 			String randomstr = "aaa,";
 			int nums = 10;			
-		Set collect=new HashSet<Integer>();
+		Set<Integer> collect=new HashSet<Integer>();
 
 			int count=0,k=0;int justcount=0;
 			for (int countslice=1;countslice<=10;countslice++)
@@ -368,7 +317,7 @@ private CheckBox radio_senior_prepare_for_interview;
 				if (collect.size()==100)break;	
 		}
 		
-			Iterator it=collect.iterator();
+			Iterator<Integer> it=collect.iterator();
 			while(it.hasNext())
 		{k=((Integer)it.next());
 				questions_list.add("" + allquestions[randoms[k]]);
@@ -396,79 +345,18 @@ private CheckBox radio_senior_prepare_for_interview;
 	}
 	
 	
-	private String getSenators(){
-		try {
-				
-			
-			
-		  URL senators=  new URL("http://www.senate.gov/general/contact_information/senators_cfm.xml");
-		Log.d("printinfo","gotit ***************??????????????????????????>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-		new DownloadFilesTask().execute(senators);
-		  String[] firstname=new String[100];
-		  String[] lastname=new String[100];
-		  
-		  BufferedReader in = new BufferedReader(
-			        new InputStreamReader(senators.openStream()));
-		int cnt=0;
-			        String inputLine,str,str1,str2,str3,str4,str5,str6;
-			        while ((inputLine = in.readLine()) != null )
-			        { 
-			        	if (inputLine.contains("first_name"))firstname[cnt]=inputLine;
-			        	if (inputLine.contains("last_name"))lastname[cnt]=inputLine;
-			        	if (inputLine.contains("state")){state[cnt]=inputLine;
-			        	
-			        	cnt++;}
-			        }
-			        
-		  for (int i=0;i<100;i++)
-		  {
-			   str1= ((firstname[i].replace("<first_name>","")).trim()).replaceAll("\\n", "");;			  
-			   str2= ((str1.replace("</first_name>",""))).trim().replaceAll("\\n", "");;;
-			   
-			   str3= ((lastname[i].replace("<last_name>","")).trim()).replaceAll("\\n", "");;;
-			   str4= ((str3.replace("</last_name>","")).trim()).replaceAll("\\n", "");;;
-			  str5=str2+" "+str4;
-			   str6= ((str5)).trim().replaceAll("\\n", "");;;
-			   
-			   sentr[i]= str6.replaceAll("\\\\n", "");
-			  
-			  }
-		  
-		  
-		  
-		  } catch (Exception e) {
-		  e.printStackTrace();
-		  }
-		
-		
-		return senator_of_state;
-		
-		
-	}
-	
-	private String getSenator(String ofstate){
-		String senator_of_state="old";
-		
-		  for (int i=0;i<100;i++){	
-					   senator_of_state +=sentr[i]+"\n";
-            }
-		return   senator_of_state;
-	}
-	
-	public  void governorData(){
-		 String         line;int cnt=0;
+	public  void stateData(){
+		 String   line;
+		 int cnt=0;
 		 statenames=new String[50];
-		 String key="";String value="";String val="";
-		 HashMap<String, String> statesncaps = new HashMap<String,  String>(); 
-		 HashMap<String, String> statenabbrevs = new HashMap<String,  String>(); 
+		 String key="";String value="";
+		statesncaps = new HashMap<String,  String>(); 
+		statenabbrevs = new HashMap<String,  String>(); 
 		 try{InputStream is1 = this.getResources().openRawResource(R.raw.statencaps);
 			InputStreamReader isr1 = new InputStreamReader(is1);
 			BufferedReader br = new BufferedReader(isr1);
-		//, Charset.forName("UTF-8")));
-			
-				while ((line = br.readLine()) != null) {
-					
-					if(cnt %3==0){val=line;
+				while ((line = br.readLine()) != null) {	
+					if(cnt %3==0){
 						key=line;
 					}
 					if(cnt % 3==1)
@@ -487,61 +375,18 @@ private CheckBox radio_senior_prepare_for_interview;
 				  e.printStackTrace();
 			  }
 		 String[]states=new String[50];
-		 String[]mystates=new String[50];
+		
 		 Iterator<String> it = statenabbrevs.keySet().iterator();
 		 int cntr=-1;
 	     while (it.hasNext()) {cntr++;
 	        String s = (String) it.next();
-	        statenames[cntr]=s;
-	        //System.out.println(statenabbrevs.get(s) + "\t" + s+statenames[cntr]+"*********************");
+	        statenames[cntr]=s;	        
 	        states[cntr]=statenabbrevs.get(s);
 	     }
 	     for(int i=0;i<50;i++)
 	    	 System.out.println(states[i].toString());
-	Arrays.sort(states);Arrays.sort(statenames);
-	
-	 	int statecounter=-1;	 
-	 currentgovernors=new HashMap<String, String>();
-	  try {
-	  URL governors=  new URL("http://en.wikipedia.org/wiki/List_of_current_United_States_governors");
-      BufferedReader in = new BufferedReader(
-		        new InputStreamReader(governors.openStream()));
-                String inputLine,currstate;
-	 
-	statecounter++;currstate=states[statecounter];
-	 cnt=0;int p=0;int q=0;int counter=0;
-     while ((inputLine = in.readLine()) != null )
-     		{if(counter>=50)break;
-     	
-     	if(inputLine.contains(",") && ! inputLine.contains("20") && !inputLine.contains("img") )	{
-     		if (cnt>210){//System.out.println(cnt+"\n"+inputLine);
-     		currstate=statenames[counter];
-     		 p=inputLine.indexOf("\">");
-     		 q=inputLine.indexOf("</"); 
-     		 if(p<0 ||q<0 ||q-p<0)continue;
-     		// System.out.println(p+" "+q);
-     		String currgov=inputLine.substring(p+2, q);
-     		currentgovernors.put(currstate, currgov);
-     		//Log.d("currstate and currgov",currstate+"\n"+currgov);counter++;
-     		
-     	}
-     	}
-      	cnt++;
-     }
-		        		
-		        	
-		   
-		        
-	  } 
-	   catch (Exception e) {
-	  e.printStackTrace();
-	  }
-	 
+	         Arrays.sort(states);Arrays.sort(statenames);
 		 }
-	
-	
-	
-	
 	private void read_Rawdata() {
 
 		InputStream is1 = this.getResources().openRawResource(R.raw.allquestions);
@@ -570,9 +415,6 @@ private CheckBox radio_senior_prepare_for_interview;
 				if (testMC[0] == null || testMC[1] == null || testMC[2] == null)
 					break;
 
-				nearlygood[qnnum] = testMC[0];
-				funny1[qnnum] = testMC[1];
-				funny2[qnnum] = testMC[2];
 
 				test = br1.readLine();
 
@@ -597,30 +439,11 @@ private CheckBox radio_senior_prepare_for_interview;
 			br2.close();
 			is1.close();
 			is2.close();
-			int end = allquestions.length;
-			//Log.d("Length: ",end+"");
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
-	private class DownloadFilesTask extends AsyncTask<URL, Integer, Long> {
-	     protected Long doInBackground(URL... urls) {
-	         int count = urls.length;
-	         long totalSize = 0;
-	         for (int i = 0; i < count; i++) {
-	           
-	             publishProgress((int) ((i / (float) count) * 100));
-	             // Escape early if cancel() is called
-	             if (isCancelled()) break;
-	         }
-	         return totalSize;
-	     }
 
-	     protected void onProgressUpdate(Integer... progress) {
-	    	// setProgressPercent(progress[0]);
-	     }
-
-	    
-	 }
 }

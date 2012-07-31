@@ -13,7 +13,7 @@ Everyone must follow the law   Leaders must obey the law   Government must obey 
 Congress legislative President executive the courts judicial
 checks and balances separation of powers
 the President
-Congress + \n   Senate and House (of Representatives)   (U.S. or national) legislature
+Congress    Senate and House (of Representatives)   (U.S. or national) legislature
 the Senate and House (of Representatives)
 one hundred (100)
 six (6)
@@ -22,7 +22,7 @@ four hundred thirty-five (435)
 two (2)
 Answers will vary.  [Residents of territories with nonvoting Delegates or Resident Commissioners may + provide the name of that Delegate or Commissioner.  Also acceptable is any statement that the territory has + no (voting) Representatives in Congress.]
 all people of the state
-(because of) the state’s population  (because) they have more people  (because) some states have more people
+(because of) the state's population  (because) they have more people  (because) some states have more people
 four (4)
 November
 Barack Obama Obama
@@ -33,19 +33,19 @@ the President
 the President
 the President
 advises the President
-Secretary of Agriculture/\nSecretary of Commerce Secretary of Defense +"\n" + Secretary of Education Secretary of Energy Secretary of Health and Human Services  Secretary of Homeland Security  Secretary of Housing and Urban Development  Secretary of the Interior Secretary of Labor Secretary of State  Secretary of Transportation  Secretary of the Treasury  Secretary of Veterans Affairs  Attorney General Vice President
+Secretary of Agriculture*Secretary of Commerce Secretary of Defense * Secretary of Education Secretary of Energy Secretary of Health and Human Services  Secretary of Homeland Security  Secretary of Housing and Urban Development  Secretary of the Interior Secretary of Labor Secretary of State  Secretary of Transportation  Secretary of the Treasury  Secretary of Veterans Affairs  Attorney General Vice President
 reviews laws explains laws  resolves disputes(disagreements)  decides if a law goes against the Constitution
 the Supreme Court
 nine (9)
 John Roberts (John G. Roberts, Jr.)
-to print money to declare war to create an army +\n + to make treaties
-provide schooling and education  provide protection (police)  provide safety (fire departments)  give a driver’s license  approve zoning and land use
+to print money to declare war to create an army * to make treaties
+provide schooling and education  provide protection (police)  provide safety (fire departments)  give a driver's license  approve zoning and land use
 Answers will vary.  [District of Columbia residents should answer that D.C. does not have a Governor
 Answers will vary.  [District of Columbia residents should answer that D.C. is not a state and does not have a capital.  Residents of U.S. territories should name the capital of the territory.]
 Democratic and Republican
 Democratic (Party)
 (Nancy) Pelosi
-Citizens eighteen (18) and older (can vote).  You don’t have to pay (a poll tax) to vote.  Any citizen can vote.  (Women and men can vote.)  A male citizen of any race (can vote).
+Citizens eighteen (18) and older (can vote).  You don't have to pay (a poll tax) to vote.  Any citizen can vote.  (Women and men can vote.)  A male citizen of any race (can vote).
 serve on a jury vote in a federal election
 vote in a federal election run for federal office
 freedom of expression  freedom of assembly freedom to petition the government  freedom of worship the right to bear arms
@@ -65,13 +65,13 @@ New Hampshire Massachusetts Rhode Island Connecticut New York  New Jersey Pennsy
 The Constitution was written.  The Founding Fathers wrote the Constitution.
 1787
 (James) Madison. (Alexander) Hamilton.  (John) Jay. Publius
-U.S. diplomat.  oldest member of the Constitutional Convention.  first Postmaster General of the United States.  writer of “Poor Richard’s Almanac”.  started the first free libraries.
+U.S. diplomat.  oldest member of the Constitutional Convention.  first Postmaster General of the United States.  writer of "Poor Richard’s Almanac".  started the first free libraries.
 (George) Washington.
 (George) Washington.
 the Louisiana Territory.Louisiana.
 War of 1812. Mexican-American War. Civil War. Spanish-American War
 the Civil War.  the War between the States
-slavery. economic reasons. states’ rights
+slavery. economic reasons. states' rights
 freed the slaves (Emancipation Proclamation).   saved (or preserved) the Union.  led the United States during the Civil War
 freed the slaves.  freed slaves in the Confederacy.freed slaves in the Confederate states.   freed slaves in most Southern states
 fought for women’s rights.  fought for civil rights
@@ -97,4 +97,4 @@ because there were 13 original colonies  because the stripes represent the origi
 because there is one star for each state  because each star represents a state  because there are 50 states
 The Star-Spangled Banner
 July 4
-New Year’s Day  Martin Luther King, Jr. Day  Presidents’ Day Memorial Day  Independence Day Labor Day   Columbus Day Veterans Day  Thanksgiving Christmas
+New Year's Day  Martin Luther King, Jr. Day  Presidents' Day Memorial Day  Independence Day Labor Day   Columbus Day Veterans Day  Thanksgiving Christmas

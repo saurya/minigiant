@@ -18,19 +18,13 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 
 
-import android.widget.Button;
-import android.widget.CheckBox;
+
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
-
 
 import android.widget.TextView;
 import android.widget.Toast;
 
-import android.gesture.GestureLibrary;
 
 import android.view.MotionEvent;
 
@@ -47,7 +41,7 @@ public class PrepNoTimer extends Activity implements  OnGestureListener,SimpleGe
 	private TextView mgetAnswerString;
 //	private EditText mtimerTextField;
 
-	 private SimpleGestureFilter detector;
+	private SimpleGestureFilter detector;
 	int questionnumber;
 	//private Button mnext;
 	
@@ -108,7 +102,7 @@ int numberofrounds;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		 detector = new SimpleGestureFilter(this,this);
+ detector = new SimpleGestureFilter(this,this);
 		bingo=false;
 		gestureScanner = new GestureDetector(this);
 		
@@ -135,7 +129,7 @@ int numberofrounds;
 	 @Override 
 	 public boolean dispatchTouchEvent(MotionEvent me){ 
 		  super.dispatchTouchEvent(me);
-	   this.detector.onTouchEvent(me);
+	  this.detector.onTouchEvent(me);
 	  return super.dispatchTouchEvent(me); 
 	 }
 	 public void onDoubleTap() {callrestofthecode();
