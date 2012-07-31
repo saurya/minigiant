@@ -51,10 +51,16 @@ public final class R {
         public static final int icon=0x7f020007;
         public static final int menuitem_checkbox=0x7f020008;
         public static final int menuitem_checkbox_on=0x7f020009;
-        public static final int spinner_background=0x7f02000a;
-        public static final int spinner_normal=0x7f02000b;
-        public static final int spinner_press=0x7f02000c;
-        public static final int spinner_select=0x7f02000d;
+        public static final int radiobutton_on_background=0x7f02000a;
+        public static final int spinner=0x7f02000b;
+        public static final int spinner_ab_default_holo_light=0x7f02000c;
+        public static final int spinner_background=0x7f02000d;
+        public static final int spinner_default_holo_light=0x7f02000e;
+        public static final int spinner_focused_holo_light=0x7f02000f;
+        public static final int spinner_normal=0x7f020010;
+        public static final int spinner_press=0x7f020011;
+        public static final int spinner_pressed_holo_light=0x7f020012;
+        public static final int spinner_select=0x7f020013;
     }
     public static final class id {
         public static final int btn_check_on=0x7f090010;

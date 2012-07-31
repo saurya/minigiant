@@ -1,63 +1,35 @@
 package com.ctz;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import java.util.Random;
-
-import com.ctz.R.color;
 import com.ctz.SimpleGestureFilter.SimpleGestureListener;
+import android.view.GestureDetector.OnGestureListener;
+import android.view.GestureDetector;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.graphics.Color;
+
 import android.os.Bundle;
+
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 
-import android.util.Log;
-import android.view.GestureDetector;
 import android.view.View;
-import android.view.GestureDetector.OnGestureListener;
+import android.view.MotionEvent;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
-import android.widget.ToggleButton;
-
 import android.widget.TextView;
 import android.widget.Toast;
-import android.gesture.Gesture;
-import android.gesture.GestureLibraries;
-import android.gesture.GestureLibrary;
-import android.gesture.GestureOverlayView;
-import android.gesture.GestureOverlayView.OnGesturePerformedListener;
-import android.gesture.Prediction;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.MotionEvent;
-import android.widget.Toast;
+
 @SuppressLint("NewApi")
 public class TestCTZ1 extends Activity implements  OnGestureListener,SimpleGestureListener{
-	private GestureLibrary gLib;
-	private static final String TAG = "com.ctz";
-	 boolean bingo,done;private GestureDetector gestureScanner ;
-	 static Toast toast;
-		private final Handler toastHandler = new Handler();
+	
+	 boolean i_got_it,time_out;private GestureDetector gestureScanner ;
+	 private SimpleGestureFilter detector;
+	 
 	@SuppressLint({ "NewApi", "NewApi", "NewApi" })
 	OnClickListener myListener;	
 	EditText edittext;//
@@ -65,32 +37,18 @@ public class TestCTZ1 extends Activity implements  OnGestureListener,SimpleGestu
 	private TextView mgetAnswerString;
 	private TextView mtimerTextField;
 	private TextView mScore;
-	private CheckBox mcheckBox2;
-	private RelativeLayout mtotalView;
-	 private SimpleGestureFilter detector;
+	
 	int questionnumber,current_Qn_length;
-	//private Button mnext;
-	private Button exit_button;
 	int cnt = 0; int  score = 0;
-	private Button getscores;
-	//private Button mcancel;
 	int cnt1, ctz_ans, correct_ans,begin,end;
 	CountDownTimer runtimer;
-	String correctanswerstring;
-	// multiple choice answers display
-	private RadioGroup radiobtnGrp;
-	private RadioButton radio_ans1;
-	private RadioButton radio_ans2;
-	private RadioButton radio_ans3;
-	private RadioButton radio_ans4;
+	String correctanswerstring;	
 	final static long seconds_in_milllies = 1000L;
 	final static long minutes_in_millies = seconds_in_milllies * 60;
 	final static long hours_in_millies = minutes_in_millies * 60;
 	static AlertDialog.Builder testscores_dialog_builder,builder;
 	static AlertDialog testscores_dialog,alert;
-	// in onTick
-	//final Runnable r; 
-	// Array containing randomly generated question numbers
+	
 	int[] originalQNums = new int[100];
 	ImageButton  mbtnclose_normal;
 	TextView mgetReport;
@@ -105,131 +63,99 @@ public class TestCTZ1 extends Activity implements  OnGestureListener,SimpleGestu
 	String getAnswerString = "";
 	String getquestionString = "";// and the next .
 	boolean test_interrupted;
-	
 	int justfound;
-	String[] nearlygood_10; // deceptive answerset
-	String[] funny1_10; // fake answerset 1
-	String[] funny2_10; // fake answerset 2
+
 	int userselectQns;
 	String multipleChoiceAnswers = "";
 	String setanswerString = "";
 	String scoreString = "Your Score Now Is";
 	int userselecttiming;
-	String[] qnlist;// retrieve current 100 questions of the test
-	String[] anslist;// retrieve current 100 answers of the test
-	String[] ctznanslist;// corresponding answerset
-	Handler handler = new Handler(); 
-	String ctznans;// user-selected answerset
+	String[] qnlist;
+	String[] anslist;
+	String[] ctznanslist;
+	
+	String ctznans;
+    Toast mToast;;
 	int currentdisplay;
 	int originalQnumber;
 	static String finalswipe;
-int numberofrounds;
+    int numberofrounds;
 	/** Called when the activity is first created. */
 	
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		detector = new SimpleGestureFilter(this,this);
+		gestureScanner = new GestureDetector(this);
+		mToast = Toast.makeText( this  , "" , Toast.LENGTH_SHORT );
 		test_interrupted=false;
 		justfound=-1;
-		 detector = new SimpleGestureFilter(this,this);
-		bingo=false;
-		gestureScanner = new GestureDetector(this);
-		
-		setContentView(R.layout.main2);//following lines 'must' to follow layout
-		
-	
-		setDefaultKeyMode(DEFAULT_KEYS_DISABLE);
-		// getMultiChoiceData();
-		// get hundred random qns, and corresponding answers and their original
-		// numbers
-		Bundle bundle = new Bundle();
+        i_got_it=false;
+        numberofrounds=1;
+        
+        Bundle bundle = new Bundle();
 		bundle = this.getIntent().getExtras();
-		nearlygood_10= new String[100];
-		funny1_10= new String[100];
-		funny2_10= new String[100];
-		// numberofrounds= bundle.getInt( "numberofrounds");
-		numberofrounds=1;
-		 {  userselectQns= bundle.getInt("userselectQns");if(userselectQns==0)userselectQns=3;//default
-		// checkValidity();
-		// for(int k=0;k< userselectQns;k++)
 		
-		 
-		 
-		nearlygood_10 = bundle.getStringArray("nearlygood_10");
-		funny1_10 = bundle.getStringArray("funny1_10");
-		funny2_10 = bundle.getStringArray("funny2_10");
-		qnlist = bundle.getStringArray("randomqns");
-		anslist = bundle.getStringArray("anstorandomqns");
-		originalQNums = bundle.getIntArray("originalQNums");
-		 
-		 userselecttiming= bundle.getInt("userselecttiming");
-		 if(userselecttiming==0)userselecttiming=3;
-		 }
-		 
-		// form a tring to verify if user got the answer right
+        setContentView(R.layout.main2);
+	    setDefaultKeyMode(DEFAULT_KEYS_DISABLE);
+		
+		 {  
+			 userselectQns= bundle.getInt("userselectQns");if(userselectQns==0)userselectQns=3;//default
+            qnlist = bundle.getStringArray("randomqns");
+		    anslist = bundle.getStringArray("anstorandomqns");
+		    originalQNums = bundle.getIntArray("originalQNums");
+            userselecttiming= bundle.getInt("userselecttiming");
+		
+            if(userselecttiming==0)userselecttiming=3;
+		 } 
 		correctanswerstring = "";
 		begin=0;
 		end=userselectQns;
 		begin=(numberofrounds-1)*userselectQns; end=begin+userselectQns;if(end>100)end=100;
-		if(begin>=100){
-			Toast.makeText(this, "Congratulations. You just completed practice of 100 qustions", Toast.LENGTH_SHORT).show(); 
-			finish();
+		if(begin>=100){mToast.setText("Congratulations. You just completed practice of 100 qustions");
+           mToast.show();
+		   finish();
 		}
-		
 		for (int i = begin; i <  end; i++)
 			correctanswerstring += originalQNums[i] + ",";
 		
 		
 		getAnswerString0 = anslist[begin];
-		getquestionString0 = "Question# 1: " + qnlist[begin];// first question
+		getquestionString0 = "Question# 1: " + qnlist[begin];
 		
-		
-		 int hrs=0,mins=0;String timedisplay="";
-		 
-		
-		 mgetReport=(TextView) findViewById(R.id.getReport);
+		mgetReport=(TextView) findViewById(R.id.getReport);
 		mGetQuestionString = (TextView) findViewById(R.id.getquestionString);
 		mgetAnswerString = (TextView) findViewById(R.id.getAnswerString);
 		mScore=(TextView)findViewById(R.id.scoreField);
-	//	mnext = (Button) findViewById(R.id.next);
+	
 		myListener=new View.OnClickListener() {
             public void onClick(View v) {
                 newOnclick(v);
             }
         };
-		
-	
-		//mnext.setClickable(false);
 		mtimerTextField=(TextView) findViewById(R.id. timerTextField );
-		 mtotalView=(RelativeLayout)findViewById(R.id.totalView);		
-		 mbtnclose_normal=(ImageButton)	findViewById(R.id.btn_close_normal);
-		 mbtn_check_on=(ImageButton)	findViewById(R.id.btn_check_on);
-		//mGetQuestionString.setBackgroundColor(color.maroon);
+		mbtnclose_normal=(ImageButton)	findViewById(R.id.btn_close_normal);
+		mbtn_check_on=(ImageButton)	findViewById(R.id.btn_check_on);
 		mGetQuestionString.setText(getquestionString0);
-		//mgetAnswerString.setText(getAnswerString0);
-		mgetAnswerString.setVisibility(View.GONE); mbtnclose_normal.setVisibility(View.GONE);
-		 mbtn_check_on.setVisibility(View.GONE);
+		mgetAnswerString.setVisibility(View.GONE); 
+		mbtnclose_normal.setVisibility(View.GONE);
+		mbtn_check_on.setVisibility(View.GONE);
 		mgetReport.setVisibility(View.GONE);
-	   // mnext.setVisibility(View.GONE);
-		 ;
 		calltimer(PreferenceManager.getDefaultSharedPreferences(this));
-	
-		mgetAnswerString.setText(getAnswerString0);
+        mgetAnswerString.setText(getAnswerString0);
 		currentdisplay = 0;
 		originalQnumber = originalQNums[0];
 	}
 	
-	private void go_For_NextRound(int begin,int end){++numberofrounds;
-     
-Toast.makeText(TestCTZ1.this,"starting Round#"+(numberofrounds), Toast.LENGTH_LONG).show();
-
-if(begin==100)return;
-
-if(end>100)end=100;
+	private void go_For_NextRound(int begin,int end){
+		++numberofrounds;
+        mToast.setText("starting Round#"+(numberofrounds));
+        mToast.show();
+        if(begin==100)return;
+        if(end>100)end=100;
 		getAnswerString0 = anslist[begin];
-		getquestionString0 = "Question# 1: " + qnlist[begin];// first question
-		
+		getquestionString0 = "Question# 1: " + qnlist[begin];
 		mGetQuestionString.setText(getquestionString0);mGetQuestionString.setVisibility(View.VISIBLE);
 		mgetAnswerString.setVisibility(View.GONE); 
 		mbtnclose_normal.setVisibility(View.GONE);
@@ -240,8 +166,6 @@ if(end>100)end=100;
 		currentdisplay = 0;
 		originalQnumber = originalQNums[0];
 }
-	
-	
 	 @Override
 	public void onBackPressed() {
 		if(cnt<userselectQns)
@@ -272,8 +196,9 @@ if(end>100)end=100;
 			end=100;
 			
 		}
-	       // go For NextRound();; // my method to toggle the views
-	        Toast.makeText(this, "Starting Next Round"+begin+"to"+end, Toast.LENGTH_SHORT).show();
+	       
+	        mToast.setText( "Starting Next Round"+begin+"to"+end);
+	        mToast.show();
 	        cnt=0;
 	        score=0;
 	        current_Qn_length=userselectQns;
@@ -284,9 +209,7 @@ if(end>100)end=100;
 		else{
 	        super.onBackPressed(); 
 	    }
-		
-		
-		
+				
 		}
 	 @Override 
 	 public boolean dispatchTouchEvent(MotionEvent me){ 
@@ -298,73 +221,52 @@ if(end>100)end=100;
 		 mgetAnswerString.setVisibility(View.VISIBLE);mbtnclose_normal.setVisibility(View.VISIBLE);
 		 mbtn_check_on.setVisibility(View.VISIBLE); mbtnclose_normal.setClickable(true);
 		 mbtn_check_on.setClickable(true);
-	   // Toast.makeText(this, "Double Tap", Toast.LENGTH_SHORT).show(); 
+	  
 	 }
 	 public boolean onSingleTapUp() {runtimer.cancel();
 		 mgetAnswerString.setVisibility(View.VISIBLE);mbtnclose_normal.setVisibility(View.VISIBLE);
 		 mbtn_check_on.setVisibility(View.VISIBLE);
 			 mbtnclose_normal.setClickable(true);
 			 mbtn_check_on.setClickable(true);
-		  //  Toast.makeText(this, "Single Tap", Toast.LENGTH_SHORT).show(); 
+		  
 		    return false;
 		 }
 	public void newOnclick2(View v){
-	//Toast.makeText(TestCTZ1.this,anslist[cnt],
-		//Toast.LENGTH_SHORT).show();
-		
-	bingo=false;
+
+	i_got_it=false;
 	callrestofthecode();
 	}
 	
 	public void newOnclick(View v){
 		
-		if(!done)
-		{bingo=true;
+		if(!time_out)
+		{i_got_it=true;
 	callrestofthecode();
 	
 	}
 	
 	}
 	
-	
-	
-	
-	private void checkValidity(){
-		 if(100%userselectQns==0 &&  numberofrounds>=100/userselectQns+1)this.finish();//REport??
-		 if(100%userselectQns!=0 &&  numberofrounds>=100/userselectQns+2)this.finish();//there is one more round for the last ten Qns
-	}
 	public void callrestofthecode(){	
 	runtimer.cancel();
-	
-	
-		{SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(this);;
+	{SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(this);;
 					cnt++;
 					ctz_ans = -1;
-					 {//mnext.setClickable(false);
-					  //  calltimer(prefs);
+					 {
 					    calculateScores();
 						mScore.setText( scoreString);
-						
-					}
-
-			
+					}			
 					if (cnt ==userselectQns || cnt==justfound) {
-						
-						decideVisibility(true);//mbtn_check_on.setClickable(true);//mbtnclose_normal.setClickable(true);
+						decideVisibility(true);
 						mgetReport.setText(getreportString());
 						mgetReport.setVisibility(View.VISIBLE);
-					
-
 					} else {
 						decideVisibility(false);
-						//mgetAnswerString.setVisibility(View.GONE);
 						getquestionString = getnextqn(cnt);
 						mGetQuestionString.setText(getquestionString);
-						
 						mgetAnswerString.setText(anslist[cnt]);
 						mgetAnswerString.setVisibility(View.GONE);
 						cnt1 = originalQNums[cnt];runtimer.start();
-
 					}
 				}
 			}
@@ -384,7 +286,7 @@ if(end>100)end=100;
 		if(hide)
 		{mbtn_check_on.setVisibility(View.GONE);
 		mbtnclose_normal.setVisibility(View.GONE);
-			mgetAnswerString.setVisibility(View.GONE);
+		mgetAnswerString.setVisibility(View.GONE);
 		mGetQuestionString.setVisibility(View.GONE);
 		mtimerTextField.setVisibility(View.GONE);
 		
@@ -394,25 +296,18 @@ if(end>100)end=100;
 			mgetAnswerString.setVisibility(View.VISIBLE);
 		    mGetQuestionString.setVisibility(View.VISIBLE);
 		    mtimerTextField.setVisibility(View.VISIBLE);
-		mbtnclose_normal.setVisibility(View.GONE);
-		 mbtn_check_on.setVisibility(View.GONE);
-	/*	 mbtn_check_on.setOnClickListener(new View.OnClickListener() {
-             public void onClick(View v) {
-                 newOnclick(v);
-             }
-         });*/
-		 mbtn_check_on.setOnClickListener(myListener);
-		 mbtn_check_on.setClickable(true);
-			mbtnclose_normal.setClickable(true);}
-		
-		
-		
+		    mbtnclose_normal.setVisibility(View.GONE);
+		    mbtn_check_on.setVisibility(View.GONE);
+	
+		    mbtn_check_on.setOnClickListener(myListener);
+		    mbtn_check_on.setClickable(true);
+			mbtnclose_normal.setClickable(true);}		
 	}
 	
 	private void calltimer( SharedPreferences prefs){mbtn_check_on.setClickable(true);
 	
-		int hrs=0,mins=0;String timedisplay="";done=false;
-		 long timer = prefs.getLong("TIME", userselecttiming* 1000);//set your testtime limit here
+		time_out=false;
+		long timer = prefs.getLong("TIME", userselecttiming* 1000);
 		runtimer=	 new CountDownTimer(timer,1000) {
          
           public void onTick(long elapsed) {
@@ -422,65 +317,25 @@ if(end>100)end=100;
 		     }
           
 		     public void onFinish() {
-		    	 mtimerTextField.setText("done!");//mbtn_check_on.setClickable(false);
-		    	// done=true;
-		    	 bingo=false;
-		    	 mgetAnswerString.setVisibility(View.VISIBLE);
-		    	 
+		    	 mtimerTextField.setText("done!");
+		    	 i_got_it=false;
+		    	 mgetAnswerString.setVisibility(View.VISIBLE); 
 		 	     mbtnclose_normal.setVisibility(View.VISIBLE);
-		 		
-		 	    mbtn_check_on.setVisibility(View.VISIBLE); 
-		 	   
-		    mbtn_check_on.setOnClickListener(null); 
-		 	    
-		 	   
-		 	    
-		 	    
-		 	    
-		 	   
-		 	   Toast.makeText(getBaseContext(), "Sorry, time is up!", Toast.LENGTH_SHORT).show();
-		    	//if( mbtn_check_on.callOnClick());
-		    	// if (finalswipe=="Right" || mnext.isSelected())getNext();
-		    	// mnext.setEnabled(true);
+		 	     mbtn_check_on.setVisibility(View.VISIBLE);   
+		         mbtn_check_on.setOnClickListener(null); 
+		         mToast.setText( "Sorry, time is up!");
+			        mToast.show();
+		   
 		     }
 		  }.start();
 		 
 }
-	//Use this method for hours duration in GATE
-	
-	private void calltimerinhrs( SharedPreferences prefs){
-		int hrs=0,mins=0;String timedisplay="";
-		 long timer = prefs.getLong("TIME", 3700000);//set your testtime limit here
-		runtimer=	 new CountDownTimer(timer,1000) {
-         
-          public void onTick(long elapsed) {
-        	  
-		    		
-		    	 mtimerTextField.setText(( elapsed/3600000)%60+ ":" +(( elapsed/60000)%60 <10?"0"+( elapsed/60000)%60:( elapsed/60000)%60)+" :"+(elapsed/1000)%60);
-		     }
-          
-		     public void onFinish() {
-		    	 mtimerTextField.setText("done!");done=true;
-		     }
-		  }.start();
-		 
-		
-	}
-	  public void clickNew(View v)
-	    {
-	        Toast.makeText(this, "Show some text on the screen.", Toast.LENGTH_LONG).show();
-	    }
 	    
-	public void onRadioButtonClicked(View v) {
-		RadioButton rb = (RadioButton) v;
-
-	}
-
-	public void calculateScores() {//if (done)return;
-      if(bingo )
-    	  if (!done)score++;
+	public void calculateScores() {
+      if(i_got_it )
+    	  if (!time_out)score++;
       	scoreString =  score+"/"+cnt;
-        bingo=false;
+        i_got_it=false;
      
     	  
 	}
@@ -519,30 +374,18 @@ if(end>100)end=100;
 	    }
 	 
 	    public boolean onSingleTapUp(MotionEvent e)
-	    {mgetAnswerString.setVisibility(View.VISIBLE);
-	    mbtnclose_normal.setVisibility(View.VISIBLE);
-		 mbtn_check_on.setVisibility(View.VISIBLE);
-		 
-	/*	 mbtn_check_on.setOnClickListener(new View.OnClickListener() {
-	             public void onClick(View v) {
-	                 newOnclick(v);
-	             }
-	         });*/
-		 
-		 mbtn_check_on.setOnClickListener(myListener);
-		 
-		 mbtnclose_normal.setClickable(true);
-		 mbtn_check_on.setClickable(true);
-	       // Toast.makeText(TestCTZ1.this, "Single-Tap event ", Toast.LENGTH_LONG).show();
+	    {
+	    	mgetAnswerString.setVisibility(View.VISIBLE);
+	        mbtnclose_normal.setVisibility(View.VISIBLE);
+		    mbtn_check_on.setVisibility(View.VISIBLE);
+		    mbtn_check_on.setOnClickListener(myListener);
+		    mbtnclose_normal.setClickable(true);
+		    mbtn_check_on.setClickable(true); 
 	        return true;
+	     
 	    }
 	public String getnextqn(int cnt) {
 		int qnnumber = cnt + 1;
 		return "Qusestion# " + qnnumber +": "+ qnlist[cnt] ;
 	}
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

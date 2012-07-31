@@ -125,9 +125,9 @@ private CheckBox radio_senior_prepare_for_interview;
 		
 		// Apply the adapter to the spinner
 		//DialogInterface dialog;
-		spinner.setBackgroundColor(color.background_dark);
+	//	spinner.setBackgroundColor(color.background_light);
 		spinner.setAdapter(adapter);spinner.setFocusable(true);
-		spinner.setVisibility(1);
+		//spinner.setVisibility(1);
 		 radio_senior_prepare_for_interview=(CheckBox) findViewById(com.ctz.R.id.radio_senior_prepare_for_interview);
 		radio_prepare_for_interview = (RadioButton) findViewById(com.ctz.R.id.radio_prepare_for_interview);
 		radio_test_yourself = (RadioButton) findViewById(com.ctz.R.id.radio_test_yourself);

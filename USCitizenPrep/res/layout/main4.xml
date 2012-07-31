@@ -29,30 +29,17 @@ android:layout_height="wrap_content"
     android:textColor="#4F2F4F"
      android:layout_gravity="center_horizontal"
       android:layout_marginTop="23dp"/>
-<!--
-<EditText
-    android:id="@+id/numberofQns"
-    android:layout_width="27dp"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-  android:background="@android:drawable/editbox_background"
-    android:hint="@string/hint1"
-     android:layout_marginTop="23dp"
-    android:inputType="number"
-    android:maxLength="2"
-    android:padding="2dp"
-    android:singleLine="true" />
--->
+
  <Spinner
         android:id="@+id/questionslice_spinner"
+         style="@style/style1"
+        android:background="@drawable/spinner_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        style="@style/style1"
         android:layout_gravity="center_horizontal"
-        android:duplicateParentState="false"
-      android:textColor="#4F2F4F"
+        android:textColor="#4F2F4F"
         >
-         </Spinner>
+ </Spinner> 
 <CheckedTextView
     android:id="@+id/chkbx2"
     android:layout_width="wrap_content"
@@ -61,32 +48,17 @@ android:layout_height="wrap_content"
     android:text="Time Limit"
      android:textColor="#4F2F4F"
     />
-<!--
-<EditText
-    android:id="@+id/timingperqn"
-    android:layout_width="27dp"
-    android:layout_height="wrap_content"
-    android:background="@android:drawable/editbox_background"
-     android:layout_gravity="center_horizontal"
-    android:ems="10"
-    android:hint="@string/hint1"
-    android:inputType="number"
-    android:maxLength="2"
-    android:padding="2dp"
-    android:layout_marginTop="23dp"
-    android:singleLine="true" 
-   />
--->
  <Spinner
         android:id="@+id/timerslice_spinner"
-       android:textColor="#4F2F4F"
+        style="@style/style1"
+        android:background="@drawable/spinner_background"
+        android:textColor="#4F2F4F"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-         android:layout_gravity="center_horizontal"
-        style="@style/style1"
-      
+        android:layout_gravity="center_horizontal"
+       
         >
-         </Spinner>
+</Spinner>
 <Button
     android:id="@+id/go"
   android:textColor="#4F2F4F"

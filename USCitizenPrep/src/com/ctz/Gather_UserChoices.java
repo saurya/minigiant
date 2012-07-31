@@ -62,7 +62,7 @@ public class Gather_UserChoices extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		 bundle = new Bundle();
+		bundle = new Bundle();
 		bundle = this.getIntent().getExtras();
 		
 	
@@ -71,25 +71,24 @@ public class Gather_UserChoices extends Activity {
 	
 		final Spinner	 questionslice_spinner = (Spinner) findViewById(R.id.questionslice_spinner);
 		final Spinner	 timerslice_spinner = (Spinner) findViewById(R.id.timerslice_spinner);
-		ArrayAdapter qnadapter = new ArrayAdapter(
+        ArrayAdapter<CharSequence> qnadapter = new ArrayAdapter<CharSequence>(
 								this,
 								android.R.layout.simple_spinner_item, 
 								questionslice_size);
 	
-		ArrayAdapter timeadapter = new ArrayAdapter(
+		ArrayAdapter<CharSequence> timeadapter = new ArrayAdapter<CharSequence>(
 								this,
 								android.R.layout.simple_spinner_item, 
 								timerslice_size);
 		
 		qnadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		questionslice_spinner.setBackgroundColor(color.background_dark);
-				questionslice_spinner.setAdapter(qnadapter);questionslice_spinner.setFocusable(true);
-				questionslice_spinner.setVisibility(1);
-
+		questionslice_spinner.setAdapter(qnadapter);
+		questionslice_spinner.setFocusable(true);
+				
 		timeadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		timerslice_spinner.setBackgroundColor(color.background_dark);
-		timerslice_spinner.setAdapter(timeadapter);timerslice_spinner.setFocusable(true);
-		timerslice_spinner.setVisibility(1);
+		timerslice_spinner.setAdapter(timeadapter);
+		timerslice_spinner.setFocusable(true);
+	
 		go_Button = (Button) findViewById(com.ctz.R.id.go);
 		exit_Button = (Button) findViewById(com.ctz.R.id.exit);
 		exit_Button.setOnClickListener(new OnClickListener() {
