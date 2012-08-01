@@ -81,12 +81,12 @@ android:layout_height="wrap_content"
                android:textSize="5pt" />
      -->
   <!--   android:background="@drawable/android_button" -->
-<!-- android:src="@drawable/android_button" -->
+<!-- android:src="@drawable/android_button" 
 
  <android.gesture.GestureOverlayView
     android:id="@+id/gestures"
     android:layout_width="match_parent"
     android:layout_height="0dip"
     android:layout_weight="1.0" />
-
+-->
 </LinearLayout>

@@ -10,9 +10,5 @@
     android:layout_height="wrap_content"
     android:text="Try to draw the gesture"
     />
-<android.gesture.GestureOverlayView
-    android:id="@+id/gestures"
-    android:layout_width="fill_parent"
-    android:layout_height="0dip"
-    android:layout_weight="1.0" />
+
 </LinearLayout>
