@@ -79,7 +79,7 @@ public class USCitizenPrep extends Activity implements OnGesturePerformedListene
 	
 	private String selected_type;
 	private Button go_Button;
-	private Button exit_Button;
+	//private Button exit_Button;
 	
 	private RadioButton radio_prepare_for_interview;
 	private RadioButton radio_test_yourself;
@@ -120,7 +120,7 @@ public class USCitizenPrep extends Activity implements OnGesturePerformedListene
 		radio_test_yourself = (RadioButton) findViewById(com.ctz.R.id.radio_test_yourself);
 		
 		go_Button = (Button) findViewById(com.ctz.R.id.go);
-		exit_Button = (Button) findViewById(com.ctz.R.id.exit);
+		/*exit_Button = (Button) findViewById(com.ctz.R.id.exit);
 		
 		exit_Button.setOnClickListener(new OnClickListener() {
 
@@ -144,7 +144,7 @@ public class USCitizenPrep extends Activity implements OnGesturePerformedListene
 				
 			}
 		});
-		
+		*/
 		go_Button.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
