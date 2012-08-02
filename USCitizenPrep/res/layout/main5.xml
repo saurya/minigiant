@@ -6,32 +6,75 @@
     android:background="@color/anstxt3"
     android:paddingLeft="16dp"
     android:paddingRight="16dp" >
+  <EditText
+    android:id="@+id/scoresLabel"
+    android:layout_width="70dp"
+    android:layout_height="37dp"
+    android:layout_alignParentLeft="true"
+    android:textSize="7pt"
+    android:hint="@string/Score"
+     android:gravity="center"
+    android:focusable="false"
+     android:enabled="false"
+     android:background="@color/anstxt3"
+    />
 
     <TextView
-        android:id="@+id/getAnswerString"
-        android:layout_width="fill_parent"
+        android:id="@+id/scoreField"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_margin="4dip"
-        android:background="#CDB79E"
-        android:scrollbars="vertical"
-        android:textColor="#4F2F4F"
-        android:textSize="9pt" />
- 
+        android:layout_toRightOf="@+id/scoresLabel"
+        android:layout_alignBaseline="@+id/scoresLabel"
+        android:layout_marginRight="44dip"
+        android:hint="@string/reminder3"
+        android:textColor="#000000"
+        android:textSize="7pt" />
+    <View
+          android:id="@+id/emptyView1"
+          android:layout_width="fill_parent"
+           android:layout_marginTop="14dip"
+        android:layout_height="5dip"
+        android:layout_alignLeft="@+id/scoresLabel"
+         android:layout_below="@+id/scoreField"
+        android:background="#8B5742" />
     <TextView
         android:id="@+id/getquestionString"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/getAnswerString"
-        android:layout_alignLeft="@+id/getAnswerString"
+        android:layout_alignLeft="@+id/emptyView1"
+        android:layout_below="@+id/emptyView1"
         android:layout_margin="4dip"
-        android:layout_marginBottom="54dp"
-        android:background="#CDB79E"
-        android:gravity="center_vertical"
+        android:layout_marginTop="25dp"
+      
+        android:gravity="center"
         android:scrollbars="vertical"
-        android:textColor="#4F2F4F"
+        android:textColor="#000000"
+        android:textSize="9pt"
+         />
+  <View
+          android:id="@+id/emptyView2"
+          android:layout_width="fill_parent"
+        android:layout_height="5dip"
+        android:layout_alignLeft="@+id/getquestionString"
+         android:layout_below="@+id/getquestionString"
+        android:background="#8B5742" />
+    <TextView
+        android:id="@+id/getAnswerString"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/getquestionString"
+        android:layout_centerInParent="true"
+        android:layout_margin="4dip"
+        android:layout_marginBottom="59dp"
+        
+        android:scrollbars="vertical"
+        android:textColor="#000000"
         android:textSize="9pt" />
- <View
-        android:layout_height="2dip"
-        android:background="#FF0000" />
+  <View
+          android:id="@+id/emptyView3"
+          android:layout_width="fill_parent"
+        android:layout_height="5dip"
+        android:layout_alignLeft="@+id/getAnswerString"
+         android:layout_below="@+id/getAnswerString"
+        android:background="#8B5742" />  
 </RelativeLayout>
