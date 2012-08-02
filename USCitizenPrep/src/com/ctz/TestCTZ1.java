@@ -143,6 +143,7 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
 				newOnclick(v);
 			}
 		};
+
 		mtimerTextField = (TextView) findViewById(R.id.timerTextField);
 		mbtnclose_normal = (ImageButton) findViewById(R.id.btn_close_normal);
 		mbtn_check_on = (ImageButton) findViewById(R.id.btn_check_on);

@@ -8,18 +8,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.GestureDetector.OnGestureListener;
-import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ctz.SimpleGestureFilter.SimpleGestureListener;
-
 @SuppressLint("NewApi")
-public class PrepNoTimer extends Activity implements OnGestureListener,
-    SimpleGestureListener {
+public class PrepNoTimer extends Activity {
 
 	boolean bingo, done;
 	private GestureDetector gestureScanner;
@@ -29,20 +27,17 @@ public class PrepNoTimer extends Activity implements OnGestureListener,
 	EditText edittext;//
 	private TextView mGetQuestionString;
 	private TextView mgetAnswerString;
-	// private EditText mtimerTextField;
+
 	private TextView mScore;
-	private SimpleGestureFilter detector;
-	int questionnumber;
-	// private Button mnext;
+	private Button mnext;
+	private Button mprev;
 
 	int cnt = 0;
 	int score = 0;
-
-	// private Button mcancel;
+	int questionnumber;
 	int cnt1, ctz_ans, correct_ans;
-	// CountDownTimer runtimer;
+
 	String correctanswerstring;
-	// multiple choice answers display
 
 	final static long seconds_in_milllies = 1000L;
 	final static long minutes_in_millies = seconds_in_milllies * 60;
@@ -55,6 +50,7 @@ public class PrepNoTimer extends Activity implements OnGestureListener,
 	int[] originalQNums = new int[100];
 	ImageButton mbtnclose_normal;
 	TextView mgetReport;
+
 	ImageButton mbtn_check_on;
 	String getansString1 = "";
 	String getansString2 = "";
@@ -63,6 +59,7 @@ public class PrepNoTimer extends Activity implements OnGestureListener,
 	String getAnswerString0 = "";
 	String getquestionString0 = "";// set first question to be displayed
 	String multipleChoiceAnswer = "";
+
 	String getAnswerString = "";
 	String getquestionString = "";// and the next .
 
@@ -94,16 +91,83 @@ public class PrepNoTimer extends Activity implements OnGestureListener,
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		detector = new SimpleGestureFilter(this, this);
+
 		bingo = false;
 		int score = 0;
-		gestureScanner = new GestureDetector(this);
 
 		setContentView(R.layout.main5);// following lines 'must' to follow layout
 		mGetQuestionString = (TextView) findViewById(R.id.getquestionString);
 		mgetAnswerString = (TextView) findViewById(R.id.getAnswerString);
 		mScore = (TextView) findViewById(R.id.scoreField);
+		mnext = (Button) findViewById(com.ctz.R.id.next);
+		mprev = (Button) findViewById(com.ctz.R.id.prev);
+		mprev.setText("<");
 		setDefaultKeyMode(DEFAULT_KEYS_DISABLE);
+		mnext.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+				cnt++;
+				Log.d("Next: ", cnt + "*****************************************");
+				if (cnt > 99) {
+
+					AlertDialog.Builder testscores_dialog_builder = new AlertDialog.Builder(
+					    PrepNoTimer.this);
+					testscores_dialog_builder
+					    .setMessage(
+					        "Congratulations! You just finished Practice of all Questions! ")
+					    .setCancelable(false)
+					    .setPositiveButton("Home", new DialogInterface.OnClickListener() {
+						    public void onClick(DialogInterface dialog, int id) {
+							    PrepNoTimer.this.finish();
+						    }
+					    });
+					testscores_dialog = testscores_dialog_builder.create();
+					testscores_dialog.show();
+				}
+
+				else {
+					getquestionString = getnextqn(cnt);
+					Log.d("Next: ", cnt
+					    + "*****************************************else1");
+					mGetQuestionString.setText(getquestionString);
+					getAnswerString = getnextanswer(cnt);
+					Log.d("Next: ", cnt
+					    + "*****************************************else2");
+					mgetAnswerString.setText(getAnswerString);
+					Log.d("Next: ", cnt
+					    + "*****************************************else3");
+				}
+			}
+		}
+
+		);
+
+		mprev.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+				if (cnt > 99)
+					cnt = 99;
+
+				if (cnt <= 0) {
+
+					cnt = 0;
+					mGetQuestionString.setText(getquestionString0);
+					mgetAnswerString.setText(getAnswerString0);
+				}
+
+				else {
+
+					cnt--;
+					getquestionString = getpreviousqn(cnt);
+					mGetQuestionString.setText(getquestionString);
+					getAnswerString = getpreviousanswer(cnt);
+					mgetAnswerString.setText(getAnswerString);
+				}
+			}
+		}
+
+		);
+
 		Bundle bundle = new Bundle();
 		bundle = this.getIntent().getExtras();
 
@@ -123,31 +187,13 @@ public class PrepNoTimer extends Activity implements OnGestureListener,
 		originalQnumber = originalQNums[0];
 	}
 
-	@Override
-	public boolean dispatchTouchEvent(MotionEvent me) {
-		super.dispatchTouchEvent(me);
-		this.detector.onTouchEvent(me);
-		return super.dispatchTouchEvent(me);
-	}
-
-	public void onDoubleTap() {
-		callrestofthecode();
-
-	}
-
-	public boolean onSingleTapUp() {
-		callrestofthecode();
-
-		return false;
-	}
-
 	public void callrestofthecode() {
 
 		{
 			cnt++;
 			ctz_ans = -1;
 			getquestionString = getnextqn(cnt);
-			if (getquestionString == null) {
+			if (getquestionString.equals("Done!")) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(PrepNoTimer.this);
 				builder
 				    .setMessage(
@@ -169,56 +215,36 @@ public class PrepNoTimer extends Activity implements OnGestureListener,
 		}
 	}
 
-	@Override
-	public boolean onTouchEvent(MotionEvent me) {
-		return gestureScanner.onTouchEvent(me);
+	public String getpreviousqn(int cnt) {
+		if (cnt < 0)
+			cnt = 0;
+		if (cnt > 99)
+			cnt = 99;
+		int qnnumber = cnt;
+		mScore.setText((qnnumber + 1) + "/100");
+		return "Question># " + (qnnumber + 1) + ": " + qnlist[cnt];
 	}
 
-	public boolean onDown(MotionEvent e) {
+	public String getpreviousanswer(int cnt) {
 
-		return false;
-	}
+		return "Answer" + ": " + anslist[cnt];
 
-	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-	    float velocityY) {
-
-		return false;
-	}
-
-	public void onLongPress(MotionEvent e) {
-		return;
-	}
-
-	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
-	    float distanceY) {
-
-		return false;
-	}
-
-	public void onShowPress(MotionEvent e) {
-		return;
-	}
-
-	public boolean onSingleTapUp(MotionEvent e) {
-
-		return true;
 	}
 
 	public String getnextqn(int cnt) {
+		if (cnt < 0)
+			cnt = 0;
+		if (cnt > 99)
+			cnt = 99;
 		int qnnumber = cnt + 1;
-		if (qnnumber > qnlist.length)
-			return null;
-		;
-		mScore.setText(qnnumber + "/100");
-		return "Qusestion# " + qnnumber + ": " + qnlist[cnt];
+
+		mScore.setText((qnnumber) + "/100");
+		return "Qusestion# " + (qnnumber) + ": " + qnlist[cnt];
 	}
 
 	public String getnextanswer(int cnt) {
 		int qnnumber = cnt + 1;
-		if (qnnumber > anslist.length) {
 
-			return null;
-		}
 		return "Answer" + ": " + anslist[cnt];
 
 	}

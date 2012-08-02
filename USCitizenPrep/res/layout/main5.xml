@@ -58,6 +58,7 @@
         android:layout_alignLeft="@+id/getquestionString"
          android:layout_below="@+id/getquestionString"
         android:background="#8B5742" />
+ 
     <TextView
         android:id="@+id/getAnswerString"
         android:layout_width="fill_parent"
@@ -76,5 +77,26 @@
         android:layout_height="5dip"
         android:layout_alignLeft="@+id/getAnswerString"
          android:layout_below="@+id/getAnswerString"
-        android:background="#8B5742" />  
+        android:background="#8B5742" />
+
+  <Button
+      android:id="@+id/next"
+      android:layout_width="50dp"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_centerVertical="true"
+      
+      android:layout_marginTop="161dp"
+      android:text="@string/next"
+      android:textColor="#aa8888bb" />
+
+  <Button
+      android:id="@+id/prev"
+      android:layout_width="50dp"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_alignTop="@+id/next"
+      android:background="@drawable/android_normal"
+      android:textColor="#aa8888bb" />
+  
 </RelativeLayout>
