@@ -17,7 +17,7 @@
         android:scrollbars="vertical"
         android:textColor="#4F2F4F"
         android:textSize="9pt" />
-
+ 
     <TextView
         android:id="@+id/getquestionString"
         android:layout_width="fill_parent"
@@ -31,5 +31,7 @@
         android:scrollbars="vertical"
         android:textColor="#4F2F4F"
         android:textSize="9pt" />
-
+ <View
+        android:layout_height="2dip"
+        android:background="#FF0000" />
 </RelativeLayout>

@@ -9,7 +9,7 @@
 
 <TextView
 android:gravity="center"
-android:text="\nWELCOME \n to \n U.S NATURALIZATION INTERVIEW Practice Test \n\n
+android:text="\n \n U.S NATURALIZATION INTERVIEW Practice Test \n\n
  Please enter the number of questions for your parctice and your expected time in seconds to answer a question, 
  in the boxes below.\n"
  android:textColor="#4F2F4F"
@@ -68,14 +68,5 @@ android:layout_height="wrap_content"
     android:onClick="onButtonClicked"
     android:text="@string/startTest" />
 
-<Button
-    android:id="@+id/exit"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="58dp"
-    android:text="Exit"
-    android:layout_gravity="bottom|right"
-    android:textColorHighlight="#00f"
-    android:textSize="8sp" />
- 
+
 </LinearLayout>

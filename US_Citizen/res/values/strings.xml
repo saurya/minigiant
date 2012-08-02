@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="hello">Hello World, USCitizen!</string>
-    <string name="app_name">USCitizenship application</string>
-    <string name="startTest">Starting Test Now</string>
-   
-</resources>

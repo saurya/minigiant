@@ -1,5 +1,7 @@
 package com.ctz;
 
+import java.util.Calendar;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -181,7 +183,7 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
 	public void onBackPressed() {
 		if (cnt < userselectQns) {
 			testscores_dialog_builder = new AlertDialog.Builder(TestCTZ1.this);
-			testscores_dialog_builder.setMessage("Exiting the test!Are you sure?")
+			testscores_dialog_builder.setMessage("Exiting the test! Are you sure?")
 			    .setCancelable(false)
 			    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 				    public void onClick(DialogInterface dialog, int id) {
@@ -282,6 +284,9 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
 			}
 			if (cnt == userselectQns || cnt == justfound) {
 				decideVisibility(true);
+				Calendar c = Calendar.getInstance();
+				int seconds = c.get(Calendar.SECOND);
+
 				mgetReport.setText(getreportString());
 				mgetReport.setVisibility(View.VISIBLE);
 			} else {
@@ -297,13 +302,15 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
 	}
 
 	public String getreportString() {
-		return (" Scores Based On Self-Evaluation: " + "\n"
-		    + "Total Questions Available From  Website: \n 100" + "\n"
-		    + "Number of Questions I selected in random fashion \n" + userselectQns
-		    + "\n" + "Time I allocated to answer each Question " + "\n"
-		    + userselecttiming + "seconds \n" + "I know answers for: " + "\n"
-		    + score + "\n" + "I Missed answers for: " + "\n"
-		    + (userselectQns - score) + " Questions\n");
+		return ("\n\n\n" + "   Scores Based On Self-Evaluation " + "\n\n\n"
+		    + "Questions Prescribed On Website:  100" + "\n\n"
+		    + "Number of Questions I selected in random fashion:  " + userselectQns
+		    + "\n\n" + "Time per Question: " + userselecttiming + " seconds \n\n"
+		    + "I know answers for: " + score + " Question(s)\n\n"
+		    + "I Missed answers for: " + (userselectQns - score) + " Question(s)\n\n")
+		    + "Comment:\n\n In the actual test you are required to get answers for 5 to 6 questions right out of 10."
+		    + " Real Test does not involve any time factor "
+		    + " Visit Official website for more details.";
 	}
 
 	public void decideVisibility(boolean hide) {
