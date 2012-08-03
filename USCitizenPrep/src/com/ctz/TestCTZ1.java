@@ -210,7 +210,7 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
 
 			}
 
-			mToast.setText("Starting Next Round" + begin + "to" + end);
+			mToast.setText("Next Round: " + begin + "to" + end);
 			mToast.show();
 			cnt = 0;
 			score = 0;

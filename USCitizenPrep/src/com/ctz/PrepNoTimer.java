@@ -180,7 +180,7 @@ public class PrepNoTimer extends Activity {
 		Log.d("length: ", qnlist.length + ">*>*>&>*>&>*>&>*>&*>&>*>&>&*&"
 		    + anslist.length);
 		getAnswerString0 = anslist[begin];
-		getquestionString0 = "Question# 1: " + qnlist[begin];// first question
+		getquestionString0 = "Q: " + qnlist[begin];// first question
 		mGetQuestionString.setText(getquestionString0);
 		mgetAnswerString.setText(getAnswerString0);
 		currentdisplay = 0;
@@ -222,12 +222,12 @@ public class PrepNoTimer extends Activity {
 			cnt = 99;
 		int qnnumber = cnt;
 		mScore.setText((qnnumber + 1) + "/100");
-		return "Question># " + (qnnumber + 1) + ": " + qnlist[cnt];
+		return "Q: " + (qnnumber + 1) + ": " + qnlist[cnt];
 	}
 
 	public String getpreviousanswer(int cnt) {
 
-		return "Answer" + ": " + anslist[cnt];
+		return "A: " + ": " + anslist[cnt];
 
 	}
 
@@ -245,7 +245,7 @@ public class PrepNoTimer extends Activity {
 	public String getnextanswer(int cnt) {
 		int qnnumber = cnt + 1;
 
-		return "Answer" + ": " + anslist[cnt];
+		return "A: " + anslist[cnt];
 
 	}
 

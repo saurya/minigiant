@@ -49,7 +49,7 @@ public class USCitizenPrep extends Activity implements
 	HashMap<String, String> currentgovernors;
 	ArrayList<String> questions_list, answers_list;
 	static int positionprev = 0;
-
+	String[] states = new String[50];
 	static int question_bank_size = 100;
 	static String[] allquestions = new String[question_bank_size];
 	static String[] allanswers = new String[question_bank_size];
@@ -94,7 +94,7 @@ public class USCitizenPrep extends Activity implements
 		answers_list = new ArrayList<String>();
 		final Spinner spinner = (Spinner) findViewById(R.id.state_spinner);
 		ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this,
-		    android.R.layout.simple_spinner_item, statenames);
+		    android.R.layout.simple_spinner_item, states);
 
 		adapter
 		    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -159,7 +159,7 @@ public class USCitizenPrep extends Activity implements
 							Object[] ansobarr = answers_list.toArray();
 							for (int i = 0; i < questions_list.size(); i++) {
 								qns[i] = (String) qnobarr[i];// (String[])
-																						 // questions_list.toArray()
+								                             // questions_list.toArray()
 								ans[i] = (String) ansobarr[i];
 							}
 							qnbundle.putIntArray("originalQNums", randoms);
@@ -360,7 +360,7 @@ public class USCitizenPrep extends Activity implements
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		String[] states = new String[50];
+		states = new String[50];
 
 		Iterator<String> it = statenabbrevs.keySet().iterator();
 		int cntr = -1;
@@ -369,6 +369,7 @@ public class USCitizenPrep extends Activity implements
 			String s = it.next();
 			statenames[cntr] = s;
 			states[cntr] = statenabbrevs.get(s);
+
 		}
 		for (int i = 0; i < 50; i++)
 			System.out.println(states[i].toString());

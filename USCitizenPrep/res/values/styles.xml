@@ -8,12 +8,11 @@
  </style>
 
  <style name="style1" parent="android:style/Widget.Holo.Light.Spinner">
-<item name="android:layout_width">wrap_content</item>
- <item name="android:layout_height">wrap_content</item>    
+<item name="android:layout_width">fill_parent</item>
+ <item name="android:layout_height">fill_parent</item>    
 <item  name="android:layout_gravity">center|center_horizontal</item>
  <item name="android:textSize">4pt</item>
-       <item name="android:dropDownSelector">#8B5742</item>
-       <item name="android:popupBackground">#8B5742</item>
+      
       <item name="android:orientation">vertical</item>
        
   </style>

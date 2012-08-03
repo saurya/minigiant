@@ -9,8 +9,7 @@
 <TextView
 android:gravity="center"
 android:text=" U.S NATURALIZATION INTERVIEW PREPARATION \n\n
- Some answers depend on your state and county. 
- Please click here to select your state. \n"
+ Some answers depend on your location. Please click here to select your state. \n"
 
 android:layout_margin="4dip"
 android:layout_width="fill_parent"
@@ -19,14 +18,15 @@ android:layout_height="wrap_content"
 <!--  style="?android:attr/spinnerItemStyle"--> 
  <Spinner
         android:id="@+id/state_spinner"
-         style="@style/style1"
-        android:background="@drawable/spinner_background"
+         
+        android:background="@drawable/spinner"
         
         android:layout_height="wrap_content" 
         android:layout_gravity="center_horizontal"
         android:textColor="#4F2F4F"
-        android:layout_width="?android:attr/listPreferredItemHeight"
+        android:layout_width="wrap_content" 
         >
+        <!-- android:layout_width= "?android:attr/listPreferredItemHeight" -->
  </Spinner> 
  
     

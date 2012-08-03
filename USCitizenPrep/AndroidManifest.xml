@@ -11,23 +11,29 @@
         android:label="@string/app_name" android:debuggable="true" >
 
      
-             <activity android:name=".USCitizenPrep"   >
+             <activity android:name=".USCitizenPrep"   android:configChanges="orientation"
+    android:screenOrientation="portrait" >
                  
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
                  </intent-filter>
               </activity>
-              <activity android:name=".US_CitizenActivity">
+              <activity android:name=".US_CitizenActivity"  android:configChanges="orientation"
+    android:screenOrientation="portrait">
                       </activity>
-                       <activity android:name=".TestCTZ1"   >
+                       <activity android:name=".TestCTZ1"    android:configChanges="orientation"
+    android:screenOrientation="portrait">
                            </activity>
- <activity android:name=".GestBuildActivity">
+ <activity android:name=".GestBuildActivity"   android:configChanges="orientation"
+    android:screenOrientation="portrait">
                       </activity>
-                        <activity  android:name=".Gather_UserChoices">
+                        <activity  android:name=".Gather_UserChoices" android:configChanges="orientation"
+    android:screenOrientation="portrait">
                       </activity>
                       
-                      <activity android:name=".PrepNoTimer">
+                      <activity android:name=".PrepNoTimer" android:configChanges="orientation"
+    android:screenOrientation="portrait">
                       </activity> 
                        
                        
