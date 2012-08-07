@@ -14,6 +14,7 @@
     android:layout_width="70dp"
     android:layout_height="37dp"
     android:layout_alignParentLeft="true"
+    android:layout_marginRight="10dip"
     android:textSize="7pt"
     android:hint="@string/Score"
      android:gravity="center"
@@ -28,10 +29,10 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/scoresLabel"
         android:layout_alignBaseline="@+id/scoresLabel"
-        android:layout_marginRight="44dip"
+       
         android:hint="@string/reminder1"
         android:textColor="#000000"
-        android:textSize="7pt" />
+        android:textSize="9pt" />
 
     <TextView
         android:id="@+id/timerTextField"
@@ -42,7 +43,7 @@
         android:gravity="center"
         android:hint="@string/reminder2"
         android:textColor="#000000"
-        android:textSize="7pt" />
+        android:textSize="9pt" />
  <EditText
     android:id="@+id/timerLabel"
     android:layout_width="70dp"
@@ -105,28 +106,47 @@
         android:layout_alignLeft="@+id/getAnswerString"
          android:layout_below="@+id/getAnswerString"
         android:background="#8B5742" />  
-<ImageButton
+        
+  
+  
+  <ImageView android:id="@+id/btn_check_on_disabled" 
+      
+      android:clickable="false" 
+      android:textColor="#999999" 
+      android:visibility="gone" 
+      android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="107dp"
+            android:layout_alignParentBottom="true"
+        
+            android:src="@drawable/btn_check_on_disabled"
+          >
+      
+  </ImageView>
+<ImageView
             android:id="@+id/btn_check_on"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:layout_marginRight="17dp"
+            android:layout_marginLeft="107dp"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
+        
             android:src="@drawable/btn_check_on"
             android:onClick="newOnclick"
             android:textColor="#4F2F4F"
              />
-    <ImageButton
+
+   <ImageView
         android:id="@+id/btn_close_normal"
         android:layout_width="55dp"
         android:layout_height="55dp"
+        android:layout_marginRight="27dp"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/btn_check_on"
         android:onClick="newOnclick2"
         android:layout_marginLeft="17dp"
         android:src="@drawable/btn_close_normal"
         android:textColor="#4F2F4F" />
->  
+
 
     <TextView
         android:id="@+id/getReport"

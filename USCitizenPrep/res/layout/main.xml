@@ -39,11 +39,13 @@ android:layout_height="wrap_content"
            android:textColor="#4F2F4F"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:layout_marginTop="20dp"
           android:text="Prepare For The Test" />
       <RadioButton android:id="@+id/radio_test_yourself"
           android:textColor="#4F2F4F"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+           android:layout_marginTop="20dp"
           android:text="Take Practice Test now" />      
     </RadioGroup>
 
@@ -62,7 +64,7 @@ android:layout_height="wrap_content"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:layout_gravity="center"
-               android:layout_marginTop="10dp"
+               android:layout_marginTop="22dp"
                android:onClick="onButtonClicked"
                android:text="@string/Next"
                android:textColor="#4F2F4F"
