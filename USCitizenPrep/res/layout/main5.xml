@@ -71,6 +71,33 @@
         android:scrollbars="vertical"
         android:textColor="#000000"
         android:textSize="9pt" />
+    
+   
+ <Button
+android:id="@+id/multipleAns"
+android:text="Show All Acceptable Answers"
+ android:layout_below="@+id/getAnswerString"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:onClick="addItems"
+/>
+
+<ListView
+android:id="@android:id/list"
+android:layout_below="@+id/multipleAns"
+android:layout_width="wrap_content"
+android:headerDividersEnabled="true"
+android:footerDividersEnabled="true"
+android:background="#aaa000"
+android:layout_weight="2"
+android:drawSelectorOnTop="false"
+    android:layout_height="wrap_content"
+    android:divider="#FFCC00"
+    android:dividerHeight="14.5sp"/>
+
+
+
+    
   <View
           android:id="@+id/emptyView3"
           android:layout_width="fill_parent"

@@ -64,9 +64,9 @@ public final class R {
         public static final int spinner_select=0x7f020014;
     }
     public static final class id {
-        public static final int btn_check_on=0x7f090014;
+        public static final int btn_check_on=0x7f090015;
         public static final int btn_check_on_disabled=0x7f090013;
-        public static final int btn_close_normal=0x7f090015;
+        public static final int btn_close_normal=0x7f090014;
         public static final int checkedTextView1=0x7f090018;
         public static final int chkbx2=0x7f09001a;
         public static final int emptyView1=0x7f09000e;
@@ -80,8 +80,9 @@ public final class R {
         public static final int image=0x7f090001;
         public static final int layout_root=0x7f090000;
         public static final int list_content=0x7f090003;
-        public static final int next=0x7f09001c;
-        public static final int prev=0x7f09001d;
+        public static final int multipleAns=0x7f09001c;
+        public static final int next=0x7f09001d;
+        public static final int prev=0x7f09001e;
         public static final int questionslice_spinner=0x7f090019;
         public static final int radio_prepare_for_interview=0x7f090005;
         public static final int radio_senior_prepare_for_interview=0x7f090007;

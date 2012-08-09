@@ -1,5 +1,6 @@
 package com.ctz;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.annotation.SuppressLint;
@@ -16,8 +17,10 @@ import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,9 +39,14 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
   EditText edittext;//
   private TextView mGetQuestionString;
   private TextView mgetAnswerString;
+  private ListView mlistView;
   private TextView mtimerTextField;
   private TextView mScore;
+  // LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
+  ArrayList<String> multipleAnswersItems = new ArrayList<String>();
 
+  // DEFINING STRING ADAPTER WHICH WILL HANDLE DATA OF LISTVIEW
+  ArrayAdapter<String> adapter;
   int questionnumber, current_Qn_length;
   int cnt = 0;
   int score = 0;
@@ -351,6 +359,7 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
     mgetReport = (TextView) findViewById(R.id.getReport);
     mGetQuestionString = (TextView) findViewById(R.id.getquestionString);
     mgetAnswerString = (TextView) findViewById(R.id.getAnswerString);
+
     mScore = (TextView) findViewById(R.id.scoreField);
 
     myListener = new View.OnClickListener() {
@@ -451,4 +460,5 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
   public boolean onTouchEvent(MotionEvent me) {
     return gestureScanner.onTouchEvent(me);
   }
+
 }
