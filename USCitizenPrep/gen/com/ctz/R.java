@@ -67,34 +67,39 @@ public final class R {
         public static final int btn_check_on=0x7f090015;
         public static final int btn_check_on_disabled=0x7f090013;
         public static final int btn_close_normal=0x7f090014;
-        public static final int checkedTextView1=0x7f090018;
-        public static final int chkbx2=0x7f09001a;
+        public static final int checkedTextView1=0x7f09001b;
+        public static final int chkbx2=0x7f09001d;
         public static final int emptyView1=0x7f09000e;
         public static final int emptyView2=0x7f090010;
         public static final int emptyView3=0x7f090012;
-        public static final int gestures=0x7f090017;
+        public static final int gestures=0x7f09001a;
         public static final int getAnswerString=0x7f090011;
-        public static final int getReport=0x7f090016;
+        public static final int getReport=0x7f090019;
         public static final int getquestionString=0x7f09000f;
         public static final int go=0x7f090008;
         public static final int image=0x7f090001;
+        public static final int latelabel=0x7f090016;
         public static final int layout_root=0x7f090000;
         public static final int list_content=0x7f090003;
-        public static final int multipleAns=0x7f09001c;
-        public static final int next=0x7f09001d;
-        public static final int prev=0x7f09001e;
-        public static final int questionslice_spinner=0x7f090019;
+        public static final int multipleAns=0x7f09001f;
+        public static final int next=0x7f090020;
+        public static final int prev=0x7f090021;
+        public static final int questionslice_spinner=0x7f09001c;
         public static final int radio_prepare_for_interview=0x7f090005;
         public static final int radio_senior_prepare_for_interview=0x7f090007;
         public static final int radio_test_yourself=0x7f090006;
+        public static final int rightlabel=0x7f090017;
         public static final int scoreField=0x7f09000b;
         public static final int scoresLabel=0x7f09000a;
         public static final int state_spinner=0x7f090004;
         public static final int text=0x7f090002;
+        public static final int textView1=0x7f090022;
+        public static final int textView2=0x7f090023;
         public static final int timerLabel=0x7f09000d;
         public static final int timerTextField=0x7f09000c;
-        public static final int timerslice_spinner=0x7f09001b;
+        public static final int timerslice_spinner=0x7f09001e;
         public static final int totalView=0x7f090009;
+        public static final int wronglabel=0x7f090018;
     }
     public static final class layout {
         public static final int custom_dialog=0x7f030000;
@@ -107,6 +112,7 @@ public final class R {
         public static final int main3=0x7f030007;
         public static final int main4=0x7f030008;
         public static final int main5=0x7f030009;
+        public static final int right=0x7f03000a;
     }
     public static final class raw {
         public static final int allanswers=0x7f050000;

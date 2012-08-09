@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/totalView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/anstxt3"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" 
+    android:textSize="9pt"
+    >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="37dp"
+        android:layout_marginLeft="35dp"
+        android:text="I Got It Right" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="14dp"
+        android:text="I don&apos;t know" />
+       
+</RelativeLayout>

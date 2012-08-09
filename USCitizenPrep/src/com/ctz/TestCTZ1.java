@@ -11,7 +11,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
@@ -40,6 +39,7 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
   private TextView mGetQuestionString;
   private TextView mgetAnswerString;
   private ListView mlistView;
+  private TextView mrightlabel, mlatelabel, mwronglabel;
   private TextView mtimerTextField;
   private TextView mScore;
   // LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
@@ -146,6 +146,8 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
       @Override
       public void onFinish() {
         mtimerTextField.setText("done!");
+        mrightlabel.setVisibility(View.GONE);
+        mlatelabel.setVisibility(View.VISIBLE);
         i_got_it = false;
         mgetAnswerString.setVisibility(View.VISIBLE);
         mbtnclose_normal.setVisibility(View.VISIBLE);
@@ -154,11 +156,13 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
           // mbtn_check_on.setOnClickListener(null);
           mbtn_check_on.setEnabled(false);
           mbtn_check_on_disabled.setVisibility(View.VISIBLE);
-        }
-        // mToast.setText("Sorry, time is up!");
+          mrightlabel.setVisibility(View.GONE);
+          mwronglabel.setVisibility(View.VISIBLE);
+          mlatelabel.setVisibility(View.VISIBLE);
 
-        // mToast.show();
-        mbtn_check_on_disabled.setVisibility(View.VISIBLE);
+        }
+
+        // mbtn_check_on_disabled.setVisibility(View.VISIBLE);
       }
 
       @Override
@@ -178,6 +182,9 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
       mgetAnswerString.setVisibility(View.GONE);
       mGetQuestionString.setVisibility(View.GONE);
       mtimerTextField.setVisibility(View.GONE);
+      // mrightlabel.setVisibility(View.GONE);
+      // mwronglabel.setVisibility(View.GONE);
+      // mlatelabel.setVisibility(View.GONE);
 
     } else {
       mgetAnswerString.setVisibility(View.VISIBLE);
@@ -190,9 +197,7 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
       // mbtn_check_on.setOnClickListener(myListener);
       mbtn_check_on.setClickable(true);
       mbtnclose_normal.setClickable(true);
-      Log.d("status5 ",
-          "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-              + mbtn_check_on.getVisibility());
+
     }
   }
 
@@ -368,17 +373,26 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
       }
     };
 
+    mrightlabel = (TextView) findViewById(R.id.rightlabel);
+    mlatelabel = (TextView) findViewById(R.id.latelabel);
+    mwronglabel = (TextView) findViewById(R.id.wronglabel);
+
     mtimerTextField = (TextView) findViewById(R.id.timerTextField);
     mbtnclose_normal = (ImageView) findViewById(R.id.btn_close_normal);
     mbtn_check_on = (ImageView) findViewById(R.id.btn_check_on);
     mbtn_check_on_disabled = (ImageView) findViewById(R.id.btn_check_on_disabled);
+
     mbtn_check_on_disabled.setOnClickListener(null);
     mbtn_check_on.setOnClickListener(myListener);
     mGetQuestionString.setText(getquestionString0);
     mgetAnswerString.setVisibility(View.GONE);
+
     mbtnclose_normal.setVisibility(View.GONE);
     mbtn_check_on.setVisibility(View.GONE);
     mgetReport.setVisibility(View.GONE);
+    mwronglabel.setVisibility(View.GONE);
+    mlatelabel.setVisibility(View.GONE);
+    mrightlabel.setVisibility(View.GONE);
 
     calltimer(PreferenceManager.getDefaultSharedPreferences(this));
     mgetAnswerString.setText(getAnswerString0);
@@ -408,9 +422,9 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
     mbtn_check_on.setVisibility(View.VISIBLE);
     mbtnclose_normal.setClickable(true);
     mbtn_check_on.setClickable(true);
-    Log.d("status3 ",
-        "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-            + mbtn_check_on.getVisibility());
+    mrightlabel.setVisibility(View.VISIBLE);
+    mwronglabel.setVisibility(View.VISIBLE);
+    mlatelabel.setVisibility(View.GONE);
     return;
   }
 
@@ -433,9 +447,9 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
     mbtn_check_on.setVisibility(View.VISIBLE);
     mbtnclose_normal.setClickable(true);
     mbtn_check_on.setClickable(true);
-    Log.d("status2 ",
-        "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-            + mbtn_check_on.getVisibility());
+    mrightlabel.setVisibility(View.VISIBLE);
+    mwronglabel.setVisibility(View.VISIBLE);
+    mlatelabel.setVisibility(View.GONE);
     return true;
   }
 
@@ -449,9 +463,9 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
     // mbtn_check_on.setOnClickListener(myListener);
     mbtnclose_normal.setClickable(true);
     mbtn_check_on.setClickable(true);
-    Log.d("status4 ",
-        "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-            + mbtn_check_on.getVisibility());
+    mrightlabel.setVisibility(View.VISIBLE);
+    mwronglabel.setVisibility(View.VISIBLE);
+    mlatelabel.setVisibility(View.GONE);
     return true;
 
   }

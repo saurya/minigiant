@@ -124,18 +124,52 @@
           >
       
   </ImageView>
+ 
 <ImageView
             android:id="@+id/btn_check_on"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_marginLeft="127dp"
-           android:layout_above="@+id/btn_close_normal"
+            android:layout_above="@+id/btn_close_normal"
         
             android:src="@drawable/btn_check_on"
             android:onClick="newOnclick"
             android:textColor="#4F2F4F"
              />
 
+
+<TextView
+        android:id="@+id/latelabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:visibility="gone" 
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="67dp"
+        android:layout_marginLeft="35dp"
+        android:text="I Got It late!" />
+   <TextView
+        android:id="@+id/rightlabel"
+         android:visibility="gone" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="67dp"
+        android:layout_marginLeft="35dp"
+        android:text="I Got It Right" />
+
+
+    <TextView
+        android:id="@+id/wronglabel"
+         android:visibility="gone" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/btn_close_normal"
+        android:layout_alignParentBottom="true"
+       android:layout_marginLeft="35dp"
+        android:text="I don't know" />
+       
    <ImageView
         android:id="@+id/btn_close_normal"
         android:layout_width="55dp"

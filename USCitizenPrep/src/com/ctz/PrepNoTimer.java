@@ -27,9 +27,9 @@ import android.widget.Toast;
 public class PrepNoTimer extends ListActivity {
   static Set multansqnnums = new HashSet(Arrays.asList(new String[] { "1", "3",
       "5", "7", "8", "11", "12", "13", "15", "24", "27", "28", "35", "36",
-      "40", "41", "47", "48", "49", "50", "51", "52", "54", "56", "57", "60",
-      "63", "64", "66", "67", "70", "71", "72", "73", "74", "75", "76", "77",
-      "84", "86", "92", "94", "95", "96", "99" }));
+      "40", "41", "47", "48", "49", "50", "51", "52", "54", "56", "57", "58",
+      "59", "60", "63", "64", "66", "67", "70", "71", "72", "73", "74", "75",
+      "76", "77", "84", "86", "87", "90", "91", "92", "94", "95", "96", "99" }));
   boolean bingo, done;
   // set the answerlist array element to this string for
   // tokenizing and displaying a dropdown listview of
@@ -104,6 +104,7 @@ public class PrepNoTimer extends ListActivity {
   ArrayList<String> multipleAnswerslist = new ArrayList<String>();
 
   public void addItems(View v) {
+    mmultipleanswerlist.setVisibility(View.GONE);
     addItemscalled = true;
     if (addItemscalled)
       adapter.clear();
@@ -142,12 +143,16 @@ public class PrepNoTimer extends ListActivity {
       getAnswerString = getnextanswer(cnt);
 
       if (multansqnnums.contains(cnt + "")) {
+        if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
+          mmultipleanswerlist.setVisibility(View.GONE);
+        mmultipleanswerlist.setVisibility(View.GONE);
+        mmultipleAns.setVisibility(View.GONE);
         mmultipleAns.setVisibility(View.VISIBLE);
         int till = getAnswerString.indexOf("*");
         mgetAnswerString.setText(getAnswerString.substring(0, till));
       } else {
         mmultipleAns.setVisibility(View.GONE);
-
+        mmultipleanswerlist.setVisibility(View.GONE);
         mgetAnswerString.setVisibility(View.VISIBLE);
         mgetAnswerString.setText(getAnswerString);
       }
@@ -241,10 +246,12 @@ public class PrepNoTimer extends ListActivity {
           mGetQuestionString.setText(getquestionString);
           getAnswerString = getnextanswer(cnt);
           if (multansqnnums.contains(cnt + "")) {
+            if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
+              mmultipleanswerlist.setVisibility(View.GONE);
             mmultipleAns.setVisibility(View.VISIBLE);
             // mmultipleanswerlist.setVisibility(View.VISIBLE);
             int till = getAnswerString.indexOf("*");
-            mgetAnswerString.setText(getAnswerString.substring(0, till - 1));
+            mgetAnswerString.setText(getAnswerString.substring(0, till));
           } else {
             mmultipleanswerlist.setVisibility(View.GONE);
             mmultipleAns.setVisibility(View.GONE);
@@ -278,6 +285,8 @@ public class PrepNoTimer extends ListActivity {
           mGetQuestionString.setText(getquestionString);
           getAnswerString = getpreviousanswer(cnt);
           if (multansqnnums.contains(cnt + "")) {
+            if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
+              mmultipleanswerlist.setVisibility(View.GONE);
             mmultipleAns.setVisibility(View.VISIBLE);
             // mmultipleanswerlist.setVisibility(View.VISIBLE);
             int till = getAnswerString.indexOf("*");
