@@ -5,31 +5,28 @@
     android:layout_height="fill_parent"
     android:background="@color/anstxt3"
     android:paddingLeft="16dp"
-    android:paddingRight="16dp" 
-    android:textSize="9pt"
-    >
+    android:paddingRight="16dp"
+    android:textSize="9pt" >
 
     <EditText
-    android:id="@+id/scoresLabel"
-    android:layout_width="70dp"
-    android:layout_height="37dp"
-    android:layout_alignParentLeft="true"
-    android:layout_marginRight="10dip"
-    android:textSize="7pt"
-    android:hint="@string/Score"
-     android:gravity="center"
-    android:focusable="false"
-     android:enabled="false"
-     android:background="@color/anstxt3"
-    />
+        android:id="@+id/scoresLabel"
+        android:layout_width="70dp"
+        android:layout_height="37dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="10dip"
+        android:background="@color/anstxt3"
+        android:enabled="false"
+        android:focusable="false"
+        android:gravity="center"
+        android:hint="@string/Score"
+        android:textSize="7pt" />
 
     <TextView
         android:id="@+id/scoreField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/scoresLabel"
         android:layout_alignBaseline="@+id/scoresLabel"
-       
+        android:layout_toRightOf="@+id/scoresLabel"
         android:hint="@string/reminder1"
         android:textColor="#000000"
         android:textSize="9pt" />
@@ -38,34 +35,36 @@
         android:id="@+id/timerTextField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignBaseline="@+id/scoresLabel"
+        android:layout_alignParentRight="true"
         android:gravity="center"
         android:hint="@string/reminder2"
         android:textColor="#000000"
         android:textSize="9pt" />
- <EditText
-    android:id="@+id/timerLabel"
-    android:layout_width="70dp"
-    android:layout_height="37dp"
-     android:layout_marginLeft="20dip"
-     android:layout_toRightOf="@+id/scoreField"
-     android:layout_alignBaseline="@+id/scoreField"
-    android:textSize="7pt"
-    android:hint="@string/timer"
-     android:gravity="center"
-    android:focusable="false"
-     android:enabled="false"
-     android:background="@color/anstxt3"
-    />
-     <View
-          android:id="@+id/emptyView1"
-          android:layout_width="fill_parent"
-           android:layout_marginTop="14dip"
+
+    <EditText
+        android:id="@+id/timerLabel"
+        android:layout_width="70dp"
+        android:layout_height="37dp"
+        android:layout_alignBaseline="@+id/scoreField"
+        android:layout_marginLeft="20dip"
+        android:layout_toRightOf="@+id/scoreField"
+        android:background="@color/anstxt3"
+        android:enabled="false"
+        android:focusable="false"
+        android:gravity="center"
+        android:hint="@string/timer"
+        android:textSize="7pt" />
+
+    <View
+        android:id="@+id/emptyView1"
+        android:layout_width="fill_parent"
         android:layout_height="5dip"
         android:layout_alignLeft="@+id/scoresLabel"
-         android:layout_below="@+id/scoreField"
+        android:layout_below="@+id/scoreField"
+        android:layout_marginTop="14dip"
         android:background="#8B5742" />
+
     <TextView
         android:id="@+id/getquestionString"
         android:layout_width="fill_parent"
@@ -74,19 +73,19 @@
         android:layout_below="@+id/emptyView1"
         android:layout_margin="4dip"
         android:layout_marginTop="25dp"
-      
         android:gravity="center"
         android:scrollbars="vertical"
         android:textColor="#000000"
-        android:textSize="9pt"
-         />
-  <View
-          android:id="@+id/emptyView2"
-          android:layout_width="fill_parent"
+        android:textSize="9pt" />
+
+    <View
+        android:id="@+id/emptyView2"
+        android:layout_width="fill_parent"
         android:layout_height="5dip"
         android:layout_alignLeft="@+id/getquestionString"
-         android:layout_below="@+id/getquestionString"
+        android:layout_alignTop="@+id/getReport"
         android:background="#8B5742" />
+
     <TextView
         android:id="@+id/getAnswerString"
         android:layout_width="fill_parent"
@@ -95,105 +94,117 @@
         android:layout_centerInParent="true"
         android:layout_margin="4dip"
         android:layout_marginBottom="59dp"
-        
         android:scrollbars="vertical"
         android:textColor="#000000"
         android:textSize="9pt" />
-  <View
-          android:id="@+id/emptyView3"
-          android:layout_width="fill_parent"
+
+    <View
+        android:id="@+id/emptyView3"
+        android:layout_width="fill_parent"
         android:layout_height="5dip"
         android:layout_alignLeft="@+id/getAnswerString"
-         android:layout_below="@+id/getAnswerString"
-        android:background="#8B5742" />  
-        
-  
-  
-  <ImageView android:id="@+id/btn_check_on_disabled" 
-      
-      android:clickable="false" 
-      android:textColor="#999999" 
-      android:visibility="gone" 
-      android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginLeft="127dp"
-      
-           android:layout_above="@+id/btn_close_normal"
-        
-            android:src="@drawable/btn_check_on_disabled"
-          >
-      
-  </ImageView>
- 
+        android:layout_below="@+id/getAnswerString"
+        android:background="#8B5742" />
+<!--  
+    <Button
+        android:id="@+id/btn_check_on_disabled"
+        android:visibility="gone"
+        android:layout_width="95dp"
+        android:layout_height="55dp"
+        android:layout_above="@+id/btn_close_normal"
+        android:layout_toLeftOf="@+id/timerTextField"
+       
+        android:text="I got it late!!"
+      android:background="@drawable/rounded_buttonstates"
+        android:clickable="false"
+        android:src="@drawable/btn_check_on_disabled"
+        android:textColor="#999999"
+         />
+-->
 <ImageView
-            android:id="@+id/btn_check_on"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginLeft="127dp"
-            android:layout_above="@+id/btn_close_normal"
-        
-            android:src="@drawable/btn_check_on"
-            android:onClick="newOnclick"
-            android:textColor="#4F2F4F"
-             />
+     android:id="@+id/btn_check_on_disabled"
+        android:layout_width="155dp"
+        android:layout_height="55dp"
+        android:onClick="newOnclick"
+         android:visibility="gone"
+        android:src="@drawable/btn_check_on_disabled"
+      android:layout_above="@+id/btn_close_normal"
+        android:layout_toLeftOf="@+id/timerTextField"
+        />
+
+<TextView
+    android:id="@+id/disabled_ViewText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+     
+    android:layout_alignLeft="@+id/btn_check_on_disabled"
+    android:layout_alignTop="@+id/btn_check_on_disabled"
+    android:visibility="gone"
+    android:layout_alignBottom="@+id/btn_check_on"
+    android:layout_margin="1dp"
+    android:gravity="center"
+      android:text="oops!        "
+    android:textColor="#000000" />
+   <ImageView
+        android:id="@+id/btn_close_normal"
+        android:layout_width="35dp"
+        android:layout_height="55dp"
+         android:onClick="newOnclick2"
+          android:src="@drawable/btn_close_normal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="52dp"
+        android:layout_centerHorizontal="true"     
+         android:layout_marginTop="10dp"
+         
+        />
+
+   <TextView
+    android:id="@+id/wrongViewText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+     android:visibility="gone"
+    android:layout_alignRight="@+id/btn_close_normal"
+    android:layout_alignTop="@+id/btn_close_normal"
+    
+    android:layout_alignBottom="@+id/btn_close_normal"
+    android:layout_margin="1dp"
+    android:gravity="center"
+     android:text="I don't know!        "
+    android:textColor="#000000" />
+   
+   
+<ImageView
+     android:id="@+id/btn_check_on"
+        android:layout_width="155dp"
+        android:layout_height="55dp"
+        android:onClick="newOnclick"
+        android:src="@drawable/btn_check_on"
+      android:layout_above="@+id/btn_close_normal"
+        android:layout_toLeftOf="@+id/timerTextField"
+        />
+
+<TextView
+    android:id="@+id/rightViewText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+     
+    android:layout_alignLeft="@+id/btn_check_on"
+    android:layout_alignTop="@+id/btn_check_on"
+    android:visibility="gone"
+    android:layout_alignBottom="@+id/btn_check_on"
+    android:layout_margin="1dp"
+    android:gravity="center"
+      android:text="I got it!        "
+    android:textColor="#000000" />
 
 
 <TextView
-        android:id="@+id/latelabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-         android:visibility="gone" 
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="67dp"
-        android:layout_marginLeft="35dp"
-        android:text="I Got It late!" />
-   <TextView
-        android:id="@+id/rightlabel"
-         android:visibility="gone" 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="67dp"
-        android:layout_marginLeft="35dp"
-        android:text="I Got It Right" />
-
-
-    <TextView
-        android:id="@+id/wronglabel"
-         android:visibility="gone" 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/btn_close_normal"
-        android:layout_alignParentBottom="true"
-       android:layout_marginLeft="35dp"
-        android:text="I don't know" />
-       
-   <ImageView
-        android:id="@+id/btn_close_normal"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-         android:layout_marginLeft="127dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="2dp"
-        android:onClick="newOnclick2"
-        
-        android:src="@drawable/btn_close_normal"
-        android:textColor="#4F2F4F" />
-
-
-    <TextView
-        android:id="@+id/getReport"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignParentBottom="true"
-      
-        android:layout_margin="4dip"
-        android:background="#FA8072"
-       android:typeface="serif" 
-       android:textColor="#4F2F4F"
-        android:textSize="7pt" />
-
-   
+    android:id="@+id/getReport"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_alignRight="@+id/btn_check_on"
+    android:background="#FA8072"
+    android:gravity="center"
+    android:textColor="#4F2F4F"
+    android:textSize="6pt" />
 </RelativeLayout>
