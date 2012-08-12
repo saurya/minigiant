@@ -44,7 +44,7 @@
         android:layout_alignLeft="@+id/emptyView1"
         android:layout_below="@+id/emptyView1"
         android:layout_margin="4dip"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="55dp"
       
         android:gravity="center"
         android:scrollbars="vertical"
@@ -54,7 +54,8 @@
   <View
           android:id="@+id/emptyView2"
           android:layout_width="fill_parent"
-        android:layout_height="5dip"
+        android:layout_height="7dip"
+         android:layout_marginTop="7dp"
         android:layout_alignLeft="@+id/getquestionString"
          android:layout_below="@+id/getquestionString"
         android:background="#8B5742" />
@@ -63,11 +64,11 @@
         android:id="@+id/getAnswerString"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/getquestionString"
+        android:layout_below="@+id/emptyView2"
         android:layout_centerInParent="true"
         android:layout_margin="4dip"
         android:layout_marginBottom="59dp"
-        
+       android:layout_marginTop="5dp"
         android:scrollbars="vertical"
         android:textColor="#000000"
         android:textSize="9pt" />
@@ -79,6 +80,7 @@ android:text="Show All Acceptable Answers"
  android:layout_below="@+id/getAnswerString"
 android:layout_width="fill_parent"
 android:layout_height="wrap_content"
+ android:layout_marginTop="9dp"
 android:onClick="addItems"
 />
 
@@ -91,11 +93,9 @@ android:footerDividersEnabled="true"
 android:background="#aaa000"
 android:layout_weight="2"
 android:drawSelectorOnTop="false"
-    android:layout_height="wrap_content"
-    android:divider="#FFCC00"
-    android:dividerHeight="14.5sp"/>
-
-
+android:layout_height="wrap_content"
+android:divider="#FFCC00"
+android:dividerHeight="14.5sp"/>
 
     
   <View
@@ -104,8 +104,7 @@ android:drawSelectorOnTop="false"
         android:layout_height="5dip"
         android:layout_alignLeft="@+id/getAnswerString"
          android:layout_below="@+id/getAnswerString"
-        android:background="#8B5742" />
-
+        android:background="#8B5742" />
   <Button
       android:id="@+id/next"
       android:layout_width="50dp"

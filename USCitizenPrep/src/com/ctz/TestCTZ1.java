@@ -217,7 +217,7 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
 
   public String getnextqn(int cnt) {
     int qnnumber = cnt + 1;
-    return "Qusestion# " + qnnumber + ": " + qnlist[cnt];
+    return qnlist[cnt];
   }
 
   public String getreportString() {
@@ -241,7 +241,7 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
     if (end > 100)
       end = 100;
     getAnswerString0 = anslist[begin];
-    getquestionString0 = "Question# 1: " + qnlist[begin];
+    getquestionString0 = qnlist[begin];
     mGetQuestionString.setText(getquestionString0);
     mGetQuestionString.setVisibility(View.VISIBLE);
     mgetAnswerString.setVisibility(View.GONE);
@@ -249,7 +249,8 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
     mbtn_check_on.setVisibility(View.GONE);
     mrightViewText.setVisibility(View.GONE);
     mwrongViewText.setVisibility(View.GONE);
-    ;
+    mbtn_check_on_disabled.setVisibility(View.GONE);
+    mdisabledViewText.setVisibility(View.GONE);
 
     mgetReport.setVisibility(View.GONE);
     calltimer(PreferenceManager.getDefaultSharedPreferences(this));
@@ -370,7 +371,7 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
       correctanswerstring += originalQNums[i] + ",";
 
     getAnswerString0 = anslist[begin];
-    getquestionString0 = "Question# 1: " + qnlist[begin];
+    getquestionString0 = qnlist[begin];
 
     mgetReport = (TextView) findViewById(R.id.getReport);
     mGetQuestionString = (TextView) findViewById(R.id.getquestionString);
