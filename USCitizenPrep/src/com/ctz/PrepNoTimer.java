@@ -20,6 +20,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.SlidingDrawer;
+import android.widget.SlidingDrawer.OnDrawerCloseListener;
+import android.widget.SlidingDrawer.OnDrawerOpenListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,11 +44,12 @@ public class PrepNoTimer extends ListActivity {
   private TextView mGetQuestionString;
   private TextView mgetAnswerString;
   private ListView mmultipleanswerlist;
-  private Button mmultipleAns;
+
   private TextView mScore;
   private Button mnext;
   private Button mprev;
-
+  private ImageButton mslideHandleButton;
+  private SlidingDrawer mslidingDrawer;
   int cnt = 0;
   int score = 0;
   int questionnumber;
@@ -146,12 +150,18 @@ public class PrepNoTimer extends ListActivity {
         if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
           mmultipleanswerlist.setVisibility(View.GONE);
         mmultipleanswerlist.setVisibility(View.GONE);
-        mmultipleAns.setVisibility(View.GONE);
-        mmultipleAns.setVisibility(View.VISIBLE);
+        mslideHandleButton.setVisibility(View.GONE);
+        mslideHandleButton.setVisibility(View.VISIBLE);
+        mslidingDrawer.setVisibility(View.VISIBLE);
+        // mmultipleAns.setVisibility(View.VISIBLE);
+        // mmultipleAns.setVisibility(View.VISIBLE);
         int till = getAnswerString.indexOf("*");
         mgetAnswerString.setText(getAnswerString.substring(0, till));
       } else {
-        mmultipleAns.setVisibility(View.GONE);
+        // mmultipleAns.setVisibility(View.GONE);
+        mslidingDrawer.setVisibility(View.GONE);
+        mslideHandleButton.setVisibility(View.GONE);
+
         mmultipleanswerlist.setVisibility(View.GONE);
         mgetAnswerString.setVisibility(View.VISIBLE);
         mgetAnswerString.setText(getAnswerString);
@@ -210,13 +220,33 @@ public class PrepNoTimer extends ListActivity {
     mGetQuestionString = (TextView) findViewById(R.id.getquestionString);
     mgetAnswerString = (TextView) findViewById(R.id.getAnswerString);
     mmultipleanswerlist = (ListView) findViewById(android.R.id.list);
-    mmultipleAns = (Button) findViewById(R.id.multipleAns);
-    mmultipleAns.setVisibility(View.GONE);
+    mslideHandleButton = (ImageButton) findViewById(R.id.slideHandleButton);
+    mslidingDrawer = (SlidingDrawer) findViewById(R.id.slidingDrawer);
+    // mmultipleAns.setVisibility(View.GONE);
+    // mslideHandleButton.setVisibility(View.GONE);
+    mslidingDrawer.setVisibility(View.GONE);
     mmultipleanswerlist.setVisibility(View.GONE);
     mScore = (TextView) findViewById(R.id.scoreField);
     mnext = (Button) findViewById(com.ctz.R.id.next);
     mprev = (Button) findViewById(com.ctz.R.id.prev);
     mprev.setText("<");
+
+    mslidingDrawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
+
+      public void onDrawerOpened() {
+        addItems(findViewById(R.layout.main5));
+        mslideHandleButton
+            .setBackgroundResource(R.drawable.btn_check_on_disabled2);
+      }
+    });
+
+    mslidingDrawer.setOnDrawerCloseListener(new OnDrawerCloseListener() {
+
+      public void onDrawerClosed() {
+        mslideHandleButton.setBackgroundResource(R.drawable.btn_check_on2);
+      }
+    });
+
     setDefaultKeyMode(DEFAULT_KEYS_DISABLE);
     mnext.setOnClickListener(new OnClickListener() {
 
@@ -248,13 +278,17 @@ public class PrepNoTimer extends ListActivity {
           if (multansqnnums.contains(cnt + "")) {
             if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
               mmultipleanswerlist.setVisibility(View.GONE);
-            mmultipleAns.setVisibility(View.VISIBLE);
+            // mmultipleAns.setVisibility(View.VISIBLE);
             // mmultipleanswerlist.setVisibility(View.VISIBLE);
+            // mslideHandleButton.setVisibility(View.VISIBLE);
+            mslidingDrawer.setVisibility(View.VISIBLE);
             int till = getAnswerString.indexOf("*");
             mgetAnswerString.setText(getAnswerString.substring(0, till));
           } else {
             mmultipleanswerlist.setVisibility(View.GONE);
-            mmultipleAns.setVisibility(View.GONE);
+            // mmultipleAns.setVisibility(View.GONE);
+            mslideHandleButton.setVisibility(View.GONE);
+            mslidingDrawer.setVisibility(View.GONE);
             mgetAnswerString.setVisibility(View.VISIBLE);
             mgetAnswerString.setText(getAnswerString);
           }
@@ -287,13 +321,17 @@ public class PrepNoTimer extends ListActivity {
           if (multansqnnums.contains(cnt + "")) {
             if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
               mmultipleanswerlist.setVisibility(View.GONE);
-            mmultipleAns.setVisibility(View.VISIBLE);
+            mslidingDrawer.setVisibility(View.VISIBLE);
+            // mslideHandleButton.setVisibility(View.VISIBLE);
+            // mmultipleAns.setVisibility(View.VISIBLE);
             // mmultipleanswerlist.setVisibility(View.VISIBLE);
             int till = getAnswerString.indexOf("*");
             mgetAnswerString.setText(getAnswerString.substring(0, till));
           } else {
             mmultipleanswerlist.setVisibility(View.GONE);
-            mmultipleAns.setVisibility(View.GONE);
+            // mmultipleAns.setVisibility(View.GONE);
+            // mslideHandleButton.setVisibility(View.GONE);
+            mslidingDrawer.setVisibility(View.VISIBLE);
             mgetAnswerString.setVisibility(View.VISIBLE);
             mgetAnswerString.setText(getAnswerString);
           }

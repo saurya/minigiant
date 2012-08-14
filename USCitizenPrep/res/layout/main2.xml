@@ -63,7 +63,7 @@
     <View
         android:id="@+id/emptyView1"
         android:layout_width="fill_parent"
-        android:layout_height="5dip"
+        android:layout_height="2dip"
         android:layout_alignLeft="@+id/scoresLabel"
         android:layout_below="@+id/scoreField"
         android:layout_marginTop="24dip"
@@ -86,7 +86,7 @@
     <View
         android:id="@+id/emptyView2"
         android:layout_width="fill_parent"
-        android:layout_height="5dip"
+        android:layout_height="2dip"
         android:layout_alignLeft="@+id/getquestionString"
         android:layout_below="@+id/getquestionString"
         android:background="#8B5742" />
@@ -103,29 +103,17 @@
         android:textColor="#000000"
         android:textSize="9pt" />
 
+    
     <View
         android:id="@+id/emptyView3"
         android:layout_width="fill_parent"
-        android:layout_height="5dip"
+        android:layout_height="2dip"
         android:layout_alignLeft="@+id/getAnswerString"
         android:layout_below="@+id/getAnswerString"
         android:background="#8B5742" />
-<!--  
-    <Button
-        android:id="@+id/btn_check_on_disabled"
-        android:visibility="gone"
-        android:layout_width="95dp"
-        android:layout_height="55dp"
-        android:layout_above="@+id/btn_close_normal"
-        android:layout_toLeftOf="@+id/timerTextField"
-       
-        android:text="I got it late!!"
-      android:background="@drawable/rounded_buttonstates"
-        android:clickable="false"
-        android:src="@drawable/btn_check_on_disabled"
-        android:textColor="#999999"
-         />
--->
+
+   
+
 <ImageView
      android:id="@+id/btn_check_on_disabled"
         android:layout_width="145dp"
@@ -147,9 +135,7 @@
     android:layout_alignLeft="@+id/btn_check_on_disabled"
     android:layout_alignTop="@+id/btn_check_on_disabled"
     android:layout_alignBottom="@+id/btn_check_on"
-      
-         android:layout_marginTop="7dp"
-         
+    android:layout_marginTop="7dp"
     android:gravity="center"
       android:text="  oops!"
     android:textColor="#000000" />
@@ -163,8 +149,7 @@
         android:layout_marginBottom="52dp"
         android:layout_centerHorizontal="true"     
          android:layout_marginTop="10dp"
-         
-        />
+   />
 
    <TextView
     android:id="@+id/wrongViewText"
@@ -173,7 +158,6 @@
      android:visibility="gone"
     android:layout_alignRight="@+id/btn_close_normal"
     android:layout_alignTop="@+id/btn_close_normal"
-    
     android:layout_alignBottom="@+id/btn_close_normal"
     android:layout_margin="1dp"
     android:gravity="center"
@@ -204,8 +188,6 @@
     android:gravity="center"
       android:text="I got it!        "
     android:textColor="#000000" />
-
-
 <TextView
     android:id="@+id/getReport"
     android:layout_width="fill_parent"
@@ -215,4 +197,6 @@
     android:gravity="center"
     android:textColor="#4F2F4F"
     android:textSize="6pt" />
+
+
 </RelativeLayout>

@@ -28,12 +28,13 @@
         android:layout_marginRight="44dip"
         android:hint="@string/reminder3"
         android:textColor="#000000"
+        
         android:textSize="7pt" />
     <View
           android:id="@+id/emptyView1"
           android:layout_width="fill_parent"
            android:layout_marginTop="14dip"
-        android:layout_height="5dip"
+        android:layout_height="2dip"
         android:layout_alignLeft="@+id/scoresLabel"
          android:layout_below="@+id/scoreField"
         android:background="#8B5742" />
@@ -45,7 +46,7 @@
         android:layout_below="@+id/emptyView1"
         android:layout_margin="4dip"
         android:layout_marginTop="55dp"
-      
+   
         android:gravity="center"
         android:scrollbars="vertical"
         android:textColor="#000000"
@@ -54,7 +55,7 @@
   <View
           android:id="@+id/emptyView2"
           android:layout_width="fill_parent"
-        android:layout_height="7dip"
+        android:layout_height="2dip"
          android:layout_marginTop="7dp"
         android:layout_alignLeft="@+id/getquestionString"
          android:layout_below="@+id/getquestionString"
@@ -71,58 +72,100 @@
        android:layout_marginTop="5dp"
         android:scrollbars="vertical"
         android:textColor="#000000"
-        android:textSize="9pt" />
-    
-   
- <Button
-android:id="@+id/multipleAns"
-android:text="Show All Acceptable Answers"
- android:layout_below="@+id/getAnswerString"
-android:layout_width="fill_parent"
-android:layout_height="wrap_content"
- android:layout_marginTop="9dp"
-android:onClick="addItems"
-/>
-
-<ListView
-android:id="@android:id/list"
-android:layout_below="@+id/multipleAns"
-android:layout_width="wrap_content"
-android:headerDividersEnabled="true"
-android:footerDividersEnabled="true"
-android:background="#aaa000"
-android:layout_weight="2"
-android:drawSelectorOnTop="false"
-android:layout_height="wrap_content"
-android:divider="#FFCC00"
-android:dividerHeight="14.5sp"/>
-
+        android:textSize="9pt" 
+       />
     
   <View
           android:id="@+id/emptyView3"
           android:layout_width="fill_parent"
-        android:layout_height="5dip"
+        android:layout_height="2dip"
         android:layout_alignLeft="@+id/getAnswerString"
          android:layout_below="@+id/getAnswerString"
-        android:background="#8B5742" />
-  <Button
-      android:id="@+id/next"
-      android:layout_width="50dp"
-      android:layout_height="wrap_content"
-      android:layout_alignParentRight="true"
-      android:layout_centerVertical="true"
+        android:background="#8B5742" />  
+
+<SlidingDrawer
+    android:id="@+id/slidingDrawer"
+    android:layout_width="250dp"
+    android:layout_height="250dip"
+    android:content="@+id/contentLayout"
+    android:handle="@+id/slideHandleButton"
+    android:padding="10dip"
+    android:visibility="gone" >
+
+    <ImageButton
+           android:id="@+id/slideHandleButton"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="107dp"
+            android:layout_alignParentBottom="true"
+        android:layout_below="@+id/emptyView3"
+            android:src="@drawable/btn_check_on2"
+          android:visibility="gone"
+            android:textColor="#4F2F4F"
+             />
       
-      android:layout_marginTop="161dp"
-      android:text="@string/next"
-      android:textColor="#aa8888bb" />
+<LinearLayout android:layout_width="fill_parent" 
+    android:id="@+id/contentLayout" 
+    android:orientation="vertical" 
+    
+    android:padding="10dip" 
+    android:background="#C0C0C0" 
+    android:layout_height="fill_parent">
+ <ImageButton android:id="@+id/btn_check_on_disabled" 
+     android:clickable="false" 
+     android:layout_width="55dp"
+     android:layout_height="55dp"
+     android:layout_marginLeft="107dp"
+     android:layout_alignParentBottom="true"
+     android:src="@drawable/btn_check_on_disabled"
+          android:visibility="gone" >
+</ImageButton>
+
+ <ListView
+    android:id="@android:id/list"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="2"
+    android:background="#aaa000"
+    android:divider="#FFCC00"
+    android:dividerHeight="14.5sp"
+    android:drawSelectorOnTop="false"
+    android:footerDividersEnabled="true"
+    android:headerDividersEnabled="true" />
+</LinearLayout>
+</SlidingDrawer>    
+ 
 
   <Button
+      android:id="@+id/next"
+       android:color="@color/anstxt3"
+      android:layout_width="36dp"
+      android:layout_height="36dp"
+      android:layout_alignParentRight="true"
+      android:layout_centerVertical="true"
+      android:layout_marginTop="161dp"
+ android:background="@drawable/rounded_buttonstates"
+      android:capitalize="characters"
+      android:includeFontPadding="true"
+      android:text="@string/next"
+      android:textAllCaps="true"
+      android:textColor="#000000"
+      android:textSize="16pt"
+       android:layout_gravity="center" /> <Button
       android:id="@+id/prev"
-      android:layout_width="50dp"
+        android:color="@color/anstxt3"
+      android:layout_width="25dp"
       android:layout_height="wrap_content"
-      android:layout_alignParentLeft="true"
+      android:layout_alignParentLeft="false"
       android:layout_alignTop="@+id/next"
-      android:background="@drawable/android_normal"
-      android:textColor="#aa8888bb" />
-  
+      android:layout_centerVertical="true"
+      android:layout_marginLeft="1dp"
+     android:capitalize="characters"
+      android:includeFontPadding="true"
+      android:background="@drawable/rounded_buttonstates"
+      android:text="@string/next"
+      android:textAllCaps="true"
+      android:textColor="#000000"
+      android:textSize="16pt"
+       android:layout_gravity="center" /> 
 </RelativeLayout>
