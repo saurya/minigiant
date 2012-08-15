@@ -85,54 +85,48 @@
 
 <SlidingDrawer
     android:id="@+id/slidingDrawer"
-    android:layout_width="250dp"
-    android:layout_height="250dip"
-    android:content="@+id/contentLayout"
+    android:layout_alignParentBottom="true"
+     
+      
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:content="@android:id/list"
     android:handle="@+id/slideHandleButton"
+     android:layout_below="@+id/emptyView3"
+     android:clipChildren="true"
     android:padding="10dip"
-    android:visibility="gone" >
+    android:topOffset="-100dp"
+  >
+   <LinearLayout
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal">
 
     <ImageButton
            android:id="@+id/slideHandleButton"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:layout_marginLeft="107dp"
-            android:layout_alignParentBottom="true"
-        android:layout_below="@+id/emptyView3"
-            android:src="@drawable/btn_check_on2"
-          android:visibility="gone"
+            android:layout_marginLeft="107dp"  
+            android:src="@drawable/btn_check_on2" 
+             android:layout_below="@+id/emptyView3"
+      
             android:textColor="#4F2F4F"
              />
-      
-<LinearLayout android:layout_width="fill_parent" 
-    android:id="@+id/contentLayout" 
-    android:orientation="vertical" 
-    
-    android:padding="10dip" 
-    android:background="#C0C0C0" 
-    android:layout_height="fill_parent">
- <ImageButton android:id="@+id/btn_check_on_disabled" 
-     android:clickable="false" 
-     android:layout_width="55dp"
-     android:layout_height="55dp"
-     android:layout_marginLeft="107dp"
-     android:layout_alignParentBottom="true"
-     android:src="@drawable/btn_check_on_disabled"
-          android:visibility="gone" >
-</ImageButton>
-
- <ListView
+    </LinearLayout>
+      <ListView
     android:id="@android:id/list"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:layout_weight="2"
-    android:background="#aaa000"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1.6"
+    android:background="@color/anstxt3"
+     android:layout_below="@+id/emptyView3"
     android:divider="#FFCC00"
     android:dividerHeight="14.5sp"
     android:drawSelectorOnTop="false"
     android:footerDividersEnabled="true"
     android:headerDividersEnabled="true" />
-</LinearLayout>
+
+
 </SlidingDrawer>    
  
 

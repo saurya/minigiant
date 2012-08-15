@@ -45,8 +45,8 @@ public final class R {
         public static final int androidbackground=0x7f020001;
         public static final int btn_check_on=0x7f020002;
         public static final int btn_check_on2=0x7f020003;
-        public static final int btn_check_on_disabled=0x7f020004;
-        public static final int btn_check_on_disabled2=0x7f020005;
+        public static final int btn_check_on2_disabled=0x7f020004;
+        public static final int btn_check_on_disabled=0x7f020005;
         public static final int btn_close_normal=0x7f020006;
         public static final int btn_close_normal00=0x7f020007;
         public static final int btn_close_normal1=0x7f020008;
@@ -81,7 +81,6 @@ public final class R {
         public static final int btn_close_normal=0x7f090014;
         public static final int checkedTextView1=0x7f09001b;
         public static final int chkbx2=0x7f09001d;
-        public static final int contentLayout=0x7f090020;
         public static final int disabled_ViewText=0x7f090015;
         public static final int emptyView1=0x7f09000e;
         public static final int emptyView2=0x7f090010;
@@ -94,8 +93,8 @@ public final class R {
         public static final int image=0x7f090001;
         public static final int layout_root=0x7f090000;
         public static final int list_content=0x7f090003;
-        public static final int next=0x7f090022;
-        public static final int prev=0x7f090023;
+        public static final int next=0x7f090021;
+        public static final int prev=0x7f090022;
         public static final int questionslice_spinner=0x7f09001c;
         public static final int radio_prepare_for_interview=0x7f090005;
         public static final int radio_senior_prepare_for_interview=0x7f090007;
@@ -103,7 +102,7 @@ public final class R {
         public static final int rightViewText=0x7f090018;
         public static final int scoreField=0x7f09000b;
         public static final int scoresLabel=0x7f09000a;
-        public static final int slideHandleButton=0x7f090021;
+        public static final int slideHandleButton=0x7f090020;
         public static final int slidingDrawer=0x7f09001f;
         public static final int state_spinner=0x7f090004;
         public static final int text=0x7f090002;

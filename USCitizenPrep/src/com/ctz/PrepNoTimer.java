@@ -54,7 +54,7 @@ public class PrepNoTimer extends ListActivity {
   int score = 0;
   int questionnumber;
   int cnt1, ctz_ans, correct_ans;
-
+  // LinearLayout mcontentlayout;
   String correctanswerstring;
 
   final static long seconds_in_milllies = 1000L;
@@ -67,6 +67,7 @@ public class PrepNoTimer extends ListActivity {
   // Array containing randomly generated question numbers
   int[] originalQNums = new int[100];
   ImageButton mbtnclose_normal;
+  ImageButton mbtn_check_on2_disabled;
   TextView mgetReport;
 
   ImageButton mbtn_check_on;
@@ -151,6 +152,8 @@ public class PrepNoTimer extends ListActivity {
           mmultipleanswerlist.setVisibility(View.GONE);
         mmultipleanswerlist.setVisibility(View.GONE);
         mslideHandleButton.setVisibility(View.GONE);
+
+        // mcontentlayout.setVisibility(View.GONE);
         mslideHandleButton.setVisibility(View.VISIBLE);
         mslidingDrawer.setVisibility(View.VISIBLE);
         // mmultipleAns.setVisibility(View.VISIBLE);
@@ -161,7 +164,7 @@ public class PrepNoTimer extends ListActivity {
         // mmultipleAns.setVisibility(View.GONE);
         mslidingDrawer.setVisibility(View.GONE);
         mslideHandleButton.setVisibility(View.GONE);
-
+        // mcontentlayout.setVisibility(View.GONE);
         mmultipleanswerlist.setVisibility(View.GONE);
         mgetAnswerString.setVisibility(View.VISIBLE);
         mgetAnswerString.setText(getAnswerString);
@@ -173,7 +176,7 @@ public class PrepNoTimer extends ListActivity {
   public String getnextanswer(int cnt) {
     int qnnumber = cnt + 1;
 
-    return "A: " + anslist[cnt];
+    return anslist[cnt];
 
   }
 
@@ -185,12 +188,12 @@ public class PrepNoTimer extends ListActivity {
     int qnnumber = cnt + 1;
 
     mScore.setText((qnnumber) + "/100");
-    return "Q: " + (qnnumber) + ": " + qnlist[cnt];
+    return qnlist[cnt];
   }
 
   public String getpreviousanswer(int cnt) {
 
-    return "A: " + ": " + anslist[cnt];
+    return anslist[cnt];
 
   }
 
@@ -201,7 +204,7 @@ public class PrepNoTimer extends ListActivity {
       cnt = 99;
     int qnnumber = cnt;
     mScore.setText((qnnumber + 1) + "/100");
-    return "Q: " + (qnnumber + 1) + ": " + qnlist[cnt];
+    return qnlist[cnt];
   }
 
   /** Called when the activity is first created. */
@@ -222,10 +225,14 @@ public class PrepNoTimer extends ListActivity {
     mmultipleanswerlist = (ListView) findViewById(android.R.id.list);
     mslideHandleButton = (ImageButton) findViewById(R.id.slideHandleButton);
     mslidingDrawer = (SlidingDrawer) findViewById(R.id.slidingDrawer);
+    // mcontentlayout = (LinearLayout) findViewById(R.id.contentLayout);
+
     // mmultipleAns.setVisibility(View.GONE);
-    // mslideHandleButton.setVisibility(View.GONE);
+    mslideHandleButton.setVisibility(View.GONE);
     mslidingDrawer.setVisibility(View.GONE);
+    // mcontentlayout.setVisibility(View.GONE);
     mmultipleanswerlist.setVisibility(View.GONE);
+
     mScore = (TextView) findViewById(R.id.scoreField);
     mnext = (Button) findViewById(com.ctz.R.id.next);
     mprev = (Button) findViewById(com.ctz.R.id.prev);
@@ -236,13 +243,15 @@ public class PrepNoTimer extends ListActivity {
       public void onDrawerOpened() {
         addItems(findViewById(R.layout.main5));
         mslideHandleButton
-            .setBackgroundResource(R.drawable.btn_check_on_disabled2);
+            .setBackgroundResource(R.drawable.btn_check_on2_disabled);
+        mslideHandleButton.setVisibility(View.GONE);
       }
     });
 
     mslidingDrawer.setOnDrawerCloseListener(new OnDrawerCloseListener() {
 
       public void onDrawerClosed() {
+        mmultipleanswerlist.setVisibility(View.GONE);
         mslideHandleButton.setBackgroundResource(R.drawable.btn_check_on2);
       }
     });
@@ -279,15 +288,17 @@ public class PrepNoTimer extends ListActivity {
             if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
               mmultipleanswerlist.setVisibility(View.GONE);
             // mmultipleAns.setVisibility(View.VISIBLE);
-            // mmultipleanswerlist.setVisibility(View.VISIBLE);
+            mmultipleanswerlist.setVisibility(View.GONE);
             // mslideHandleButton.setVisibility(View.VISIBLE);
             mslidingDrawer.setVisibility(View.VISIBLE);
             int till = getAnswerString.indexOf("*");
             mgetAnswerString.setText(getAnswerString.substring(0, till));
           } else {
+            adapter.clear();
             mmultipleanswerlist.setVisibility(View.GONE);
-            // mmultipleAns.setVisibility(View.GONE);
+
             mslideHandleButton.setVisibility(View.GONE);
+            // mcontentlayout.setVisibility(View.GONE);
             mslidingDrawer.setVisibility(View.GONE);
             mgetAnswerString.setVisibility(View.VISIBLE);
             mgetAnswerString.setText(getAnswerString);
@@ -321,17 +332,24 @@ public class PrepNoTimer extends ListActivity {
           if (multansqnnums.contains(cnt + "")) {
             if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
               mmultipleanswerlist.setVisibility(View.GONE);
+            mslidingDrawer.setVisibility(View.GONE);
+            mslideHandleButton.setBackgroundResource(R.drawable.btn_check_on2);
+
             mslidingDrawer.setVisibility(View.VISIBLE);
-            // mslideHandleButton.setVisibility(View.VISIBLE);
             // mmultipleAns.setVisibility(View.VISIBLE);
             // mmultipleanswerlist.setVisibility(View.VISIBLE);
             int till = getAnswerString.indexOf("*");
             mgetAnswerString.setText(getAnswerString.substring(0, till));
           } else {
+            if (mslidingDrawer.getVisibility() == View.VISIBLE)
+              mslidingDrawer.setVisibility(View.GONE);
+            mslideHandleButton.setVisibility(View.GONE);
+            // mcontentlayout.setVisibility(View.GONE);
             mmultipleanswerlist.setVisibility(View.GONE);
             // mmultipleAns.setVisibility(View.GONE);
-            // mslideHandleButton.setVisibility(View.GONE);
-            mslidingDrawer.setVisibility(View.VISIBLE);
+            mslideHandleButton.setVisibility(View.GONE);
+            // mbtn_check_on2_disabled.setVisibility(View.GONE);
+            mslidingDrawer.setVisibility(View.GONE);
             mgetAnswerString.setVisibility(View.VISIBLE);
             mgetAnswerString.setText(getAnswerString);
           }
