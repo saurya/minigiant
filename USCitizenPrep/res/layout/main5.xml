@@ -82,45 +82,8 @@
         android:layout_alignLeft="@+id/getAnswerString"
          android:layout_below="@+id/getAnswerString"
         android:background="#8B5742" />  
-
-<SlidingDrawer
-    android:id="@+id/slidingDrawer" 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:content="@android:id/list"
-    android:handle="@+id/slideHandleButton"
-    android:layout_below="@+id/getAnswerString"
-     android:orientation="horizontal"
-     
-   android:clipChildren="false"
-    android:padding="1dp"
-   
-  >
-  
-    <ImageButton
-           android:id="@+id/slideHandleButton"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-        
-            android:src="@drawable/btn_check_on2" 
-        android:duplicateParentState="false"
-            android:textColor="#4F2F4F"
-          
-             />
 
-      <ListView
-          android:id="@android:id/list"
-          android:layout_width="match_parent"
-          android:layout_height="389dp"
-          android:background="@color/anstxt3"
-          android:divider="#FFDEAD"
-          android:dividerHeight="4.5sp"
-          android:drawSelectorOnTop="false"
-          android:footerDividersEnabled="true"
-          android:headerDividersEnabled="true" />
 
-</SlidingDrawer>    
- 
 
   <Button
       android:id="@+id/next"
@@ -140,7 +103,8 @@
       android:textAllCaps="true"
       android:textColor="#000000"
       android:textSize="16pt"
-       android:layout_gravity="center" /> <Button
+       android:layout_gravity="center" />
+ <Button
       android:id="@+id/prev"
         android:color="@color/anstxt3"
       android:layout_width="25dp"
@@ -157,7 +121,51 @@
       android:background="@drawable/rounded_buttonstates"
       android:text="@string/next"
       android:textAllCaps="true"
-      android:textColor="#000000"
+       android:textColor="#000000"
       android:textSize="16pt"
-       android:layout_gravity="center" /> 
+       android:layout_gravity="center" 
+       /> 
+<SlidingDrawer
+    android:id="@+id/slidingDrawer" 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:content="@android:id/list"
+    android:handle="@+id/slideHandleButton"
+    android:layout_below="@+id/getquestionString"
+     android:orientation="horizontal"
+     android:bottomOffset="10dp"
+   android:clipChildren="false"
+    android:padding="1dp"
+   
+  >
+  
+    <ImageButton
+           android:id="@+id/slideHandleButton"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+        
+            android:src="@drawable/btn_check_on2" 
+        android:duplicateParentState="false"
+            android:textColor="#4F2F4F"
+          
+             />
+
+
+      <ListView
+          android:id="@android:id/list"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"        
+          android:divider="#8B5742"
+          android:dividerHeight="4.5sp"
+          android:drawSelectorOnTop="false"
+          android:footerDividersEnabled="true"
+          android:headerDividersEnabled="true"
+    android:background="@drawable/listview_border"/>
+
+</SlidingDrawer>    
+ 
+
+ 
 </RelativeLayout>
+ 
+
