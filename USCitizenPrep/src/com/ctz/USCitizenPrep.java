@@ -170,6 +170,7 @@ public class USCitizenPrep extends Activity implements
     questions_list = new ArrayList<String>();
     answers_list = new ArrayList<String>();
     final Spinner spinner = (Spinner) findViewById(R.id.state_spinner);
+    // spinner.setBackgroundColor(color.aspinner);
     ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this,
         android.R.layout.simple_spinner_item, states);
 
