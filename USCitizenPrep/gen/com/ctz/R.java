@@ -88,7 +88,7 @@ public final class R {
         public static final int spinnerbox_arrows=0x7f02002b;
     }
     public static final class id {
-        public static final int btn_check_on=0x7f090017;
+        public static final int btn_check_on=0x7f090018;
         public static final int btn_check_on_disabled=0x7f090014;
         public static final int btn_close_normal=0x7f090015;
         public static final int checkedTextView1=0x7f09001c;
@@ -123,7 +123,7 @@ public final class R {
         public static final int timerTextField=0x7f09000c;
         public static final int timerslice_spinner=0x7f09001f;
         public static final int totalView=0x7f090009;
-        public static final int wrongViewText=0x7f090018;
+        public static final int wrongViewText=0x7f090017;
     }
     public static final class layout {
         public static final int custom_dialog=0x7f030000;
