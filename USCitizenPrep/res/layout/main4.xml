@@ -5,7 +5,7 @@
  android:orientation="vertical" 
    
  android:layout_centerVertical="true"
- android:layout_centerInParent="true" android:background="@color/anstxt3" >
+ android:layout_centerInParent="true" android:background="@drawable/mainbackground"> 
 
 <TextView
 android:gravity="center"
@@ -29,16 +29,17 @@ android:layout_height="wrap_content"
     android:textColor="#4F2F4F"
      android:layout_gravity="center_horizontal"
       android:layout_marginTop="23dp"/>
-
+
  <Spinner
-        android:id="@+id/questionslice_spinner"
-         style="@style/style1"
-        android:background="@drawable/spinner_background"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:layout_gravity="center_horizontal"
-        android:textColor="#4F2F4F"
-        >
+     android:id="@+id/questionslice_spinner"
+     style="@style/style1"
+     android:layout_width="43dp"
+     android:layout_height="38dp"
+     android:layout_gravity="center_horizontal"
+     android:background="@drawable/spinner"
+     android:gravity="center"
+     android:textColor="#4F2F4F" >
+
  </Spinner> 
 <CheckedTextView
     android:id="@+id/chkbx2"
@@ -48,25 +49,27 @@ android:layout_height="wrap_content"
     android:text="Time Limit"
      android:textColor="#4F2F4F"
     />
+
  <Spinner
-        android:id="@+id/timerslice_spinner"
-        style="@style/style1"
-        android:background="@drawable/spinner_background"
-        android:textColor="#4F2F4F"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:layout_gravity="center_horizontal"
-       
-        >
+     android:id="@+id/timerslice_spinner"
+     style="@style/style1"
+     android:layout_width="43dp"
+     android:layout_height="38dp"
+     android:layout_gravity="center_horizontal"
+     android:background="@drawable/spinner"
+     android:gravity="center"
+     android:textColor="#4F2F4F" >
+
 </Spinner>
 <Button
     android:id="@+id/go"
   android:textColor="#4F2F4F"
      android:layout_gravity="center_horizontal"
      android:layout_marginTop="30dp"
-    android:layout_width="166dp"
-    android:layout_height="48dp"
+    android:layout_width="126dp"
+    android:layout_height="22dp"
     android:onClick="onButtonClicked"
+    android:background="@drawable/go_buttonstates"
     android:text="@string/startTest" />
 
 

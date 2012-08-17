@@ -241,6 +241,7 @@ public class PrepNoTimer extends ListActivity {
     mslidingDrawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
 
       public void onDrawerOpened() {
+        mprev.setEnabled(false);
         addItems(findViewById(R.layout.main5));
         mslideHandleButton
             .setBackgroundResource(R.drawable.btn_check_on2_disabled);
@@ -251,6 +252,7 @@ public class PrepNoTimer extends ListActivity {
     mslidingDrawer.setOnDrawerCloseListener(new OnDrawerCloseListener() {
 
       public void onDrawerClosed() {
+        mprev.setEnabled(true);
         mmultipleanswerlist.setVisibility(View.GONE);
         mslideHandleButton.setBackgroundResource(R.drawable.btn_check_on2);
       }
