@@ -36,7 +36,7 @@ public class PrepNoTimer extends ListActivity {
       "76", "77", "84", "86", "87", "90", "91", "92", "94", "95", "96", "99" }));
   boolean bingo, done;
   // set the answerlist array element to this string for
-  // tokenizing and displaying a dropdown listview of
+  // tokenizing and displaying a dropup listview of
   // possible multiple answers for a few qns
   static Toast toast;
   ArrayList<String> multipleAnswersItems = new ArrayList<String>();
@@ -45,7 +45,7 @@ public class PrepNoTimer extends ListActivity {
   private TextView mGetQuestionString;
   private TextView mgetAnswerString;
   private ListView mmultipleanswerlist;
-
+  private View main5_View;
   private TextView mScore;
   private Button mnext;
   private Button mprev;
@@ -68,7 +68,7 @@ public class PrepNoTimer extends ListActivity {
   // Array containing randomly generated question numbers
   int[] originalQNums = new int[100];
   ImageButton mbtnclose_normal;
-  ImageButton mbtn_check_on2_disabled;
+  // ImageView marrow_up_float;
   TextView mgetReport;
 
   ImageButton mbtn_check_on;
@@ -219,13 +219,15 @@ public class PrepNoTimer extends ListActivity {
     this.setListAdapter(adapter);
     bingo = false;
     int score = 0;
-
+    main5_View = findViewById(R.layout.main5);
     setContentView(R.layout.main5);// following lines 'must' to follow layout
     mGetQuestionString = (TextView) findViewById(R.id.getquestionString);
     mgetAnswerString = (TextView) findViewById(R.id.getAnswerString);
     mmultipleanswerlist = (ListView) findViewById(android.R.id.list);
+    mmultipleanswerlist.setScrollbarFadingEnabled(false);
     mslideHandleButton = (ImageView) findViewById(R.id.slideHandleButton);
     mslidingDrawer = (SlidingDrawer) findViewById(R.id.slidingDrawer);
+    // marrow_up_float = (ImageView) findViewById(R.id.arrow_up_float);
     // mcontentlayout = (LinearLayout) findViewById(R.id.contentLayout);
 
     // mmultipleAns.setVisibility(View.GONE);
@@ -242,13 +244,14 @@ public class PrepNoTimer extends ListActivity {
     mslidingDrawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
 
       public void onDrawerOpened() {
+
+        addItems(main5_View);
         mprev.setEnabled(false);
         mnext.setEnabled(false);
-        addItems(findViewById(R.layout.main5));
+        // marrow_up_float.setVisibility(View.VISIBLE);
+        mslideHandleButton.setBackgroundResource(R.drawable.arrow_down_float);
 
-        // mslideHandleButton.setBackgroundResource(R.drawable.uparrow);
-
-        mslideHandleButton.setVisibility(View.GONE);
+        // mslideHandleButton.setVisibility(View.GONE);
       }
     });
 
@@ -258,8 +261,8 @@ public class PrepNoTimer extends ListActivity {
         mprev.setEnabled(true);
         mnext.setEnabled(true);
         mmultipleanswerlist.setVisibility(View.GONE);
-
-        // mslideHandleButton.setBackgroundResource(R.drawable.downarrow);
+        // marrow_up_float.setVisibility(View.GONE);
+        mslideHandleButton.setBackgroundResource(R.drawable.arrow_up_float);
       }
     });
 
@@ -340,7 +343,7 @@ public class PrepNoTimer extends ListActivity {
             if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
               mmultipleanswerlist.setVisibility(View.GONE);
             mslidingDrawer.setVisibility(View.GONE);
-            mslideHandleButton.setBackgroundResource(R.drawable.btn_check_on2);
+            mslideHandleButton.setBackgroundResource(R.drawable.arrow_up_float);
 
             mslidingDrawer.setVisibility(View.VISIBLE);
             // mmultipleAns.setVisibility(View.VISIBLE);
@@ -355,7 +358,7 @@ public class PrepNoTimer extends ListActivity {
             mmultipleanswerlist.setVisibility(View.GONE);
             // mmultipleAns.setVisibility(View.GONE);
             mslideHandleButton.setVisibility(View.GONE);
-            // mbtn_check_on2_disabled.setVisibility(View.GONE);
+            // marrow_up_float.setVisibility(View.GONE);
             mslidingDrawer.setVisibility(View.GONE);
             mgetAnswerString.setVisibility(View.VISIBLE);
             mgetAnswerString.setText(getAnswerString);
