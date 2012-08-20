@@ -452,7 +452,7 @@ public class USCitizenPrep extends Activity implements
 
     }
     for (int i = 0; i < 50; i++)
-      System.out.println(states[i].toString());
+      System.out.println((states[i].toString()).trim());
     Arrays.sort(states);
     Arrays.sort(statenames);
   }

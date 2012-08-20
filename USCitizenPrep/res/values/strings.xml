@@ -16,6 +16,6 @@
   <string name="aboutsenioritis"> Select the state you belong to</string>
   
   <string name= "Score">Score</string>
-
+<string name="more">  more .. </string>
     <string name= "timer">Timer</string>
 </resources>

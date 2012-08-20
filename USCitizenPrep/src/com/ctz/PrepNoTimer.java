@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SlidingDrawer;
 import android.widget.SlidingDrawer.OnDrawerCloseListener;
@@ -48,7 +49,7 @@ public class PrepNoTimer extends ListActivity {
   private TextView mScore;
   private Button mnext;
   private Button mprev;
-  private ImageButton mslideHandleButton;
+  private ImageView mslideHandleButton;
   private SlidingDrawer mslidingDrawer;
   int cnt = 0;
   int score = 0;
@@ -223,7 +224,7 @@ public class PrepNoTimer extends ListActivity {
     mGetQuestionString = (TextView) findViewById(R.id.getquestionString);
     mgetAnswerString = (TextView) findViewById(R.id.getAnswerString);
     mmultipleanswerlist = (ListView) findViewById(android.R.id.list);
-    mslideHandleButton = (ImageButton) findViewById(R.id.slideHandleButton);
+    mslideHandleButton = (ImageView) findViewById(R.id.slideHandleButton);
     mslidingDrawer = (SlidingDrawer) findViewById(R.id.slidingDrawer);
     // mcontentlayout = (LinearLayout) findViewById(R.id.contentLayout);
 
@@ -244,8 +245,9 @@ public class PrepNoTimer extends ListActivity {
         mprev.setEnabled(false);
         mnext.setEnabled(false);
         addItems(findViewById(R.layout.main5));
-        mslideHandleButton
-            .setBackgroundResource(R.drawable.btn_check_on2_disabled);
+
+        // mslideHandleButton.setBackgroundResource(R.drawable.uparrow);
+
         mslideHandleButton.setVisibility(View.GONE);
       }
     });
@@ -256,7 +258,8 @@ public class PrepNoTimer extends ListActivity {
         mprev.setEnabled(true);
         mnext.setEnabled(true);
         mmultipleanswerlist.setVisibility(View.GONE);
-        mslideHandleButton.setBackgroundResource(R.drawable.btn_check_on2);
+
+        // mslideHandleButton.setBackgroundResource(R.drawable.downarrow);
       }
     });
 

@@ -145,7 +145,7 @@ android:layout_marginTop="10dip"
    <ImageView
         android:id="@+id/btn_close_normal"
         android:layout_width="35dp"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
          android:onClick="newOnclick2"
           android:src="@drawable/btn_close_normal"
         android:layout_alignParentBottom="true"
@@ -198,21 +198,12 @@ android:layout_marginTop="10dip"
     android:textColor="#000000" />
 
 
-
-
-
-
-
-
-
-
-
 <TextView
     android:id="@+id/getReport"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_alignRight="@+id/btn_check_on"
-    android:background="#FA8072"
+    android:background="@drawable/mainbackground"
     android:gravity="center"
     android:textColor="#4F2F4F"
     android:textSize="6pt" />

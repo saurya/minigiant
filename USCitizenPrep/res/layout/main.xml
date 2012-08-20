@@ -16,17 +16,21 @@ android:layout_width="fill_parent"
 android:layout_height="wrap_content"
 />
 <!--  style="?android:attr/spinnerItemStyle"--> 
+<!--  
+     android:background="@drawable/btn_dropdown"
+     -->
  <Spinner
-        android:id="@+id/state_spinner"
-         android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-        android:background="@drawable/spinner"
-        android:gravity="center"
-        
-        android:layout_gravity="center_horizontal"
-        android:textColor="#4F2F4F"
+     android:id="@+id/state_spinner"
+     android:layout_width="230dp"
+     android:layout_height="wrap_content"
+     android:layout_gravity="center_horizontal"
+   android:color="@color/anstxt3"
+     android:clipToPadding="true"
+     android:gravity="left"
+     android:textColor="#4F2F4F" 
      
-        >
+     >
+
         <!-- android:layout_width= "?android:attr/listPreferredItemHeight" -->
  </Spinner> 
  
@@ -67,12 +71,12 @@ android:layout_height="wrap_content"
                android:layout_marginTop="32dp"
                android:onClick="onButtonClicked"
                android:text="@string/Next"
-               
+           
                android:textSize="12sp" 
                android:layout_height="32dp"
-        android:layout_width="32dp"
+        android:layout_width="45dp"
         android:textColor="#000000"
-      android:background="@drawable/go_buttonstates"
+   
        
          />
 
