@@ -4,7 +4,6 @@ package com.ctz;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,7 +47,7 @@ public class Justdownload {
           try {
 
             URLConnection connection = url.openConnection();
-            connection.setConnectTimeout(1000);
+            connection.setConnectTimeout(500);
             connection.connect();
 
             input = new BufferedInputStream(url.openStream());
@@ -74,7 +73,7 @@ public class Justdownload {
 
                     if (currstate.equals(USCitizenPrep.currentstate)) {
                       USCitizenPrep.allanswers[42] = currgov;
-                      out.write(currstate + " &" + currgov + "\n");
+                      out.write(currstate + " Sena " + currgov + "\n");
                       out.close();
                       break;
                     }
@@ -133,9 +132,12 @@ public class Justdownload {
                     "\\n", "");
                 ;
                 state[id] = str8;
+
                 if (state[id].equals(USCitizenPrep.currentstate)) {
-                  USCitizenPrep.allanswers[19] = sentr[id];
-                  out.write(state[id] + " " + sentr[id] + "\n");
+                  USCitizenPrep.allanswers[19] = sentr[id] + "   (" + state[id]
+                      + "   )";
+                  out.write(state[id] + " " + sentr[id] + "   (" + state[id]
+                      + "   )" + "\n");
                   break;
                 }
               }
@@ -163,45 +165,9 @@ public class Justdownload {
       return null;
     }
 
-    public void filldata() {// close ???
-      String senator = "";
-      try {
-        FileInputStream fIn = new FileInputStream(
-            "/sdcard/senatordataactual.txt");
-        BufferedReader myReader = new BufferedReader(new InputStreamReader(fIn));
-
-        String onlyone = "";
-        while ((onlyone = myReader.readLine()) != null) {
-          senator += onlyone + "\n";
-          Log.d("onlyone ", onlyone
-              + "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
-        }
-      } catch (Exception e) {
-
-      }
-
-      USCitizenPrep.allanswers[19] = senator;
-
-      String governor = "";
-      try {
-        FileInputStream fIn = new FileInputStream("/sdcard/govdataactual.txt");
-        BufferedReader myReader = new BufferedReader(new InputStreamReader(fIn));
-
-        String onlyone = "";
-        while ((onlyone = myReader.readLine()) != null) {
-          governor += onlyone + "\n";
-          Log.d("onlyone ", onlyone
-              + "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
-        }
-      } catch (Exception e) {
-
-      }
-      USCitizenPrep.allanswers[42] = governor;
-
-    }
-
     protected void onPostExecute(Integer... progress) {
-
+      Log.d("currentstate", USCitizenPrep.currentstate
+          + "(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((");
     }
 
     @Override

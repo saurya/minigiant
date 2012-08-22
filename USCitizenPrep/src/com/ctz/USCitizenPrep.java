@@ -1,7 +1,7 @@
 package com.ctz;
 
 import java.io.BufferedReader;
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -38,12 +38,13 @@ public class USCitizenPrep extends Activity implements
 
   static int userselectQns;;
   static int userselecttiming;
-
+  private boolean gov_exist, sen_exist;
   static Toast toast;
   static int duration_of_toast_display = 2000;
-
+  private String original42, original19;
   int[] randoms = new int[100];
-
+  private boolean changedstate;// if user selects a different state in the same
+                               // session
   String selected;
   static String currentstate;// just to keep it going
   HashMap<String, String> currentgovernors;
@@ -71,13 +72,25 @@ public class USCitizenPrep extends Activity implements
   private RadioButton radio_test_yourself;
   private CheckBox radio_senior_prepare_for_interview;
   private static String user_selection;
-
+  String currentcapital, previouscapital;
   private GestureLibrary gLib;
 
-  public String capital() {
-    String currcapital;
-    currcapital = statenabbrevs.get(currentstate);
-    return (statesncaps.get(currcapital));
+  public boolean capital() {
+    changedstate = false;
+    Log.d("correct?", currentstate + "   " + statesncaps.get(currentstate)
+        + "*&*&*&^*&^&*&*&^*&^");
+    currentcapital = statesncaps.get(currentstate);
+    allanswers[43] = currentcapital;
+    Log.d("prevcap && currcap", currentcapital + " " + previouscapital
+        + "*********************^^^^^^^^^^^^^^^$%%%%%%%%%%%%%%%%%%%%");
+    if (previouscapital.contains(currentcapital)
+        || currentcapital.contains(previouscapital)) {
+      ;
+    } else {
+      changedstate = true;
+      previouscapital = currentcapital;
+    }
+    return (changedstate);
   }
 
   public void copy(String s) {
@@ -151,6 +164,78 @@ public class USCitizenPrep extends Activity implements
 
   }
 
+  public void fillgovernordata() {
+    String governor = "";
+    new Justdownload(currentstate);
+    FileInputStream fIn = null;
+    BufferedReader myReader = null;
+    try {
+      fIn = new FileInputStream("/sdcard/govdataactual.txt");
+      myReader = new BufferedReader(new InputStreamReader(fIn));
+
+      String onlyone = "";
+
+      while ((onlyone = myReader.readLine()) != null) {
+        governor += onlyone + "\n";
+
+      }
+    } catch (Exception e) {
+
+    } finally {
+      try {
+        myReader.close();
+        fIn.close();
+
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+
+    if (governor.contains(currentstate)) {
+      USCitizenPrep.allanswers[42] = governor;
+      Log.d("onlyone ",
+          "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" + "  "
+              + currentstate);
+      gov_exist = true;
+    } else
+      USCitizenPrep.allanswers[42] = original42;
+    Log.d("governor", governor);
+  }
+
+  public void fillsenatordata() {// close ???
+    String senator = "";
+    FileInputStream fIn = null;
+    BufferedReader myReader = null;
+    try {
+      fIn = new FileInputStream("/sdcard/senatordataactual.txt");
+      myReader = new BufferedReader(new InputStreamReader(fIn));
+
+      String onlyone = "";
+      while ((onlyone = myReader.readLine()) != null) {
+        senator += onlyone + "\n";
+
+      }
+    } catch (Exception e) {
+
+    } finally {
+      try {
+        myReader.close();
+        fIn.close();
+
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+    if (senator.contains(currentstate)) {
+      USCitizenPrep.allanswers[19] = senator;
+      Log.d("Hello onlyone ",
+          "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" + senator
+              + "  " + currentstate);
+      sen_exist = true;
+    } else
+      USCitizenPrep.allanswers[19] = original19;
+  }
+
   /** Called when the activity is first created. */
   @SuppressLint({ "NewApi", "NewApi", "NewApi", "NewApi" })
   @Override
@@ -158,7 +243,8 @@ public class USCitizenPrep extends Activity implements
     super.onCreate(savedInstanceState);
     stateData();
     read_Rawdata();
-
+    currentstate = "Alabama";
+    previouscapital = "Montgomery";
     setContentView(com.ctz.R.layout.main);
     /*
      * GestureOverlayView gOverlay = (GestureOverlayView)
@@ -167,6 +253,9 @@ public class USCitizenPrep extends Activity implements
      * GestureLibraries.fromRawResource(this, R.raw.gestures); if (!gLib.load())
      * { finish(); }
      */
+    gov_exist = false;
+    sen_exist = false;// governor and senator
+    // olddata exists or
     questions_list = new ArrayList<String>();
     answers_list = new ArrayList<String>();
     final Spinner spinner = (Spinner) findViewById(R.id.state_spinner);
@@ -206,44 +295,55 @@ public class USCitizenPrep extends Activity implements
     go_Button.setOnClickListener(new OnClickListener() {
 
       public void onClick(View v) {
+
+        Log.d("prev Spinner Selection0", currentstate
+            + "***************&&&&&&&&&&&&&&&&&&^^^^^^^^^^^^^^^^^^"
+            + allanswers[19] + allanswers[42] + allanswers[43]);
+
         String str;// generate string basedon conditions
-        boolean gov_exist = false, sen_exist = false;// governor and senator
-                                                     // olddata exists or
+        gov_exist = false;
+        sen_exist = false;
         // not
         Bundle bundle = new Bundle();
         Bundle qnbundle = new Bundle();
         Intent myIntent2 = new Intent();
-        File file = new File("/sdcard/govdataactual.txt");
-        if (file.exists()) {// allanswers[42] = capital();//Read old data to be
-                            // safe, then delete
-          gov_exist = true;
-          file.delete();
-        }
-        file = new File("/sdcard/senatordataactual.txt");
-        if (file.exists()) {
-          sen_exist = true;
-          // allanswers[19] = capital();//Read old data to be safe
-          file.delete();
-        }
 
-        if (v == go_Button) {
-          currentstate = "AK";// default in case nothing selected
+        {
+
           currentstate = spinner.getSelectedItem().toString();
+          changedstate = capital();// currentstate has to be fulllength for this
+                                   // method
 
-          new Justdownload(currentstate);// get current dat if possible
-          if (gov_exist && sen_exist)
-            str = "Data from previous session will be used";
-          else
-            str = " answers as given on official website will be provided";
-          if (Justdownload.timedout && !str.equals(null))
+          // send abbreviation 6/20/2012
+          Iterator<String> it = statenabbrevs.keySet().iterator();
 
-            Toast.makeText(USCitizenPrep.this,
-                "Could not establish Internet Connection." + "/n" + str,
-                Toast.LENGTH_SHORT).show();
-          allanswers[43] = capital();
-          Log.d("Spinner Selection", currentstate
-              + "***************&&&&&&&&&&&&&&&&&&^^^^^^^^^^^^^^^^^^"
-              + allanswers[19] + allanswers[42]);
+          while (it.hasNext()) {
+
+            String currentstateabbrev = it.next();
+
+            if (statenabbrevs.get(currentstateabbrev).equals(currentstate))
+
+            {
+              currentstate = currentstateabbrev;
+              break;
+            }
+
+          }
+          // currentstate is now an abbrev
+
+          // if (gov_exist && sen_exist) str =
+          // "Data from previous session will be used"; else str =
+          // " answers as given on official website will be provided"; if
+          // (Justdownload.timedout && !str.equals(null))
+
+          // Toast.makeText(USCitizenPrep.this,
+          // "Could not establish Internet Connection." + "/n" + str,
+          // Toast.LENGTH_SHORT).show();
+
+          fillgovernordata();// staledata still can use
+
+          fillsenatordata();
+
           if (radio_test_yourself.isChecked() == true
               && radio_senior_prepare_for_interview.isChecked() == false) {
             selected_type = new String("2");
@@ -288,6 +388,7 @@ public class USCitizenPrep extends Activity implements
           StringBuilder sb = new StringBuilder().append(selected_type);
           bundle.putString(user_selection, sb.toString());
           bundle.putStringArray("allquestions", allquestions);
+
           bundle.putStringArray("allanswers", allanswers);
 
           myIntent2.putExtras(bundle);
@@ -394,6 +495,8 @@ public class USCitizenPrep extends Activity implements
         allanswers[qnnum] = test;
         qnnum++;
       }
+      original42 = allanswers[42];
+      original19 = allanswers[19];
       isr1.close();
       isMC1.close();
       isr2.close();
@@ -418,6 +521,8 @@ public class USCitizenPrep extends Activity implements
     String value = "";
     statesncaps = new HashMap<String, String>();
     statenabbrevs = new HashMap<String, String>();
+    currentstate = "AL";// default in case nothing selected
+    previouscapital = "Montgomery";// previously selected state's capital
     try {
       InputStream is1 = this.getResources().openRawResource(R.raw.statencaps);
       InputStreamReader isr1 = new InputStreamReader(is1);
@@ -428,12 +533,12 @@ public class USCitizenPrep extends Activity implements
         }
         if (cnt % 3 == 1) {
           statenabbrevs.put(line, key);
-
+          Log.d("getitrightabbrevs", line + "  " + key);
         }
         if (cnt % 3 == 2) {
           value = line;
           statesncaps.put(key, value);
-
+          Log.d("getitrightcaps", key + "  " + value);
         }
         cnt++;
       }

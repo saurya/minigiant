@@ -174,7 +174,7 @@
       
         android:src="@drawable/arrow_down_float"
          android:textSize="9dp"
-         
+          android:background="@drawable/mainbackground"
           android:gravity="center"
         />
 

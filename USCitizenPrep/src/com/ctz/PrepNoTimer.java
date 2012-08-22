@@ -248,8 +248,9 @@ public class PrepNoTimer extends ListActivity {
         addItems(main5_View);
         mprev.setEnabled(false);
         mnext.setEnabled(false);
-        // marrow_up_float.setVisibility(View.VISIBLE);
-        mslideHandleButton.setBackgroundResource(R.drawable.arrow_down_float);
+        // marrow_up_float.setVisibility(View.GONE);
+
+        // mslideHandleButton.setBackgroundResource(R.drawable.arrow_down_float);
 
         // mslideHandleButton.setVisibility(View.GONE);
       }
@@ -261,8 +262,8 @@ public class PrepNoTimer extends ListActivity {
         mprev.setEnabled(true);
         mnext.setEnabled(true);
         mmultipleanswerlist.setVisibility(View.GONE);
-        // marrow_up_float.setVisibility(View.GONE);
-        mslideHandleButton.setBackgroundResource(R.drawable.arrow_up_float);
+
+        // mslideHandleButton.setBackgroundResource(R.drawable.arrow_up_float);
       }
     });
 
@@ -343,7 +344,7 @@ public class PrepNoTimer extends ListActivity {
             if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
               mmultipleanswerlist.setVisibility(View.GONE);
             mslidingDrawer.setVisibility(View.GONE);
-            mslideHandleButton.setBackgroundResource(R.drawable.arrow_up_float);
+            // mslideHandleButton.setBackgroundResource(R.drawable.arrow_up_float);
 
             mslidingDrawer.setVisibility(View.VISIBLE);
             // mmultipleAns.setVisibility(View.VISIBLE);
@@ -381,7 +382,7 @@ public class PrepNoTimer extends ListActivity {
     Log.d("length: ", qnlist.length + ">*>*>&>*>&>*>&>*>&*>&>*>&>&*&"
         + anslist.length);
     getAnswerString0 = anslist[begin];
-    getquestionString0 = "Q: " + qnlist[begin];// first question
+    getquestionString0 = qnlist[begin];// first question
     mGetQuestionString.setText(getquestionString0);
     mgetAnswerString.setText(getAnswerString0);
     currentdisplay = 0;
