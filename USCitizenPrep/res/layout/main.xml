@@ -25,9 +25,8 @@ android:layout_height="wrap_content"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
      android:layout_gravity="center_horizontal"
-   android:color="@color/anstxt3"
-     android:clipToPadding="true"
-     android:gravity="left"
+ 
+     android:gravity="center"
      android:textColor="#4F2F4F" 
      
      >

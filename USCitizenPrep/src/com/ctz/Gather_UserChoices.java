@@ -108,7 +108,7 @@ public class Gather_UserChoices extends Activity {
           userselecttiming = 3;
           userselectQns = 3;
           userselecttiming = Integer.parseInt(timerslice_spinner
-              .getSelectedItem().toString().substring(0, 2));
+              .getSelectedItem().toString().substring(0, 2).trim());
           userselectQns = Integer.parseInt(questionslice_spinner
               .getSelectedItem().toString());
 
