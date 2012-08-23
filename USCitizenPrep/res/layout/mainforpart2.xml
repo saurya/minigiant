@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:layout_width="fill_parent"
+ android:layout_height="fill_parent"
+ android:orientation="vertical" 
+  
+ android:layout_centerVertical="true"
+ android:layout_centerInParent="true" android:background="@drawable/mainbackground">
+<TextView
+android:gravity="center"
+android:text=" U.S NATURALIZATION INTERVIEW PREPARATION \n\n
+ Some answers depend on your location. Please click here to select your state. \n"
+
+android:layout_margin="4dip"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+/>
+<!--  style="?android:attr/spinnerItemStyle"--> 
+<!-- android:layout_width= "?android:attr/listPreferredItemHeight" -->
+
+<!--    android:background="@drawable/android_focused" -->
+           <RadioGroup
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+      <RadioButton android:id="@+id/radio_prepare_for_interview"
+           android:textColor="#4F2F4F"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="20dp"
+          android:text="Prepare For The Test" />
+      <RadioButton android:id="@+id/radio_test_yourself"
+          android:textColor="#4F2F4F"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+           android:layout_marginTop="20dp"
+          android:text="Take Practice Test now" />      
+    </RadioGroup>
+
+         
+
+           <Button
+               android:id="@+id/go"
+                android:background="@drawable/mainbackground"
+               android:layout_gravity="center"
+               android:layout_marginTop="32dp"
+               android:onClick="onButtonClicked"
+               android:text="@string/Next"
+           
+               android:textSize="12sp" 
+               android:layout_height="32dp"
+        android:layout_width="45dp"
+        android:textColor="#000000"
+   
+       
+         />
+
+</LinearLayout>

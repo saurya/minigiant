@@ -26,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -35,11 +36,10 @@ public class USCitizenPreppart1 extends Activity implements
   private boolean gov_exist, sen_exist;
   static Toast toast;
   static int duration_of_toast_display = 2000;
-  private static String original42, original19, currentcpital43;// numbers
-                                                                // denote
-                                                                // answers to qn
-                                                                // numbers
-
+  // Foll vars used across once a state and senior selected
+  static String original42, original19, currentcpital43;
+  static boolean is_a_senior;;
+  // that's it
   private boolean changedstate;// if user selects a different state in the same
                                // session
 
@@ -63,7 +63,8 @@ public class USCitizenPreppart1 extends Activity implements
   private String selected_type;
   private Button go_Button;
   // private Button exit_Button;
-
+  private RadioButton radio_prepare_for_interview;
+  private RadioButton radio_test_yourself;
   private CheckBox radio_senior_prepare_for_interview;
   private static String user_selection;
   String currentcapital, previouscapital;
@@ -167,7 +168,7 @@ public class USCitizenPreppart1 extends Activity implements
 
     currentstate = "Alabama";
     previouscapital = "Montgomery";
-    setContentView(com.ctz.R.layout.maina);
+    setContentView(com.ctz.R.layout.mainforpart1);
 
     gov_exist = false;
     sen_exist = false;// governor and senator
@@ -175,11 +176,10 @@ public class USCitizenPreppart1 extends Activity implements
 
     final Spinner spinner = (Spinner) findViewById(R.id.state_spinner);
     // spinner.setBackgroundColor(color.aspinner);
-    ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this,
-        android.R.layout.simple_spinner_item, states);
+    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        R.array.states, R.layout.spinnerview);
 
-    adapter
-        .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    adapter.setDropDownViewResource(R.layout.spinnerview);
     spinner.setAdapter(adapter);
     spinner.setFocusable(true);
 
@@ -192,7 +192,7 @@ public class USCitizenPreppart1 extends Activity implements
       public void onClick(View v) {
         original19 = "";
         original42 = "";
-
+        is_a_senior = false;
         Log.d("prev Spinner Selection0", currentstate
             + "***************&&&&&&&&&&&&&&&&&&^^^^^^^^^^^^^^^^^^"
             + original19 + original42 + currentcpital43);
@@ -204,6 +204,7 @@ public class USCitizenPreppart1 extends Activity implements
         Intent myIntent2 = new Intent();
 
         {
+          is_a_senior = radio_senior_prepare_for_interview.isChecked();
 
           currentstate = spinner.getSelectedItem().toString();
           changedstate = capital();// currentstate has to be fulllength for this

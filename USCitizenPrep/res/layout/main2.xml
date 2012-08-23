@@ -202,7 +202,7 @@
     android:id="@+id/getReport"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_alignRight="@+id/btn_check_on"
+    
     android:background="@drawable/mainbackground"
     android:gravity="center"
     android:textColor="#4F2F4F"
