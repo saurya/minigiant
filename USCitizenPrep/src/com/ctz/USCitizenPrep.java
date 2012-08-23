@@ -260,14 +260,23 @@ public class USCitizenPrep extends Activity implements
     answers_list = new ArrayList<String>();
     final Spinner spinner = (Spinner) findViewById(R.id.state_spinner);
     // spinner.setBackgroundColor(color.aspinner);
-    ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this,
-        android.R.layout.simple_spinner_item, states);
+    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        R.array.states, R.layout.spinnerview);
 
-    adapter
-        .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    adapter.setDropDownViewResource(R.layout.spinnerview);
     spinner.setAdapter(adapter);
     spinner.setFocusable(true);
-
+    /*
+     * spinner.setOnItemSelectedListener(new
+     * AdapterView.OnItemSelectedListener() { public void
+     * onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+     * currentstate = parent.getItemAtPosition(position).toString();
+     * 
+     * }
+     * 
+     * public void onNothingSelected(AdapterView<?> arg0) { currentstate =
+     * "Alabama"; } });
+     */
     radio_senior_prepare_for_interview = (CheckBox) findViewById(com.ctz.R.id.radio_senior_prepare_for_interview);
     radio_prepare_for_interview = (RadioButton) findViewById(com.ctz.R.id.radio_prepare_for_interview);
     radio_test_yourself = (RadioButton) findViewById(com.ctz.R.id.radio_test_yourself);
@@ -309,7 +318,6 @@ public class USCitizenPrep extends Activity implements
         Intent myIntent2 = new Intent();
 
         {
-
           currentstate = spinner.getSelectedItem().toString();
           changedstate = capital();// currentstate has to be fulllength for this
                                    // method

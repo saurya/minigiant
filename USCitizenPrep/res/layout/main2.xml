@@ -50,10 +50,10 @@
        
         android:layout_width="70dp"
         android:layout_height="37dp"
-android:layout_marginTop="10dip"
+        android:layout_marginTop="10dip"
         android:layout_marginRight="10dip"
         android:layout_toRightOf="@+id/scoreLabel"
-       android:layout_toLeftOf="@+id/timerTextField"
+        android:layout_toLeftOf="@+id/timerTextField"
        
         android:enabled="false"
         android:focusable="false"

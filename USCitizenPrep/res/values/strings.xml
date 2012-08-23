@@ -1,21 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hint1">"  "</string>
-    <string name="hello">Hello US Citizenship Applicant!</string>
-    <string name="app_name">Prepare For Interview</string>
-     <string name="title_close">Start</string>
-    <string name="Next">Go!</string>
- <string name="select">Selected is :</string>
- <string name="seniors_prepare_for_interview">Qualifying Senior-Citizens</string>
- <string name="startTest">Start Test</string>
-  <string name="next"> > </string>
-  
-  <string name="reminder1"> "  0/0  "  </string>
-  <string name="reminder2"> "done!" </string>
-   <string name="reminder3">"  1/100" </string>
-  <string name="aboutsenioritis"> Select the state you belong to</string>
-  
-  <string name= "Score">Score</string>
-<string name="more">  more .. </string>
-    <string name= "timer">Timer</string>
+   <string-array name="states">
+     <item>Alabama</item>  
+     <item>Alaska</item>
+     <item>Arizona</item>
+     <item>Arkansas</item>
+     <item> Califirnia</item>
+       <item>Connecticut</item>
+     <item>Delaware</item>
+      <item>Florida</item>
+       <item>Georgia</item>
+     <item> Hawaii</item>
+      <item>Illinois</item>
+      <item> Indianapolis</item>
+       <item>Indiana</item>
+      <item> Iowa</item>
+      <item>Kentucky</item>
+      <item>Louisiana</item>
+     <item>Maine</item>
+      <item> Massachussetts</item>
+      <item>Maryland</item>
+      <item> Michigan</item>
+     <item>Mississippi</item>
+       <item>Montana</item> 
+       
+        <item>Nebraska</item>
+      
+        <item>New Hampshire</item>
+       <item>New Jersey</item>
+       <item>New Mexico</item>
+       <item>New York</item>
+         <item> North Dakotan</item>
+      <item> North Carolina</item>
+       
+       <item>Pennsylvania</item>
+       <item>Texas</item>
+       
+       <item>RhodeIland</item>
+        
+       <item>Washington</item>
+       <item> South Carolina</item>
+      <item>South Dakota</item>
+       <item>Virginia</item>
+      
+      <item>Wisconsin</item>
+      <item>Wyoming</item>
+     
+    
+      
+    
+       
+       
+       
+       
+       
+       
+       
+       
+       
+   </string-array> 
+    
+
+<string-array name="timerslice_size">
+        <item> 3 seconds.</item>
+        <item> 7 seconds.</item>
+        <item> 10 seconds.</item>
+       <item> 15 seconds.</item>
+        <item> 20 seconds.</item>
+        <item> 25 seconds.</item>
+       <item> 30 seconds.</item>
+       <item> 40 seconds.</item>
+    </string-array>
+    
+<string-array name="questionslice_size">
+     <item>3 </item>
+       
+        <item>10</item>
+       
+       <item>30 </item>
+       <item>45 </item> 
+       <item> 100 </item> 
+       </string-array>
 </resources>

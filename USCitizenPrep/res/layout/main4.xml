@@ -29,14 +29,13 @@ android:layout_height="wrap_content"
     android:textColor="#4F2F4F"
      android:layout_gravity="center_horizontal"
       android:layout_marginTop="23dp"/>
-
+
  <Spinner
      android:id="@+id/questionslice_spinner"
-     
-     android:layout_width="73dp"
-     android:layout_height="38dp"
+     android:background="@drawable/mainbackground"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
      android:layout_gravity="center_horizontal"
-     
      android:gravity="center"
      android:textColor="#4F2F4F" >
 
@@ -49,18 +48,16 @@ android:layout_height="wrap_content"
     android:text="Time Limit"
      android:textColor="#4F2F4F"
     />
-
- <Spinner
+<Spinner
      android:id="@+id/timerslice_spinner"
-    
-     android:layout_width="73dp"
-     android:layout_height="38dp"
+     android:background="@drawable/mainbackground"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
      android:layout_gravity="center_horizontal"
-    
      android:gravity="center"
      android:textColor="#4F2F4F" >
+</Spinner>
 
-</Spinner>
 <Button
     android:id="@+id/go"
   android:textColor="#4F2F4F"
@@ -69,7 +66,7 @@ android:layout_height="wrap_content"
     android:layout_width="126dp"
     android:layout_height="42dp"
     android:onClick="onButtonClicked"
-    
+    android:background="@drawable/mainbackground"
     android:text="@string/startTest" />
 
 

@@ -11,6 +11,11 @@ public final class R {
     public static final class animator {
         public static final int property_stringanimator=0x7f040000;
     }
+    public static final class array {
+        public static final int questionslice_size=0x7f080002;
+        public static final int states=0x7f080000;
+        public static final int timerslice_size=0x7f080001;
+    }
     public static final class attr {
     }
     public static final class color {
@@ -92,42 +97,42 @@ public final class R {
         public static final int uparrow=0x7f02002f;
     }
     public static final class id {
-        public static final int btn_check_on=0x7f090018;
-        public static final int btn_check_on_disabled=0x7f090014;
-        public static final int btn_close_normal=0x7f090015;
-        public static final int checkedTextView1=0x7f09001c;
-        public static final int chkbx2=0x7f09001e;
-        public static final int disabled_ViewText=0x7f090016;
-        public static final int emptyView1=0x7f09000f;
-        public static final int emptyView2=0x7f090011;
-        public static final int emptyView3=0x7f090013;
-        public static final int gestures=0x7f09001b;
-        public static final int getAnswerString=0x7f090012;
-        public static final int getReport=0x7f09001a;
-        public static final int getquestionString=0x7f090010;
-        public static final int go=0x7f090008;
-        public static final int image=0x7f090001;
-        public static final int layout_root=0x7f090000;
-        public static final int list_content=0x7f090003;
-        public static final int next=0x7f090021;
-        public static final int prev=0x7f090020;
-        public static final int questionslice_spinner=0x7f09001d;
-        public static final int radio_prepare_for_interview=0x7f090005;
-        public static final int radio_senior_prepare_for_interview=0x7f090007;
-        public static final int radio_test_yourself=0x7f090006;
-        public static final int rightViewText=0x7f090019;
-        public static final int scoreField=0x7f09000b;
-        public static final int scoreLabel=0x7f09000e;
-        public static final int scoresLabel=0x7f09000a;
-        public static final int slideHandleButton=0x7f090023;
-        public static final int slidingDrawer=0x7f090022;
-        public static final int state_spinner=0x7f090004;
-        public static final int text=0x7f090002;
-        public static final int timerLabel=0x7f09000d;
-        public static final int timerTextField=0x7f09000c;
-        public static final int timerslice_spinner=0x7f09001f;
-        public static final int totalView=0x7f090009;
-        public static final int wrongViewText=0x7f090017;
+        public static final int btn_check_on=0x7f0a0018;
+        public static final int btn_check_on_disabled=0x7f0a0014;
+        public static final int btn_close_normal=0x7f0a0015;
+        public static final int checkedTextView1=0x7f0a001c;
+        public static final int chkbx2=0x7f0a001e;
+        public static final int disabled_ViewText=0x7f0a0016;
+        public static final int emptyView1=0x7f0a000f;
+        public static final int emptyView2=0x7f0a0011;
+        public static final int emptyView3=0x7f0a0013;
+        public static final int gestures=0x7f0a001b;
+        public static final int getAnswerString=0x7f0a0012;
+        public static final int getReport=0x7f0a001a;
+        public static final int getquestionString=0x7f0a0010;
+        public static final int go=0x7f0a0008;
+        public static final int image=0x7f0a0001;
+        public static final int layout_root=0x7f0a0000;
+        public static final int list_content=0x7f0a0003;
+        public static final int next=0x7f0a0021;
+        public static final int prev=0x7f0a0020;
+        public static final int questionslice_spinner=0x7f0a001d;
+        public static final int radio_prepare_for_interview=0x7f0a0005;
+        public static final int radio_senior_prepare_for_interview=0x7f0a0007;
+        public static final int radio_test_yourself=0x7f0a0006;
+        public static final int rightViewText=0x7f0a0019;
+        public static final int scoreField=0x7f0a000b;
+        public static final int scoreLabel=0x7f0a000e;
+        public static final int scoresLabel=0x7f0a000a;
+        public static final int slideHandleButton=0x7f0a0023;
+        public static final int slidingDrawer=0x7f0a0022;
+        public static final int state_spinner=0x7f0a0004;
+        public static final int text=0x7f0a0002;
+        public static final int timerLabel=0x7f0a000d;
+        public static final int timerTextField=0x7f0a000c;
+        public static final int timerslice_spinner=0x7f0a001f;
+        public static final int totalView=0x7f0a0009;
+        public static final int wrongViewText=0x7f0a0017;
     }
     public static final class layout {
         public static final int custom_dialog=0x7f030000;
@@ -141,6 +146,8 @@ public final class R {
         public static final int main3=0x7f030008;
         public static final int main4=0x7f030009;
         public static final int main5=0x7f03000a;
+        public static final int maina=0x7f03000b;
+        public static final int spinnerview=0x7f03000c;
     }
     public static final class raw {
         public static final int allanswers=0x7f050000;
@@ -151,24 +158,26 @@ public final class R {
     }
     public static final class string {
         public static final int Next=0x7f070004;
-        public static final int Score=0x7f07000d;
+        public static final int Score=0x7f07000f;
         public static final int aboutsenioritis=0x7f07000c;
         public static final int app_name=0x7f070002;
         public static final int hello=0x7f070001;
         public static final int hint1=0x7f070000;
-        public static final int more=0x7f07000e;
+        public static final int more=0x7f070010;
         public static final int next=0x7f070008;
+        public static final int questioner=0x7f07000e;
         public static final int reminder1=0x7f070009;
         public static final int reminder2=0x7f07000a;
         public static final int reminder3=0x7f07000b;
         public static final int select=0x7f070005;
         public static final int seniors_prepare_for_interview=0x7f070006;
         public static final int startTest=0x7f070007;
-        public static final int timer=0x7f07000f;
+        public static final int time=0x7f07000d;
+        public static final int timer=0x7f070011;
         public static final int title_close=0x7f070003;
     }
     public static final class style {
-        public static final int MyTheme=0x7f080000;
-        public static final int style1=0x7f080001;
+        public static final int MyTheme=0x7f090000;
+        public static final int style1=0x7f090001;
     }
 }

@@ -21,8 +21,7 @@ android:layout_height="wrap_content"
      -->
  <Spinner
      android:id="@+id/state_spinner"
-      android:background="@drawable/mainbackground"
-     android:layout_width="wrap_content"
+     android:layout_width="230dp"
      android:layout_height="wrap_content"
      android:layout_gravity="center_horizontal"
    android:color="@color/anstxt3"
@@ -36,25 +35,7 @@ android:layout_height="wrap_content"
  </Spinner> 
  
     
-         <!--    android:background="@drawable/android_focused" -->
-           <RadioGroup
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical">
-      <RadioButton android:id="@+id/radio_prepare_for_interview"
-           android:textColor="#4F2F4F"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="20dp"
-          android:text="Prepare For The Test" />
-      <RadioButton android:id="@+id/radio_test_yourself"
-          android:textColor="#4F2F4F"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-           android:layout_marginTop="20dp"
-          android:text="Take Practice Test now" />      
-    </RadioGroup>
-
+       
            <CheckBox
                android:id="@+id/radio_senior_prepare_for_interview"
                android:layout_width="146dp"
@@ -67,7 +48,7 @@ android:layout_height="wrap_content"
 
            <Button
                android:id="@+id/go"
-                android:background="@drawable/mainbackground"
+               
                android:layout_gravity="center"
                android:layout_marginTop="32dp"
                android:onClick="onButtonClicked"

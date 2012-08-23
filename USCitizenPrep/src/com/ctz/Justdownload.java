@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 public class Justdownload {
   final class DownloadFile extends AsyncTask<URL, Integer, String> {
@@ -73,7 +72,7 @@ public class Justdownload {
 
                     if (currstate.equals(USCitizenPrep.currentstate)) {
                       USCitizenPrep.allanswers[42] = currgov;
-                      out.write(currstate + " Sena " + currgov + "\n");
+                      out.write(currgov + "   (" + currstate + "   )" + "\n");
                       out.close();
                       break;
                     }
@@ -136,8 +135,7 @@ public class Justdownload {
                 if (state[id].equals(USCitizenPrep.currentstate)) {
                   USCitizenPrep.allanswers[19] = sentr[id] + "   (" + state[id]
                       + "   )";
-                  out.write(state[id] + " " + sentr[id] + "   (" + state[id]
-                      + "   )" + "\n");
+                  out.write(sentr[id] + "   (" + state[id] + "   )" + "\n");
                   break;
                 }
               }
@@ -150,11 +148,15 @@ public class Justdownload {
 
           finally {
             try {
-              out.close();
-              input.close();
-              output.close();
+              if (out != null)
+                out.close();// caused nullpointerexception
+              if (input != null)
+                input.close();
+              if (output != null)
+                output.close();
             } catch (IOException e) {
               e.printStackTrace();
+
             }
 
           }
@@ -165,9 +167,10 @@ public class Justdownload {
       return null;
     }
 
-    protected void onPostExecute(Integer... progress) {
-      Log.d("currentstate", USCitizenPrep.currentstate
-          + "(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((");
+    protected void onPostExecute(Boolean timedout) {
+
+      if (timedout)
+        return;// exit gracefully
     }
 
     @Override

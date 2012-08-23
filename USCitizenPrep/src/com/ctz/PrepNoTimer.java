@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -26,6 +27,8 @@ import android.widget.SlidingDrawer.OnDrawerCloseListener;
 import android.widget.SlidingDrawer.OnDrawerOpenListener;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.ctz.R.color;
 
 @SuppressLint("NewApi")
 public class PrepNoTimer extends ListActivity {
@@ -50,6 +53,7 @@ public class PrepNoTimer extends ListActivity {
   private Button mnext;
   private Button mprev;
   private ImageView mslideHandleButton;
+  private int movinghandle;
   private SlidingDrawer mslidingDrawer;
   int cnt = 0;
   int score = 0;
@@ -119,6 +123,9 @@ public class PrepNoTimer extends ListActivity {
 
     adapter.notifyDataSetChanged();
     // prtmultiplestrg = anslist[k];
+    // movinghandle = (int)
+    // TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+    // (float) (323.4), getResources().getDisplayMetrics());
 
     mmultipleanswerlist.setVisibility(View.VISIBLE);
   }
@@ -156,6 +163,7 @@ public class PrepNoTimer extends ListActivity {
 
         // mcontentlayout.setVisibility(View.GONE);
         mslideHandleButton.setVisibility(View.VISIBLE);
+
         mslidingDrawer.setVisibility(View.VISIBLE);
         // mmultipleAns.setVisibility(View.VISIBLE);
         // mmultipleAns.setVisibility(View.VISIBLE);
@@ -168,6 +176,7 @@ public class PrepNoTimer extends ListActivity {
         // mcontentlayout.setVisibility(View.GONE);
         mmultipleanswerlist.setVisibility(View.GONE);
         mgetAnswerString.setVisibility(View.VISIBLE);
+
         mgetAnswerString.setText(getAnswerString);
       }
 
@@ -231,6 +240,7 @@ public class PrepNoTimer extends ListActivity {
     // mcontentlayout = (LinearLayout) findViewById(R.id.contentLayout);
 
     // mmultipleAns.setVisibility(View.GONE);
+
     mslideHandleButton.setVisibility(View.GONE);
     mslidingDrawer.setVisibility(View.GONE);
     // mcontentlayout.setVisibility(View.GONE);
@@ -246,7 +256,9 @@ public class PrepNoTimer extends ListActivity {
       public void onDrawerOpened() {
 
         addItems(main5_View);
+        mprev.setTextColor(color.anstxt3);
         mprev.setEnabled(false);
+        mnext.setTextColor(color.anstxt3);
         mnext.setEnabled(false);
         // marrow_up_float.setVisibility(View.GONE);
 
@@ -259,7 +271,9 @@ public class PrepNoTimer extends ListActivity {
     mslidingDrawer.setOnDrawerCloseListener(new OnDrawerCloseListener() {
 
       public void onDrawerClosed() {
+        mprev.setTextColor(Color.WHITE);
         mprev.setEnabled(true);
+        mnext.setTextColor(Color.WHITE);
         mnext.setEnabled(true);
         mmultipleanswerlist.setVisibility(View.GONE);
 
@@ -390,17 +404,16 @@ public class PrepNoTimer extends ListActivity {
   }
 
   private ArrayList<String> tokens(String str) {
-
+    int skip = 0;
     StringTokenizer stringTokenizer = new StringTokenizer(str, "*");
-    Log.d("try:  ",
-        "The total no. of tokens generated :  " + stringTokenizer.countTokens());
+    Log.d("try:  ", "The total no. of tokens generated for:  " + str + " is "
+        + stringTokenizer.countTokens());
 
     while (stringTokenizer.hasMoreTokens()) {
 
       multipleAnswersItems.add(stringTokenizer.nextToken());
     }
-
+    multipleAnswersItems.remove(0);
     return multipleAnswersItems;
   }
-
 }
