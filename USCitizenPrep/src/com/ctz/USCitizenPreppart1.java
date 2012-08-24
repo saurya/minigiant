@@ -37,7 +37,7 @@ public class USCitizenPreppart1 extends Activity implements
   static Toast toast;
   static int duration_of_toast_display = 2000;
   // Foll vars used across once a state and senior selected
-  static String original42, original19, currentcpital43;
+  static String original42, original19, currentcapital43;
   static boolean is_a_senior;;
   // that's it
   private boolean changedstate;// if user selects a different state in the same
@@ -75,7 +75,7 @@ public class USCitizenPreppart1 extends Activity implements
     Log.d("correct?", currentstate + "   " + statesncaps.get(currentstate)
         + "*&*&*&^*&^&*&*&^*&^");
     currentcapital = statesncaps.get(currentstate);
-    currentcpital43 = currentcapital;
+    currentcapital43 = currentcapital;
     Log.d("prevcap && currcap", currentcapital + " " + previouscapital
         + "*********************^^^^^^^^^^^^^^^$%%%%%%%%%%%%%%%%%%%%");
     if (previouscapital.contains(currentcapital)
@@ -192,10 +192,11 @@ public class USCitizenPreppart1 extends Activity implements
       public void onClick(View v) {
         original19 = "";
         original42 = "";
+        currentcapital43 = "";
         is_a_senior = false;
         Log.d("prev Spinner Selection0", currentstate
             + "***************&&&&&&&&&&&&&&&&&&^^^^^^^^^^^^^^^^^^"
-            + original19 + original42 + currentcpital43);
+            + original19 + original42 + currentcapital43);
 
         gov_exist = false;
         sen_exist = false;

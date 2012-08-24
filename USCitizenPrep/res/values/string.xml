@@ -20,6 +20,6 @@
   <string name= "Score">Score</string>
 <string name="more">  more .. </string>
     <string name= "timer">Timer</string>
-    
+    <string name="stateprompt">select your state</string>
     </resources>
     

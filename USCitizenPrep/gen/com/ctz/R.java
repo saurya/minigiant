@@ -173,6 +173,7 @@ public final class R {
         public static final int select=0x7f070005;
         public static final int seniors_prepare_for_interview=0x7f070006;
         public static final int startTest=0x7f070007;
+        public static final int stateprompt=0x7f070012;
         public static final int time=0x7f07000d;
         public static final int timer=0x7f070011;
         public static final int title_close=0x7f070003;

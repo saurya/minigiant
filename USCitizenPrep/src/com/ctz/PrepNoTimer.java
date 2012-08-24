@@ -40,8 +40,8 @@ public class PrepNoTimer extends ListActivity {
       "99" }));
   boolean bingo, done;
   // set the answerlist array element to this string for
-  // tokenizing and displaying a dropup listview of
-  // possible multiple answers for a few qns
+  // tokenizing and displaying a draw-up listview of
+  // possible multiple answers for aboveqns
   static Toast toast;
   ArrayList<String> multipleAnswersItems = new ArrayList<String>();
   @SuppressLint({ "NewApi", "NewApi", "NewApi" })
@@ -54,13 +54,13 @@ public class PrepNoTimer extends ListActivity {
   private Button mnext;
   private Button mprev;
   private ImageView mslideHandleButton;
-  private int movinghandle;
+
   private SlidingDrawer mslidingDrawer;
   int cnt = 0;
   int score = 0;
   int questionnumber;
   int cnt1, ctz_ans, correct_ans;
-  // LinearLayout mcontentlayout;
+
   String correctanswerstring;
 
   final static long seconds_in_milllies = 1000L;
@@ -68,12 +68,9 @@ public class PrepNoTimer extends ListActivity {
   final static long hours_in_millies = minutes_in_millies * 60;
   static AlertDialog.Builder testscores_dialog_builder, builder;
   static AlertDialog testscores_dialog, alert;
-  // in onTick
-  // final Runnable r;
-  // Array containing randomly generated question numbers
+
   int[] originalQNums = new int[100];
   ImageButton mbtnclose_normal;
-  // ImageView marrow_up_float;
   TextView mgetReport;
 
   ImageButton mbtn_check_on;
@@ -121,13 +118,7 @@ public class PrepNoTimer extends ListActivity {
       adapter.clear();
     prtmultiplestrg = anslist[cnt];
     multipleAnswersItems = tokens(prtmultiplestrg);
-
     adapter.notifyDataSetChanged();
-    // prtmultiplestrg = anslist[k];
-    // movinghandle = (int)
-    // TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-    // (float) (323.4), getResources().getDisplayMetrics());
-
     mmultipleanswerlist.setVisibility(View.VISIBLE);
   }
 
@@ -153,6 +144,8 @@ public class PrepNoTimer extends ListActivity {
         alert.show();
 
       }
+      if (getquestionString.endsWith("*"))
+        getquestionString.replace("*", " ");
       mGetQuestionString.setText(getquestionString);
       getAnswerString = getnextanswer(cnt);
 
@@ -161,23 +154,16 @@ public class PrepNoTimer extends ListActivity {
           mmultipleanswerlist.setVisibility(View.GONE);
         mmultipleanswerlist.setVisibility(View.GONE);
         mslideHandleButton.setVisibility(View.GONE);
-
-        // mcontentlayout.setVisibility(View.GONE);
         mslideHandleButton.setVisibility(View.VISIBLE);
 
         mslidingDrawer.setVisibility(View.VISIBLE);
-        // mmultipleAns.setVisibility(View.VISIBLE);
-        // mmultipleAns.setVisibility(View.VISIBLE);
         int till = getAnswerString.indexOf("*");
         mgetAnswerString.setText(getAnswerString.substring(0, till));
       } else {
-        // mmultipleAns.setVisibility(View.GONE);
         mslidingDrawer.setVisibility(View.GONE);
         mslideHandleButton.setVisibility(View.GONE);
-        // mcontentlayout.setVisibility(View.GONE);
         mmultipleanswerlist.setVisibility(View.GONE);
         mgetAnswerString.setVisibility(View.VISIBLE);
-
         mgetAnswerString.setText(getAnswerString);
       }
 
@@ -186,9 +172,7 @@ public class PrepNoTimer extends ListActivity {
 
   public String getnextanswer(int cnt) {
     int qnnumber = cnt + 1;
-
     return anslist[cnt];
-
   }
 
   public String getnextqn(int cnt) {
@@ -237,21 +221,10 @@ public class PrepNoTimer extends ListActivity {
     mmultipleanswerlist.setScrollbarFadingEnabled(false);
     mslideHandleButton = (ImageView) findViewById(R.id.slideHandleButton);
     mslidingDrawer = (SlidingDrawer) findViewById(R.id.slidingDrawer);
-    // marrow_up_float = (ImageView) findViewById(R.id.arrow_up_float);
-    // mcontentlayout = (LinearLayout) findViewById(R.id.contentLayout);
-
-    // mmultipleAns.setVisibility(View.GONE);
-
     mslideHandleButton.setVisibility(View.GONE);
     mslidingDrawer.setVisibility(View.GONE);
-    // mcontentlayout.setVisibility(View.GONE);
     mmultipleanswerlist.setVisibility(View.GONE);
-
     mScore = (TextView) findViewById(R.id.scoreField);
-    mnext = (Button) findViewById(com.ctz.R.id.next);
-    mprev = (Button) findViewById(com.ctz.R.id.prev);
-    mprev.setText("<");
-
     mslidingDrawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
 
       public void onDrawerOpened() {
@@ -261,11 +234,6 @@ public class PrepNoTimer extends ListActivity {
         mprev.setEnabled(false);
         mnext.setTextColor(color.anstxt3);
         mnext.setEnabled(false);
-        // marrow_up_float.setVisibility(View.GONE);
-
-        // mslideHandleButton.setBackgroundResource(R.drawable.arrow_down_float);
-
-        // mslideHandleButton.setVisibility(View.GONE);
       }
     });
 
@@ -277,11 +245,12 @@ public class PrepNoTimer extends ListActivity {
         mnext.setTextColor(Color.WHITE);
         mnext.setEnabled(true);
         mmultipleanswerlist.setVisibility(View.GONE);
-
-        // mslideHandleButton.setBackgroundResource(R.drawable.arrow_up_float);
       }
     });
-
+    // BEGIN************this code not for TestCtz1*************
+    mnext = (Button) findViewById(com.ctz.R.id.next);
+    mprev = (Button) findViewById(com.ctz.R.id.prev);
+    mprev.setText("<");
     setDefaultKeyMode(DEFAULT_KEYS_DISABLE);
     mnext.setOnClickListener(new OnClickListener() {
 
@@ -307,15 +276,12 @@ public class PrepNoTimer extends ListActivity {
 
         else {
           getquestionString = getnextqn(cnt);
-
           mGetQuestionString.setText(getquestionString);
           getAnswerString = getnextanswer(cnt);
           if (multansqnnums.contains(cnt + "")) {
             if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
               mmultipleanswerlist.setVisibility(View.GONE);
-            // mmultipleAns.setVisibility(View.VISIBLE);
             mmultipleanswerlist.setVisibility(View.GONE);
-            // mslideHandleButton.setVisibility(View.VISIBLE);
             mslidingDrawer.setVisibility(View.VISIBLE);
             int till = getAnswerString.indexOf("*");
             mgetAnswerString.setText(getAnswerString.substring(0, till));
@@ -324,7 +290,6 @@ public class PrepNoTimer extends ListActivity {
             mmultipleanswerlist.setVisibility(View.GONE);
 
             mslideHandleButton.setVisibility(View.GONE);
-            // mcontentlayout.setVisibility(View.GONE);
             mslidingDrawer.setVisibility(View.GONE);
             mgetAnswerString.setVisibility(View.VISIBLE);
             mgetAnswerString.setText(getAnswerString);
@@ -359,22 +324,15 @@ public class PrepNoTimer extends ListActivity {
             if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
               mmultipleanswerlist.setVisibility(View.GONE);
             mslidingDrawer.setVisibility(View.GONE);
-            // mslideHandleButton.setBackgroundResource(R.drawable.arrow_up_float);
-
             mslidingDrawer.setVisibility(View.VISIBLE);
-            // mmultipleAns.setVisibility(View.VISIBLE);
-            // mmultipleanswerlist.setVisibility(View.VISIBLE);
             int till = getAnswerString.indexOf("*");
             mgetAnswerString.setText(getAnswerString.substring(0, till));
           } else {
             if (mslidingDrawer.getVisibility() == View.VISIBLE)
               mslidingDrawer.setVisibility(View.GONE);
             mslideHandleButton.setVisibility(View.GONE);
-            // mcontentlayout.setVisibility(View.GONE);
             mmultipleanswerlist.setVisibility(View.GONE);
-            // mmultipleAns.setVisibility(View.GONE);
             mslideHandleButton.setVisibility(View.GONE);
-            // marrow_up_float.setVisibility(View.GONE);
             mslidingDrawer.setVisibility(View.GONE);
             mgetAnswerString.setVisibility(View.VISIBLE);
             mgetAnswerString.setText(getAnswerString);
@@ -404,6 +362,7 @@ public class PrepNoTimer extends ListActivity {
     originalQnumber = originalQNums[0];
   }
 
+  // END************this code not for TestCtz1*************
   private ArrayList<String> tokens(String str) {
     int skip = 0;
     StringTokenizer stringTokenizer = new StringTokenizer(str, "*");

@@ -226,7 +226,7 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
         + " random Questions " + userselectQns + "\n\n" + "Timer "
         + userselecttiming + " seconds \n\n" + "Right: " + score
         + " Question(s)\n\n" + "Wrong: " + (userselectQns - score))
-        + "Comment:\n\n In the actual test you are required to get answers for 5 to 6 questions right out of 10."
+        + " \nComment:\n\n In the actual test you are required to get answers for 5 to 6 questions right out of 10."
         + " Real Test does not involve any time factor "
         + " Visit Official website for more details.";
   }

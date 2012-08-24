@@ -160,6 +160,7 @@
     android:topOffset="25dp"
     android:clipChildren="false"
     android:padding="1dp"  
+    android:allowSingleTap="true"
    
   >       
    <ImageView
@@ -179,15 +180,10 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:paddingBottom="50dip"
-          android:divider="#8B5742"
-          android:dividerHeight="2dip"
           android:drawSelectorOnTop="false"
-          android:footerDividersEnabled="true"
-          android:headerDividersEnabled="true" 
+          android:fadeScrollbars="false"
           
-     android:fadeScrollbars="false"
-          
-          
+          android:divider="@drawable/mainbackground"
           /> 
     
  

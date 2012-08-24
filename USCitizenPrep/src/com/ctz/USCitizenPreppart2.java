@@ -33,10 +33,10 @@ public class USCitizenPreppart2 extends Activity implements
 
   static int userselectQns;;
   static int userselecttiming;
-  private boolean gov_exist, sen_exist;
+
   static Toast toast;
   static int duration_of_toast_display = 2000;
-  private String original42, original19;
+
   int[] randoms = new int[100];
   private boolean changedstate;// if user selects a different state in the same
                                // session
@@ -148,16 +148,7 @@ public class USCitizenPreppart2 extends Activity implements
 
     previouscapital = "Montgomery";
     setContentView(com.ctz.R.layout.mainforpart2);
-    /*
-     * GestureOverlayView gOverlay = (GestureOverlayView)
-     * findViewById(R.id.gestures);
-     * gOverlay.addOnGesturePerformedListener(USCitizenPrep.this); gLib =
-     * GestureLibraries.fromRawResource(this, R.raw.gestures); if (!gLib.load())
-     * { finish(); }
-     */
-    gov_exist = false;
-    sen_exist = false;// governor and senator
-    // olddata exists or
+
     questions_list = new ArrayList<String>();
     answers_list = new ArrayList<String>();
     radio_prepare_for_interview = (RadioButton) findViewById(com.ctz.R.id.radio_prepare_for_interview);
@@ -173,10 +164,6 @@ public class USCitizenPreppart2 extends Activity implements
             "***************&&&&&&&&&&&&&&&&&&^^^^^^^^^^^^^^^^^^"
                 + allanswers[19] + allanswers[42] + allanswers[43]);
 
-        String str;// generate string basedon conditions
-        gov_exist = false;
-        sen_exist = false;
-        // not
         Bundle bundle = new Bundle();
         Bundle qnbundle = new Bundle();
         Intent myIntent2 = new Intent();
@@ -335,8 +322,18 @@ public class USCitizenPreppart2 extends Activity implements
         allanswers[qnnum] = test;
         qnnum++;
       }
-      original42 = allanswers[42];
-      original19 = allanswers[19];
+      if ((USCitizenPreppart1.original42).length() > 0)// if internet
+                                                       // connection
+                                                       // didn't fetch
+                                                       // results
+        allanswers[42] = USCitizenPreppart1.original42; // and staledta alsonot
+                                                        // available
+      if ((USCitizenPreppart1.original19).length() > 0)// have default answer
+                                                       // as
+        // given on website
+        allanswers[19] = USCitizenPreppart1.original19;
+      if ((USCitizenPreppart1.currentcapital43).length() > 0)
+        allanswers[43] = USCitizenPreppart1.currentcapital43;
       isr1.close();
       isMC1.close();
       isr2.close();
