@@ -39,6 +39,8 @@ public class PrepNoTimer extends ListActivity {
       "75", "76", "77", "84", "86", "87", "90", "91", "92", "94", "95", "96",
       "99" }));
   boolean bingo, done;
+  ImageButton magichandle, invertimage;
+  private int clickcounter;
   // set the answerlist array element to this string for
   // tokenizing and displaying a draw-up listview of
   // possible multiple answers for aboveqns
@@ -214,6 +216,7 @@ public class PrepNoTimer extends ListActivity {
     bingo = false;
     int score = 0;
     main5_View = findViewById(R.layout.main5);
+
     setContentView(R.layout.main5);// following lines 'must' to follow layout
     mGetQuestionString = (TextView) findViewById(R.id.getquestionString);
     mgetAnswerString = (TextView) findViewById(R.id.getAnswerString);
@@ -225,6 +228,8 @@ public class PrepNoTimer extends ListActivity {
     mslidingDrawer.setVisibility(View.GONE);
     mmultipleanswerlist.setVisibility(View.GONE);
     mScore = (TextView) findViewById(R.id.scoreField);
+    magichandle = (ImageButton) findViewById(R.id.magichandle);
+    invertimage = (ImageButton) findViewById(R.id.invertimage);
     mslidingDrawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
 
       public void onDrawerOpened() {
@@ -300,6 +305,27 @@ public class PrepNoTimer extends ListActivity {
     }
 
     );
+    magichandle.setOnClickListener(new OnClickListener() {
+      public void onClick(View v) {
+
+        {
+          mslidingDrawer.open();
+          invertimage.setVisibility(View.VISIBLE);
+        }
+
+      }
+    });
+
+    invertimage.setOnClickListener(new OnClickListener() {
+      public void onClick(View v) {
+
+        {
+          mslidingDrawer.close();
+          invertimage.setVisibility(View.GONE);
+        }
+
+      }
+    });
 
     mprev.setOnClickListener(new OnClickListener() {
 
