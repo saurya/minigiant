@@ -64,18 +64,23 @@
        android:src="@drawable/arrow_down_float"
      
       android:layout_width="36dp"
-            android:layout_height="36dp"
+      android:layout_height="36dp"
+       android:layout_below="@+id/emptyView3"
+   android:layout_alignBaseline="@+id/emptyView3"
+   android:layout_alignRight="@+id/emptyView3"
+      android:gravity="center_vertical|center_horizontal"
     
-   android:gravity="center_vertical|center_horizontal"
-    
-     android:textColor="#FFFFFF"
-     android:textSize="11pt"
+    android:visibility="gone"
+      android:textColor="#FFFFFF"
+      android:textSize="11pt"
       android:background="@drawable/mainbackground"
      />
   <ImageButton
        android:id="@+id/invertimage"
        android:src="@drawable/arrowup"
-    
+    android:layout_below="@+id/emptyView3"
+   android:layout_alignBaseline="@+id/emptyView3"
+   android:layout_alignRight="@+id/emptyView3"
       android:layout_width="36dp"
             android:layout_height="36dp"
     android:visibility="gone"

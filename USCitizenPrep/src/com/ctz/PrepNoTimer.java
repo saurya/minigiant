@@ -154,14 +154,15 @@ public class PrepNoTimer extends ListActivity {
       if (multansqnnums.contains(cnt + "")) {
         if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
           mmultipleanswerlist.setVisibility(View.GONE);
-        mmultipleanswerlist.setVisibility(View.GONE);
-        mslideHandleButton.setVisibility(View.GONE);
-        mslideHandleButton.setVisibility(View.VISIBLE);
+        mmultipleanswerlist.setVisibility(View.GONE);// remove staledata
 
+        mslideHandleButton.setVisibility(View.VISIBLE);
         mslidingDrawer.setVisibility(View.VISIBLE);
+
         int till = getAnswerString.indexOf("*");
         mgetAnswerString.setText(getAnswerString.substring(0, till));
       } else {
+        magichandle.setVisibility(View.GONE);
         mslidingDrawer.setVisibility(View.GONE);
         mslideHandleButton.setVisibility(View.GONE);
         mmultipleanswerlist.setVisibility(View.GONE);
@@ -284,6 +285,7 @@ public class PrepNoTimer extends ListActivity {
           mGetQuestionString.setText(getquestionString);
           getAnswerString = getnextanswer(cnt);
           if (multansqnnums.contains(cnt + "")) {
+            magichandle.setVisibility(View.VISIBLE);
             if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
               mmultipleanswerlist.setVisibility(View.GONE);
             mmultipleanswerlist.setVisibility(View.GONE);
@@ -291,6 +293,7 @@ public class PrepNoTimer extends ListActivity {
             int till = getAnswerString.indexOf("*");
             mgetAnswerString.setText(getAnswerString.substring(0, till));
           } else {
+            magichandle.setVisibility(View.GONE);
             adapter.clear();
             mmultipleanswerlist.setVisibility(View.GONE);
 
