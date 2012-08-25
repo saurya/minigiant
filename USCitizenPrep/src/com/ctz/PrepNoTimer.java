@@ -39,6 +39,7 @@ public class PrepNoTimer extends ListActivity {
       "75", "76", "77", "84", "86", "87", "90", "91", "92", "94", "95", "96",
       "99" }));
   boolean bingo, done;
+  int current_number_of_questions;
   ImageButton magichandle, invertimage;
   private int clickcounter;
   // set the answerlist array element to this string for
@@ -71,7 +72,7 @@ public class PrepNoTimer extends ListActivity {
   static AlertDialog.Builder testscores_dialog_builder, builder;
   static AlertDialog testscores_dialog, alert;
 
-  int[] originalQNums = new int[100];
+  int[] originalQNums;// = new int[100];
   ImageButton mbtnclose_normal;
   TextView mgetReport;
 
@@ -87,9 +88,9 @@ public class PrepNoTimer extends ListActivity {
   String getAnswerString = "";
   String getquestionString = "";// and the next .
 
-  String[] allquestions = new String[100];
+  // String[] allquestions; = new String[current_number_of_questions];
 
-  String[] allanswers = new String[100];;
+  // String[] allanswers;// = new String[current_number_of_questions];;
 
   String[] nearlygood_10; // deceptive answerset
   String[] funny1_10; // fake answerset 1
@@ -181,11 +182,11 @@ public class PrepNoTimer extends ListActivity {
   public String getnextqn(int cnt) {
     if (cnt < 0)
       cnt = 0;
-    if (cnt > 99)
-      cnt = 99;
+    if (cnt > current_number_of_questions - 1)
+      cnt = current_number_of_questions - 1;
     int qnnumber = cnt + 1;
 
-    mScore.setText((qnnumber) + "/100");
+    mScore.setText((qnnumber) + "/" + current_number_of_questions);
     return qnlist[cnt];
   }
 
@@ -198,10 +199,10 @@ public class PrepNoTimer extends ListActivity {
   public String getpreviousqn(int cnt) {
     if (cnt < 0)
       cnt = 0;
-    if (cnt > 99)
-      cnt = 99;
+    if (cnt > current_number_of_questions - 1)
+      cnt = current_number_of_questions - 1;
     int qnnumber = cnt;
-    mScore.setText((qnnumber + 1) + "/100");
+    mScore.setText((qnnumber + 1) + "/" + current_number_of_questions);
     return qnlist[cnt];
   }
 
@@ -211,6 +212,11 @@ public class PrepNoTimer extends ListActivity {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    // allquestions = new String[current_number_of_questions];
+
+    // allanswers = new String[current_number_of_questions];
+
     adapter = new ArrayAdapter<String>(this,
         android.R.layout.simple_list_item_1, multipleAnswersItems);
     this.setListAdapter(adapter);
@@ -263,7 +269,7 @@ public class PrepNoTimer extends ListActivity {
       public void onClick(View v) {
         cnt++;
         Log.d("Next: ", cnt + "*****************************************");
-        if (cnt > 99) {
+        if (cnt > current_number_of_questions - 1) {
 
           AlertDialog.Builder testscores_dialog_builder = new AlertDialog.Builder(
               PrepNoTimer.this);
@@ -283,6 +289,7 @@ public class PrepNoTimer extends ListActivity {
         else {
           getquestionString = getnextqn(cnt);
           mGetQuestionString.setText(getquestionString);
+
           getAnswerString = getnextanswer(cnt);
           if (multansqnnums.contains(cnt + "")) {
             magichandle.setVisibility(View.VISIBLE);
@@ -291,7 +298,8 @@ public class PrepNoTimer extends ListActivity {
             mmultipleanswerlist.setVisibility(View.GONE);
             mslidingDrawer.setVisibility(View.VISIBLE);
             int till = getAnswerString.indexOf("*");
-            mgetAnswerString.setText(getAnswerString.substring(0, till));
+            if (till > 0)
+              mgetAnswerString.setText(getAnswerString.substring(0, till));
           } else {
             magichandle.setVisibility(View.GONE);
             adapter.clear();
@@ -333,8 +341,8 @@ public class PrepNoTimer extends ListActivity {
     mprev.setOnClickListener(new OnClickListener() {
 
       public void onClick(View v) {
-        if (cnt > 99)
-          cnt = 99;
+        if (cnt > current_number_of_questions - 1)
+          cnt = current_number_of_questions;
 
         if (cnt <= 0) {
 
@@ -355,7 +363,8 @@ public class PrepNoTimer extends ListActivity {
             mslidingDrawer.setVisibility(View.GONE);
             mslidingDrawer.setVisibility(View.VISIBLE);
             int till = getAnswerString.indexOf("*");
-            mgetAnswerString.setText(getAnswerString.substring(0, till));
+            if (till > 0)
+              mgetAnswerString.setText(getAnswerString.substring(0, till));
           } else {
             if (mslidingDrawer.getVisibility() == View.VISIBLE)
               mslidingDrawer.setVisibility(View.GONE);
@@ -377,6 +386,8 @@ public class PrepNoTimer extends ListActivity {
 
     qnlist = bundle.getStringArray("allquestions");
     anslist = bundle.getStringArray("allanswers");
+    current_number_of_questions = qnlist.length;
+    originalQNums = new int[current_number_of_questions];
     int begin = 0, end = 0;
     begin = 0;
     end = qnlist.length;

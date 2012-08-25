@@ -183,8 +183,10 @@ public class USCitizenPrep extends Activity implements
 
     } finally {
       try {
-        myReader.close();
-        fIn.close();
+        if ((myReader == null) == false)
+          myReader.close();
+        if ((fIn == null) == false)
+          fIn.close();
 
       } catch (IOException e) {
         e.printStackTrace();
@@ -193,7 +195,7 @@ public class USCitizenPrep extends Activity implements
 
     if (governor.contains(currentstate)) {
       USCitizenPrep.allanswers[42] = governor;
-      Log.d("onlyone ",
+      Log.d("onlyoneoneone ",
           "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" + "  "
               + currentstate);
       gov_exist = true;
@@ -282,25 +284,7 @@ public class USCitizenPrep extends Activity implements
     radio_test_yourself = (RadioButton) findViewById(com.ctz.R.id.radio_test_yourself);
 
     go_Button = (Button) findViewById(com.ctz.R.id.go);
-    /*
-     * exit_Button = (Button) findViewById(com.ctz.R.id.exit);
-     * 
-     * exit_Button.setOnClickListener(new OnClickListener() {
-     * 
-     * public void onClick(View v) {
-     * 
-     * AlertDialog.Builder builder = new
-     * AlertDialog.Builder(USCitizenPrep.this);
-     * builder.setMessage("Are you sure you want to exit?")
-     * .setCancelable(false) .setPositiveButton("Yes", new
-     * DialogInterface.OnClickListener() { public void onClick(DialogInterface
-     * dialog, int id) { USCitizenPrep.this.finish(); } })
-     * .setNegativeButton("No", new DialogInterface.OnClickListener() { public
-     * void onClick(DialogInterface dialog, int id) { dialog.cancel(); } });
-     * AlertDialog alert = builder.create(); alert.show();
-     * 
-     * } });
-     */
+
     go_Button.setOnClickListener(new OnClickListener() {
 
       public void onClick(View v) {
@@ -309,7 +293,6 @@ public class USCitizenPrep extends Activity implements
             + "***************&&&&&&&&&&&&&&&&&&^^^^^^^^^^^^^^^^^^"
             + allanswers[19] + allanswers[42] + allanswers[43]);
 
-        String str;// generate string basedon conditions
         gov_exist = false;
         sen_exist = false;
         // not

@@ -37,7 +37,7 @@ public class USCitizenPreppart2 extends Activity implements
   static Toast toast;
   static int duration_of_toast_display = 2000;
 
-  int[] randoms = new int[100];
+  int[] randoms;// = new int[100];
   private boolean changedstate;// if user selects a different state in the same
                                // session
   String selected;
@@ -71,6 +71,7 @@ public class USCitizenPreppart2 extends Activity implements
     int start, end;
     answers_list.clear();
     questions_list.clear();
+
     if (s.equals("total")) {
 
       start = 0;
@@ -86,7 +87,7 @@ public class USCitizenPreppart2 extends Activity implements
       String randomstr = "aaa,";
       int nums = 10;
       Set<Integer> collect = new HashSet<Integer>();
-
+      randoms = new int[allquestions.length];
       int count = 0, k = 0;
       int justcount = 0;
       for (int countslice = 1; countslice <= 10; countslice++) {
@@ -94,7 +95,7 @@ public class USCitizenPreppart2 extends Activity implements
         randomstr = "aaa";
         count = 0;
         while (count < 10) {
-          if (collect.size() == 100)
+          if (collect.size() == allquestions.length)
             break;
           k = rands.nextInt(nums);
           if (!randomstr.contains(k + "")) {
@@ -106,7 +107,7 @@ public class USCitizenPreppart2 extends Activity implements
 
           }
         }
-        if (collect.size() == 100)
+        if (collect.size() == allquestions.length)
           break;
       }
 
@@ -198,11 +199,16 @@ public class USCitizenPreppart2 extends Activity implements
           }
 
           if (USCitizenPreppart1.is_a_senior == true
-              && (radio_prepare_for_interview.isChecked() == true || radio_test_yourself
-                  .isChecked() == true)) {
+              && (radio_prepare_for_interview.isChecked() == true)) {
             selected_type = new String("1");
             copy("senior");
           }
+        }
+
+        if (USCitizenPreppart1.is_a_senior == true
+            && (radio_test_yourself.isChecked() == true)) {
+          selected_type = new String("2");
+          copy("senior");
         }
 
         if (selected_type == null) {
@@ -228,8 +234,8 @@ public class USCitizenPreppart2 extends Activity implements
           startActivity(myIntent2);
         }
 
-        if ((selected_type.equals("1") || selected_type.equals("2"))
-            && USCitizenPreppart1.is_a_senior == true) {
+        if ((selected_type.equals("1") || (selected_type.equals("2"))
+            && USCitizenPreppart1.is_a_senior == true)) {
 
           qnbundle.clear();
           copy("senior");
@@ -241,11 +247,29 @@ public class USCitizenPreppart2 extends Activity implements
             qns[i] = (String) qnobarr[i];// (String[]) questions_list.toArray()
             ans[i] = (String) ansobarr[i];
           }
-          qnbundle.putStringArray("allquestions", qns);
-          qnbundle.putStringArray("allanswers", ans);
-          myIntent2.setClassName("com.ctz", "com.ctz.PrepNoTimer");
+
+          randoms = new int[qns.length];
+          for (int i = 0; i < qns.length; i++)
+            randoms[i] = i;
+
+          qnbundle.putIntArray("originalQNums", randoms);
+          if (selected_type.equals("1")) {
+            qnbundle.putStringArray("allquestions", qns);
+            qnbundle.putStringArray("allanswers", ans);
+            // you must have a randmzr for 13 qns
+
+            myIntent2.setClassName("com.ctz", "com.ctz.PrepNoTimer");
+
+          } else
+
+          {
+            qnbundle.putStringArray("randomqns", qns);
+            qnbundle.putStringArray("anstorandomqns", ans);
+            myIntent2.setClassName("com.ctz", "com.ctz.Gather_UserChoices");
+          }
           myIntent2.putExtras(qnbundle);
           startActivity(myIntent2);
+
         }
 
       }

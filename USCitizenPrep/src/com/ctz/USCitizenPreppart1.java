@@ -89,7 +89,11 @@ public class USCitizenPreppart1 extends Activity implements
   }
 
   public void fillgovernordata() {
+    Log.d("prevcap && currcap", currentcapital + "  trying governordata"
+        + "*********************^^^^^^^^^^^^^^^$%%%%%%%%%%%%%%%%%%%%"
+        + currentstate);
     String governor = "";
+
     new Justdownload(currentstate);
     FileInputStream fIn = null;
     BufferedReader myReader = null;
@@ -107,8 +111,10 @@ public class USCitizenPreppart1 extends Activity implements
 
     } finally {
       try {
-        myReader.close();
-        fIn.close();
+        if ((myReader == null) == false)
+          myReader.close();
+        if ((myReader == null) == false)
+          fIn.close();
 
       } catch (IOException e) {
         e.printStackTrace();
@@ -121,12 +127,15 @@ public class USCitizenPreppart1 extends Activity implements
       Log.d("onlyone ",
           "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" + "  "
               + currentstate);
-      gov_exist = true;
+      gov_exist = true;// for popup message
     }
 
   }
 
   public void fillsenatordata() {// close ???
+    Log.d("prevcap && currcap", currentcapital + "  trying senatordata"
+        + "*********************^^^^^^^^^^^^^^^$%%%%%%%%%%%%%%%%%%%%");
+
     String senator = "";
     FileInputStream fIn = null;
     BufferedReader myReader = null;
@@ -150,6 +159,9 @@ public class USCitizenPreppart1 extends Activity implements
         e.printStackTrace();
       }
     }
+    Log.d("Hello onlyoneonlyone ",
+        "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMsenator" + senator
+            + currentstate);
     if (senator.contains(currentstate)) {
       original19 = senator;
       Log.d("Hello onlyone ",
