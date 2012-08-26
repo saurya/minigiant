@@ -38,6 +38,9 @@ public class PrepNoTimer extends ListActivity {
       "58", "59", "60", "63", "64", "66", "67", "70", "71", "72", "73", "74",
       "75", "76", "77", "84", "86", "87", "90", "91", "92", "94", "95", "96",
       "99" }));
+  static String[] seniordata = { "5", "6", "10", "11", "12", "16", "17", "19",
+      "24", "26", "27", "43", "44", "48", "53", "55", "69", "74", "77", "84",
+      "93", "94", "96", "98" };
   boolean bingo, done;
   int current_number_of_questions;
   ImageButton magichandle, invertimage;
@@ -152,7 +155,10 @@ public class PrepNoTimer extends ListActivity {
       mGetQuestionString.setText(getquestionString);
       getAnswerString = getnextanswer(cnt);
 
-      if (multansqnnums.contains(cnt + "")) {
+      if ((!USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
+          .contains(cnt + ""))
+          || (USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
+              .contains(PrepNoTimer.seniordata[cnt]))) {
         if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
           mmultipleanswerlist.setVisibility(View.GONE);
         mmultipleanswerlist.setVisibility(View.GONE);// remove staledata
@@ -161,17 +167,46 @@ public class PrepNoTimer extends ListActivity {
         mslidingDrawer.setVisibility(View.VISIBLE);
 
         int till = getAnswerString.indexOf("*");
-        mgetAnswerString.setText(getAnswerString.substring(0, till));
+        mgetAnswerString.setText("hello1" + getAnswerString.substring(0, till));
       } else {
         magichandle.setVisibility(View.GONE);
         mslidingDrawer.setVisibility(View.GONE);
         mslideHandleButton.setVisibility(View.GONE);
         mmultipleanswerlist.setVisibility(View.GONE);
         mgetAnswerString.setVisibility(View.VISIBLE);
-        mgetAnswerString.setText(getAnswerString);
+        mgetAnswerString.setText("hello2" + getAnswerString);
       }
 
     }
+  }
+
+  private void check_if_multipleanswers() {
+    if ((!USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
+        .contains(cnt + ""))
+        || (USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
+            .contains(PrepNoTimer.seniordata[cnt]))) {
+      magichandle.setVisibility(View.VISIBLE);
+      if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
+        mmultipleanswerlist.setVisibility(View.GONE);
+      mslidingDrawer.setVisibility(View.VISIBLE);
+      mslideHandleButton.setVisibility(View.VISIBLE);
+
+      int till = getAnswerString.indexOf("*");
+
+      if (till > 0)
+        mgetAnswerString.setText("hello3" + getAnswerString.substring(0, till));
+
+    } else {
+      if (mslidingDrawer.getVisibility() == View.VISIBLE)
+        mslidingDrawer.setVisibility(View.GONE);
+      mslideHandleButton.setVisibility(View.GONE);
+      mmultipleanswerlist.setVisibility(View.GONE);
+      magichandle.setVisibility(View.GONE);
+      mslidingDrawer.setVisibility(View.GONE);
+      mgetAnswerString.setVisibility(View.VISIBLE);
+      mgetAnswerString.setText("hello4" + getAnswerString);
+    }
+
   }
 
   public String getnextanswer(int cnt) {
@@ -206,8 +241,6 @@ public class PrepNoTimer extends ListActivity {
     return qnlist[cnt];
   }
 
-  /** Called when the activity is first created. */
-
   @SuppressWarnings("deprecation")
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -223,7 +256,6 @@ public class PrepNoTimer extends ListActivity {
     bingo = false;
     int score = 0;
     main5_View = findViewById(R.layout.main5);
-
     setContentView(R.layout.main5);// following lines 'must' to follow layout
     mGetQuestionString = (TextView) findViewById(R.id.getquestionString);
     mgetAnswerString = (TextView) findViewById(R.id.getAnswerString);
@@ -291,7 +323,11 @@ public class PrepNoTimer extends ListActivity {
           mGetQuestionString.setText(getquestionString);
 
           getAnswerString = getnextanswer(cnt);
-          if (multansqnnums.contains(cnt + "")) {
+          // not sequential numbers as in senior data
+          if ((!USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
+              .contains(cnt + ""))
+              || (USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
+                  .contains(PrepNoTimer.seniordata[cnt]))) {
             magichandle.setVisibility(View.VISIBLE);
             if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
               mmultipleanswerlist.setVisibility(View.GONE);
@@ -299,7 +335,8 @@ public class PrepNoTimer extends ListActivity {
             mslidingDrawer.setVisibility(View.VISIBLE);
             int till = getAnswerString.indexOf("*");
             if (till > 0)
-              mgetAnswerString.setText(getAnswerString.substring(0, till));
+              mgetAnswerString.setText("hello5"
+                  + getAnswerString.substring(0, till));
           } else {
             magichandle.setVisibility(View.GONE);
             adapter.clear();
@@ -308,7 +345,7 @@ public class PrepNoTimer extends ListActivity {
             mslideHandleButton.setVisibility(View.GONE);
             mslidingDrawer.setVisibility(View.GONE);
             mgetAnswerString.setVisibility(View.VISIBLE);
-            mgetAnswerString.setText(getAnswerString);
+            mgetAnswerString.setText("hello6" + getAnswerString);
           }
 
         }
@@ -342,13 +379,15 @@ public class PrepNoTimer extends ListActivity {
 
       public void onClick(View v) {
         if (cnt > current_number_of_questions - 1)
-          cnt = current_number_of_questions;
+          cnt = current_number_of_questions - 1;
 
         if (cnt <= 0) {
 
           cnt = 0;
           mGetQuestionString.setText(getquestionString0);
-          mgetAnswerString.setText(getAnswerString0);
+          getAnswerString = getAnswerString0;
+          int till = getAnswerString.indexOf("*");
+          check_if_multipleanswers();
         }
 
         else {
@@ -357,24 +396,28 @@ public class PrepNoTimer extends ListActivity {
           getquestionString = getpreviousqn(cnt);
           mGetQuestionString.setText(getquestionString);
           getAnswerString = getpreviousanswer(cnt);
-          if (multansqnnums.contains(cnt + "")) {
-            if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
-              mmultipleanswerlist.setVisibility(View.GONE);
-            mslidingDrawer.setVisibility(View.GONE);
-            mslidingDrawer.setVisibility(View.VISIBLE);
-            int till = getAnswerString.indexOf("*");
-            if (till > 0)
-              mgetAnswerString.setText(getAnswerString.substring(0, till));
-          } else {
-            if (mslidingDrawer.getVisibility() == View.VISIBLE)
-              mslidingDrawer.setVisibility(View.GONE);
-            mslideHandleButton.setVisibility(View.GONE);
-            mmultipleanswerlist.setVisibility(View.GONE);
-            mslideHandleButton.setVisibility(View.GONE);
-            mslidingDrawer.setVisibility(View.GONE);
-            mgetAnswerString.setVisibility(View.VISIBLE);
-            mgetAnswerString.setText(getAnswerString);
-          }
+          check_if_multipleanswers();
+
+          // call with getAnswerstring
+          /*
+           * if ((!USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
+           * .contains(cnt + "")) || (USCitizenPreppart1.is_a_senior &&
+           * PrepNoTimer.multansqnnums .contains(PrepNoTimer.seniordata[cnt])))
+           * { if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
+           * mmultipleanswerlist.setVisibility(View.GONE);
+           * mslidingDrawer.setVisibility(View.GONE);
+           * mslidingDrawer.setVisibility(View.VISIBLE); int till =
+           * getAnswerString.indexOf("*"); if (till > 0)
+           * mgetAnswerString.setText(getAnswerString.substring(0, till)); }
+           * else { if (mslidingDrawer.getVisibility() == View.VISIBLE)
+           * mslidingDrawer.setVisibility(View.GONE);
+           * mslideHandleButton.setVisibility(View.GONE);
+           * mmultipleanswerlist.setVisibility(View.GONE);
+           * mslideHandleButton.setVisibility(View.GONE);
+           * mslidingDrawer.setVisibility(View.GONE);
+           * mgetAnswerString.setVisibility(View.VISIBLE);
+           * mgetAnswerString.setText(getAnswerString); }
+           */
         }
       }
     }
@@ -397,12 +440,12 @@ public class PrepNoTimer extends ListActivity {
     getAnswerString0 = anslist[begin];
     getquestionString0 = qnlist[begin];// first question
     mGetQuestionString.setText(getquestionString0);
-    mgetAnswerString.setText(getAnswerString0);
+    getAnswerString = anslist[begin];
+    check_if_multipleanswers();
     currentdisplay = 0;
     originalQnumber = originalQNums[0];
   }
 
-  // END************this code not for TestCtz1*************
   private ArrayList<String> tokens(String str) {
     int skip = 0;
     StringTokenizer stringTokenizer = new StringTokenizer(str, "*");

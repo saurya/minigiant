@@ -51,9 +51,9 @@ public class USCitizenPreppart1 extends Activity implements
   String[] states = new String[50];
 
   static String[] statenames;
-  static String statename = "";
+  static String statename = "a";
 
-  String senator_of_state = "", governor_of_state = "";
+  String senator_of_state = "a", governor_of_state = "a";
   String[] state = new String[100];
   String[] sentr = new String[100];
 
@@ -218,7 +218,10 @@ public class USCitizenPreppart1 extends Activity implements
 
         {
           is_a_senior = radio_senior_prepare_for_interview.isChecked();
-
+          Log.d(
+              "oldfella",
+              is_a_senior
+                  + "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
           currentstate = spinner.getSelectedItem().toString();
           changedstate = capital();// currentstate has to be fulllength for this
                                    // method

@@ -2,15 +2,17 @@ package com.ctz;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.StringTokenizer;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
@@ -18,21 +20,23 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SlidingDrawer;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ctz.SimpleGestureFilter.SimpleGestureListener;
 
 @SuppressLint("NewApi")
-public class TestCTZ1 extends Activity implements OnGestureListener,
+public class TestCTZ1 extends ListActivity implements OnGestureListener,
     SimpleGestureListener {
 
   boolean i_got_it, time_out;
   private GestureDetector gestureScanner;
   private SimpleGestureFilter detector;
-
+  ImageButton magichandle, invertimage;
   @SuppressLint({ "NewApi", "NewApi", "NewApi" })
   OnClickListener myListener;
   EditText edittext;//
@@ -43,8 +47,15 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
   private TextView mtimerTextField;
   private TextView mScore;
   // LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
-  ArrayList<String> multipleAnswersItems = new ArrayList<String>();
 
+  String prtmultiplestrg;
+
+  ArrayList<String> multipleAnswersItems = new ArrayList<String>();
+  private ImageView mslideHandleButton;
+
+  private SlidingDrawer mslidingDrawer;
+  boolean addItemscalled = false;
+  private ListView mmultipleanswerlist;
   // DEFINING STRING ADAPTER WHICH WILL HANDLE DATA OF LISTVIEW
   ArrayAdapter<String> adapter;
   int questionnumber, current_Qn_length;
@@ -58,7 +69,7 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
   final static long hours_in_millies = minutes_in_millies * 60;
   static AlertDialog.Builder testscores_dialog_builder, builder;
   static AlertDialog testscores_dialog, alert;
-
+  ArrayList<String> multipleAnswerslist = new ArrayList<String>();
   int[] originalQNums = new int[100];
   ImageView mbtnclose_normal;
   TextView mgetReport;
@@ -91,6 +102,19 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
   int originalQnumber;
   static String finalswipe;
   int numberofrounds;
+
+  public void addItems(View v) {
+    mmultipleanswerlist.setVisibility(View.GONE);
+    addItemscalled = true;
+    if (addItemscalled)
+      adapter.clear();
+    prtmultiplestrg = anslist[cnt];
+    multipleAnswersItems = tokens(prtmultiplestrg);
+    adapter.notifyDataSetChanged();
+    Log.d("additems",
+        "got to SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
+    mmultipleanswerlist.setVisibility(View.VISIBLE);
+  }
 
   public void calculateScores() {
     if (i_got_it)
@@ -125,8 +149,34 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
 
         getquestionString = getnextqn(cnt);
         mGetQuestionString.setText(getquestionString);
-        mgetAnswerString.setText(anslist[cnt]);
+        // mgetAnswerString.setText(anslist[cnt]);
+        if ((!USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
+            .contains(cnt + ""))
+            || (USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
+                .contains(PrepNoTimer.seniordata[cnt]))) {
 
+          if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
+            mmultipleanswerlist.setVisibility(View.GONE);
+          mmultipleanswerlist.setVisibility(View.GONE);
+          mslidingDrawer.setVisibility(View.VISIBLE);
+          mslideHandleButton.setVisibility(View.VISIBLE);
+          magichandle.setVisibility(View.VISIBLE);
+          getAnswerString = anslist[cnt];
+          int till = getAnswerString.indexOf("*");
+          if (till > 0)
+            mgetAnswerString.setText(getAnswerString.substring(0, till));
+          Log.d("error", PrepNoTimer.seniordata[cnt] + "   " + getAnswerString
+              + "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+        } else {
+          magichandle.setVisibility(View.GONE);
+          adapter.clear();
+          mmultipleanswerlist.setVisibility(View.GONE);
+
+          mslideHandleButton.setVisibility(View.GONE);
+          mslidingDrawer.setVisibility(View.GONE);
+          mgetAnswerString.setVisibility(View.VISIBLE);
+          mgetAnswerString.setText(getAnswerString);
+        }
         mbtn_check_on.setEnabled(true);
         cnt1 = originalQNums[cnt];
         runtimer.start();
@@ -327,6 +377,9 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    adapter = new ArrayAdapter<String>(this,
+        android.R.layout.simple_list_item_1, multipleAnswersItems);
+    this.setListAdapter(adapter);
     detector = new SimpleGestureFilter(this, this);
     gestureScanner = new GestureDetector(this);
     mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
@@ -377,12 +430,45 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
     mgetAnswerString = (TextView) findViewById(R.id.getAnswerString);
 
     mScore = (TextView) findViewById(R.id.scoreField);
+    magichandle = (ImageButton) findViewById(R.id.magichandle);
+    invertimage = (ImageButton) findViewById(R.id.invertimage);
+    magichandle.setOnClickListener(new OnClickListener() {
+      public void onClick(View v) {
 
+        {
+          mslidingDrawer.open();
+          mmultipleanswerlist.setVisibility(View.VISIBLE);
+          invertimage.setVisibility(View.VISIBLE);
+        }
+
+      }
+    });
+
+    invertimage.setOnClickListener(new OnClickListener() {
+      public void onClick(View v) {
+
+        {
+          mmultipleanswerlist.setVisibility(View.GONE);
+          mslidingDrawer.close();
+          invertimage.setVisibility(View.GONE);
+        }
+
+      }
+    });
     myListener = new View.OnClickListener() {
       public void onClick(View v) {
         newOnclick(v);
       }
     };
+
+    mmultipleanswerlist = (ListView) findViewById(android.R.id.list);
+    mmultipleanswerlist.setScrollbarFadingEnabled(false);
+    mslideHandleButton = (ImageView) findViewById(R.id.slideHandleButton);
+    mslidingDrawer = (SlidingDrawer) findViewById(R.id.slidingDrawer);
+    mslideHandleButton.setVisibility(View.GONE);
+    mslidingDrawer.setVisibility(View.GONE);
+    mmultipleanswerlist.setVisibility(View.GONE);
+
     mrightViewText = (TextView) findViewById(R.id.rightViewText);
     mwrongViewText = (TextView) findViewById(R.id.wrongViewText);
     mdisabledViewText = (TextView) findViewById(R.id.disabled_ViewText);
@@ -482,6 +568,19 @@ public class TestCTZ1 extends Activity implements OnGestureListener,
   @Override
   public boolean onTouchEvent(MotionEvent me) {
     return gestureScanner.onTouchEvent(me);
+  }
+
+  private ArrayList<String> tokens(String str) {
+    StringTokenizer stringTokenizer = new StringTokenizer(str, "*");
+    Log.d("try:  ", "The total no. of tokens generated for:  " + str + " is "
+        + stringTokenizer.countTokens());
+
+    while (stringTokenizer.hasMoreTokens()) {
+
+      multipleAnswersItems.add(stringTokenizer.nextToken());
+    }
+    multipleAnswersItems.remove(0);
+    return multipleAnswersItems;
   }
 
 }

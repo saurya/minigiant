@@ -129,12 +129,22 @@ public class USCitizenPreppart2 extends Activity implements
           "Length: ",
           end
               + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-      for (int i = start; i < end; i++)
-        if (allquestions[i].contains("?*")) {
+      for (int i = start; i < end; i++) {
+        int len = allquestions[i].length() - 1;
+        if (allquestions[i].substring(len).equals("*")) {
           questions_list.add(allquestions[i]);
           answers_list.add("" + allanswers[i]);
+          Log.d(
+              "QA",
+              i
+                  + "   "
+                  + allquestions[i]
+                  + " "
+                  + allanswers[i]
+                  + "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
         }
 
+      }
     }
 
   }
@@ -191,7 +201,29 @@ public class USCitizenPreppart2 extends Activity implements
 
             }
           }
+          if (radio_test_yourself.isChecked() == true
+              && USCitizenPreppart1.is_a_senior == true) {
+            selected_type = new String("2");
 
+            copy("senior");
+            qnbundle.clear();
+            String[] qns = new String[questions_list.size()];
+            String[] ans = new String[answers_list.size()];
+            Object[] qnobarr = questions_list.toArray();
+            Object[] ansobarr = answers_list.toArray();
+            for (int i = 0; i < questions_list.size(); i++) {
+              qns[i] = (String) qnobarr[i];// (String[])
+                                           // questions_list.toArray()
+              ans[i] = (String) ansobarr[i];
+            }
+            randoms = new int[qns.length];
+            for (int i = 0; i < qns.length; i++)
+              randoms[i] = i;
+            qnbundle.putIntArray("originalQNums", randoms);
+            qnbundle.putStringArray("randomqns", qns);
+            qnbundle.putStringArray("anstorandomqns", ans);
+
+          }
           if (radio_prepare_for_interview.isChecked() == true
               && USCitizenPreppart1.is_a_senior == false) {
             selected_type = new String("1");
@@ -205,73 +237,55 @@ public class USCitizenPreppart2 extends Activity implements
           }
         }
 
-        if (USCitizenPreppart1.is_a_senior == true
-            && (radio_test_yourself.isChecked() == true)) {
-          selected_type = new String("2");
-          copy("senior");
-        }
-
         if (selected_type == null) {
           return;
         }
-
-        if (radio_prepare_for_interview.isChecked() == true
-            && USCitizenPreppart1.is_a_senior == false) {
-          StringBuilder sb = new StringBuilder().append(selected_type);
-          bundle.putString(user_selection, sb.toString());
-          bundle.putStringArray("allquestions", allquestions);
-
-          bundle.putStringArray("allanswers", allanswers);
-
-          myIntent2.putExtras(bundle);
-          myIntent2.setClassName("com.ctz", "com.ctz.PrepNoTimer");
-          startActivity(myIntent2);
-        }
-        if (selected_type.equals("2")
-            && USCitizenPreppart1.is_a_senior == false) {
-          myIntent2.setClassName("com.ctz", "com.ctz.Gather_UserChoices");
-          myIntent2.putExtras(qnbundle);
-          startActivity(myIntent2);
-        }
-
-        if ((selected_type.equals("1") || (selected_type.equals("2"))
-            && USCitizenPreppart1.is_a_senior == true)) {
-
-          qnbundle.clear();
-          copy("senior");
-          String[] qns = new String[questions_list.size()];
-          String[] ans = new String[answers_list.size()];
-          Object[] qnobarr = questions_list.toArray();
-          Object[] ansobarr = answers_list.toArray();
-          for (int i = 0; i < questions_list.size(); i++) {
-            qns[i] = (String) qnobarr[i];// (String[]) questions_list.toArray()
-            ans[i] = (String) ansobarr[i];
-          }
-
-          randoms = new int[qns.length];
-          for (int i = 0; i < qns.length; i++)
-            randoms[i] = i;
-
-          qnbundle.putIntArray("originalQNums", randoms);
+        if (USCitizenPreppart1.is_a_senior == false) {
           if (selected_type.equals("1")) {
-            qnbundle.putStringArray("allquestions", qns);
-            qnbundle.putStringArray("allanswers", ans);
-            // you must have a randmzr for 13 qns
+            StringBuilder sb = new StringBuilder().append(selected_type);
+            bundle.putString(user_selection, sb.toString());
 
+            bundle.putStringArray("allquestions", allquestions);
+
+            bundle.putStringArray("allanswers", allanswers);
+            myIntent2.putExtras(bundle);
             myIntent2.setClassName("com.ctz", "com.ctz.PrepNoTimer");
-
-          } else
-
-          {
-            qnbundle.putStringArray("randomqns", qns);
-            qnbundle.putStringArray("anstorandomqns", ans);
-            myIntent2.setClassName("com.ctz", "com.ctz.Gather_UserChoices");
+            startActivity(myIntent2);
           }
-          myIntent2.putExtras(qnbundle);
-          startActivity(myIntent2);
-
+          if (selected_type.equals("2")) {
+            myIntent2.setClassName("com.ctz", "com.ctz.Gather_UserChoices");
+            myIntent2.putExtras(qnbundle);
+            startActivity(myIntent2);
+          }
         }
+        if (USCitizenPreppart1.is_a_senior == true) {
+          if (selected_type.equals("1")) {
+            StringBuilder sb = new StringBuilder().append(selected_type);
+            bundle.putString(user_selection, sb.toString());
+            String[] qns = new String[questions_list.size()];
+            String[] ans = new String[answers_list.size()];
+            Object[] qnobarr = questions_list.toArray();
+            Object[] ansobarr = answers_list.toArray();
 
+            for (int i = 0; i < questions_list.size(); i++) {
+              qns[i] = (String) qnobarr[i];// (String[])
+                                           // questions_list.toArray()
+              ans[i] = (String) ansobarr[i];
+            }
+            bundle.putStringArray("allquestions", qns);
+
+            bundle.putStringArray("allanswers", ans);
+
+            myIntent2.putExtras(bundle);
+            myIntent2.setClassName("com.ctz", "com.ctz.PrepNoTimer");
+            startActivity(myIntent2);
+          }
+          if (selected_type.equals("2")) {
+            myIntent2.setClassName("com.ctz", "com.ctz.Gather_UserChoices");
+            myIntent2.putExtras(qnbundle);
+            startActivity(myIntent2);
+          }
+        }
       }
     });
   }
@@ -346,17 +360,17 @@ public class USCitizenPreppart2 extends Activity implements
         allanswers[qnnum] = test;
         qnnum++;
       }
-      if ((USCitizenPreppart1.original42).length() > 0)// if internet
+      if ((USCitizenPreppart1.original42).length() > 1)// if internet
                                                        // connection
                                                        // didn't fetch
                                                        // results
         allanswers[42] = USCitizenPreppart1.original42; // and staledta alsonot
                                                         // available
-      if ((USCitizenPreppart1.original19).length() > 0)// have default answer
+      if ((USCitizenPreppart1.original19).length() > 1)// have default answer
                                                        // as
         // given on website
         allanswers[19] = USCitizenPreppart1.original19;
-      if ((USCitizenPreppart1.currentcapital43).length() > 0)
+      if ((USCitizenPreppart1.currentcapital43).length() > 1)
         allanswers[43] = USCitizenPreppart1.currentcapital43;
       isr1.close();
       isMC1.close();

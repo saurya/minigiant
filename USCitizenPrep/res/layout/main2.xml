@@ -113,7 +113,37 @@
         android:layout_below="@+id/getAnswerString"
         android:background="#8B5742" />
 
-   
+   <ImageButton
+       android:id="@+id/magichandle"
+       android:src="@drawable/arrow_down_float"
+     
+      android:layout_width="36dp"
+      android:layout_height="36dp"
+       android:layout_below="@+id/emptyView3"
+   android:layout_alignBaseline="@+id/emptyView3"
+   android:layout_alignRight="@+id/emptyView3"
+      android:gravity="center_vertical|center_horizontal"
+    
+    android:visibility="gone"
+      android:textColor="#FFFFFF"
+      android:textSize="11pt"
+      android:background="@drawable/mainbackground"
+     />
+  <ImageButton
+       android:id="@+id/invertimage"
+       android:src="@drawable/arrowup"
+    android:layout_below="@+id/emptyView3"
+   android:layout_alignBaseline="@+id/emptyView3"
+   android:layout_alignRight="@+id/emptyView3"
+      android:layout_width="36dp"
+            android:layout_height="36dp"
+    android:visibility="gone"
+   android:gravity="center_vertical|center_horizontal"
+    
+     android:textColor="#FFFFFF"
+     android:textSize="11pt"
+      android:background="@drawable/mainbackground"
+     /> 
 
 <ImageView
      android:id="@+id/btn_check_on_disabled"
@@ -198,6 +228,49 @@
     android:textColor="#000000" />
 
 
+
+
+ <SlidingDrawer
+    android:id="@+id/slidingDrawer" 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:content="@android:id/list"
+    android:handle="@+id/slideHandleButton"
+    android:layout_below="@+id/emptyView3"   
+    android:orientation="vertical"
+    android:bottomOffset="-317dp"
+    android:topOffset="25dp"
+    android:clipChildren="false"
+    android:padding="1dp"  
+    android:allowSingleTap="true"
+   
+  >       
+   <ImageView
+           android:id="@+id/slideHandleButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+      
+        android:src="@drawable/arrow_down_float"
+         android:textSize="9dp"
+          android:background="@drawable/mainbackground"
+          android:gravity="center"
+        />
+
+       
+     <ListView
+          android:id="@+id/@android:id/list"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:paddingBottom="50dip"
+          android:drawSelectorOnTop="false"
+          android:fadeScrollbars="false"
+          
+          android:divider="@drawable/mainbackground"
+          /> 
+    
+ 
+</SlidingDrawer> 
+
 <TextView
     android:id="@+id/getReport"
     android:layout_width="fill_parent"
@@ -206,7 +279,9 @@
     android:background="@drawable/mainbackground"
     android:gravity="center"
     android:textColor="#4F2F4F"
-    android:textSize="6pt" />
-
-
+    android:textSize="6pt" /> 
+ 
+ 
+ 
+ 
 </RelativeLayout>

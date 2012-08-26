@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/mainbackground"
+   android:background="@drawable/mainbackground"
      style="?android:attr/spinnerItemStyle"
      android:layout_width="280dp"
      android:layout_height="wrap_content"
@@ -9,5 +9,7 @@
      android:gravity="center"
     android:textSize="22dp"
     android:layout_marginBottom="60dp"
+    android:paddingRight="20dp"
+    android:layout_marginRight="20dp"
      >
 </TextView>
