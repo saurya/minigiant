@@ -19,8 +19,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SlidingDrawer;
@@ -65,7 +65,7 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
   final static long hours_in_millies = minutes_in_millies * 60;
   static AlertDialog.Builder testscores_dialog_builder, builder;
   static AlertDialog testscores_dialog, alert;
-  ImageButton magichandle, invertimage;
+  Button magichandle, invertimage;
   private ListView mmultipleanswerlist;
   private ImageView mslideHandleButton;
   private SlidingDrawer mslidingDrawer;
@@ -171,7 +171,7 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
         mtimerTextField.setText("done!");
         check_if_multipleanswers();
         i_got_it = false;
-        magichandle.setVisibility(View.VISIBLE);
+        magichandle.setVisibility(0);
         if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
           mmultipleanswerlist.setVisibility(View.GONE);
         mslidingDrawer.setVisibility(View.VISIBLE);
@@ -208,7 +208,7 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
         .contains(originalQNums[cnt] + ""))
         || (USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
             .contains(originalQNums[cnt]))) {
-      magichandle.setVisibility(View.VISIBLE);
+      // magichandle.setVisibility(View.VISIBLE);
       if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
         mmultipleanswerlist.setVisibility(View.GONE);
       mslidingDrawer.setVisibility(View.VISIBLE);
@@ -224,7 +224,7 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
         mslidingDrawer.setVisibility(View.GONE);
       mslideHandleButton.setVisibility(View.GONE);
       mmultipleanswerlist.setVisibility(View.GONE);
-      magichandle.setVisibility(View.GONE);
+      magichandle.setVisibility(0);
       mslidingDrawer.setVisibility(View.GONE);
       mgetAnswerString.setVisibility(View.GONE);
 
@@ -246,6 +246,7 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
       mtimerTextField.setVisibility(View.GONE);
 
     } else {
+      magichandle.setVisibility(0);
       mgetAnswerString.setVisibility(View.VISIBLE);
       mGetQuestionString.setVisibility(View.VISIBLE);
       mtimerTextField.setVisibility(View.VISIBLE);
@@ -299,6 +300,7 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
     getquestionString0 = qnlist[begin];
 
     mGetQuestionString.setText(getquestionString0);
+
     mGetQuestionString.setVisibility(View.VISIBLE);
     mgetAnswerString.setVisibility(View.GONE);
     mbtnclose_normal.setVisibility(View.GONE);
@@ -443,11 +445,11 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
     mgetReport = (TextView) findViewById(R.id.getReport);
     mGetQuestionString = (TextView) findViewById(R.id.getquestionString);
     mgetAnswerString = (TextView) findViewById(R.id.getAnswerString);
-    magichandle = (ImageButton) findViewById(R.id.magichandle);
+    magichandle = (Button) findViewById(R.id.magichandle);
     adapter = new ArrayAdapter<String>(this,
         android.R.layout.simple_list_item_1, multipleAnswersItems);
     this.setListAdapter(adapter);
-    invertimage = (ImageButton) findViewById(R.id.invertimage);
+    invertimage = (Button) findViewById(R.id.invertimage);
     mScore = (TextView) findViewById(R.id.scoreField);
     magichandle.setOnClickListener(new OnClickListener() {
       public void onClick(View v) {
@@ -486,6 +488,7 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
     mdisabledViewText.setVisibility(View.GONE);
     mbtn_check_on_disabled.setOnClickListener(null);
     mbtn_check_on.setOnClickListener(myListener);
+
     mGetQuestionString.setText(getquestionString0);
     mgetAnswerString.setVisibility(View.GONE);
 
@@ -498,9 +501,9 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
     mslideHandleButton.setVisibility(View.GONE);
     mslidingDrawer.setVisibility(View.GONE);
     mmultipleanswerlist.setVisibility(View.GONE);
-    magichandle = (ImageButton) findViewById(R.id.magichandle);
-    invertimage = (ImageButton) findViewById(R.id.invertimage);
-
+    magichandle = (Button) findViewById(R.id.magichandle);
+    invertimage = (Button) findViewById(R.id.invertimage);
+    magichandle.setVisibility(View.GONE);
     mslidingDrawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
 
       public void onDrawerOpened() {

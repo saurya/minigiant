@@ -47,7 +47,7 @@
         android:layout_marginBottom="59dp"
         android:layout_marginTop="5dp"
         android:scrollbars="vertical"
-        android:textColor="#000000"
+       
         android:textSize="9pt" 
        />
     
@@ -57,7 +57,7 @@
           android:layout_height="2dip"
           android:layout_alignLeft="@+id/getAnswerString"
           android:layout_below="@+id/getAnswerString"
-          android:background="#8B5742" />  
+          android:background="@drawable/mainbackground" />  
 
    <ImageButton
        android:id="@+id/magichandle"
@@ -213,7 +213,7 @@
           android:paddingBottom="50dip"
           android:drawSelectorOnTop="false"
           android:fadeScrollbars="false"
-          
+       
           android:divider="@drawable/mainbackground"
           /> 
     

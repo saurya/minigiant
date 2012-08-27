@@ -3,10 +3,8 @@
     android:id="@+id/totalView"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/anstxt3"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:textSize="9pt" >
+    android:background="@drawable/mainbackground">
+    
 
     <EditText
         android:id="@+id/scoresLabel"
@@ -15,7 +13,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginRight="10dip"
             android:layout_marginTop="10dip"
-        android:background="@color/anstxt3"
+       
         android:enabled="false"
         android:focusable="false"
         android:gravity="center"
@@ -31,29 +29,32 @@
         android:layout_toRightOf="@+id/scoresLabel"
         android:hint="@string/reminder1"
         android:textColor="#000000"
-        android:textSize="9pt" />
+        android:textSize="7pt"
+        />
 
     <TextView
         android:id="@+id/timerTextField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
          android:layout_marginTop="10dip"
+         android:layout_marginRight="15dip"
         android:layout_alignBaseline="@+id/scoresLabel"
         android:layout_alignParentRight="true"
         android:gravity="center"
         android:hint="@string/reminder2"
         android:textColor="#000000"
-        android:textSize="9pt" />
+        android:textSize="7pt" />
 
     <EditText
         android:id="@+id/timerLabel"
-         android:layout_marginRight="10dip"
+       
         android:layout_width="70dp"
         android:layout_height="37dp"
-        android:layout_alignBaseline="@+id/scoreField"
-        android:layout_marginLeft="20dip"
-        android:layout_toRightOf="@+id/scoreField"
-        android:background="@color/anstxt3"
+        android:layout_marginTop="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_toRightOf="@+id/scoreLabel"
+        android:layout_toLeftOf="@+id/timerTextField"
+       
         android:enabled="false"
         android:focusable="false"
         android:gravity="center"
@@ -80,7 +81,7 @@
         android:gravity="center"
         android:scrollbars="vertical"
         android:textColor="#000000"
-        android:textSize="9pt" />
+        android:textSize="11pt" />
 
 
     <View
@@ -100,30 +101,62 @@
         android:layout_margin="4dip"
         android:layout_marginBottom="59dp"
         android:scrollbars="vertical"
-        android:textColor="#000000"
-        android:textSize="9pt" />
+        
+        android:textSize="10pt" />
 
+    
     <View
         android:id="@+id/emptyView3"
-        android:layout_width="fill_parent"
-        android:layout_height="2dip"
-        android:layout_alignLeft="@+id/getAnswerString"
+        android:layout_width="55dip"
+        android:layout_height="1dip"
+       android:visibility="gone"
+        android:layout_alignRight="@+id/getAnswerString"
         android:layout_below="@+id/getAnswerString"
         android:background="#8B5742" />
 
-   
-
+   <Button
+       android:id="@+id/magichandle"
+      
+     android:drawableRight="@drawable/arrow_down_float"
+      android:layout_width="55dp"
+      android:layout_height="36dp"
+       android:layout_below="@+id/emptyView3"
+   android:layout_alignBaseline="@+id/emptyView3"
+   android:layout_alignRight="@+id/emptyView3"
+      android:gravity="center_vertical|center_horizontal"
+    android:text="more..."
+    android:visibility="gone"
+      android:textColor="#FFFFFF"
+      android:textSize="5pt"
+      android:background="@drawable/mainbackground"
+     />
+  <Button
+       android:id="@+id/invertimage"
+      android:drawableRight="@drawable/arrowup"
+    android:layout_below="@+id/emptyView3"
+   android:layout_alignBaseline="@+id/emptyView3"
+   android:layout_alignRight="@+id/emptyView3"
+      android:layout_width="55dp"
+            android:layout_height="36dp"
+    android:visibility="gone"
+   android:gravity="center_vertical|center_horizontal"
+     android:text="less..."
+     android:textColor="#FFFFFF"
+     android:textSize="5pt"
+      android:background="@drawable/mainbackground"
+     /> 
 <ImageView
      android:id="@+id/btn_check_on_disabled"
-        android:layout_width="145dp"
-        android:layout_height="46dp"
+         android:layout_width="35dp"
+        android:layout_height="55dp"
         android:onClick="newOnclick"
          android:visibility="gone"
-         android:layout_centerHorizontal="true" 
+         
         android:src="@drawable/btn_check_on_disabled"
       android:layout_above="@+id/btn_close_normal"
+       android:layout_gravity="center_horizontal"
+          android:layout_alignRight="@+id/btn_close_normal"
         android:layout_toLeftOf="@+id/timerTextField"
-         
         />
 
 <TextView
@@ -131,27 +164,25 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
      android:visibility="gone"
-    android:layout_alignLeft="@+id/btn_check_on_disabled"
+     android:layout_marginRight="1dip"
+    android:layout_alignRight="@+id/btn_check_on_disabled"
     android:layout_alignTop="@+id/btn_check_on_disabled"
-    android:layout_alignBottom="@+id/btn_check_on"
-      
-         android:layout_marginTop="7dp"
-         
+    android:layout_alignBottom="@+id/btn_check_on_disabled"
+    android:layout_marginTop="5dp"
     android:gravity="center"
-      android:text="  oops!"
+     android:text="oops!        "
     android:textColor="#000000" />
    <ImageView
         android:id="@+id/btn_close_normal"
         android:layout_width="35dp"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
          android:onClick="newOnclick2"
           android:src="@drawable/btn_close_normal"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="52dp"
         android:layout_centerHorizontal="true"     
          android:layout_marginTop="10dp"
-         
-        />
+   />
 
    <TextView
     android:id="@+id/wrongViewText"
@@ -160,7 +191,6 @@
      android:visibility="gone"
     android:layout_alignRight="@+id/btn_close_normal"
     android:layout_alignTop="@+id/btn_close_normal"
-    
     android:layout_alignBottom="@+id/btn_close_normal"
     android:layout_margin="1dp"
     android:gravity="center"
@@ -170,36 +200,88 @@
    
 <ImageView
      android:id="@+id/btn_check_on"
-        android:layout_width="155dp"
+        android:layout_width="35dp"
         android:layout_height="55dp"
         android:onClick="newOnclick"
         android:src="@drawable/btn_check_on"
-      android:layout_above="@+id/btn_close_normal"
+         android:visibility="gone"
+          android:layout_above="@+id/btn_close_normal"
+       android:layout_gravity="center_horizontal"
+          android:layout_alignRight="@+id/btn_close_normal"
         android:layout_toLeftOf="@+id/timerTextField"
+       
         />
 
 <TextView
     android:id="@+id/rightViewText"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-     
-    android:layout_alignLeft="@+id/btn_check_on"
+  
+    android:layout_alignRight="@+id/btn_check_on"
     android:layout_alignTop="@+id/btn_check_on"
-    android:visibility="gone"
     android:layout_alignBottom="@+id/btn_check_on"
+   android:visibility="gone"
+  android:layout_marginRight="1dip"
     android:layout_margin="1dp"
     android:gravity="center"
-      android:text="I got it!        "
+      android:text="I got it!       "
     android:textColor="#000000" />
 
+
+
+
+ <SlidingDrawer
+    android:id="@+id/slidingDrawer" 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:content="@android:id/list"
+    android:handle="@+id/slideHandleButton"
+    android:layout_below="@+id/emptyView3"   
+    android:orientation="vertical"
+    android:bottomOffset="-317dp"
+    android:topOffset="25dp"
+    android:clipChildren="false"
+    android:padding="1dp"  
+    android:allowSingleTap="true"
+   
+  >       
+   <ImageView
+           android:id="@+id/slideHandleButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+      
+        android:src="@drawable/arrow_down_float"
+         android:textSize="9dp"
+          android:background="@drawable/mainbackground"
+          android:gravity="center"
+        />
+
+       
+     <ListView
+          android:id="@+id/@android:id/list"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:paddingBottom="50dip"
+          android:drawSelectorOnTop="false"
+          android:fadeScrollbars="false"
+          android:textSize="9pt"
+          android:divider="@drawable/mainbackground"
+          /> 
+    
+ 
+</SlidingDrawer> 
 
 <TextView
     android:id="@+id/getReport"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_alignRight="@+id/btn_check_on"
-    android:background="#FA8072"
+    
+    android:background="@drawable/mainbackground"
     android:gravity="center"
     android:textColor="#4F2F4F"
-    android:textSize="6pt" />
+    android:textSize="6pt" /> 
+ 
+ 
+ 
+ 
 </RelativeLayout>

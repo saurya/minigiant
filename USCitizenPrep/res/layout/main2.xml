@@ -113,35 +113,35 @@
         android:layout_below="@+id/getAnswerString"
         android:background="#8B5742" />
 
-   <ImageButton
+   <Button
        android:id="@+id/magichandle"
-       android:src="@drawable/arrow_down_float"
-     
-      android:layout_width="36dp"
+      
+     android:drawableRight="@drawable/arrow_down_float"
+      android:layout_width="55dp"
       android:layout_height="36dp"
        android:layout_below="@+id/emptyView3"
    android:layout_alignBaseline="@+id/emptyView3"
    android:layout_alignRight="@+id/emptyView3"
       android:gravity="center_vertical|center_horizontal"
-    
+    android:text="more..."
     android:visibility="gone"
       android:textColor="#FFFFFF"
-      android:textSize="11pt"
+      android:textSize="5pt"
       android:background="@drawable/mainbackground"
      />
-  <ImageButton
+  <Button
        android:id="@+id/invertimage"
-       android:src="@drawable/arrowup"
+      android:drawableRight="@drawable/arrowup"
     android:layout_below="@+id/emptyView3"
    android:layout_alignBaseline="@+id/emptyView3"
    android:layout_alignRight="@+id/emptyView3"
-      android:layout_width="36dp"
+      android:layout_width="55dp"
             android:layout_height="36dp"
     android:visibility="gone"
    android:gravity="center_vertical|center_horizontal"
-    
+     android:text="less..."
      android:textColor="#FFFFFF"
-     android:textSize="11pt"
+     android:textSize="5pt"
       android:background="@drawable/mainbackground"
      /> 
 
