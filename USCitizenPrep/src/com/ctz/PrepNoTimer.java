@@ -155,27 +155,7 @@ public class PrepNoTimer extends ListActivity {
       mGetQuestionString.setText(getquestionString);
       getAnswerString = getnextanswer(cnt);
 
-      if ((!USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
-          .contains(cnt + ""))
-          || (USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
-              .contains(PrepNoTimer.seniordata[cnt]))) {
-        if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
-          mmultipleanswerlist.setVisibility(View.GONE);
-        mmultipleanswerlist.setVisibility(View.GONE);// remove staledata
-
-        mslideHandleButton.setVisibility(View.VISIBLE);
-        mslidingDrawer.setVisibility(View.VISIBLE);
-
-        int till = getAnswerString.indexOf("*");
-        mgetAnswerString.setText("hello1" + getAnswerString.substring(0, till));
-      } else {
-        magichandle.setVisibility(View.GONE);
-        mslidingDrawer.setVisibility(View.GONE);
-        mslideHandleButton.setVisibility(View.GONE);
-        mmultipleanswerlist.setVisibility(View.GONE);
-        mgetAnswerString.setVisibility(View.VISIBLE);
-        mgetAnswerString.setText("hello2" + getAnswerString);
-      }
+      check_if_multipleanswers();
 
     }
   }
@@ -194,7 +174,7 @@ public class PrepNoTimer extends ListActivity {
       int till = getAnswerString.indexOf("*");
 
       if (till > 0)
-        mgetAnswerString.setText("hello3" + getAnswerString.substring(0, till));
+        mgetAnswerString.setText(getAnswerString.substring(0, till));
 
     } else {
       if (mslidingDrawer.getVisibility() == View.VISIBLE)
@@ -204,7 +184,7 @@ public class PrepNoTimer extends ListActivity {
       magichandle.setVisibility(View.GONE);
       mslidingDrawer.setVisibility(View.GONE);
       mgetAnswerString.setVisibility(View.VISIBLE);
-      mgetAnswerString.setText("hello4" + getAnswerString);
+      mgetAnswerString.setText(getAnswerString);
     }
 
   }
@@ -324,29 +304,7 @@ public class PrepNoTimer extends ListActivity {
 
           getAnswerString = getnextanswer(cnt);
           // not sequential numbers as in senior data
-          if ((!USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
-              .contains(cnt + ""))
-              || (USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
-                  .contains(PrepNoTimer.seniordata[cnt]))) {
-            magichandle.setVisibility(View.VISIBLE);
-            if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
-              mmultipleanswerlist.setVisibility(View.GONE);
-            mmultipleanswerlist.setVisibility(View.GONE);
-            mslidingDrawer.setVisibility(View.VISIBLE);
-            int till = getAnswerString.indexOf("*");
-            if (till > 0)
-              mgetAnswerString.setText("hello5"
-                  + getAnswerString.substring(0, till));
-          } else {
-            magichandle.setVisibility(View.GONE);
-            adapter.clear();
-            mmultipleanswerlist.setVisibility(View.GONE);
-
-            mslideHandleButton.setVisibility(View.GONE);
-            mslidingDrawer.setVisibility(View.GONE);
-            mgetAnswerString.setVisibility(View.VISIBLE);
-            mgetAnswerString.setText("hello6" + getAnswerString);
-          }
+          check_if_multipleanswers();
 
         }
       }
@@ -398,26 +356,6 @@ public class PrepNoTimer extends ListActivity {
           getAnswerString = getpreviousanswer(cnt);
           check_if_multipleanswers();
 
-          // call with getAnswerstring
-          /*
-           * if ((!USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
-           * .contains(cnt + "")) || (USCitizenPreppart1.is_a_senior &&
-           * PrepNoTimer.multansqnnums .contains(PrepNoTimer.seniordata[cnt])))
-           * { if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
-           * mmultipleanswerlist.setVisibility(View.GONE);
-           * mslidingDrawer.setVisibility(View.GONE);
-           * mslidingDrawer.setVisibility(View.VISIBLE); int till =
-           * getAnswerString.indexOf("*"); if (till > 0)
-           * mgetAnswerString.setText(getAnswerString.substring(0, till)); }
-           * else { if (mslidingDrawer.getVisibility() == View.VISIBLE)
-           * mslidingDrawer.setVisibility(View.GONE);
-           * mslideHandleButton.setVisibility(View.GONE);
-           * mmultipleanswerlist.setVisibility(View.GONE);
-           * mslideHandleButton.setVisibility(View.GONE);
-           * mslidingDrawer.setVisibility(View.GONE);
-           * mgetAnswerString.setVisibility(View.VISIBLE);
-           * mgetAnswerString.setText(getAnswerString); }
-           */
         }
       }
     }

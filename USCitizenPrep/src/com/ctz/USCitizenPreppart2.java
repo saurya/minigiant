@@ -360,16 +360,20 @@ public class USCitizenPreppart2 extends Activity implements
         allanswers[qnnum] = test;
         qnnum++;
       }
-      if ((USCitizenPreppart1.original42).length() > 1)// if internet
-                                                       // connection
-                                                       // didn't fetch
-                                                       // results
-        allanswers[42] = USCitizenPreppart1.original42; // and staledta alsonot
-                                                        // available
-      if ((USCitizenPreppart1.original19).length() > 1)// have default answer
-                                                       // as
-        // given on website
-        allanswers[19] = USCitizenPreppart1.original19;
+
+      Log.d(
+          "originl42",
+          USCitizenPreppart1.original42
+              + "**********************************************************************************************");
+      // if ((USCitizenPreppart1.original42).length() > 1)// if internet
+      // fillgovernordata()
+
+      allanswers[42] = USCitizenPreppart1.original42; // and staledta alsonot
+                                                      // available
+      // if ((USCitizenPreppart1.original19).length() > 1)// have default answer
+      // as
+      // given on website
+      allanswers[19] = USCitizenPreppart1.original19;
       if ((USCitizenPreppart1.currentcapital43).length() > 1)
         allanswers[43] = USCitizenPreppart1.currentcapital43;
       isr1.close();

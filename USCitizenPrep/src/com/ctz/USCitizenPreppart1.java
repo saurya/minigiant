@@ -92,7 +92,7 @@ public class USCitizenPreppart1 extends Activity implements
     Log.d("prevcap && currcap", currentcapital + "  trying governordata"
         + "*********************^^^^^^^^^^^^^^^$%%%%%%%%%%%%%%%%%%%%"
         + currentstate);
-    String governor = "";
+    String governor = "bc";
 
     new Justdownload(currentstate);
     FileInputStream fIn = null;
@@ -123,7 +123,7 @@ public class USCitizenPreppart1 extends Activity implements
 
     if (governor.contains(currentstate)) {
 
-      original42 = governor;
+      original42 = governor + "junk";
       Log.d("onlyone ",
           "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" + "  "
               + currentstate);
@@ -136,7 +136,7 @@ public class USCitizenPreppart1 extends Activity implements
     Log.d("prevcap && currcap", currentcapital + "  trying senatordata"
         + "*********************^^^^^^^^^^^^^^^$%%%%%%%%%%%%%%%%%%%%");
 
-    String senator = "";
+    String senator = "ab";
     FileInputStream fIn = null;
     BufferedReader myReader = null;
     try {
@@ -202,9 +202,10 @@ public class USCitizenPreppart1 extends Activity implements
     go_Button.setOnClickListener(new OnClickListener() {
 
       public void onClick(View v) {
-        original19 = "";
-        original42 = "";
-        currentcapital43 = "";
+        original19 = "G";
+        original42 = "Ssssss";
+
+        currentcapital43 = "C";
         is_a_senior = false;
         Log.d("prev Spinner Selection0", currentstate
             + "***************&&&&&&&&&&&&&&&&&&^^^^^^^^^^^^^^^^^^"
@@ -218,10 +219,7 @@ public class USCitizenPreppart1 extends Activity implements
 
         {
           is_a_senior = radio_senior_prepare_for_interview.isChecked();
-          Log.d(
-              "oldfella",
-              is_a_senior
-                  + "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+
           currentstate = spinner.getSelectedItem().toString();
           changedstate = capital();// currentstate has to be fulllength for this
                                    // method
