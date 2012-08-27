@@ -101,15 +101,16 @@
         android:layout_margin="4dip"
         android:layout_marginBottom="59dp"
         android:scrollbars="vertical"
-        android:textColor="#000000"
-        android:textSize="9pt" />
+        android:textColor="#8B5742"
+        android:textSize="11pt" />
 
     
     <View
         android:id="@+id/emptyView3"
-        android:layout_width="fill_parent"
-        android:layout_height="2dip"
-        android:layout_alignLeft="@+id/getAnswerString"
+        android:layout_width="55dip"
+        android:layout_height="1dip"
+       android:visibility="gone"
+        android:layout_alignRight="@+id/getAnswerString"
         android:layout_below="@+id/getAnswerString"
         android:background="#8B5742" />
 
