@@ -32,7 +32,7 @@ import android.widget.Toast;
 import com.ctz.SimpleGestureFilter.SimpleGestureListener;
 
 @SuppressLint("NewApi")
-public class TestCTZ1 extends ListActivity implements OnGestureListener,
+public class TestCTZ10 extends ListActivity implements OnGestureListener,
     SimpleGestureListener {
   boolean mslidingdrawer_open;
   boolean i_got_it, time_out;
@@ -146,11 +146,16 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
         decideVisibility(false);
         mbtn_check_on.setClickable(true);
         getquestionString = getnextqn(cnt);
+        mGetQuestionString.setText(getquestionString);
 
-        mGetQuestionString.setText("cnt here" + cnt + getquestionString);
-        getAnswerString = "cnt here" + cnt + anslist[cnt];
-        // check_if_multipleanswers();
-        display_answer();
+        getAnswerString = anslist[cnt];
+
+        if ((PrepNoTimer.multansqnnums.contains(originalQNums[cnt] + "")))
+          // display_answer();
+          ;
+        else
+          mgetAnswerString.setText(getAnswerString);
+        check_if_multipleanswers();
         cnt1 = originalQNums[cnt];
         runtimer.start();
       }
@@ -175,24 +180,31 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
       public void onFinish() {
         mtimerTextField.setText("done!");
 
+        if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
+          mmultipleanswerlist.setVisibility(View.GONE);
+        mslidingDrawer.setVisibility(View.VISIBLE);
+        mslideHandleButton.setVisibility(View.VISIBLE);
+
         if ((PrepNoTimer.multansqnnums.contains(originalQNums[cnt] + ""))) {
-          mslidingDrawer.setVisibility(View.VISIBLE);
-          mslideHandleButton.setVisibility(View.VISIBLE);
           magichandle.setVisibility(View.VISIBLE);
 
-        }
+          // display_answer();
+        } else
+          mgetAnswerString.setText(getAnswerString);
 
-        display_answer();
         mgetAnswerString.setVisibility(View.VISIBLE);
-
-        mdisabledViewText.setVisibility(View.VISIBLE);
-        mbtn_check_on_disabled.setVisibility(View.VISIBLE);
         mbtnclose_normal.setVisibility(View.VISIBLE);
+        // mrightViewText.setVisibility(View.GONE);
         mwrongViewText.setVisibility(View.VISIBLE);
         i_got_it = false;
+        {
+          mbtn_check_on.setVisibility(View.GONE);
+          mrightViewText.setVisibility(View.GONE);
 
-        mbtn_check_on.setVisibility(View.GONE);
-        mrightViewText.setVisibility(View.GONE);
+          mbtn_check_on.setEnabled(true);
+          mbtn_check_on_disabled.setVisibility(View.VISIBLE);
+          mdisabledViewText.setVisibility(View.VISIBLE);
+        }
 
       }
 
@@ -209,23 +221,20 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
 
     if ((PrepNoTimer.multansqnnums.contains(originalQNums[cnt] + ""))) {
 
+      if (mmultipleanswerlist.getVisibility() == View.VISIBLE)
+        mmultipleanswerlist.setVisibility(View.GONE);
       mslidingDrawer.setVisibility(View.VISIBLE);
       mslideHandleButton.setVisibility(View.VISIBLE);
 
-      magichandle.setVisibility(View.VISIBLE);
     } else {
-      // if (
-
-      // mslidingDrawer.getVisibility() == View.VISIBLE)
-      magichandle.setVisibility(View.GONE);
-
+      if (mslidingDrawer.getVisibility() == View.VISIBLE)
+        mslidingDrawer.setVisibility(View.GONE);
       mslideHandleButton.setVisibility(View.GONE);
-      mslidingDrawer.setVisibility(View.GONE);
       mmultipleanswerlist.setVisibility(View.GONE);
-
+      magichandle.setVisibility(View.GONE);
       mslidingDrawer.setVisibility(View.GONE);
-      mgetAnswerString.setVisibility(View.VISIBLE);
-      // mgetAnswerString.setText(getAnswerString);
+      mgetAnswerString.setVisibility(View.GONE);
+      mgetAnswerString.setText(getAnswerString);
     }
 
   }
@@ -238,7 +247,6 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
       mrightViewText.setVisibility(View.GONE);
       mwrongViewText.setVisibility(View.GONE);
       mgetAnswerString.setVisibility(View.GONE);
-      magichandle.setVisibility(View.GONE);
       mGetQuestionString.setVisibility(View.GONE);
       mtimerTextField.setVisibility(View.GONE);
 
@@ -274,27 +282,17 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
       display = (getAnswerString.substring(0, till));
 
       if (getquestionString.contains("two")) {
-        small = getAnswerString.substring(till + 1);
+        small = getAnswerString.substring(till);
         till = small.indexOf("*");
-        if (till > 0) {
-          String smaller = small.substring(0, till);
-          display += smaller;
-        }
+        if (till > 0)
+          display += (small.substring(0, till));
       }
-
     }
     mgetAnswerString.setText(display);
   }
 
   public String getnextqn(int cnt) {
-
-    if (cnt >= 100) {
-      mToast
-          .setText("Congratulations. You just completed practice of 100 qustions");
-      mToast.show();
-      finish();
-    }
-    ;
+    int qnnumber = cnt + 1;
     return qnlist[cnt];
   }
 
@@ -321,15 +319,13 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
     // getAnswerString = getAnswerString0;
     // check_if_multipleanswers();
     getquestionString0 = qnlist[begin];
-    getAnswerString = anslist[begin];
+
     mGetQuestionString.setText((numberofrounds) + " " + begin + " "
         + getquestionString0);
-
-    magichandle.setVisibility(View.GONE);
-    invertimage.setVisibility(View.GONE);
+    magichandle.setVisibility(0);
+    invertimage.setVisibility(0);
     mGetQuestionString.setVisibility(View.VISIBLE);
     mgetAnswerString.setVisibility(View.GONE);
-    magichandle.setVisibility(View.GONE);
     mbtnclose_normal.setVisibility(View.GONE);
     mbtn_check_on.setVisibility(View.GONE);
     mrightViewText.setVisibility(View.GONE);
@@ -342,14 +338,9 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
     getAnswerString = anslist[begin];
     cnt = begin;
     display_answer();
-    magichandle.setVisibility(View.GONE);
 
-    mslideHandleButton.setVisibility(View.GONE);
-    mslidingDrawer.setVisibility(View.GONE);
-    mmultipleanswerlist.setVisibility(View.GONE);
-
-    mslidingDrawer.setVisibility(View.GONE);
-    mgetAnswerString.setVisibility(View.GONE);
+    check_if_multipleanswers();
+    cnt = begin;
 
     currentdisplay = 0;
     originalQnumber = originalQNums[0];
@@ -387,7 +378,7 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
   @Override
   public void onBackPressed() {
     if (cnt < userselectQns) {// user in the middle of a test
-      testscores_dialog_builder = new AlertDialog.Builder(TestCTZ1.this);
+      testscores_dialog_builder = new AlertDialog.Builder(TestCTZ10.this);
       testscores_dialog_builder.setMessage("Exiting the test! Are you sure?")
           .setCancelable(false)
           .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -564,11 +555,10 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
     mdisabledViewText.setVisibility(View.GONE);
     mbtn_check_on_disabled.setOnClickListener(null);
     mbtn_check_on.setOnClickListener(myListener);
-    getquestionString0 = qnlist[cnt];
+
     mGetQuestionString.setText(getquestionString0);
-    mGetQuestionString.setVisibility(View.VISIBLE);
     mgetAnswerString.setVisibility(View.GONE);
-    magichandle.setVisibility(View.GONE);
+
     mbtnclose_normal.setVisibility(View.GONE);
     mbtn_check_on.setVisibility(View.GONE);
     mgetReport.setVisibility(View.GONE);
@@ -603,7 +593,7 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
 
     getAnswerString = getAnswerString0;
 
-    // check_if_multipleanswers();
+    check_if_multipleanswers();
     currentdisplay = 0;
     originalQnumber = originalQNums[0];
   }
@@ -625,14 +615,37 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
 
   public void onLongPress(MotionEvent e) {
 
-    // check_if_multipleanswers();
-    // if ((PrepNoTimer.multansqnnums.contains(originalQNums[cnt] + "")))
-    {
-      check_if_multipleanswers();
-      open_answer_check();
-    }
+    check_if_multipleanswers();
+    if ((!USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
+        .contains(originalQNums[cnt] + ""))
+        || (USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
+            .contains(originalQNums[cnt])))
+      magichandle.setVisibility(View.VISIBLE);
+
     runtimer.cancel();
-    display_answer();
+    String display = getAnswerString;
+    int till = getAnswerString.indexOf("*");
+    String small = "";
+    if (till > 0) {
+      display = (getAnswerString.substring(0, till));
+
+      if (getquestionString.contains("two")) {
+        small = getAnswerString.substring(till);
+        till = small.indexOf("*");
+        if (till > 0)
+          display += (small.substring(0, till));
+      }
+    }
+    mgetAnswerString.setText(display);
+    mgetAnswerString.setVisibility(View.VISIBLE);
+    mbtnclose_normal.setVisibility(View.VISIBLE);
+    mbtn_check_on.setVisibility(View.VISIBLE);
+
+    mrightViewText.setVisibility(View.VISIBLE);
+    mwrongViewText.setVisibility(View.VISIBLE);
+    ;
+    mbtnclose_normal.setClickable(true);
+    mbtn_check_on.setClickable(true);
 
     return;
   }
@@ -651,22 +664,44 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
 
     if (mbtn_check_on.getVisibility() == View.GONE)
       return false;
-    // check_if_multipleanswers();
-
     check_if_multipleanswers();
+    if ((!USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
+        .contains(originalQNums[cnt] + ""))
+        || (USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
+            .contains(originalQNums[cnt])))
+      magichandle.setVisibility(View.VISIBLE);
     runtimer.cancel();
-    display_answer();
-    open_answer_check();
+    mgetAnswerString.setVisibility(View.VISIBLE);
+    mbtnclose_normal.setVisibility(View.VISIBLE);
+    mbtn_check_on.setVisibility(View.VISIBLE);
+    mrightViewText.setVisibility(View.VISIBLE);
+    mwrongViewText.setVisibility(View.VISIBLE);
+    ;
+    mbtnclose_normal.setClickable(true);
+    mbtn_check_on.setClickable(true);
+    // check_if_multipleanswers();
     return true;
   }
 
   public boolean onSingleTapUp(MotionEvent e) {
     if (mbtn_check_on.getVisibility() == View.GONE)
       return false;
-
-    check_if_multipleanswers();
+    if ((!USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
+        .contains(originalQNums[cnt] + ""))
+        || (USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
+            .contains(originalQNums[cnt])))
+      magichandle.setVisibility(View.VISIBLE);
     runtimer.cancel();
-    open_answer_check();
+    mgetAnswerString.setVisibility(View.VISIBLE);
+    mbtnclose_normal.setVisibility(View.VISIBLE);
+    mbtn_check_on.setVisibility(View.VISIBLE);
+    mrightViewText.setVisibility(View.VISIBLE);
+    mwrongViewText.setVisibility(View.VISIBLE);
+    ;
+    // mbtn_check_on.setOnClickListener(myListener);
+    mbtnclose_normal.setClickable(true);
+    mbtn_check_on.setClickable(true);
+
     return true;
 
   }
@@ -676,22 +711,8 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
     return gestureScanner.onTouchEvent(me);
   }
 
-  private void open_answer_check() {
-    if (mslidingDrawer.getVisibility() == View.VISIBLE)
-      magichandle.setVisibility(View.VISIBLE);
-    else
-      magichandle.setVisibility(View.GONE);
-    mgetAnswerString.setVisibility(View.VISIBLE);
-    mbtnclose_normal.setVisibility(View.VISIBLE);
-    mbtn_check_on.setVisibility(View.VISIBLE);
-    mrightViewText.setVisibility(View.VISIBLE);
-    mwrongViewText.setVisibility(View.VISIBLE);
-    mbtnclose_normal.setClickable(true);
-    mbtn_check_on.setClickable(true);
-  }
-
-  private ArrayList<String> tokens(String str) {// call for multiple answers
-
+  private ArrayList<String> tokens(String str) {
+    int skip = 0;
     StringTokenizer stringTokenizer = new StringTokenizer(str, "*");
     Log.d("try:  ", "The total no. of tokens generated for:  " + str + " is "
         + stringTokenizer.countTokens());

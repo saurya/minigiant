@@ -374,6 +374,7 @@ public class USCitizenPreppart2 extends Activity implements
       // as
       // given on website
       allanswers[19] = USCitizenPreppart1.original19;
+      USCitizenPreppart1.currentcapital43 = "MONT";
       if ((USCitizenPreppart1.currentcapital43).length() > 1)
         allanswers[43] = USCitizenPreppart1.currentcapital43;
       isr1.close();
