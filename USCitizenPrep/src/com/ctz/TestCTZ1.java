@@ -1,7 +1,8 @@
 package com.ctz;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.StringTokenizer;
 
 import android.annotation.SuppressLint;
@@ -20,7 +21,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SlidingDrawer;
@@ -34,111 +34,112 @@ import com.ctz.SimpleGestureFilter.SimpleGestureListener;
 @SuppressLint("NewApi")
 public class TestCTZ1 extends ListActivity implements OnGestureListener,
     SimpleGestureListener {
-  boolean mslidingdrawer_open;
-  boolean i_got_it, time_out;
+
   private GestureDetector gestureScanner;
   private SimpleGestureFilter detector;
-  boolean addItemscalled = false;
+
   @SuppressLint({ "NewApi", "NewApi", "NewApi" })
   OnClickListener myListener;
-  EditText edittext;//
+
+  // GUI for wysiwyg
+  private View main2_View;
   private TextView mGetQuestionString;
   private TextView mgetAnswerString;
-  private ListView mlistView;
   private TextView mrightViewText, mwrongViewText, mdisabledViewText;
   private TextView mtimerTextField;
   private TextView mScore;
+  String scoreString = "Your Score Now Is";
+  String coveredstring1, coveredstring2;// random and original strings of
+                                        // question numbers covered
   String prtmultiplestrg;
-  // LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
-  ArrayList<String> multipleAnswersItems = new ArrayList<String>();
-  private View main2_View;
+
   // DEFINING STRING ADAPTER WHICH WILL HANDLE DATA OF LISTVIEW
-  ArrayAdapter<String> adapter;
+
   int questionnumber, current_Qn_length;
   int cnt = 0;
   int score = 0;
-  int cnt1, ctz_ans, correct_ans, begin, end;
+  boolean test_interrupted;
+  int cnt1, correct_ans, begin, end;
+  // LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
+  ArrayList<String> multipleAnswersItems = new ArrayList<String>();
+  ArrayAdapter<String> adapter;
+
+  // timer GUI and variables
   CountDownTimer runtimer;
-  String correctanswerstring;
   final static long seconds_in_milllies = 1000L;
   final static long minutes_in_millies = seconds_in_milllies * 60;
   final static long hours_in_millies = minutes_in_millies * 60;
   static AlertDialog.Builder testscores_dialog_builder, builder;
   static AlertDialog testscores_dialog, alert;
-  Button magichandle, invertimage;
-  private ListView mmultipleanswerlist;
-  private ImageView mslideHandleButton;
-  private SlidingDrawer mslidingDrawer;
-  int[] originalQNums = new int[100];
   ImageView mbtnclose_normal;
   TextView mgetReport;
   ImageView mbtn_check_on;
   ImageView mbtn_check_on_disabled;;
-  String getansString1 = "";
-  String getansString2 = "";
-  String getansString3 = "";
-  String getansString4 = "";
-  String getAnswerString0 = "";
+
+  // GUI and variables for dropdown
+  Button magichandle, invertimage;
+  private ListView mmultipleanswerlist;
+  private ImageView mslideHandleButton;
+  private SlidingDrawer mslidingDrawer;
+  boolean mslidingdrawer_open;
+  HashSet<Integer> multansqnnums;
+  boolean i_got_it, time_out;
+
+  String getAnswerString0 = ""; // set first answer to be displayed
   String getquestionString0 = "";// set first question to be displayed
-  String multipleChoiceAnswer = "";
-  String getAnswerString = "";
-  String getquestionString = "";// and the next .
-  boolean test_interrupted;
+  String getAnswerString = "";// and the next answer
+  String getquestionString = "";// and the next question
+  String[] question_list;
+  String[] answer_list;
+  int[] randomqn_original_index = new int[100];
   int justfound;
-
   int userselectQns;
-  String multipleChoiceAnswers = "";
-  String setanswerString = "";
-  String scoreString = "Your Score Now Is";
   int userselecttiming;
-  String[] qnlist;
-  String[] anslist;
-  String[] ctznanslist;
-
-  String ctznans;
-  Toast mToast;;
-  int currentdisplay;
-  int originalQnumber;
-  static String finalswipe;
+  int counter_for_display;
   int numberofrounds;
 
+  Toast mToast;;
+
+  boolean addItemscalled = false;
+
   public void addItems(View v) {
+
     mmultipleanswerlist.setVisibility(View.GONE);
     addItemscalled = true;
     if (addItemscalled)
       adapter.clear();
-    prtmultiplestrg = anslist[cnt];
+    prtmultiplestrg = answer_list[cnt];
     multipleAnswersItems = tokens(prtmultiplestrg);
     adapter.notifyDataSetChanged();
     mmultipleanswerlist.setVisibility(View.VISIBLE);
   }
 
   public void calculateScores() {
+
     if (i_got_it)
       if (!time_out)
         score++;
-    scoreString = score + "/" + currentdisplay;
+    scoreString = score + "/" + counter_for_display;
     i_got_it = false;
 
   }
 
   public void callrestofthecode() {
+
     runtimer.cancel();
     {
-      SharedPreferences prefs = PreferenceManager
-          .getDefaultSharedPreferences(this);
-      ;
+
+      coveredstring1 += cnt + ",";
+      coveredstring2 += randomqn_original_index[cnt] + ",";
       cnt++;
-      currentdisplay++;
-      ctz_ans = -1;
+      counter_for_display++;
+
       {
         calculateScores();
         mScore.setText(scoreString);
       }
-      if (currentdisplay == userselectQns || cnt == justfound) {
+      if (counter_for_display == userselectQns || cnt == justfound) {
         decideVisibility(true);
-        Calendar c = Calendar.getInstance();
-        int seconds = c.get(Calendar.SECOND);
 
         mgetReport.setText(getreportString());
         mgetReport.setVisibility(View.VISIBLE);
@@ -147,24 +148,20 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
         mbtn_check_on.setClickable(true);
         getquestionString = getnextqn(cnt);
 
-        mGetQuestionString.setText("cnt here" + cnt + getquestionString);
-        getAnswerString = "cnt here" + cnt + anslist[cnt];
+        mGetQuestionString.setText(getquestionString);
+        getAnswerString = answer_list[cnt];
         // check_if_multipleanswers();
         display_answer();
-        cnt1 = originalQNums[cnt];
+        cnt1 = randomqn_original_index[cnt];
         runtimer.start();
       }
     }
+
   }
 
   private void calltimer(SharedPreferences prefs) {
-    /*
-     * { mbtn_check_on.setVisibility(View.VISIBLE);
-     * 
-     * mbtn_check_on.setEnabled(true);
-     */
-    mbtn_check_on.setClickable(true);
 
+    mbtn_check_on.setClickable(true);
     magichandle.setVisibility(View.GONE);
     invertimage.setVisibility(View.GONE);
     time_out = false;
@@ -175,22 +172,29 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
       public void onFinish() {
         mtimerTextField.setText("done!");
 
-        if ((PrepNoTimer.multansqnnums.contains(originalQNums[cnt] + ""))) {
+        if (getAnswerString.contains("*")) {
+          magichandle.setVisibility(View.VISIBLE);
           mslidingDrawer.setVisibility(View.VISIBLE);
           mslideHandleButton.setVisibility(View.VISIBLE);
-          magichandle.setVisibility(View.VISIBLE);
-
+        } else {
+          magichandle.setVisibility(View.GONE);
+          mslidingDrawer.setVisibility(View.GONE);
+          mslideHandleButton.setVisibility(View.GONE);
         }
 
         display_answer();
         mgetAnswerString.setVisibility(View.VISIBLE);
-
+        if (magichandle.getVisibility() == View.VISIBLE
+            && !(getAnswerString.contains("*")))
+          magichandle.setVisibility(View.GONE);
+        if (magichandle.getVisibility() == View.GONE
+            && getAnswerString.contains("*"))
+          magichandle.setVisibility(View.VISIBLE);
         mdisabledViewText.setVisibility(View.VISIBLE);
         mbtn_check_on_disabled.setVisibility(View.VISIBLE);
         mbtnclose_normal.setVisibility(View.VISIBLE);
         mwrongViewText.setVisibility(View.VISIBLE);
         i_got_it = false;
-
         mbtn_check_on.setVisibility(View.GONE);
         mrightViewText.setVisibility(View.GONE);
 
@@ -205,18 +209,18 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
 
   }
 
-  private void check_if_multipleanswers() {// you need a sliding drqwer if so
+  private void check_if_multipleanswers() {// you need a sliding drawer if so
 
-    if ((PrepNoTimer.multansqnnums.contains(originalQNums[cnt] + ""))) {
-
+    if (getAnswerString.contains("*")) {
+      mToast.setText("cnt= " + cnt + "," + randomqn_original_index[cnt]
+          + "show button");
+      mToast.show();
       mslidingDrawer.setVisibility(View.VISIBLE);
       mslideHandleButton.setVisibility(View.VISIBLE);
 
       magichandle.setVisibility(View.VISIBLE);
     } else {
-      // if (
 
-      // mslidingDrawer.getVisibility() == View.VISIBLE)
       magichandle.setVisibility(View.GONE);
 
       mslideHandleButton.setVisibility(View.GONE);
@@ -225,14 +229,14 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
 
       mslidingDrawer.setVisibility(View.GONE);
       mgetAnswerString.setVisibility(View.VISIBLE);
-      // mgetAnswerString.setText(getAnswerString);
+
     }
 
   }
 
   public void decideVisibility(boolean hide) {
 
-    if (hide) {// for report
+    if (hide) {// for report hide all components
       mbtn_check_on.setVisibility(View.GONE);
       mbtnclose_normal.setVisibility(View.GONE);
       mrightViewText.setVisibility(View.GONE);
@@ -243,59 +247,77 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
       mtimerTextField.setVisibility(View.GONE);
 
     } else {
-
-      magichandle.setVisibility(View.GONE);
+      // otherwise always stay in view
       mGetQuestionString.setVisibility(View.VISIBLE);
       mtimerTextField.setVisibility(View.VISIBLE);
+
+      // come into view only when user taps
       mbtnclose_normal.setVisibility(View.GONE);
       mbtn_check_on.setVisibility(View.GONE);
+      mbtn_check_on.setClickable(true);
+      mbtnclose_normal.setClickable(true);
       mrightViewText.setVisibility(View.GONE);
       mwrongViewText.setVisibility(View.GONE);
       mbtn_check_on_disabled.setVisibility(View.GONE);
       mdisabledViewText.setVisibility(View.GONE);
-      mbtn_check_on.setClickable(true);
-      mbtnclose_normal.setClickable(true);
       mgetAnswerString.setVisibility(View.GONE);
+      magichandle.setVisibility(View.GONE);
     }
+
   }
 
   @Override
   public boolean dispatchTouchEvent(MotionEvent me) {
+
     super.dispatchTouchEvent(me);
     this.detector.onTouchEvent(me);
+
     return super.dispatchTouchEvent(me);
   }
 
-  private void display_answer() {
-    String display = getAnswerString;
-    int till = getAnswerString.indexOf("*");
-    String small = "";
-    if (till > 0) {
-      display = (getAnswerString.substring(0, till));
+  private void display_answer() {// display either the only answer or first or 2
+                                 // or 3 depending on the question
 
-      if (getquestionString.contains("two")) {
-        small = getAnswerString.substring(till + 1);
-        till = small.indexOf("*");
+    String answer_left = "", second_answer = "", third_answer = "", remaining = "";
+    String display = getAnswerString;// default, the whole string
+    int till = getAnswerString.indexOf("*");// multiple answers separated by a *
+                                            // in data
+
+    if (till > 0) {
+      display = (getAnswerString.substring(0, till));// yanked first answer
+
+      if ((getquestionString.contains("two") && !getquestionString
+          .contains("parts")) || getquestionString.contains("three")) {
+        answer_left = getAnswerString.substring(till + 1);
+        till = answer_left.indexOf("*");
         if (till > 0) {
-          String smaller = small.substring(0, till);
-          display += smaller;
+          second_answer = answer_left.substring(0, till);
+          display += ", " + second_answer;
+        }
+        if (getquestionString.contains("three")) {
+          remaining = answer_left.substring(till + 1);
+          till = remaining.indexOf("*");
+          if (till > 0) {
+            third_answer = remaining.substring(0, till);
+            display += ", " + third_answer;
+          }
         }
       }
-
     }
     mgetAnswerString.setText(display);
+
   }
 
   public String getnextqn(int cnt) {
 
     if (cnt >= 100) {
       mToast
-          .setText("Congratulations. You just completed practice of 100 qustions");
+          .setText("Congratulations. You just completed practice of 100 questions");
       mToast.show();
       finish();
     }
     ;
-    return qnlist[cnt];
+    return question_list[cnt];
   }
 
   public String getreportString() {
@@ -304,56 +326,90 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
         + " random Questions " + userselectQns + "\n\n" + "Timer "
         + userselecttiming + " seconds \n\n" + "Right: " + score
         + " Question(s)\n\n" + "Wrong: " + (userselectQns - score))
+        + coveredstring1
+        + " "
+        + coveredstring2
         + " \nComment:\n\n In the actual test you are required to get answers for 5 to 6 questions right out of 10."
         + " Real Test does not involve any time factor "
         + " Visit Official website for more details.";
   }
 
   private void go_For_NextRound(int begin, int end) {
+
     ++numberofrounds;
+
     mToast.setText("Round# " + (numberofrounds));
     mToast.show();
     if (begin == 100)
       return;
-    if (end > 100)
+    if (end > 100)// if 40 questions per round third round is 3*40=120 So push
+                  // back to 100
       end = 100;
-    // getAnswerString0 = anslist[begin];
-    // getAnswerString = getAnswerString0;
-    // check_if_multipleanswers();
-    getquestionString0 = qnlist[begin];
-    getAnswerString = anslist[begin];
+    if (begin >= 100) {
+      mToast
+          .setText("Congratulations. You just completed practice of 100 qustions");
+      mToast.show();
+      finish();
+    }
+    cnt = begin;
+    getAnswerString = answer_list[cnt];
+
+    getquestionString0 = question_list[cnt];
     mGetQuestionString.setText((numberofrounds) + " " + begin + " "
         + getquestionString0);
-
-    magichandle.setVisibility(View.GONE);
-    invertimage.setVisibility(View.GONE);
     mGetQuestionString.setVisibility(View.VISIBLE);
-    mgetAnswerString.setVisibility(View.GONE);
-    magichandle.setVisibility(View.GONE);
-    mbtnclose_normal.setVisibility(View.GONE);
-    mbtn_check_on.setVisibility(View.GONE);
+
+    calltimer(PreferenceManager.getDefaultSharedPreferences(this));
+    getAnswerString = answer_list[begin];
+    cnt = begin;
+    display_answer();
+    init_disappear();
+    counter_for_display = 0;
+
+    // check_if_multipleanswers();
+
+  }
+
+  private void init_disappear() {
+
     mrightViewText.setVisibility(View.GONE);
     mwrongViewText.setVisibility(View.GONE);
     mbtn_check_on_disabled.setVisibility(View.GONE);
     mdisabledViewText.setVisibility(View.GONE);
-
-    mgetReport.setVisibility(View.GONE);
-    calltimer(PreferenceManager.getDefaultSharedPreferences(this));
-    getAnswerString = anslist[begin];
-    cnt = begin;
-    display_answer();
+    mgetAnswerString.setVisibility(View.GONE);
     magichandle.setVisibility(View.GONE);
-
+    mbtnclose_normal.setVisibility(View.GONE);
+    mbtn_check_on.setVisibility(View.GONE);
+    mgetReport.setVisibility(View.GONE);
     mslideHandleButton.setVisibility(View.GONE);
     mslidingDrawer.setVisibility(View.GONE);
     mmultipleanswerlist.setVisibility(View.GONE);
+    magichandle.setVisibility(View.GONE);
+    invertimage.setVisibility(View.GONE);
 
-    mslidingDrawer.setVisibility(View.GONE);
-    mgetAnswerString.setVisibility(View.GONE);
+  }
 
-    currentdisplay = 0;
-    originalQnumber = originalQNums[0];
-    // check_if_multipleanswers();
+  private void multansqnums() {
+
+    multansqnnums = new HashSet<Integer>();
+    String str = "";
+    int intvalue;
+    Iterator<?> it = (PrepNoTimer.multansqnnums).iterator();
+
+    while (it.hasNext()) {
+      intvalue = Integer.parseInt((String) it.next());
+      str = "(" + intvalue + "," + randomqn_original_index[intvalue] + "),";
+
+      for (int i = 0; i < 100; i++)
+        if (randomqn_original_index[i] == intvalue) {
+          str = "(" + i + " ORIG " + randomqn_original_index[i] + ")";
+          ;
+          multansqnnums.add((i));
+          break;
+
+        }
+    }
+
   }
 
   public void newOnclick(View v) {
@@ -386,6 +442,7 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
 
   @Override
   public void onBackPressed() {
+
     if (cnt < userselectQns) {// user in the middle of a test
       testscores_dialog_builder = new AlertDialog.Builder(TestCTZ1.this);
       testscores_dialog_builder.setMessage("Exiting the test! Are you sure?")
@@ -417,20 +474,14 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
 
       mToast.setText("Next Round: " + begin + "to" + end);
       mToast.show();
-      cnt = 0;
+      cnt = begin;
       score = 0;
       current_Qn_length = userselectQns;
-      // mScore.setText(" 0/0 ");
+      mScore.setText(" 0/0 ");
       mtimerTextField.setVisibility(View.VISIBLE);
       runtimer.start();
-      String str = "";
-      for (int i = 0; i < userselectQns; i++)
-        str += originalQNums[i];
-      Log.d(
-          "String val",
-          str
-              + "**********************************************************************************");
-      go_For_NextRound(begin + 1, end);
+
+      go_For_NextRound(begin, end);
 
     }
 
@@ -453,6 +504,7 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
     justfound = -1;
     i_got_it = false;
     numberofrounds = 1;
+    counter_for_display = 0;
 
     Bundle bundle = new Bundle();
     bundle = this.getIntent().getExtras();
@@ -464,23 +516,24 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
       userselectQns = bundle.getInt("userselectQns");
       if (userselectQns == 0)
         userselectQns = 3;// default
-      qnlist = bundle.getStringArray("randomqns");
-      anslist = bundle.getStringArray("anstorandomqns");
-      originalQNums = bundle.getIntArray("originalQNums");
+      question_list = bundle.getStringArray("randomqns");
+      answer_list = bundle.getStringArray("anstorandomqns");
+      randomqn_original_index = bundle.getIntArray("originalQNums");
       userselecttiming = bundle.getInt("userselecttiming");
 
       if (userselecttiming == 0)
         userselecttiming = 3;
     }
-
+    multansqnums();
     String temp = "";
-    for (int i = 0; i < qnlist.length; i++)
-      if (qnlist[i].contains("*")) {
-        temp = qnlist[i].replace("*", "");
-        qnlist[i] = temp;
-      }
+    for (int i = 0; i < question_list.length; i++)
+      if (question_list[i].contains("*")) {
+        temp = question_list[i].replace("*", "");
+        question_list[i] = temp;
 
-    correctanswerstring = "";
+      }
+    multansqnums();
+
     begin = 0;
     end = userselectQns;
     begin = (numberofrounds - 1) * userselectQns;
@@ -493,37 +546,40 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
       mToast.show();
       finish();
     }
-    for (int i = begin; i < end; i++)
-      correctanswerstring += originalQNums[i] + ",";
-    getquestionString = qnlist[begin];
-    getAnswerString0 = anslist[begin];
+
+    getquestionString = question_list[begin];
+    getAnswerString0 = answer_list[begin];
     cnt = begin;
     getAnswerString = getAnswerString0;
-    String display = getAnswerString;
-    int till = getAnswerString.indexOf("*");
-    String small = "";
-    if (till > 0)
-      display = (getAnswerString.substring(0, till));
-
-    if (getquestionString.contains("two")) {
-      small = getAnswerString.substring(till);
-      till = small.indexOf("*");
-      if (till > 0)
-        display += (small.substring(0, till));
-    }
 
     main2_View = findViewById(R.layout.main2);
     mgetReport = (TextView) findViewById(R.id.getReport);
     mGetQuestionString = (TextView) findViewById(R.id.getquestionString);
     mgetAnswerString = (TextView) findViewById(R.id.getAnswerString);
-    mGetQuestionString.setText(getquestionString);
-    mgetAnswerString.setText(display);
+    mrightViewText = (TextView) findViewById(R.id.rightViewText);
+    mwrongViewText = (TextView) findViewById(R.id.wrongViewText);
+    mdisabledViewText = (TextView) findViewById(R.id.disabled_ViewText);
+    mtimerTextField = (TextView) findViewById(R.id.timerTextField);
+    mbtnclose_normal = (ImageView) findViewById(R.id.btn_close_normal);
+    mbtn_check_on = (ImageView) findViewById(R.id.btn_check_on);
+    mbtn_check_on_disabled = (ImageView) findViewById(R.id.btn_check_on_disabled);
+    mmultipleanswerlist = (ListView) findViewById(android.R.id.list);
+    mslideHandleButton = (ImageView) findViewById(R.id.slideHandleButton);
+    mslidingDrawer = (SlidingDrawer) findViewById(R.id.slidingDrawer);
     magichandle = (Button) findViewById(R.id.magichandle);
+    invertimage = (Button) findViewById(R.id.invertimage);
+    magichandle = (Button) findViewById(R.id.magichandle);
+    invertimage = (Button) findViewById(R.id.invertimage);
+    mScore = (TextView) findViewById(R.id.scoreField);
+
     adapter = new ArrayAdapter<String>(this,
         android.R.layout.simple_list_item_1, multipleAnswersItems);
     this.setListAdapter(adapter);
-    invertimage = (Button) findViewById(R.id.invertimage);
-    mScore = (TextView) findViewById(R.id.scoreField);
+
+    mGetQuestionString.setText(getquestionString);
+    display_answer();
+
+    // Just listen
     magichandle.setOnClickListener(new OnClickListener() {
       public void onClick(View v) {
 
@@ -553,35 +609,8 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
         newOnclick(v);
       }
     };
-    mrightViewText = (TextView) findViewById(R.id.rightViewText);
-    mwrongViewText = (TextView) findViewById(R.id.wrongViewText);
-    mdisabledViewText = (TextView) findViewById(R.id.disabled_ViewText);
-    mtimerTextField = (TextView) findViewById(R.id.timerTextField);
-    mbtnclose_normal = (ImageView) findViewById(R.id.btn_close_normal);
-    mbtn_check_on = (ImageView) findViewById(R.id.btn_check_on);
-    mbtn_check_on_disabled = (ImageView) findViewById(R.id.btn_check_on_disabled);
-    mbtn_check_on_disabled.setVisibility(View.GONE);
-    mdisabledViewText.setVisibility(View.GONE);
-    mbtn_check_on_disabled.setOnClickListener(null);
+
     mbtn_check_on.setOnClickListener(myListener);
-    getquestionString0 = qnlist[cnt];
-    mGetQuestionString.setText(getquestionString0);
-    mGetQuestionString.setVisibility(View.VISIBLE);
-    mgetAnswerString.setVisibility(View.GONE);
-    magichandle.setVisibility(View.GONE);
-    mbtnclose_normal.setVisibility(View.GONE);
-    mbtn_check_on.setVisibility(View.GONE);
-    mgetReport.setVisibility(View.GONE);
-    mmultipleanswerlist = (ListView) findViewById(android.R.id.list);
-    mslideHandleButton = (ImageView) findViewById(R.id.slideHandleButton);
-    mslidingDrawer = (SlidingDrawer) findViewById(R.id.slidingDrawer);
-    mslideHandleButton.setVisibility(View.GONE);
-    mslidingDrawer.setVisibility(View.GONE);
-    mmultipleanswerlist.setVisibility(View.GONE);
-    magichandle = (Button) findViewById(R.id.magichandle);
-    invertimage = (Button) findViewById(R.id.invertimage);
-    magichandle.setVisibility(View.GONE);
-    invertimage.setVisibility(View.GONE);
     mslidingDrawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
 
       public void onDrawerOpened() {
@@ -599,13 +628,14 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
       }
     });
 
+    getquestionString0 = question_list[cnt];
+    mGetQuestionString.setText(getquestionString0);
+    mGetQuestionString.setVisibility(View.VISIBLE);
+
+    init_disappear();
+
     calltimer(PreferenceManager.getDefaultSharedPreferences(this));
 
-    getAnswerString = getAnswerString0;
-
-    // check_if_multipleanswers();
-    currentdisplay = 0;
-    originalQnumber = originalQNums[0];
   }
 
   public void onDoubleTap() {
@@ -625,14 +655,34 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
 
   public void onLongPress(MotionEvent e) {
 
-    // check_if_multipleanswers();
-    // if ((PrepNoTimer.multansqnnums.contains(originalQNums[cnt] + "")))
-    {
-      check_if_multipleanswers();
-      open_answer_check();
-    }
+    check_if_multipleanswers();
+    if (getAnswerString.contains("*"))
+      magichandle.setVisibility(View.VISIBLE);
+
     runtimer.cancel();
-    display_answer();
+    String display = getAnswerString;
+    int till = getAnswerString.indexOf("*");
+    String small = "";
+    if (till > 0) {
+      display = (getAnswerString.substring(0, till));
+
+      if (getquestionString.contains("two")) {
+        small = getAnswerString.substring(till);
+        till = small.indexOf("*");
+        if (till > 0)
+          display += (small.substring(0, till));
+      }
+    }
+    mgetAnswerString.setText(display);
+    mgetAnswerString.setVisibility(View.VISIBLE);
+    mbtnclose_normal.setVisibility(View.VISIBLE);
+    mbtn_check_on.setVisibility(View.VISIBLE);
+
+    mrightViewText.setVisibility(View.VISIBLE);
+    mwrongViewText.setVisibility(View.VISIBLE);
+    ;
+    mbtnclose_normal.setClickable(true);
+    mbtn_check_on.setClickable(true);
 
     return;
   }
@@ -651,22 +701,38 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
 
     if (mbtn_check_on.getVisibility() == View.GONE)
       return false;
-    // check_if_multipleanswers();
-
     check_if_multipleanswers();
+    if (getAnswerString.contains("*"))
+      magichandle.setVisibility(View.VISIBLE);
     runtimer.cancel();
-    display_answer();
-    open_answer_check();
+    mgetAnswerString.setVisibility(View.VISIBLE);
+    mbtnclose_normal.setVisibility(View.VISIBLE);
+    mbtn_check_on.setVisibility(View.VISIBLE);
+    mrightViewText.setVisibility(View.VISIBLE);
+    mwrongViewText.setVisibility(View.VISIBLE);
+    ;
+    mbtnclose_normal.setClickable(true);
+    mbtn_check_on.setClickable(true);
+    // check_if_multipleanswers();
     return true;
   }
 
   public boolean onSingleTapUp(MotionEvent e) {
     if (mbtn_check_on.getVisibility() == View.GONE)
       return false;
-
-    check_if_multipleanswers();
+    if (getAnswerString.contains("*"))
+      magichandle.setVisibility(View.VISIBLE);
     runtimer.cancel();
-    open_answer_check();
+    mgetAnswerString.setVisibility(View.VISIBLE);
+    mbtnclose_normal.setVisibility(View.VISIBLE);
+    mbtn_check_on.setVisibility(View.VISIBLE);
+    mrightViewText.setVisibility(View.VISIBLE);
+    mwrongViewText.setVisibility(View.VISIBLE);
+    ;
+    // mbtn_check_on.setOnClickListener(myListener);
+    mbtnclose_normal.setClickable(true);
+    mbtn_check_on.setClickable(true);
+
     return true;
 
   }
@@ -676,22 +742,8 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
     return gestureScanner.onTouchEvent(me);
   }
 
-  private void open_answer_check() {
-    if (mslidingDrawer.getVisibility() == View.VISIBLE)
-      magichandle.setVisibility(View.VISIBLE);
-    else
-      magichandle.setVisibility(View.GONE);
-    mgetAnswerString.setVisibility(View.VISIBLE);
-    mbtnclose_normal.setVisibility(View.VISIBLE);
-    mbtn_check_on.setVisibility(View.VISIBLE);
-    mrightViewText.setVisibility(View.VISIBLE);
-    mwrongViewText.setVisibility(View.VISIBLE);
-    mbtnclose_normal.setClickable(true);
-    mbtn_check_on.setClickable(true);
-  }
-
-  private ArrayList<String> tokens(String str) {// call for multiple answers
-
+  private ArrayList<String> tokens(String str) {
+    int skip = 0;
     StringTokenizer stringTokenizer = new StringTokenizer(str, "*");
     Log.d("try:  ", "The total no. of tokens generated for:  " + str + " is "
         + stringTokenizer.countTokens());

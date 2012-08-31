@@ -116,6 +116,7 @@ public class USCitizenPreppart2 extends Activity implements
         k = it.next();
         questions_list.add("" + allquestions[randoms[k]]);
         answers_list.add("" + allanswers[randoms[k]]);
+
       }
 
     }
@@ -194,6 +195,14 @@ public class USCitizenPreppart2 extends Activity implements
                 qns[i] = (String) qnobarr[i];// (String[])
                                              // questions_list.toArray()
                 ans[i] = (String) ansobarr[i];
+                Log.d(
+                    "pairs",
+                    "("
+                        + i
+                        + ","
+                        + randoms[i]
+                        + ")"
+                        + "PairPairPairPairPairPairPairPairPairPairPairPairPairPairPairPairPairPair");
               }
               qnbundle.putIntArray("originalQNums", randoms);
               qnbundle.putStringArray("randomqns", qns);

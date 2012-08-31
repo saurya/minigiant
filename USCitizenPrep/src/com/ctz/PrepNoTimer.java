@@ -109,6 +109,7 @@ public class PrepNoTimer extends ListActivity {
   Handler handler = new Handler();
   String ctznans;// user-selected answerset
   int currentdisplay;
+
   String prtmultiplestrg;
   int originalQnumber;
   static String finalswipe;

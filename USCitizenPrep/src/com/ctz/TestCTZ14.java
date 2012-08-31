@@ -32,7 +32,7 @@ import android.widget.Toast;
 import com.ctz.SimpleGestureFilter.SimpleGestureListener;
 
 @SuppressLint("NewApi")
-public class TestCTZ10 extends ListActivity implements OnGestureListener,
+public class TestCTZ14 extends ListActivity implements OnGestureListener,
     SimpleGestureListener {
   boolean mslidingdrawer_open;
   boolean i_got_it, time_out;
@@ -225,14 +225,13 @@ public class TestCTZ10 extends ListActivity implements OnGestureListener,
         mmultipleanswerlist.setVisibility(View.GONE);
       mslidingDrawer.setVisibility(View.VISIBLE);
       mslideHandleButton.setVisibility(View.VISIBLE);
-      // magichandle.setVisibility(View.VISIBLE);
+
     } else {
       if (mslidingDrawer.getVisibility() == View.VISIBLE)
         mslidingDrawer.setVisibility(View.GONE);
-      magichandle.setVisibility(View.GONE);
       mslideHandleButton.setVisibility(View.GONE);
       mmultipleanswerlist.setVisibility(View.GONE);
-
+      magichandle.setVisibility(View.GONE);
       mslidingDrawer.setVisibility(View.GONE);
       mgetAnswerString.setVisibility(View.GONE);
       mgetAnswerString.setText(getAnswerString);
@@ -379,7 +378,7 @@ public class TestCTZ10 extends ListActivity implements OnGestureListener,
   @Override
   public void onBackPressed() {
     if (cnt < userselectQns) {// user in the middle of a test
-      testscores_dialog_builder = new AlertDialog.Builder(TestCTZ10.this);
+      testscores_dialog_builder = new AlertDialog.Builder(TestCTZ14.this);
       testscores_dialog_builder.setMessage("Exiting the test! Are you sure?")
           .setCancelable(false)
           .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -509,6 +508,7 @@ public class TestCTZ10 extends ListActivity implements OnGestureListener,
     mGetQuestionString = (TextView) findViewById(R.id.getquestionString);
     mgetAnswerString = (TextView) findViewById(R.id.getAnswerString);
     mGetQuestionString.setText(getquestionString);
+    mGetQuestionString.setVisibility(View.VISIBLE);
     mgetAnswerString.setText(display);
     magichandle = (Button) findViewById(R.id.magichandle);
     adapter = new ArrayAdapter<String>(this,
