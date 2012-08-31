@@ -146,91 +146,94 @@
       android:background="@drawable/mainbackground"
      /> 
 
+
+<LinearLayout
+        android:layout_height="wrap_content"
+        android:id="@+id/button_layout"
+        android:layout_alignParentBottom="true"
+        android:layout_width="fill_parent"
+        android:gravity="center">
 <ImageView
+      android:id="@+id/btn_close_normal"
+      android:layout_width="36dp"
+            android:layout_height="36dp"
+    android:src="@drawable/btn_close_normal"
+    android:onClick="newOnclick2"
+ android:layout_marginLeft="4dip"
+    android:layout_marginBottom="1dip"
+   
+  
+      android:background="@drawable/mainbackground"
+     />
+
+
+        <TextView
+     android:id="@+id/wrongViewText"
+    android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+    android:layout_marginRight="4dip"
+    android:layout_marginLeft="2dip"
+   android:text="  I don't know!        "
+     android:gravity="center"
+    android:focusable="false"
+     android:state_enabled="false"
+     android:textColor="#000000"   
+     android:textSize="8pt"
+    
+    />
+       
+        
+        
+        
+        
+         <TextView
+       android:id="@+id/rightViewText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I got it! "
+        android:layout_marginLeft="12dip"
+        android:textColor="#000000"   
+        android:textSize="8pt" />
+<TextView
+       android:id="@+id/disabled_ViewText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       android:layout_marginRight="1dip"
+         android:visibility="gone"
+        android:text="oops!       "
+        android:textColor="#000000"   
+        android:textSize="9pt" />
+     
+    
+         <ImageView
+       android:id="@+id/btn_check_on"
+       android:layout_width="36dp"
+            android:layout_height="36dp"
+         android:gravity="center_vertical|center_horizontal"
+    android:layout_marginBottom="4dip"
+           android:src="@drawable/btn_check_on"
+     android:layout_marginLeft="1dip"
+     android:layout_marginRight="4dip"
+      android:background="@drawable/mainbackground"
+     /> 
+    <ImageView
      android:id="@+id/btn_check_on_disabled"
-         android:layout_width="35dp"
+         android:layout_width="36dp"
         android:layout_height="55dp"
-        android:onClick="newOnclick"
+        
          android:visibility="gone"
          
         android:src="@drawable/btn_check_on_disabled"
-      android:layout_above="@+id/btn_close_normal"
-       android:layout_gravity="center_horizontal"
-          android:layout_alignRight="@+id/btn_close_normal"
-        android:layout_toLeftOf="@+id/timerTextField"
-        />
-
-<TextView
-    android:id="@+id/disabled_ViewText"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-     android:visibility="gone"
+      android:layout_marginBottom="1dip"
+           android:layout_marginLeft="4dip"
      android:layout_marginRight="1dip"
-    android:layout_alignRight="@+id/btn_check_on_disabled"
-    android:layout_alignTop="@+id/btn_check_on_disabled"
-    android:layout_alignBottom="@+id/btn_check_on_disabled"
-    android:layout_marginTop="5dp"
-    android:gravity="center"
-     android:text="oops!        "
-    android:textColor="#000000" />
-   <ImageView
-        android:id="@+id/btn_close_normal"
-        android:layout_width="35dp"
-        android:layout_height="50dp"
-         android:onClick="newOnclick2"
-          android:src="@drawable/btn_close_normal"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="52dp"
-        android:layout_centerHorizontal="true"     
-         android:layout_marginTop="10dp"
-   />
-
-   <TextView
-    android:id="@+id/wrongViewText"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-     android:visibility="gone"
-    android:layout_alignRight="@+id/btn_close_normal"
-    android:layout_alignTop="@+id/btn_close_normal"
-    android:layout_alignBottom="@+id/btn_close_normal"
-    android:layout_margin="1dp"
-    android:gravity="center"
-     android:text="I don't know!        "
-    android:textColor="#000000" />
-   
-   
-<ImageView
-     android:id="@+id/btn_check_on"
-        android:layout_width="35dp"
-        android:layout_height="55dp"
-        android:onClick="newOnclick"
-        android:src="@drawable/btn_check_on"
-         android:visibility="gone"
-          android:layout_above="@+id/btn_close_normal"
-       android:layout_gravity="center_horizontal"
-          android:layout_alignRight="@+id/btn_close_normal"
-        android:layout_toLeftOf="@+id/timerTextField"
-       
+      android:text="@string/next"    
+      android:textColor="#FFFFFF"
+      android:textSize="11pt"
+      android:background="@drawable/mainbackground"
         />
-
-<TextView
-    android:id="@+id/rightViewText"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-  
-    android:layout_alignRight="@+id/btn_check_on"
-    android:layout_alignTop="@+id/btn_check_on"
-    android:layout_alignBottom="@+id/btn_check_on"
-   android:visibility="gone"
-  android:layout_marginRight="1dip"
-    android:layout_margin="1dp"
-    android:gravity="center"
-      android:text="I got it!       "
-    android:textColor="#000000" />
-
-
-
-
+     
+    </LinearLayout>
  <SlidingDrawer
     android:id="@+id/slidingDrawer" 
     android:layout_width="match_parent"

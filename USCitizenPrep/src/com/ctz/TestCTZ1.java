@@ -212,9 +212,7 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
   private void check_if_multipleanswers() {// you need a sliding drawer if so
 
     if (getAnswerString.contains("*")) {
-      mToast.setText("cnt= " + cnt + "," + randomqn_original_index[cnt]
-          + "show button");
-      mToast.show();
+
       mslidingDrawer.setVisibility(View.VISIBLE);
       mslideHandleButton.setVisibility(View.VISIBLE);
 
