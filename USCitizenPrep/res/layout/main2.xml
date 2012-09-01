@@ -78,7 +78,7 @@
         android:layout_below="@+id/emptyView1"
         android:layout_margin="4dip"
         android:layout_marginTop="25dp"
-        android:gravity="center"
+        android:gravity="left|top"
         android:scrollbars="vertical"
         android:textColor="#000000"
         android:textSize="9pt" />
@@ -97,7 +97,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/getquestionString"
-        
+        android:gravity="left|top"
         android:layout_margin="4dip"
         android:layout_marginBottom="59dp"
         android:scrollbars="vertical"
@@ -176,10 +176,10 @@
    android:text="  I don't know!        "
      android:gravity="center"
     android:focusable="false"
-     android:state_enabled="false"
+    
      android:textColor="#000000"   
      android:textSize="8pt"
-    
+    android:clickable="false"
     />
        
         
@@ -191,6 +191,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="I got it! "
+        android:clickable="false"
         android:layout_marginLeft="12dip"
         android:textColor="#000000"   
         android:textSize="8pt" />
@@ -200,6 +201,7 @@
         android:layout_height="wrap_content"
        android:layout_marginRight="1dip"
          android:visibility="gone"
+         android:clickable="false"
         android:text="oops!       "
         android:textColor="#000000"   
         android:textSize="9pt" />

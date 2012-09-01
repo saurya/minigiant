@@ -75,5 +75,16 @@ android:layout_height="wrap_content"
 android:layout_marginTop="50dp"
  android:textSize="18dp" 
 />
-
+<TextView
+      
+      android:layout_width="fill_parent"
+            android:layout_height="20dp"
+   android:textSize="15dp"
+   android:gravity="center|center_horizontal"
+   android:text=" MAYERA SOFTWARE SOLUTIONS 2012 "
+android:layout_alignParentBottom="true"
+    
+     android:background="@drawable/mainbackground"
+     />
+           
 </LinearLayout>

@@ -205,9 +205,15 @@ public class Justdownload {
 
       URL[] urlarray = new URL[2];
       urlarray[0] = new URL(
-          "http://www.senate.gov/general/contact_information/senators_cfm.xml");
+          "http://www.senate.gov/general/contact_information/senators_cfm.xml");// 2
+                                                                                // letter
+                                                                                // naneof
+                                                                                // state
       urlarray[1] = new URL(
-          "http://en.wikipedia.org/wiki/List_of_current_United_States_governors");
+          "http://en.wikipedia.org/wiki/List_of_current_United_States_governors");// name
+                                                                                  // of
+                                                                                  // state
+                                                                                  // full
       DownloadFile dfl = new DownloadFile();
       dfl.execute(urlarray);
     } catch (Exception e) {

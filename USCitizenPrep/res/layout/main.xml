@@ -68,7 +68,7 @@ android:layout_height="wrap_content"
                android:id="@+id/go"
                 android:background="@drawable/mainbackground"
                android:layout_gravity="center"
-               android:layout_marginTop="32dp"
+               android:layout_marginTop="2dp"
                android:onClick="onButtonClicked"
                android:text="@string/Next"
            
@@ -79,5 +79,16 @@ android:layout_height="wrap_content"
    
        
          />
+
+<TextView
+      
+      android:layout_width="fill_parent"
+            android:layout_height="20dp"
+   android:textSize="8dp"
+   android:text=" MAYERA SOFTWARE SOLUTIONS (US) August 2012 (all rights rserved)"
+android:layout_alignParentBottom="true"
+    
+     android:background="@drawable/mainbackground"
+     />
 
 </LinearLayout>

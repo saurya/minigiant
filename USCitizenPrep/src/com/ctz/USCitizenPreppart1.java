@@ -202,8 +202,8 @@ public class USCitizenPreppart1 extends Activity implements
     go_Button.setOnClickListener(new OnClickListener() {
 
       public void onClick(View v) {
-        original19 = "G";
-        original42 = "Ssssss";
+        original19 = "Senator: ";
+        original42 = "Governor: ";
 
         currentcapital43 = "C";
         is_a_senior = false;

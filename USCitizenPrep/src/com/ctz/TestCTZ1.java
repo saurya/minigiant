@@ -1,8 +1,6 @@
 package com.ctz;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.StringTokenizer;
 
 import android.annotation.SuppressLint;
@@ -82,7 +80,7 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
   private ImageView mslideHandleButton;
   private SlidingDrawer mslidingDrawer;
   boolean mslidingdrawer_open;
-  HashSet<Integer> multansqnnums;
+  // HashSet<Integer> multansqnnums;
   boolean i_got_it, time_out;
 
   String getAnswerString0 = ""; // set first answer to be displayed
@@ -91,7 +89,7 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
   String getquestionString = "";// and the next question
   String[] question_list;
   String[] answer_list;
-  int[] randomqn_original_index = new int[100];
+  int[] randomqn_original_index; // = new int[100];
   int justfound;
   int userselectQns;
   int userselecttiming;
@@ -138,7 +136,8 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
         calculateScores();
         mScore.setText(scoreString);
       }
-      if (counter_for_display == userselectQns || cnt == justfound) {
+      if (counter_for_display == userselectQns
+          || counter_for_display == justfound) {
         decideVisibility(true);
 
         mgetReport.setText(getreportString());
@@ -308,14 +307,10 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
 
   public String getnextqn(int cnt) {
 
-    if (cnt >= 100) {
-      mToast
-          .setText("Congratulations. You just completed practice of 100 questions");
-      mToast.show();
-      finish();
-    }
-    ;
-    return question_list[cnt];
+    if (cnt >= question_list.length)
+      return "done";
+    else
+      return question_list[cnt];
   }
 
   public String getreportString() {
@@ -338,14 +333,15 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
 
     mToast.setText("Round# " + (numberofrounds));
     mToast.show();
-    if (begin == 100)
+    if (begin == question_list.length)
       return;
-    if (end > 100)// if 40 questions per round third round is 3*40=120 So push
-                  // back to 100
-      end = 100;
-    if (begin >= 100) {
-      mToast
-          .setText("Congratulations. You just completed practice of 100 qustions");
+    if (end > question_list.length)// if 40 questions per round third round is
+                                   // 3*40=120 So push
+      // back to 100
+      end = question_list.length;
+    if (begin >= question_list.length) {
+      mToast.setText("Congratulations. You just completed practice of all "
+          + question_list.length + " qustions");
       mToast.show();
       finish();
     }
@@ -353,8 +349,7 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
     getAnswerString = answer_list[cnt];
 
     getquestionString0 = question_list[cnt];
-    mGetQuestionString.setText((numberofrounds) + " " + begin + " "
-        + getquestionString0);
+    mGetQuestionString.setText(getquestionString0);
     mGetQuestionString.setVisibility(View.VISIBLE);
 
     calltimer(PreferenceManager.getDefaultSharedPreferences(this));
@@ -387,28 +382,22 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
 
   }
 
-  private void multansqnums() {
-
-    multansqnnums = new HashSet<Integer>();
-    String str = "";
-    int intvalue;
-    Iterator<?> it = (PrepNoTimer.multansqnnums).iterator();
-
-    while (it.hasNext()) {
-      intvalue = Integer.parseInt((String) it.next());
-      str = "(" + intvalue + "," + randomqn_original_index[intvalue] + "),";
-
-      for (int i = 0; i < 100; i++)
-        if (randomqn_original_index[i] == intvalue) {
-          str = "(" + i + " ORIG " + randomqn_original_index[i] + ")";
-          ;
-          multansqnnums.add((i));
-          break;
-
-        }
-    }
-
-  }
+  /*
+   * private void multansqnums() {
+   * 
+   * multansqnnums = new HashSet<Integer>(); String str = ""; int intvalue;
+   * Iterator<?> it = (PrepNoTimer.multansqnnums).iterator();
+   * 
+   * while (it.hasNext()) { intvalue = Integer.parseInt((String) it.next());
+   * 
+   * for (int i = 0; i < question_list.length; i++) if
+   * (randomqn_original_index[i] == intvalue) { str = "(" + i + " ORIG " +
+   * randomqn_original_index[i] + ")"; ; multansqnnums.add((i)); break;
+   * 
+   * } }
+   * 
+   * }
+   */
 
   public void newOnclick(View v) {
 
@@ -464,22 +453,31 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
       begin = end;
       end = end + userselectQns;
 
-      if (end > 100) {
-        justfound = 100 % userselectQns;
-        end = 100;
+      if (end > question_list.length) {
+        justfound = question_list.length % userselectQns;
+        end = question_list.length;
 
       }
+      if (begin == question_list.length) {
+        {
+          mToast.setText("Congratulations. You just completed practice of all "
+              + question_list.length + " questions");
+          mToast.show();
+          finish();
+        }
 
-      mToast.setText("Next Round: " + begin + "to" + end);
-      mToast.show();
-      cnt = begin;
-      score = 0;
-      current_Qn_length = userselectQns;
-      mScore.setText(" 0/0 ");
-      mtimerTextField.setVisibility(View.VISIBLE);
-      runtimer.start();
+      } else {
+        mToast.setText("Next Round: " + begin + "to" + end);
+        mToast.show();
+        cnt = begin;
+        score = 0;
+        current_Qn_length = userselectQns;
+        mScore.setText(" 0/0 ");
+        mtimerTextField.setVisibility(View.VISIBLE);
+        runtimer.start();
 
-      go_For_NextRound(begin, end);
+        go_For_NextRound(begin, end);
+      }
 
     }
 
@@ -522,7 +520,7 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
       if (userselecttiming == 0)
         userselecttiming = 3;
     }
-    multansqnums();
+    // multansqnums();
     String temp = "";
     for (int i = 0; i < question_list.length; i++)
       if (question_list[i].contains("*")) {
@@ -530,17 +528,17 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
         question_list[i] = temp;
 
       }
-    multansqnums();
+    // multansqnums();
 
     begin = 0;
     end = userselectQns;
     begin = (numberofrounds - 1) * userselectQns;
     end = begin + userselectQns;
-    if (end > 100)
-      end = 100;
-    if (begin >= 100) {
-      mToast
-          .setText("Congratulations. You just completed practice of 100 qustions");
+    if (end > question_list.length)
+      end = question_list.length;
+    if (begin >= question_list.length) {
+      mToast.setText("Congratulations. You just completed practice of aa"
+          + question_list.length + " questions");
       mToast.show();
       finish();
     }
@@ -652,6 +650,10 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
   }
 
   public void onLongPress(MotionEvent e) {
+    if (mbtn_check_on_disabled.getVisibility() == View.VISIBLE) {
+      mbtn_check_on.setVisibility(View.GONE);
+      return;
+    }
 
     check_if_multipleanswers();
     if (getAnswerString.contains("*"))
@@ -697,8 +699,13 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
 
   public boolean onSingleTapUp() {
 
+    if (mbtn_check_on_disabled.getVisibility() == View.VISIBLE) {
+      mbtn_check_on.setVisibility(View.GONE);
+      return false;
+    }
     if (mbtn_check_on.getVisibility() == View.GONE)
       return false;
+
     check_if_multipleanswers();
     if (getAnswerString.contains("*"))
       magichandle.setVisibility(View.VISIBLE);
@@ -716,6 +723,10 @@ public class TestCTZ1 extends ListActivity implements OnGestureListener,
   }
 
   public boolean onSingleTapUp(MotionEvent e) {
+    if (mbtn_check_on_disabled.getVisibility() == View.VISIBLE) {
+      mbtn_check_on.setVisibility(View.GONE);
+      return false;
+    }
     if (mbtn_check_on.getVisibility() == View.GONE)
       return false;
     if (getAnswerString.contains("*"))
