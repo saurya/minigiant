@@ -60,7 +60,7 @@ public class PrepNoTimer extends ListActivity {
   private Button mnext;
   private Button mprev;
   private ImageView mslideHandleButton;
-
+  Toast mToast;;
   private SlidingDrawer mslidingDrawer;
   int cnt = 0;
   int score = 0;
@@ -162,6 +162,14 @@ public class PrepNoTimer extends ListActivity {
   }
 
   private void check_if_multipleanswers() {
+    if (getAnswerString == null
+        || getAnswerString.contains("Answers will vary")) {
+
+      mToast
+          .setText("connection not available User advised to seek answer at official website");
+      mToast.show();
+
+    }
     if ((!USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
         .contains(cnt + ""))
         || (USCitizenPreppart1.is_a_senior && PrepNoTimer.multansqnnums
@@ -184,8 +192,9 @@ public class PrepNoTimer extends ListActivity {
       mmultipleanswerlist.setVisibility(View.GONE);
       magichandle.setVisibility(View.GONE);
       mslidingDrawer.setVisibility(View.GONE);
-      mgetAnswerString.setVisibility(View.VISIBLE);
+
       mgetAnswerString.setText(getAnswerString);
+      mgetAnswerString.setVisibility(View.VISIBLE);
     }
 
   }
@@ -230,7 +239,7 @@ public class PrepNoTimer extends ListActivity {
     // allquestions = new String[current_number_of_questions];
 
     // allanswers = new String[current_number_of_questions];
-
+    mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
     adapter = new ArrayAdapter<String>(this,
         android.R.layout.simple_list_item_1, multipleAnswersItems);
     this.setListAdapter(adapter);

@@ -1,22 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2010 The Android Open Source Project
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
--->
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
+ android:layout_width="fill_parent"
+ android:layout_height="fill_parent"
+ android:orientation="vertical" 
+  
+ android:layout_centerVertical="true"
+ android:layout_centerInParent="true" >
+<TextView
+android:gravity="center"
+android:text=" U.S NATURALIZATION INTERVIEW PREPARATION \n\n
+ Some answers depend on your location. Please click here to select your state. \n"
+
+android:layout_margin="4dip"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+/>
+<!--  style="?android:attr/spinnerItemStyle"--> 
+<!--  
+     android:background="@drawable/btn_dropdown"
+     -->
+ <Spinner
+     android:id="@+id/state_spinner"
+      
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_gravity="center_horizontal"
+  
+     android:gravity="center"
+     android:textColor="#4F2F4F" 
+     
+     >
+
+        <!-- android:layout_width= "?android:attr/listPreferredItemHeight" -->
+ </Spinner> 
+ 
+    
+         <!--    android:background="@drawable/android_focused" -->
+           <RadioGroup
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+      <RadioButton android:id="@+id/radio_prepare_for_interview"
+           android:textColor="#4F2F4F"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="20dp"
+          android:text="Prepare For The Test" />
+      <RadioButton android:id="@+id/radio_test_yourself"
+          android:textColor="#4F2F4F"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+           android:layout_marginTop="20dp"
+          android:text="Take Practice Test now" />      
+    </RadioGroup>
+
+           <CheckBox
+               android:id="@+id/radio_senior_prepare_for_interview"
+               android:layout_width="146dp"
+               android:layout_height="28dp"
+               android:layout_gravity="center"
+               android:layout_marginTop="14dp"
+               android:text="Check here if you are a qualified Senior"
+               android:textColor="#4F2F4F"
+               android:textSize="11sp" />
+
+           <Button
+               android:id="@+id/go1"
+                android:background="@drawable/mainbackground"
+               android:layout_gravity="center"
+               android:layout_marginTop="2dp"
+              
+               android:text="@string/Next"
+           
+               android:textSize="12sp" 
+               android:layout_height="32dp"
+        android:layout_width="45dp"
+        android:textColor="#000000"
+   
+       
+         />
+ <Button
+               android:id="@+id/confirm"
+                android:background="@drawable/mainbackground"
+               android:layout_gravity="center"
+               android:layout_marginTop="2dp"
+               
+               android:text="Confirm your choices"
+android:visibility="gone"
+               android:textSize="12sp" 
+               android:layout_height="32dp"
+        android:layout_width="45dp"
+        android:textColor="#000000"
+   
+       
+         />
+<TextView
+      
+      android:layout_width="fill_parent"
+            android:layout_height="20dp"
+   android:textSize="8dp"
+   android:text=" MAYERA SOFTWARE SOLUTIONS (US) August 2012 (all rights rserved)"
+android:layout_alignParentBottom="true"
+    
+     android:background="@drawable/mainbackground"
+     />
+
 </LinearLayout>

@@ -53,7 +53,20 @@ android:layout_height="wrap_content"
                android:textSize="20dp" />
 
            <Button
-               android:id="@+id/go"
+               android:id="@+id/go1"
+               android:background="@drawable/mainbackground"
+               android:layout_gravity="center"
+               android:layout_marginTop="65dp"
+               android:onClick="onButtonClicked"
+               android:text="@string/Next"
+               android:textSize="20dp" 
+               android:layout_height="32dp"
+               android:layout_width="45dp"
+              android:textColor="#4F2F4F"
+             android:layout_marginBottom="50dp"
+               />
+            <Button
+               android:id="@+id/confirm"
                android:background="@drawable/mainbackground"
                android:layout_gravity="center"
                android:layout_marginTop="65dp"
@@ -75,6 +88,7 @@ android:layout_height="wrap_content"
 android:layout_marginTop="50dp"
  android:textSize="18dp" 
 />
+           
 <TextView
       
       android:layout_width="fill_parent"

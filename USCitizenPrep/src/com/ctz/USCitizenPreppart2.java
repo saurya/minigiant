@@ -20,7 +20,6 @@ import android.gesture.GestureOverlayView;
 import android.gesture.GestureOverlayView.OnGesturePerformedListener;
 import android.gesture.Prediction;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -34,14 +33,15 @@ public class USCitizenPreppart2 extends Activity implements
   static int userselectQns;;
   static int userselecttiming;
 
-  static Toast toast;
+  Toast mToast;
   static int duration_of_toast_display = 2000;
 
   int[] randoms;// = new int[100];
   private boolean changedstate;// if user selects a different state in the same
                                // session
   String selected;
-
+  String currentstate;
+  boolean gov_exist, sen_exist;
   HashMap<String, String> currentgovernors;
   ArrayList<String> questions_list, answers_list;
   static int positionprev = 0;
@@ -67,6 +67,8 @@ public class USCitizenPreppart2 extends Activity implements
   String currentcapital, previouscapital;
   private GestureLibrary gLib;
 
+  // copy relevant allqns and allans into qnlist and anslist after nec
+  // randomization
   public void copy(String s) {
     int start, end;
     answers_list.clear();
@@ -126,23 +128,13 @@ public class USCitizenPreppart2 extends Activity implements
       start = 0;
 
       end = allquestions.length;
-      Log.d(
-          "Length: ",
-          end
-              + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
       for (int i = start; i < end; i++) {
         int len = allquestions[i].length() - 1;
         if (allquestions[i].substring(len).equals("*")) {
           questions_list.add(allquestions[i]);
           answers_list.add("" + allanswers[i]);
-          Log.d(
-              "QA",
-              i
-                  + "   "
-                  + allquestions[i]
-                  + " "
-                  + allanswers[i]
-                  + "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
+
         }
 
       }
@@ -150,32 +142,40 @@ public class USCitizenPreppart2 extends Activity implements
 
   }
 
+  // modify certain values too and get all questions and answers into local
+  // arrays
+  private void fetch_data() {
+    read_Rawdata();
+    USCitizenPreppart1.fillgovernordata();
+    USCitizenPreppart1.fillsenatordata();
+    allanswers[42] = USCitizenPreppart1.original42;
+    allanswers[19] = USCitizenPreppart1.original19;
+    allanswers[43] = USCitizenPreppart1.currentcapital43;
+  }
+
   /** Called when the activity is first created. */
   @SuppressLint({ "NewApi", "NewApi", "NewApi", "NewApi" })
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    // get ready with all qns and ans as array
+    fetch_data();
 
-    read_Rawdata();
-
-    previouscapital = "Montgomery";
     setContentView(com.ctz.R.layout.mainforpart2);
 
     questions_list = new ArrayList<String>();
     answers_list = new ArrayList<String>();
     radio_prepare_for_interview = (RadioButton) findViewById(com.ctz.R.id.radio_prepare_for_interview);
     radio_test_yourself = (RadioButton) findViewById(com.ctz.R.id.radio_test_yourself);
-
-    go_Button = (Button) findViewById(com.ctz.R.id.go);
+    mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
+    go_Button = (Button) findViewById(com.ctz.R.id.go2);
 
     go_Button.setOnClickListener(new OnClickListener() {
 
       public void onClick(View v) {
 
-        Log.d("prev Spinner Selection0",
-            "***************&&&&&&&&&&&&&&&&&&^^^^^^^^^^^^^^^^^^"
-                + allanswers[19] + allanswers[42] + allanswers[43]);
-
+        gov_exist = false;
+        sen_exist = false;
         Bundle bundle = new Bundle();
         Bundle qnbundle = new Bundle();
         Intent myIntent2 = new Intent();
@@ -195,14 +195,7 @@ public class USCitizenPreppart2 extends Activity implements
                 qns[i] = (String) qnobarr[i];// (String[])
                                              // questions_list.toArray()
                 ans[i] = (String) ansobarr[i];
-                Log.d(
-                    "pairs",
-                    "("
-                        + i
-                        + ","
-                        + randoms[i]
-                        + ")"
-                        + "PairPairPairPairPairPairPairPairPairPairPairPairPairPairPairPairPairPair");
+
               }
               qnbundle.putIntArray("originalQNums", randoms);
               qnbundle.putStringArray("randomqns", qns);
@@ -210,6 +203,7 @@ public class USCitizenPreppart2 extends Activity implements
 
             }
           }
+
           if (radio_test_yourself.isChecked() == true
               && USCitizenPreppart1.is_a_senior == true) {
             selected_type = new String("2");
@@ -226,6 +220,7 @@ public class USCitizenPreppart2 extends Activity implements
               ans[i] = (String) ansobarr[i];
             }
             randoms = new int[qns.length];
+            // did not randomize for oldies
             for (int i = 0; i < qns.length; i++)
               randoms[i] = i;
             qnbundle.putIntArray("originalQNums", randoms);
@@ -307,23 +302,26 @@ public class USCitizenPreppart2 extends Activity implements
 
       String action = predictions.get(0).name;
 
-      Toast.makeText(USCitizenPreppart2.this, action, Toast.LENGTH_SHORT)
-          .show();
+      mToast.setText(action);
+      mToast.show();
     }
   }
 
   @SuppressLint({ "NewApi", "NewApi", "NewApi" })
   public void onItemSelected(AdapterView<?> parent, View v, int position,
       long id) {
-    Toast.makeText(USCitizenPreppart2.this,
-        "Button clicked" + statenames[position], Toast.LENGTH_SHORT).show();
-
+    mToast.setText("Button clicked" + statenames[position]);
+    mToast.show();
   }
 
   public void onNothingSelected(AdapterView<?> parent) {
-    Toast.makeText(USCitizenPreppart2.this, "", Toast.LENGTH_SHORT).show();
+
+    mToast.setText("Please select your state!");
+    mToast.show();
+
   }
 
+  // read raw data into allanswers and allquestions local copy
   private void read_Rawdata() {
 
     InputStream is1 = this.getResources().openRawResource(R.raw.allquestions);
@@ -347,7 +345,7 @@ public class USCitizenPreppart2 extends Activity implements
           break;
         for (int i = 0; i < 3; i++) {
           testMC[i] = brMC1.readLine();
-          // Log.d("testMC:", testMC[i]);
+
           if (testMC[i] == null)
             break;
         }
@@ -370,22 +368,6 @@ public class USCitizenPreppart2 extends Activity implements
         qnnum++;
       }
 
-      Log.d(
-          "originl42",
-          USCitizenPreppart1.original42
-              + "**********************************************************************************************");
-      // if ((USCitizenPreppart1.original42).length() > 1)// if internet
-      // fillgovernordata()
-
-      allanswers[42] = USCitizenPreppart1.original42; // and staledta alsonot
-                                                      // available
-      // if ((USCitizenPreppart1.original19).length() > 1)// have default answer
-      // as
-      // given on website
-      allanswers[19] = USCitizenPreppart1.original19;
-      USCitizenPreppart1.currentcapital43 = "MONT";
-      if ((USCitizenPreppart1.currentcapital43).length() > 1)
-        allanswers[43] = USCitizenPreppart1.currentcapital43;
       isr1.close();
       isMC1.close();
       isr2.close();

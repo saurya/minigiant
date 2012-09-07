@@ -53,49 +53,28 @@ public class Gather_UserChoices extends Activity {
     final Spinner questionslice_spinner = (Spinner) findViewById(R.id.questionslice_spinner);
     final Spinner timerslice_spinner = (Spinner) findViewById(R.id.timerslice_spinner);
 
-    ArrayAdapter<CharSequence> qnadapter = ArrayAdapter.createFromResource(
-        this, R.array.questionslice_size, com.ctz.R.layout.spinnerview);
-    ArrayAdapter<CharSequence> timeadapter = ArrayAdapter.createFromResource(
-        this, R.array.timerslice_size, com.ctz.R.layout.spinnerview);
+    ArrayAdapter<CharSequence> qnadapter;
+    if (USCitizenPreppart1.is_a_senior)
+      qnadapter = ArrayAdapter.createFromResource(this,
+          R.array.questionslice_size_senior, com.ctz.R.layout.spinnerview);
+    else
+      qnadapter = ArrayAdapter.createFromResource(this,
+          R.array.questionslice_size, com.ctz.R.layout.spinnerview);
+
+    ArrayAdapter<CharSequence> timeadapter;
+    if (USCitizenPreppart1.is_a_senior)
+      timeadapter = ArrayAdapter.createFromResource(this,
+          R.array.timerslice_size_senior, com.ctz.R.layout.spinnerview);
+    else
+      timeadapter = ArrayAdapter.createFromResource(this,
+          R.array.timerslice_size, com.ctz.R.layout.spinnerview);
     qnadapter.setDropDownViewResource(R.layout.spinnerview);
+
     timeadapter.setDropDownViewResource(R.layout.spinnerview);
     questionslice_spinner.setAdapter(qnadapter);
     timerslice_spinner.setAdapter(timeadapter);
     questionslice_spinner.setFocusable(true);
     timerslice_spinner.setFocusable(true);
-    /*
-     * questionslice_spinner .setOnItemSelectedListener(new
-     * AdapterView.OnItemSelectedListener() { public void
-     * onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-     * 
-     * userselectQns = Integer.parseInt(parent.getItemAtPosition(position)
-     * .toString().trim()); Log.d("userselectQns", userselectQns +
-     * "BLABLABLALBALBLABLABLALBALBLABLABLALBALBLABLABLALBAL"); }
-     * 
-     * public void onNothingSelected(AdapterView<?> arg0) { userselectQns = 3; }
-     * });
-     * 
-     * timerslice_spinner .setOnItemSelectedListener(new
-     * AdapterView.OnItemSelectedListener() { public void
-     * onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-     * userselecttiming = Integer.parseInt(parent
-     * .getItemAtPosition(position).toString().substring(0, 2).trim());
-     * Log.d("userselecttiming", userselecttiming +
-     * "BLABLABLALBALBLABLABLALBALBLABLABLALBALBLABLABLALBAL"); }
-     * 
-     * public void onNothingSelected(AdapterView<?> arg0) { userselecttiming =
-     * 3; } });
-     */
-
-    /*
-     * ArrayAdapter<CharSequence> timeadapter = new ArrayAdapter<CharSequence>(
-     * this, android.R.layout.simple_spinner_item, timerslice_size);
-     */
-
-    /*
-     * timeadapter
-     * .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-     */
 
     go_Button = (Button) findViewById(com.ctz.R.id.go);
 

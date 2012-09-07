@@ -7,6 +7,7 @@ import java.util.Random;
 
 import com.ctz.R.color;
 import com.ctz.SimpleGestureFilter.SimpleGestureListener;
+import com.ctz.USCitizenPreppart1;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -192,6 +193,7 @@ int numberofrounds;
 						getquestionString = getnextqn(cnt);
 						if(getquestionString==null)this.finish();
 						mGetQuestionString.setText(getquestionString);
+						
 						getAnswerString = getnextanswer(cnt);
 						mgetAnswerString.setText(getAnswerString);
 						
@@ -200,12 +202,6 @@ int numberofrounds;
 					}
 				}
 			
-	
-
-	
-	
-	 
-
 	
 	 @Override
 	    public boolean onTouchEvent(MotionEvent me)

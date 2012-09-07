@@ -46,7 +46,7 @@ android:layout_height="wrap_content"
          
 
            <Button
-               android:id="@+id/go"
+               android:id="@+id/go2"
                 android:background="@drawable/mainbackground"
                android:layout_gravity="center"
                android:layout_marginTop="60dp"

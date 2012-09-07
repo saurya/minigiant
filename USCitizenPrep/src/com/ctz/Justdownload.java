@@ -46,7 +46,7 @@ public class Justdownload {
           try {
 
             URLConnection connection = url.openConnection();
-            connection.setConnectTimeout(0);
+            connection.setConnectTimeout(30000);
             connection.connect();
 
             input = new BufferedInputStream(url.openStream());
@@ -70,11 +70,9 @@ public class Justdownload {
 
                     String currgov = inputLine.substring(p + 2, q);
 
-                    if (currstate.equals(USCitizenPrep.currentstate)) {
-                      // USCitizenPrep.allanswers[42] = currgov; //
-                      // USCitizenPreppart1.original19
-                      // =
-                      USCitizenPreppart1.original19 = currgov; // currgov;Note:8/24/2012
+                    if (currstate.equals(currentstate)) {
+
+                      USCitizenPreppart1.original42 = currgov; // currgov;Note:8/24/2012
 
                       out.write(currgov + "   (" + currstate + "   )" + "\n");
                       out.close();
@@ -137,7 +135,7 @@ public class Justdownload {
                 ;
                 state[id] = str8;
 
-                if (state[id].equals(USCitizenPrep.currentstate)) {
+                if (state[id].equals(currentstate)) {
                   USCitizenPreppart1.original42 =
                   // USCitizenPrep.allanswers[19] =
                   sentr[id] + "   (" + state[id] + "   )";
