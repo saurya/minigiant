@@ -166,26 +166,27 @@ public final class R {
         public static final int statencaps=0x7f050004;
     }
     public static final class string {
-        public static final int Next=0x7f070004;
-        public static final int Next1=0x7f070005;
-        public static final int Score=0x7f070010;
-        public static final int aboutsenioritis=0x7f07000d;
-        public static final int app_name=0x7f070002;
-        public static final int hello=0x7f070001;
-        public static final int hint1=0x7f070000;
-        public static final int more=0x7f070011;
-        public static final int next=0x7f070009;
-        public static final int questioner=0x7f07000f;
-        public static final int reminder1=0x7f07000a;
-        public static final int reminder2=0x7f07000b;
-        public static final int reminder3=0x7f07000c;
-        public static final int select=0x7f070006;
-        public static final int seniors_prepare_for_interview=0x7f070007;
-        public static final int startTest=0x7f070008;
-        public static final int stateprompt=0x7f070013;
-        public static final int time=0x7f07000e;
-        public static final int timer=0x7f070012;
-        public static final int title_close=0x7f070003;
+        public static final int Next=0x7f070005;
+        public static final int Next1=0x7f070006;
+        public static final int Score=0x7f070011;
+        public static final int aboutsenioritis=0x7f07000e;
+        public static final int app_name=0x7f070003;
+        public static final int hello=0x7f070002;
+        public static final int hint1=0x7f070001;
+        public static final int more=0x7f070012;
+        public static final int next=0x7f07000a;
+        public static final int questioner=0x7f070010;
+        public static final int reminder1=0x7f07000b;
+        public static final int reminder2=0x7f07000c;
+        public static final int reminder3=0x7f07000d;
+        public static final int select=0x7f070007;
+        public static final int seniors_prepare_for_interview=0x7f070008;
+        public static final int startTest=0x7f070009;
+        public static final int stateprompt=0x7f070014;
+        public static final int time=0x7f07000f;
+        public static final int timer=0x7f070013;
+        public static final int title_close=0x7f070004;
+        public static final int version_number=0x7f070000;
     }
     public static final class style {
         public static final int MyTheme=0x7f090000;

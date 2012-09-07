@@ -172,8 +172,8 @@ public class USCitizenPreppart1 extends Activity implements
 
   public boolean capital() {
     changedstate = false;
-    Log.d("correct?", currentstate + "   " + statesncaps.get(currentstate)
-        + "*&*&*&^*&^&*&*&^*&^");
+    Log.d("correct?", currentstate + "   " + statenames[49] + " " + states[49]
+        + statesncaps.get(currentstate) + "*&*&*&^*&^&*&*&^*&^");
     currentcapital = statesncaps.get(currentstate);
     currentcapital43 = currentcapital;
 
@@ -209,7 +209,8 @@ public class USCitizenPreppart1 extends Activity implements
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
+    String appVersion = this.getString(R.string.version_number);
+    VersionNumber.setAppVersion(appVersion);// Use it somewhere
     stateData();
     dateFormat = new SimpleDateFormat("yyyy-MMM-dd HH:mm:ss.SSS");
     dateFormat.setTimeZone(TimeZone.getTimeZone("EST5EDT"));
@@ -354,6 +355,7 @@ public class USCitizenPreppart1 extends Activity implements
     } catch (Exception e) {
       e.printStackTrace();
     }
+    // statesncaps.put("Wyoming", "Cheyenne");// hack
     states = new String[50];
 
     Iterator<String> it = statenabbrevs.keySet().iterator();
