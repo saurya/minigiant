@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="version_number">1.0.0</string>
+
 <string name="hint1">"  "</string>
     <string name="hello">Hello US Citizenship Applicant!</string>
-    <string name="app_name">Prepare For Interview</string>
+    <string name="app_name">American Citizenship-Prep </string>
      <string name="title_close">Start</string>
     <string name="Next">Go!</string>
     <string name="Next1">Go!</string>

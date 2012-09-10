@@ -145,7 +145,6 @@ Charleston
 Wisconsin
 WI
 Madison
-Wyoming
+Wyoming 
 WY
 Cheyenne
-

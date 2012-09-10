@@ -53,7 +53,7 @@ android:layout_height="wrap_content"
                android:textSize="20dp" />
 
            <Button
-               android:id="@+id/go1"
+               android:id="@+id/go"
                android:background="@drawable/mainbackground"
                android:layout_gravity="center"
                android:layout_marginTop="65dp"
@@ -65,19 +65,7 @@ android:layout_height="wrap_content"
               android:textColor="#4F2F4F"
              android:layout_marginBottom="50dp"
                />
-            <Button
-               android:id="@+id/confirm"
-               android:background="@drawable/mainbackground"
-               android:layout_gravity="center"
-               android:layout_marginTop="65dp"
-               android:onClick="onButtonClicked"
-               android:text="@string/Next"
-               android:textSize="20dp" 
-               android:layout_height="32dp"
-               android:layout_width="45dp"
-              android:textColor="#4F2F4F"
-             android:layout_marginBottom="50dp"
-               />
+           
            <TextView
 android:gravity="center"
 android:text=" * If you are 65 years old or older and have been a legal permanent resident of the United States for 20 or more years. \n"

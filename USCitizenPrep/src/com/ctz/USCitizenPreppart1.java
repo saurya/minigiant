@@ -119,7 +119,7 @@ public class USCitizenPreppart1 extends Activity implements
 
   HashMap<String, String> statenabbrevs;
   private String selected_type;
-  private Button go_Button, confirm_button;
+  private Button go_Button;
   // private Button exit_Button;
   private RadioButton radio_prepare_for_interview;
   private RadioButton radio_test_yourself;
@@ -172,8 +172,8 @@ public class USCitizenPreppart1 extends Activity implements
 
   public boolean capital() {
     changedstate = false;
-    Log.d("correct?", currentstate + "   " + statenames[49] + " " + states[49]
-        + statesncaps.get(currentstate) + "*&*&*&^*&^&*&*&^*&^");
+    Log.d("correct?", currentstate + "   " + statesncaps.get(currentstate)
+        + "*&*&*&^*&^&*&*&^*&^");
     currentcapital = statesncaps.get(currentstate);
     currentcapital43 = currentcapital;
 
@@ -209,8 +209,7 @@ public class USCitizenPreppart1 extends Activity implements
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    String appVersion = this.getString(R.string.version_number);
-    VersionNumber.setAppVersion(appVersion);// Use it somewhere
+
     stateData();
     dateFormat = new SimpleDateFormat("yyyy-MMM-dd HH:mm:ss.SSS");
     dateFormat.setTimeZone(TimeZone.getTimeZone("EST5EDT"));
@@ -232,7 +231,7 @@ public class USCitizenPreppart1 extends Activity implements
     LoadPreferences();
     spinner.setSelection(strSavedMem1);
     radio_senior_prepare_for_interview.setChecked(strSavedMem2);
-    go_Button = (Button) findViewById(com.ctz.R.id.go1);
+    go_Button = (Button) findViewById(com.ctz.R.id.go);
 
     go_Button.setOnClickListener(new OnClickListener() {
 
@@ -355,7 +354,6 @@ public class USCitizenPreppart1 extends Activity implements
     } catch (Exception e) {
       e.printStackTrace();
     }
-    // statesncaps.put("Wyoming", "Cheyenne");// hack
     states = new String[50];
 
     Iterator<String> it = statenabbrevs.keySet().iterator();
