@@ -116,6 +116,7 @@ public class USCitizenPreppart2 extends Activity implements
       Iterator<Integer> it = collect.iterator();
       while (it.hasNext()) {
         k = it.next();
+
         questions_list.add("" + allquestions[randoms[k]]);
         answers_list.add("" + allanswers[randoms[k]]);
 
@@ -123,7 +124,7 @@ public class USCitizenPreppart2 extends Activity implements
 
     }
 
-    else if (s.equals("senior")) {
+    else if (s.equals("senior")) {// only questions ending in '*'
 
       start = 0;
 

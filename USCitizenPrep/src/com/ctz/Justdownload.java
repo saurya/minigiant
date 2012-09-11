@@ -37,7 +37,7 @@ public class Justdownload {
       int cnt = 0;
       int p = 0;
       int q = 0;
-      for (int i = 0; i < 2; i++) {
+      for (int i = 0; i < sUrl.length; i++) {
         URL url = sUrl[i];
         String filename = "";
         int statecounter = -1;
@@ -75,6 +75,7 @@ public class Justdownload {
                       USCitizenPreppart1.original42 = currgov; // currgov;Note:8/24/2012
 
                       out.write(currgov + "   (" + currstate + "   )" + "\n");
+                      out.flush();
                       out.close();
                       break;
                     }
@@ -94,18 +95,26 @@ public class Justdownload {
               output = new FileOutputStream(filename);
               out = new OutputStreamWriter(output, "UTF-8");
               cnt = 0;
-              String str, str1, str2, str3, str4, str5, str6, str7, str8;
+              String str, str1, str2, str3, str4, str5, str6, str7, str8, firstname1 = "", lastname1 = "";
               while ((inputLine = br.readLine()) != null) {
                 if (inputLine.contains("first_name"))
-                  firstname[cnt] = inputLine;
+                  firstname1 = inputLine;
                 if (inputLine.contains("last_name"))
-                  lastname[cnt] = inputLine;
-                if (inputLine.contains("state")) {
+                  lastname1 = inputLine;
+                if (inputLine.contains("state") && inputLine.contains("/state")
+                    && inputLine.contains(currentstate)) {
                   state[cnt] = inputLine;
+                  firstname[cnt] = firstname1;
+                  lastname[cnt] = lastname1;
+                  // out.write(firstname[cnt] + lastname[cnt] + state[cnt] +
+                  // "\n");
                   cnt++;
+                  if (cnt == 2)
+                    break;
+
                 }
               }
-              for (int id = 0; id < 100; id++) {
+              for (int id = 0; id < 2; id++) {
 
                 str1 = ((firstname[id].replace("<first_name>", "")).trim())
                     .replaceAll("\\n", "");
@@ -135,12 +144,16 @@ public class Justdownload {
                 ;
                 state[id] = str8;
 
-                if (state[id].equals(currentstate)) {
+                if (state[id].contains(currentstate)
+                    || currentstate.contains(state[id])) {
                   USCitizenPreppart1.original42 =
                   // USCitizenPrep.allanswers[19] =
                   sentr[id] + "   (" + state[id] + "   )";
-                  out.write(sentr[id] + "   (" + state[id] + "   )" + "\n");
-                  break;
+
+                  out.write((id + 1) + ". " + sentr[id] + "   (" + state[id]
+                      + "   )" + "\n");
+                  out.flush();
+                  // break;
                 }
               }
             }
@@ -207,11 +220,12 @@ public class Justdownload {
                                                                                 // letter
                                                                                 // naneof
                                                                                 // state
-      urlarray[1] = new URL(
-          "http://en.wikipedia.org/wiki/List_of_current_United_States_governors");// name
-                                                                                  // of
-                                                                                  // state
-                                                                                  // full
+      // urlarray[1] = new URL(
+      // "http://en.wikipedia.org/wiki/List_of_current_United_States_governors");//
+      // name
+      // of
+      // state
+      // full
       DownloadFile dfl = new DownloadFile();
       dfl.execute(urlarray);
     } catch (Exception e) {

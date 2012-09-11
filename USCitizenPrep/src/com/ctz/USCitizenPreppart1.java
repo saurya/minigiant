@@ -159,7 +159,7 @@ public class USCitizenPreppart1 extends Activity implements
     }
 
     if (senator.contains(currentstate)) {
-      original19 = senator + "as on "
+      original19 = "Any one of the following: \n" + senator + "as on "
           + (dateFormat.format((new Date(f.lastModified())))) + " EST";
       ;
       sen_exist = true;
@@ -244,6 +244,7 @@ public class USCitizenPreppart1 extends Activity implements
         // SavePreferences(" is_senior", is_a_senior);
 
         currentstate = spinner.getSelectedItem().toString();
+        Log.d("currentstate selected:  ", currentstate);
         spinnerPosition = spinner.getSelectedItemPosition();
         SavePreferences();
 
@@ -265,7 +266,7 @@ public class USCitizenPreppart1 extends Activity implements
           }
 
         }
-
+        Log.d("currentstate selected:  ", currentstate);
         new Justdownload(currentstate);
 
         myIntent2.setClassName("com.ctz", "com.ctz.USCitizenPreppart2");
