@@ -46,7 +46,7 @@ public class Justdownload {
           try {
 
             URLConnection connection = url.openConnection();
-            connection.setConnectTimeout(30000);
+            connection.setConnectTimeout(60000);
             connection.connect();
 
             input = new BufferedInputStream(url.openStream());

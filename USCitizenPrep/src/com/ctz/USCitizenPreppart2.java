@@ -20,6 +20,7 @@ import android.gesture.GestureOverlayView;
 import android.gesture.GestureOverlayView.OnGesturePerformedListener;
 import android.gesture.Prediction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -73,14 +74,14 @@ public class USCitizenPreppart2 extends Activity implements
     int start, end;
     answers_list.clear();
     questions_list.clear();
-
+    String modifyQn = "";
     if (s.equals("total")) {
 
       start = 0;
       end = allquestions.length;
       for (int i = start; i < end; i++) {
-
-        questions_list.add(allquestions[i]);
+        modifyQn = processQn(allquestions[i]);
+        questions_list.add(modifyQn);
         answers_list.add(allanswers[i]);
       }
 
@@ -116,8 +117,9 @@ public class USCitizenPreppart2 extends Activity implements
       Iterator<Integer> it = collect.iterator();
       while (it.hasNext()) {
         k = it.next();
+        modifyQn = processQn(allquestions[randoms[k]]);
+        questions_list.add(modifyQn);
 
-        questions_list.add("" + allquestions[randoms[k]]);
         answers_list.add("" + allanswers[randoms[k]]);
 
       }
@@ -133,7 +135,9 @@ public class USCitizenPreppart2 extends Activity implements
       for (int i = start; i < end; i++) {
         int len = allquestions[i].length() - 1;
         if (allquestions[i].substring(len).equals("*")) {
-          questions_list.add(allquestions[i]);
+          modifyQn = processQn(allquestions[i]);
+          questions_list.add(modifyQn);
+
           answers_list.add("" + allanswers[i]);
 
         }
@@ -319,6 +323,17 @@ public class USCitizenPreppart2 extends Activity implements
 
     mToast.setText("Please select your state!");
     mToast.show();
+
+  }
+
+  private String processQn(String question) {
+    Log.d("question:", question);
+    int len = question.length() - 1;
+    String modifyQn = question;
+    if (question.substring(len).equals("*"))
+      modifyQn = question.substring(0, len);
+    Log.d("modifyQn :", modifyQn);
+    return modifyQn;
 
   }
 

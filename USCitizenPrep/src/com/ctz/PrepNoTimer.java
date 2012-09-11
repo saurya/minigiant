@@ -66,7 +66,7 @@ public class PrepNoTimer extends ListActivity {
   int score = 0;
   int questionnumber;
   int cnt1, ctz_ans, correct_ans;
-
+  String modifyQn;
   String correctanswerstring;
 
   final static long seconds_in_milllies = 1000L;
@@ -151,9 +151,8 @@ public class PrepNoTimer extends ListActivity {
         alert.show();
 
       }
-      if (getquestionString.endsWith("*"))
-        getquestionString.replace("*", " ");
-      mGetQuestionString.setText(getquestionString);
+      modifyQn = processQn(getquestionString);
+      mGetQuestionString.setText(modifyQn);
       getAnswerString = getnextanswer(cnt);
 
       check_if_multipleanswers();
@@ -257,6 +256,7 @@ public class PrepNoTimer extends ListActivity {
     mslidingDrawer.setVisibility(View.GONE);
     mmultipleanswerlist.setVisibility(View.GONE);
     mScore = (TextView) findViewById(R.id.scoreField);
+
     magichandle = (ImageButton) findViewById(R.id.magichandle);
     invertimage = (ImageButton) findViewById(R.id.invertimage);
     mslidingDrawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
@@ -310,7 +310,8 @@ public class PrepNoTimer extends ListActivity {
 
         else {
           getquestionString = getnextqn(cnt);
-          mGetQuestionString.setText(getquestionString);
+          modifyQn = processQn(getquestionString);
+          mGetQuestionString.setText(modifyQn);
 
           getAnswerString = getnextanswer(cnt);
           // not sequential numbers as in senior data
@@ -352,7 +353,8 @@ public class PrepNoTimer extends ListActivity {
         if (cnt <= 0) {
 
           cnt = 0;
-          mGetQuestionString.setText(getquestionString0);
+          modifyQn = processQn(getquestionString0);
+          mGetQuestionString.setText(modifyQn);
           getAnswerString = getAnswerString0;
           int till = getAnswerString.indexOf("*");
           check_if_multipleanswers();
@@ -362,7 +364,8 @@ public class PrepNoTimer extends ListActivity {
 
           cnt--;
           getquestionString = getpreviousqn(cnt);
-          mGetQuestionString.setText(getquestionString);
+          modifyQn = processQn(getquestionString);
+          mGetQuestionString.setText(modifyQn);
           getAnswerString = getpreviousanswer(cnt);
           check_if_multipleanswers();
 
@@ -378,6 +381,7 @@ public class PrepNoTimer extends ListActivity {
     qnlist = bundle.getStringArray("allquestions");
     anslist = bundle.getStringArray("allanswers");
     current_number_of_questions = qnlist.length;
+    mScore.setText("1/" + current_number_of_questions);
     originalQNums = new int[current_number_of_questions];
     int begin = 0, end = 0;
     begin = 0;
@@ -387,11 +391,23 @@ public class PrepNoTimer extends ListActivity {
         + anslist.length);
     getAnswerString0 = anslist[begin];
     getquestionString0 = qnlist[begin];// first question
-    mGetQuestionString.setText(getquestionString0);
+    modifyQn = processQn(getquestionString0);
+    mGetQuestionString.setText(modifyQn);
     getAnswerString = anslist[begin];
     check_if_multipleanswers();
     currentdisplay = 0;
     originalQnumber = originalQNums[0];
+  }
+
+  private String processQn(String question) {
+    Log.d("question:", question);
+    int len = question.length() - 1;
+    String modifyQn = question;
+    if (question.substring(len).equals("*"))
+      modifyQn = question.substring(0, len);
+    Log.d("modifyQn :", modifyQn);
+    return modifyQn;
+
   }
 
   private ArrayList<String> tokens(String str) {
