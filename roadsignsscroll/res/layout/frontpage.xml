@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_centerInParent="true"
+    android:layout_centerVertical="true"
+    android:background="@color/mainbg"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dip"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="NJ Driver&apos;s License Prep \nPart One: \nRoad Signs  \n\n"
+        android:textColor="#1f1b80"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/practise"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginTop="50dp"
+        android:text="Prepare" />
+
+    <Button
+        android:id="@+id/test"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginTop="40dp"
+        android:text="Test Yourself" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+    </RelativeLayout>
+
+</LinearLayout>

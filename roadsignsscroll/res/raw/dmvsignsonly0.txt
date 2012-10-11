@@ -1,0 +1,56 @@
+ Bus/car pool lane  , Yield  ,Cross road   ,Side road 
+Detour   ,Interstate  ,Keep right  ,Flagman 
+Exit marker  ,Hill   ,State route marker  ,No trucks 
+Interstate  ,State route marker  ,Multiple turning lanes   ,U.S. route marker  
+Left turn only  ,Advisory ramp speed  ,Merge   ,Road narrows 
+No standing any time  ,Wrong way   ,Yield ahead  ,No passing 
+Road closed ,Winding road  ,No standing any time   ,No turns  
+State route marker,Interstate  ,Sharp turn   ,U.S. route marker    
+Two-lane traffic  ,Road closed  ,Bus/car pool lane   ,Multiple turning lanes 
+U.S. route marker  ,Workers   ,State route marker  ,Merge 
+Workers,Cattle crossing   ,Flagman  ,Road closed   
+Cattle crossing   ,Cross road  ,Railroad  ,Yield ahead 
+Flagman ahead  ,Wrong way  ,Road closed   ,Right turn only 
+Left or straight only ,Signal ahead  ,Yield   ,Detour 
+Multiple turning lanes   ,Left or straight only  ,Left turn only  ,No U-turns 
+Hill   ,Do not pass  ,Winding road  ,Sharp turn 
+Left turn only  ,No U-turns  ,Winding road,Sharp turn
+No right turn  ,Interstate   ,Winding road  , Advisory ramp speed
+No passing ,Side road  ,Keep right   ,Hill  
+Rest area   ,Merge  ,Road narrows  ,School 
+County road marker   ,U.S. route marker  ,Winding road  ,Interstate     
+Do not pass  ,Right turn   ,Left or straight only  ,Sharp turn 
+Mile marker ,Road closed  ,Advisory ramp speed   ,Bus/car pool lane  
+No pedestrians  ,Wrong way  ,No standing any time   ,No turns 
+Hospital   ,Handicapped  ,Divided highway  ,Detour 
+Merge  ,Stop ,Multiple turning lanes  ,Left turn only 
+Reserved parking  ,No parking   ,Slippery when wet  ,Workers 
+Signal ahead  ,Yield  ,State route marker   ,Do not pass 
+Yield ahead  ,No U-turns  ,No parking   ,Bus/car pool lane 
+Slippery when wet  ,Road closed   ,Cross road  ,Side road 
+Railroad,Cross road  ,Stop here on red   ,Wrong way 
+Lane reduction ahead   ,Advisory ramp speed  ,Multiple turning lanes  , Sharp turn 
+Cross road  ,Flagman  ,Railroad   ,Stop here on red 
+No parking, No trucks  ,No turns   ,No passing  
+Advisory ramp speed  ,Mile marker  ,Rest area   ,Cattle crossing 
+Sharp turn ahead   ,Winding road  ,No right turn  , Yield ahead
+Winding road  ,Wrong way  , No standing any time  ,  No right turn 
+Keep right  ,Left turn only  ,No turns  ,Exit marker 
+No turns  ,Signal ahead  ,Keep right  ,Exit marker 
+Road narrows  ,One way  ,Divided highway  ,Keep right 
+Divided highway  ,Do not pass  ,Do not enter  ,No U-turns 
+Do not enter  ,Advisory ramp speed  ,Divided highway  ,No U-turns 
+Handicapped   ,Hospital  ,School  ,Yield ahead 
+No trucks  ,Keep right   ,Hill  ,Yield 
+Flagman  ,No turns   ,No U-turn  ,Left or straight only 
+No right turn  ,Multiple turning lanes   ,No left turn  ,One way 
+Cross road  ,Winding road   ,Flagman  ,Road closed 
+Stop  ,Merge   ,Yield  , Workers 
+Hospital  ,Pedestrian crossing   ,School  ,No parking 
+U.S. route marker  ,Wrong way   ,No right turn  ,Left turn 
+Side road,Cross road,Road closed,No passing
+Road narrows  ,Stop ahead   ,Yield ahead  ,Sharp turn 
+ Stop here on red  ,One way   ,Interstate  ,Merge v 
+Side road  ,Yield   ,Merge  ,Stop
+
+
