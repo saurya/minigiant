@@ -13,7 +13,7 @@
         android:layout_margin="4dip"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="NJ Driver&apos;s License Prep \nPart One: \nRoad Signs  \n\n"
+        android:text="NJ Driver&apos;s License Prep \nRoad Signs  \n\n"
         android:textColor="#1f1b80"
         android:textSize="20dp" />
 
@@ -32,12 +32,40 @@
         android:layout_margin="8dp"
         android:layout_marginTop="40dp"
         android:text="Test Yourself" />
+   <RelativeLayout
+               
+               android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_marginTop="20dp"
+               >
+       
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal" >
-    </RelativeLayout>
+  <TextView
+    
+android:gravity="center"
+android:text="@string/definepart12"
+android:layout_margin="4dp"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_above="@+id/company"
+android:layout_marginBottom="4dp"
+ android:textSize="20dp" 
+ android:textColor="#4F2F4F"
+
+/>
+       <TextView
+      android:id="@+id/company"
+      android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+   android:textSize="20dp"
+   android:text=" MAYERA SOFTWARE SOLUTIONS (US) September 2012 (all rights reserved)"
+android:layout_alignParentBottom="true"
+    android:layout_marginBottom="14dp"
+     android:background="#FFFFFF"
+     />
+        
+     
+</RelativeLayout>
+
 
 </LinearLayout>

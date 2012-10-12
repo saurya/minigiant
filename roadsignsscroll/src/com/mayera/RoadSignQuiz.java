@@ -16,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class RoadSignQuiz extends Activity {
@@ -30,12 +31,13 @@ public class RoadSignQuiz extends Activity {
   private ImageView mIcon;
   private Button mButtonNext;
   static int[] radioButtonIdsCopy;
+  static final int SizeOfQuestionBank = 54;
 
   private void assignAnswers(RoadSign roadSign) {
     List<String> answers = roadSign.getAnswers();
     Collections.shuffle(answers);
     for (int i = 0; i < multipleAnswers.size(); i++) {
-      multipleAnswers.get(i).setText(answers.get(i));
+      multipleAnswers.get(i).setText(answers.get(i).trim());
     }
   }
 
@@ -46,10 +48,15 @@ public class RoadSignQuiz extends Activity {
 
   private int checkCorrectness(RoadSign roadSign) {
     for (RadioButton r : multipleAnswers) {
-      if (r.isChecked() && r.getText().equals(roadSign.getCorrectAnswer())) {
-        r.setChecked(false);
-        return 1;
+      if (r.isChecked()) {
+        ((RadioGroup) findViewById(com.mayera.R.id.radiobtnGrp)).clearCheck();
+        if (r.getText().equals(roadSign.getCorrectAnswer().trim())) {
+
+          return 1;
+        }
+
       }
+
     }
 
     return 0;
@@ -87,7 +94,7 @@ public class RoadSignQuiz extends Activity {
 
   private void printScores() {
     // TODO Auto-generated method stub
-    String scoreString = "Your Score is " + score + "/54";
+    String scoreString = "Your Score is " + score + "/" + SizeOfQuestionBank;
     Builder scoreDB = new AlertDialog.Builder(RoadSignQuiz.this);
     scoreDB.setMessage(scoreString).setCancelable(false)
         .setPositiveButton("Back", new DialogInterface.OnClickListener() {
@@ -104,8 +111,7 @@ public class RoadSignQuiz extends Activity {
   private void transitionToNextQuestion() {
     if (previous != null) {
       score += checkCorrectness(previous);
-      mPrintScores.setText(score + "");
-
+      mPrintScores.setText(score + "/" + SizeOfQuestionBank);
     }
     if (it.hasNext()) {
       RoadSign roadSign = (RoadSign) it.next();
