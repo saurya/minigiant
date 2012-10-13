@@ -40,13 +40,13 @@
 <answer> A primary and a secondary ID</answer>
 <answer> At least six points of ID</answer>
 <answer> One proof of address</answer>
-<answer  correct="true"> All of the above:</answer>
+<answer  correct="true"> All the  other three choices are correct:</answer>
 </question>
 <question> If you wish to use a birth certificate as part of 6 Point ID Verification, it must be 
 <answer> Civil document with a state/municipal seal</answer>
 <answer> Original document or a certified copy – not a photocopy or fax</answer>
 <answer> Issued in the same name that you currently use or accompanied by a proof of a legal name change if your name is different</answer>
-<answer  correct="true"> All of the above:</answer>
+<answer  correct="true"> All the  other three choices are correct:</answer>
 </question>
 <question> To get a special learner permit you must be how old?
 <answer> 15 years old</answer>
@@ -70,13 +70,13 @@
 <answer> Between 11 01 p.m. and 5 00 a.m.</answer>
 <answer> With more than one person who is not from the special learner permit holder’s household</answer>
 <answer> Without an Adult Supervising Driver who must be 21 years of age, posses a valid NJ license and have a minimum of three years driving experience</answer>
-<answer correct="true"> All of the above:</answer>
+<answer correct="true"> All the  other three choices are correct:</answer>
 </question>
 <question> To take a road test at a Driver Testing Center, an applicant must 
 <answer> Provide a vehicle with a valid inspection sticker, registration and insurance card</answer>
 <answer> Show a valid examination permit</answer>
 <answer> Be accompanied by a licensed driver</answer>
-<answer  correct="true"> All of the above:</answer>
+<answer  correct="true"> All the  other three choices are correct:</answer>
 </question>
 <question> If an applicant fails to pass the road test when can he take the test again?
 <answer> The same day</answer>
@@ -88,13 +88,13 @@
 <answer> Unsafe tires</answer>
 <answer> Missing seat belts</answer>
 <answer> Examiner cannot access the foot brake or parking brake (e.g., due to a center console)</answer>
-<answer correct="true"> All of the above:</answer>
+<answer correct="true"> All the  other three choices are correct:</answer>
 </question>
 <question> New Jersey law requires that seat belts be worn by which of the following 
 <answer> Driver</answer>
 <answer> All front-seat occupants</answer>
 <answer> Children under 18 years of age</answer>
-<answer  correct="true"> All of the above:</answer>
+<answer  correct="true"> All the  other three choices are correct:</answer>
 </question>
 <question> A federally approved safety seat or booster seat must be used for 
 <answer>Children up to the age of 10</answer>
@@ -106,7 +106,7 @@
 <answer> Proper floor mats</answer>
 <answer> Functioning AM/FM radio</answer>
 <answer correct="true"> Removal of snow or ice from vehicle before driving it</answer>
-<answer> All of the above:</answer>
+<answer> All the  other three choices are correct:</answer>
 </question>
 <question> A motorist should grip the steering wheel by the outside rim at which position?
 <answer correct="true"> 9 and 3 o’clock</answer>
@@ -166,7 +166,7 @@
 <answer> The bus’ yellow lights are flashing</answer>
 <answer correct="true"> The bus’ red lights are flashing</answer>
 <answer> The bus is making a turn</answer>
-<answer> All of the above</answer>
+<answer> All the  other three choices are correct</answer>
 </question>
 <question> When emergency vehicles sound sirens and/or use flashing lights a motorist should do which of the following?
 <answer> Come to a complete stop</answer>
@@ -190,7 +190,7 @@
 <answer> Between one-half hour after sunset and one-half hour before sunrise</answer>
 <answer> When using windshield wipers</answer>
 <answer> When encountering fog, mist, smoke or other factors that reduce visibility</answer>
-<answer correct="true"> All of the above:</answer>
+<answer correct="true"> All the  other three choices are correct:</answer>
 </question>
 <question> A motorist should never stop or park within how many feet of a fire hydrant 
 <answer> 5 feet</answer>
@@ -226,7 +226,7 @@
 <answer> Signal and turn onto the shoulder at or near traffic speed</answer>
 <answer> Turn on the parking lights or emergency warning lights</answer>
 <answer> Raise the hood</answer>
-<answer correct="true"> All of the above</answer>
+<answer correct="true"> All the  other three choices are correct</answer>
 </question>
 <question> If a vehicle’s conventional disc and drum brakes suddenly fail, a motorist should 
 <answer> Apply full pressure to the brakes</answer>
@@ -407,7 +407,7 @@
 <answer> A completed Application for Duplicate Certificate of Ownership only</answer>
 <answer> A current registration certificate or insurance ID card of the vehicle only</answer>
 <answer> A lien release from the lien holder if the vehicle was financed only</answer>
-<answer correct="true"> All of the above:</answer>
+<answer correct="true"> All the  other three choices are correct:</answer>
 </question>
 <question> If you are replacing a title that is damaged, you will need the following items 
 <answer> The damaged title and $20 for the fee</answer>

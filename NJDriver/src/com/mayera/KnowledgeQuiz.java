@@ -9,6 +9,7 @@ import java.util.List;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,8 +32,11 @@ public class KnowledgeQuiz extends Activity {
   private TextView mPrintScores;
   private ImageView mIcon;
   private Button mButtonNext;
+Dialog scoresDialog;
+private int numberOfExamQuestions=50;
+int currentsession;
   static int[] radioButtonIdsCopy;
-  static final int SizeOfQuestionBank = 90;
+  static final int SizeOfQuestionBank = 82;
 
   private void assignAnswers(Question roadSign) {
     List<String> answers = roadSign.getAnswers();
@@ -65,9 +69,10 @@ public class KnowledgeQuiz extends Activity {
     setContentView(com.mayera.R.layout.exam);
     InputStream is = this.getResources().openRawResource(
         com.mayera.R.raw.nj_driver_qns);// dmvsignsonly0);
+    //Get QuestionBankSize number of Questions
     roadSigns = Question.populateKnowledge(is);
-
     Collections.shuffle(roadSigns);
+    currentsession = numberOfExamQuestions+1;
     it = roadSigns.iterator();
     int[] radioButtonIds = { com.mayera.R.id.radioA, com.mayera.R.id.radioB,
         com.mayera.R.id.radioC, com.mayera.R.id.radioD };
@@ -83,43 +88,49 @@ public class KnowledgeQuiz extends Activity {
     mButtonNext.setOnClickListener(new OnClickListener() {
       public void onClick(View v) {
         transitionToNextQuestion();
-      }
-    });
+      
+      }});
 
   }
 
   private void printScores() {
     
-    String scoreString = "Your Score is " + score + "/" + SizeOfQuestionBank;
+    String scoreString = "Your Score is " + score + "/" + numberOfExamQuestions+"which is "+score*(100/ numberOfExamQuestions)+"%"+"\n"+
+                          "Minimum requirements: 80 percent, or 40 correct answers out of 50 questions. ";
     Builder scoreDB = new AlertDialog.Builder(KnowledgeQuiz.this);
-    scoreDB.setMessage(scoreString).setCancelable(false)
-        .setPositiveButton("Back", new DialogInterface.OnClickListener() {
+    scoreDB.setMessage(scoreString)
+           .setCancelable(false)
+           .setPositiveButton("Back", new DialogInterface.OnClickListener() {
           public void onClick(DialogInterface dialog, int id) {
-        	  dialog.dismiss();
-            
+        	 finish();
           }
         });
-    AlertDialog scoresDialog = scoreDB.create();
+
+   scoresDialog = scoreDB.create();
     scoresDialog.show();
     
-    return;
+
 
   }
 
   private void transitionToNextQuestion() {
     if (previous != null) {
+    	//Go through only what is numberOfExamQuestions
+    	currentsession--;
       score += checkCorrectness(previous);
-      mPrintScores.setText(score + "/" + SizeOfQuestionBank);
+      mPrintScores.setText(score + "/" + numberOfExamQuestions);
     }
-    if (it.hasNext()) {
+    if (it.hasNext() && currentsession>0) {
       Question roadSign = (Question) it.next();
       assignAnswers(roadSign);
       assignQuestion(roadSign);
       Log.d("Question", roadSign.getQuestion()+"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
       previous = roadSign;
 
-    } else {
+    } else if(currentsession==0){
       printScores();
+     return;
+ 
     }
 
   }
