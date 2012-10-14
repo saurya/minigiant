@@ -14,14 +14,20 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 public class KnowledgeQuiz extends Activity {
+	TextView activeItem;
   List<Question> roadSigns;
   Iterator it;
   Question previous;
@@ -118,7 +124,10 @@ int currentsession;
     	//Go through only what is numberOfExamQuestions
     	currentsession--;
       score += checkCorrectness(previous);
-      mPrintScores.setText(score + "/" + numberOfExamQuestions);
+      
+      mPrintScores.setText(score + "/" + numberOfExamQuestions);  
+    getView( mPrintScores);
+    
     }
     if (it.hasNext() && currentsession>0) {
       Question roadSign = (Question) it.next();
@@ -134,5 +143,21 @@ int currentsession;
     }
 
   }
+  public View getView(View currenttView) {
+     
+   activeItem = (TextView) currenttView;
+		   
+		    {
+		    	
+		    	Animation stringMotion = AnimationUtils.loadAnimation(KnowledgeQuiz.this, R.animator.property_stringanimator);
+		    	stringMotion.setDuration(1000);
+		    	activeItem.setAnimation(stringMotion);
+		    		
+		    }
+		    
+		   
+      return new View(this.getBaseContext());
+  }
+
 
 }

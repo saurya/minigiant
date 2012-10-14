@@ -32,6 +32,22 @@ public class KnowledgeArray extends ArrayAdapter {
     TextView textView = (TextView) rowView.findViewById(com.mayera.R.id.correctanswer);
     questionView.setText(roadSigns.get(position).getQuestion());
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     return rowView;
   }
 }
